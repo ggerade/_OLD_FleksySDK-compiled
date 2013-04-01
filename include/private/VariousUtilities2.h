@@ -14,6 +14,9 @@
 #include <string>
 #include <vector>
 
+// default decryption key
+#define DEFAULT_M_VALUE "fleksy/CONTENTS_PATH_FOLDER/PATH"
+
 using namespace std;
 
 namespace VariousUtilities2 {

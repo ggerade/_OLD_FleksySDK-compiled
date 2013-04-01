@@ -23,7 +23,7 @@
 //#include <PatternRecognizer/Structures.h>
 #include "TimeFunctions.h"
 
-#define FLassert(__CONDITION__) assert(__CONDITION__)
+//#define FLassert(__CONDITION__) assert(__CONDITION__)
 
 #define MAX_WORD_ID 70000
 #define MAX_WORD_DEPTH 2  // was 2 (jfm)
