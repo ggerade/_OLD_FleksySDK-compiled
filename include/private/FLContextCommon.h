@@ -30,7 +30,7 @@
 
 // max count of trace messages reported by functions
 // once function has been called FL_MAX_COUNT times, it goes silent
-const unsigned int FL_MAX_COUNT = 5;
+const unsigned int FL_MAX_COUNT = 0;  // default to zero (set to non-zero such as 5 for trace debuggin)
 const unsigned int FL_COCA_SIZE = 420170105;  // think this is the number of words in the Mark Davies COCA corpus (our training set)  -- jfm
 const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine whether the absence of a trigram or bigram gives statistically signficant information on the probability of the bigram or trigram.  If unigram frequency predicts a count above this value, then lack of unigram/bigram gives information -- use 0 prob estimate in this case.
 const unsigned int FL_MAX_CANDIDATES = 1000;  // maximum number of candidates returned (for unigrams right now)

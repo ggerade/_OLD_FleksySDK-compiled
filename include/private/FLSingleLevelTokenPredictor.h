@@ -53,6 +53,7 @@ class FLSingleLevelTokenPredictor {
   void read_uni_bin(string uni_bin_file);
 public:
   FLSingleLevelTokenPredictor(const string& filename, const string& filehash, bool alsoLoadInMemory);
+  ~FLSingleLevelTokenPredictor();
   
   // checkConsistency: will use both normal and memoryless methods, ensures they are consistent and returns the memoryless results
   //  void getNextCandidatesList(list_pred& result, word_id previousTokenID, int resultsLimit = 0, probability pThreshold = 0);

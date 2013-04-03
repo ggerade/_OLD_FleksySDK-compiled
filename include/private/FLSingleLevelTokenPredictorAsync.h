@@ -46,7 +46,8 @@ private:
 
 public:
   FLSingleLevelTokenPredictorAsync(const string& filename, const string& filehash, bool alsoLoadInMemory);
-
+  ~FLSingleLevelTokenPredictorAsync();
+  
   // this is guaranteed not to block. Client can send multiple requests and they will all be processed in FIFO order
   void prepareNextCandidatesListAsync(word_id previousTokenID);
   

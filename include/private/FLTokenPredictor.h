@@ -62,6 +62,8 @@ public:
                    bool alsoLoadInMemory, 
                    void* _utils = NULL);
   
+  ~FLTokenPredictor();
+  
   // this is guaranteed not to block. Client can send multiple requests and they will all be processed in FIFO order
   void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
