@@ -176,7 +176,10 @@
 				2EC422C117024A21002AE1AA /* Frameworks */,
 				DDE8717A1655DFF3008F4BA2 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		DDE8717A1655DFF3008F4BA2 /* Products */ = {
 			isa = PBXGroup;
