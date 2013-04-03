@@ -110,7 +110,7 @@ public:
     /*
      * Sets the correction mode. 
      * FLCorrectionMode_ALWAYS = ON 
-     * FLCorrectionMode_OFF will not correct and will always delete only one character
+     * FLCorrectionMode_OFF will not correct and will always delete only one character at a time
      */
     void setCorrectionMode(FLCorrectionMode mode); //FLCorrectionMode_ALWAYS, FLCorrectionMode_OFF
     /*

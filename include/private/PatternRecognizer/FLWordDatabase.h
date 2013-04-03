@@ -68,6 +68,7 @@ private:
 
 public:
   FLWordDatabase();
+  ~FLWordDatabase();
   
   // FLWordDatabase (QueryingMethods)
   FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, int incrementalIndex, bool needscore, bool printResults);

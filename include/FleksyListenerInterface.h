@@ -1,5 +1,5 @@
-#ifndef FL_OUTPUT_INTERFACE_H
-#define FL_OUTPUT_INTERFACE_H
+#ifndef FLEKSYLISTENERINTERFACE
+#define FLEKSYLISTENERINTERFACE
 
 #include <string>
 #include <vector>
@@ -8,8 +8,8 @@
 
 struct FLExternalEditorState{
     FLString text;
-    int selectionStart;
-    int selectionEnd;
+    int selectionStart = 0;
+    int selectionEnd = 0;
 };
 
 class FleksyListenerInterface{

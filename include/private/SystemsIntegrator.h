@@ -33,6 +33,7 @@ private:
 
 public:
   SystemsIntegrator();
+  ~SystemsIntegrator();
   
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);

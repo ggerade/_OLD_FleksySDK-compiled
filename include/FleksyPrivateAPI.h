@@ -15,6 +15,7 @@ class SystemsIntegrator;
 class FleksyAPIpImpl{
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener, bool simulateSystemCursorUpdates = false);
+  ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
   FLTypingController *tc;
   SystemsIntegrator* fleksy;
@@ -25,7 +26,7 @@ public:
   void loadKeyboardData(void* characterCoordinates, int charCoordinatesLength);
   void loadPreprocessedFile(int wordLength, char* preprocessedFile, int preprocessedFileLength);
   void initialize(void* preloaded, int preloadedLength, void* wordlist, int wordlistLength,
-                  void* blackListCapital, int blackListCapitalLength, void* blackList, int blackListLength, void* userWordList, int userWordListLength, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
+                  void* blackListCapital, int blackListCapitalLength, void* blackList, int blackListLength, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
 };
 
 

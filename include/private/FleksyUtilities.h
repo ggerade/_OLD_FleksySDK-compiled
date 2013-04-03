@@ -46,7 +46,7 @@ class FleksyUtilities {
 private:
   FLWordDatabase* wordDatabase;
   
-  map<int, FLWordList*> wordsByLength;
+  map<int, FLWordList*> wordsByLength; // length 0 holds special non-words like "." and ","
   map<FLString, FLWord*> _wordsByLetters; // renamed with underscore to enforce method get+set and avoid direct [] operator which may create keys that didn't exist
  
   //wordsbyprintletters ????
@@ -78,6 +78,8 @@ private:
    
 public:
   FleksyUtilities();
+  ~FleksyUtilities();
+  
   FLWordList* allWords;
   
   ///////  API  ///////
