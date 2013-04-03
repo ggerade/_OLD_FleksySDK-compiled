@@ -57,4 +57,10 @@ void FleksyTester::run(const char* resourcePath) {
   printf("\n [delete words]\n\n");
   api->backspace();
   api->backspace();
+  
+  delete api;
+  api = NULL;
+
+  delete listener;
+  listener = NULL;
 }
