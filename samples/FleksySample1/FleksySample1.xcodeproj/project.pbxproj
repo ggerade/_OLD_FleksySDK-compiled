@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		126F661B170CFED00057B006 /* FleksyLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 126F661A170CFED00057B006 /* FleksyLib.dylib */; };
+		126F661C170D06030057B006 /* FleksyLib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 126F661A170CFED00057B006 /* FleksyLib.dylib */; };
 		2E0E175A16F3D32F0033ABC1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0E175616F3D32F0033ABC1 /* main.cpp */; };
 		2E0E176616F3D44D0033ABC1 /* FleksyResources in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2E0E176516F3D4470033ABC1 /* FleksyResources */; };
-		2E7AAA1F1700D9BE00B4A25E /* FleksyLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7AAA171700D9BE00B4A25E /* FleksyLib.dylib */; };
-		2E7AAA201700DD0A00B4A25E /* FleksyLib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2E7AAA171700D9BE00B4A25E /* FleksyLib.dylib */; };
 		2EC422C317024A21002AE1AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC422C217024A21002AE1AA /* UIKit.framework */; };
 		2EC422C517024A21002AE1AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC422C417024A21002AE1AA /* Foundation.framework */; };
 		2EC422C717024A21002AE1AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC422C617024A21002AE1AA /* CoreGraphics.framework */; };
@@ -35,28 +35,28 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				126F661C170D06030057B006 /* FleksyLib.dylib in CopyFiles */,
 				2E0E176616F3D44D0033ABC1 /* FleksyResources in CopyFiles */,
-				2E7AAA201700DD0A00B4A25E /* FleksyLib.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		126F661A170CFED00057B006 /* FleksyLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = FleksyLib.dylib; sourceTree = "<group>"; };
 		2E0E175616F3D32F0033ABC1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2E0E176516F3D4470033ABC1 /* FleksyResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FleksyResources; sourceTree = "<group>"; };
-		2E7AAA171700D9BE00B4A25E /* FleksyLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = FleksyLib.dylib; sourceTree = "<group>"; };
-		2E7AAA191700D9BE00B4A25E /* Fleksy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fleksy.h; path = lib/include/Fleksy.h; sourceTree = SOURCE_ROOT; };
-		2E7AAA1A1700D9BE00B4A25E /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyAPI.h; path = lib/include/FleksyAPI.h; sourceTree = SOURCE_ROOT; };
-		2E7AAA1B1700D9BE00B4A25E /* FleksyListenerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyListenerInterface.h; path = lib/include/FleksyListenerInterface.h; sourceTree = SOURCE_ROOT; };
-		2E7AAA1C1700D9BE00B4A25E /* FLEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLEnums.h; path = lib/include/FLEnums.h; sourceTree = SOURCE_ROOT; };
-		2E7AAA1D1700D9BE00B4A25E /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLPoint.h; path = lib/include/FLPoint.h; sourceTree = SOURCE_ROOT; };
-		2E7AAA1E1700D9BE00B4A25E /* FLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLString.h; path = lib/include/FLString.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA191700D9BE00B4A25E /* Fleksy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fleksy.h; path = ../../include/Fleksy.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA1A1700D9BE00B4A25E /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyAPI.h; path = ../../include/FleksyAPI.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA1B1700D9BE00B4A25E /* FleksyListenerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyListenerInterface.h; path = ../../include/FleksyListenerInterface.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA1C1700D9BE00B4A25E /* FLEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLEnums.h; path = ../../include/FLEnums.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA1D1700D9BE00B4A25E /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLPoint.h; path = ../../include/FLPoint.h; sourceTree = SOURCE_ROOT; };
+		2E7AAA1E1700D9BE00B4A25E /* FLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLString.h; path = ../../include/FLString.h; sourceTree = SOURCE_ROOT; };
 		2EC422C017024A21002AE1AA /* FleksySample_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleksySample_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC422C217024A21002AE1AA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		2EC422C417024A21002AE1AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2EC422C617024A21002AE1AA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		2EC422E617024A4D002AE1AA /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFleksyStatic.a; sourceTree = "<group>"; };
+		2EC422E617024A4D002AE1AA /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "iOS-static/Debug/libFleksyStatic.a"; sourceTree = "<group>"; };
 		2EC422E817024A7F002AE1AA /* FleksyTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyTester.cpp; sourceTree = "<group>"; };
 		2EC422E917024A7F002AE1AA /* FleksyTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyTester.h; sourceTree = "<group>"; };
 		2EC422EF17025D04002AE1AA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FleksySample_iOS/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -89,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E7AAA1F1700D9BE00B4A25E /* FleksyLib.dylib in Frameworks */,
+				126F661B170CFED00057B006 /* FleksyLib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,11 +111,12 @@
 		2E7AAA161700D9BE00B4A25E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				126F661A170CFED00057B006 /* FleksyLib.dylib */,
 				2EC422E617024A4D002AE1AA /* libFleksyStatic.a */,
-				2E7AAA171700D9BE00B4A25E /* FleksyLib.dylib */,
 				2E7AAA181700D9BE00B4A25E /* include */,
 			);
-			path = lib;
+			name = lib;
+			path = ../../compiled;
 			sourceTree = "<group>";
 		};
 		2E7AAA181700D9BE00B4A25E /* include */ = {
@@ -128,7 +129,8 @@
 				2E7AAA1D1700D9BE00B4A25E /* FLPoint.h */,
 				2E7AAA1E1700D9BE00B4A25E /* FLString.h */,
 			);
-			path = include;
+			name = include;
+			path = ../../../include;
 			sourceTree = "<group>";
 		};
 		2EC422C117024A21002AE1AA /* Frameworks */ = {
@@ -421,7 +423,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../compiled\"",
 				);
 				PRODUCT_NAME = FleksySample_OSX;
 				SUPPORTED_PLATFORMS = macosx;
@@ -434,7 +436,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../compiled\"",
 				);
 				PRODUCT_NAME = FleksySample_OSX;
 				SUPPORTED_PLATFORMS = macosx;
