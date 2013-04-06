@@ -32,15 +32,15 @@ private:
   pthread_cond_t data_available = PTHREAD_COND_INITIALIZER;
   
   
-  
+  bool producer_thread_created = false;
   pthread_t producer_thread; // background thread to perform the heavy task in producerThread()
-  queue<word_id> requestedTokenIDs; // FIFO requests
-  word_id lastProcessedTokenID = 0; // marked by producer for consumer to ensure desired results
+  queue<token_ids> requestedTokenIDs; // FIFO requests  -- convert to queue<token_ids> requestedTokenIDs
+  token_ids lastProcessedTokenIDs; // marked by producer for consumer to ensure desired results  -- convert to lastProcessedTokenIDs
   list_pred lastResults;
   
   void log(const char* format, ...);
   
-  void getNextRequest(word_id& result); // for producer to fetch next request or block until there is one
+  void getNextRequest(token_ids& result); // for producer to fetch next request or block until there is one
   static void* producerThread(void* arg); //wrapper for instance method
   void producerThread(); // where the processing is done
 
@@ -49,10 +49,10 @@ public:
   ~FLSingleLevelTokenPredictorAsync();
   
   // this is guaranteed not to block. Client can send multiple requests and they will all be processed in FIFO order
-  void prepareNextCandidatesListAsync(word_id previousTokenID);
+  void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
   // this may block until results for this tokenID are calculated
-  void peekNextCandidatesList(list_pred& result, word_id previousTokenID, int resultsLimit = 0, probability pThreshold = 0);
+  void peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
 };
 
 

@@ -25,17 +25,18 @@
 
 //#define FLassert(__CONDITION__) assert(__CONDITION__)
 
-#define MAX_WORD_ID 70000
+#define MAX_WORD_ID 65000
 #define MAX_WORD_DEPTH 2  // was 2 (jfm)
 
 // max count of trace messages reported by functions
 // once function has been called FL_MAX_COUNT times, it goes silent
-const unsigned int FL_MAX_COUNT = 0;  // default to zero (set to non-zero such as 5 for trace debuggin)
+const unsigned int FL_MAX_COUNT = 5;  // default to zero (set to non-zero such as 5 for trace debuggin)
 const unsigned int FL_COCA_SIZE = 420170105;  // think this is the number of words in the Mark Davies COCA corpus (our training set)  -- jfm
 const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine whether the absence of a trigram or bigram gives statistically signficant information on the probability of the bigram or trigram.  If unigram frequency predicts a count above this value, then lack of unigram/bigram gives information -- use 0 prob estimate in this case.
 const unsigned int FL_MAX_CANDIDATES = 1000;  // maximum number of candidates returned (for unigrams right now)
 const double       FL_UNI_SCALE = 0.1;  // max range for unigram probability (bit larger than probability of "the")
 const unsigned int FL_READ_REPORT = 20000;  // report read info every FL_READ_REPORT reads (when FL_FLEKSY_TRACE set)
+const int FL_STOP_SIGNAL = -1;   // code to stop threads
 
 using namespace std;
 
@@ -43,9 +44,147 @@ typedef int word_id;
 typedef float probability;
 typedef unordered_map<word_id, probability> map_probs;
 typedef struct short_lut { map_probs data[MAX_WORD_ID]; } short_lut;
-typedef struct token_ids { word_id data[MAX_WORD_DEPTH];
+
+class token_ids { 
+ public:
+  word_id data[MAX_WORD_DEPTH];
   bool bActive[MAX_WORD_DEPTH];  // flag to indicate the token is active
-} token_ids;
+  bool operator==(token_ids& rhs)
+  {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+      {
+        if(data[i] != rhs.data[i])
+          return false;
+
+        if(bActive[i] != rhs.bActive[i])
+          return false;
+      }
+    return true;
+  } // operator==
+
+  bool operator!=(token_ids& rhs)
+  {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+      {
+        if(data[i] != rhs.data[i])
+          return true;
+
+        if(bActive[i] != rhs.bActive[i])
+          return true;
+      }
+
+    return false;  // they are equal
+
+  }  // operator!=
+
+  token_ids()  // constructor
+    {
+      for(int i = 0; i < MAX_WORD_DEPTH; i++)
+        {
+          data[i] = 0;
+          bActive[i] = false;
+        }
+    }
+
+  // assignment operator
+  // The assignment operator is used to copy the values from one object to another already existing object. 
+  // The key words here are “already existing”.
+  // e.g.
+  // token_ids old_tokens1, old_tokens2;
+  // old_tokens2 = old_tokens1;
+ 
+  token_ids& operator= (const token_ids &rhs)
+    {
+      if(this == &rhs)
+        return *this;
+
+      for(int i = 0; i < MAX_WORD_DEPTH; i++)
+        {
+          data[i] = rhs.data[i];
+          bActive[i] = rhs.bActive[i];
+        }
+
+      return *this;
+    }
+
+  bool operator== (int n)  // for stop signal
+  {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+      {
+        if (data[i] != n)
+          return false;
+      }
+
+    return true;
+  }
+
+  // copy constructor
+  // A copy constructor is a special constructor that initializes a new object from an existing object.
+  // e.g. token_ids new_tokens = old_tokens;
+
+  token_ids(const token_ids& rhs)
+    {
+      // check for self-assignment
+
+      for(int i = 0; i < MAX_WORD_DEPTH; i++)
+        {
+          data[i] = rhs.data[i];
+          bActive[i] = rhs.bActive[i];
+        }
+    }  // copy constructor
+
+  // print method
+  void print()
+  {
+    // problem with thread safety in cout
+    //
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+      {
+        printf("tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+      }
+    fflush(stdout);
+  }  // print
+
+  // special constructor
+  token_ids(int n)
+    {
+      for(int i = 0; i < MAX_WORD_DEPTH; i++)
+        {
+          data[i] = n;
+          bActive[i] = true;
+        }
+    }  // create token_ids with non-default values
+
+  void shift(word_id wid, bool bActiveNew = true)
+  {
+    int i = 0;
+
+    for(i = (MAX_WORD_DEPTH-1); i > 0; i--)
+      {
+        data[i] = data[i-1];
+        //
+        bActive[i] = bActive[i-1];
+      }
+
+    data[0] = wid;
+    bActive[0] = bActiveNew;
+  }
+
+  char * c_str()
+  {
+    char szBuf[80];
+    char * result = new char[MAX_WORD_DEPTH*80];
+
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+      {
+        sprintf(szBuf, "tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+        strcat(result, szBuf);
+      }    
+
+    return result;
+  } // c_str()
+
+};  // class token_ids
 
 // fast binary file header
 static constexpr int FleksyCode = ( 42 | (42 << 8) | (42 << 16) | (42 << 24) );  // start code for Fleksy Fast Binary File
@@ -161,7 +300,7 @@ public:
 void display_pred_table(Predictions& pred_table);
 Predictions* read_pred_table(string& fname);
 
-string& where_am_i();
+string where_am_i();  // string& can cause problems -- return by value
 
 class FLSmartTokenizer
 {

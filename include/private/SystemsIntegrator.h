@@ -25,15 +25,16 @@ private:
   
   FLTokenPredictor* ftp;
 
-  token_ids convertToTokenIDs(FLString* token1, FLString* token2);
+  token_ids convertToTokenIDs(FLString* token2, FLString* token1);
   float distanceBetweenLetters(FLChar c1, FLChar c2);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
+  list_pred filterAndNormalizeContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   
   void addCandidate(const FLString* letters, const FLString* printLetters, const FLString* inputString, float shapeScore, bool platform, float frequency, float contextFrequency, int frequencyRank, int groupFrequencyRank, FLResponseEntryVector& candidateList);
 
 public:
   SystemsIntegrator();
-  ~SystemsIntegrator();
+  ~SystemsIntegrator(); 
   
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);

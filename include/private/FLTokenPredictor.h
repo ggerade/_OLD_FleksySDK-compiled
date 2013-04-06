@@ -69,6 +69,15 @@ public:
   
   // this may block until results for this tokenID are calculated
   void peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
+  // NOTE: the last token goes in previousTokenIDs.data[0].  The token before that is moved from previousTokenIDs.data[0] to .data[1]
+  //
+  // e.g consider processing the text stream: "the dog is black" 
+  // step 1   data[0] is "the", data[1] is blank
+  // step 2   data[0] is "dog", data[1] is "the"
+  // step 3   data[0] is "is", data[1]  is "dog"
+  // step 4   data[0] is "black", data[1] is "is"
+  //
+  // see also token_ids::shift (in FLContextCommon.h)
 
   // wrapper function of the abvove two step process
   void getNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
