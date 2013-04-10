@@ -40,10 +40,10 @@ public:
   float euclideanDistance;
   float shapeScore;
   float overallScore;
-  float frequency;
+  //float frequency;
+  //int frequencyRank;
+  //int groupFrequencyRank;
   float contextFrequency;
-  int frequencyRank;
-  int groupFrequencyRank;
   bool platform;
   bool fleksy;
   int pointsN;

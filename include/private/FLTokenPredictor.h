@@ -13,11 +13,6 @@
 // Fleksy headers
 #include "FLSingleLevelTokenPredictorAsync.h"
 
-#define USE_UTILITIES 0
-#if USE_UTILITIES
-#include "FleksyUtilities.h"
-#endif
-
 #define USE_RANK_METHOD 0
 // no need to normalize if USE_RANK_METHOD
 #define NORMALIZE_RESULTS 1
@@ -27,27 +22,14 @@
 #define PRINT_INTERMEDIATE_RESULTS 0
 
 class FLTokenPredictor {
- public:
+public:
   static double prepareTime;
   static double peekTime;
   static double getTime;
 
-private:
+protected:
   
   FLSingleLevelTokenPredictorAsync* fsltp[MAX_WORD_DEPTH];
-
-  static char* wordLetters(word_id tokenID);
-  static word_id wordID(const char* letters);
-   
-#if USE_UTILITIES 
-  static FleksyUtilities* static_utils;
-
-  void runContextTestForTokens(token_ids tokens, bool print);
-  void runContextTestForToken(word_id tokenID, FLSingleLevelTokenPredictorAsync* ftp, list_pred& preds, bool print);
-  void runContextTest2ForToken(word_id tokenID, FLSingleLevelTokenPredictorAsync* ftp, map_probs& probs, int wordLength, int depth, float weight);
-  void runContextTest2ForLetters(const char* letters, FLSingleLevelTokenPredictorAsync* ftp, map_probs& result, int wordLength, int depth, float weight);
-  void runContextTests();
-#endif
   
 public:
   
@@ -59,8 +41,7 @@ public:
                    const string& unigram_hash, 
                    const string& bigram_hash,
                    const string& trigram_hash,
-                   bool alsoLoadInMemory, 
-                   void* _utils = NULL);
+                   bool alsoLoadInMemory);
   
   ~FLTokenPredictor();
   
@@ -83,11 +64,6 @@ public:
   void getNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
   
   string getDescription();
-  
-  // testing
-  void _simpleTest(const char* word1, const char* word2);
-  void simpleTest(const char* word1, const char* word2);
-  std::vector<int> getRanksForWord(const char* letters);
 };
 
 #endif /* defined(__FleksyX__FLTokenPredictor__) */

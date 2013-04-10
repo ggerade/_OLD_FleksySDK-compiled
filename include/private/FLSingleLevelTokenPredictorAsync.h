@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 class FLSingleLevelTokenPredictorAsync : public FLSingleLevelTokenPredictor {
- public:
+public:
   static double peekWait;
   static double peekLoopTime;
   static double totalPeek;

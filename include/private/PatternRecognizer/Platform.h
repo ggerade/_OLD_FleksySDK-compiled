@@ -21,7 +21,7 @@
 #define  LOGI(format, ...)
 #else
 #define  LOGI(format, ...)  printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout)
-//#define  LOGI(format, ...)  {char buffer[1024 * 10]; sprintf(buffer, format,##__VA_ARGS__); std::cout << buffer << std::endl; }
+//#define  LOGI(format, ...)  {char buffer[1024 * 10]; snprintf(buffer, sizeof(buffer), format,##__VA_ARGS__); std::cout << buffer << std::endl; }
 #endif
 #endif
 #endif
@@ -29,6 +29,17 @@
 
 //#define FLassert(condition) assert(condition)
 #define FLassert(condition) { if(!(condition)){ signalHandlerWithParams(-3, #condition, __func__, __FILE__, __LINE__); } }
+
+
+#define FLEKSY_LIBRARY_EXPIRES 0
+//http://www.ruddwire.com/handy-code/date-to-millisecond-calculators/
+//Tue Apr 30 2013 00:00:00 GMT-0700 (PDT)
+#define EXPIRATION_DATE_IN_SECONDS 1367305200
+// set to 0 to disable. Value is approximate
+#define ALLOWED_REQUESTS_PER_WORD_LENGTH 0
+//(10 * 1000)
+
+
 
 class StaticVariables {
 public:

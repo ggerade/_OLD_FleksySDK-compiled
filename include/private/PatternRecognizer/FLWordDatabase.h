@@ -19,10 +19,6 @@
 
 using namespace std;
 
-//these need to fit in 5 bits for now, so <= 31, and not conflict with ACTUAL base IDs that might be that large! TODO
-#define BASEPOINT_CUSTOM1_ID 29
-#define BASEPOINT_CUSTOM2_ID (BASEPOINT_CUSTOM1_ID + 1)
-
 #define MIN_BASE_LENGTH 50
 
 class FLWordDatabase {
@@ -33,7 +29,7 @@ private:
   
   FLWord* wordsByID[FLEKSY_MAX_WORDS];
   FLBlackBox* blackboxesByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
-  unsigned short maxWordID;
+  BBValue maxWordID;
   FLVotesHolder* votesHolder;
 
   FLWordList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
@@ -48,13 +44,15 @@ private:
   
   // FLWordDatabase (QueryingMethods)
   void _voteWithParams1(VoteParameters params, VoteResult* result);
-  void __voteWithParams2(VoteParameters params, VoteResult* result, long long key);
+  void __voteWithParams2(VoteParameters params, VoteResult* result, BBKey key);
   void _voteWithParams2(VoteParameters params, VoteResult* result);
   void _voteWithParams(VoteParameters params, VoteResult* result);
   void voteWithParams(VoteParameters params, VoteResult* result);
   void paramsToBucketsAndVote(VoteResult result);
   void voteSingleBasisForInputWord(FLWord* inputWord, int i, int bi1, int bi2, VoteResult* result);
   float getBasisCoordDistanceForWord(FLWord* word1, FLWord* word2, int pi, int bi1, int bi2);
+  void vote(FLWord* word, int bi1, int bi2, VoteResult* result);
+  void vote(FLWord* word, VoteResult* result);
 
   // FLWordDatabase (LoadingMethods)
   void modifyBlackboxValuesFor(FLWord* word, int bi1, int bi2, bool addRemove);
@@ -64,14 +62,18 @@ private:
   static void _printResults(FLWordList* words, FLVotesHolder* votesHolder);
   static void printResults(FLInternalSuggestionsContainer* results, FLVotesHolder* votesHolder);
   void displayStats();
-
+  
+  static void printVoteParams(VoteParameters params);
+  
+  void calculateCandidateScore(FLWord* candidate, FLWord* inputWord);
+  
 
 public:
   FLWordDatabase();
   ~FLWordDatabase();
   
   // FLWordDatabase (QueryingMethods)
-  FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, int incrementalIndex, bool needscore, bool printResults);
+  FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, bool needscore, bool printResults);
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private
@@ -81,8 +83,8 @@ public:
   bool preprocessedFilesExist(const string filepathFormat);
   void loadTablesWithPathFormat(const string filepathFormat);
   void loadTableWithContents(int wordLength, const char* contents, size_t length);
-  void writeTables(const string filepathFormat);
-  unsigned short generateWordID();
+  void writeTables(const string filepath);
+  BBValue generateWordID();
   
   FLWord* getWordByID(int wordID);
   

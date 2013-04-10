@@ -30,7 +30,7 @@ class FLSingleLevelTokenPredictor {
   
   short_lut table;
 
- private:
+private:
 
   static int nPredictors;
   FastBinaryFileHeader hdr;  // version of binary file (>= 100 for fast binary files with an index)
@@ -72,7 +72,7 @@ public:
   friend class FleksyContextCommon;
   friend class FLContextTester;  
 
- public:
+public:
   // n-gram combination members (jfm)
   unordered_map<word_id, double> unigram_map;
   list_pred unigram_candidates;  

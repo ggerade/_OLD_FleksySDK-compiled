@@ -11,13 +11,14 @@
 
 #include "PrivateStructures.h"
 #include "Structures.h"
+#include "FLBlackBox.h"
 
 
 class FLWord {
   
 private:
   
-  unsigned short uniqueID;
+  BBValue uniqueID;
   
   short nPoints;
   
@@ -33,7 +34,7 @@ private:
   
   int bytesAllocated;
   
-  void initFromPoints(short nPoints, FLPoint* points, unsigned short uniqueID);
+  void initFromPoints(short nPoints, FLPoint* points, BBValue uniqueID);
   void* allocateMemoryForItems(size_t count, size_t itemSize);
   float shapeScore(float angleDeviation, float scalePpcm, bool swapped);
   void calculateLPCentroidsFromPoints(short nPoints, FLPoint* points);
@@ -95,8 +96,8 @@ public:
   
   ////////////////////
 
-  FLWord(short nPoints, FLPoint* points, unsigned short uniqueID);
-  FLWord(const FLString* letters, float frequency, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, unsigned short uniqueID);
+  FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
+  FLWord(const FLString* letters, float frequency, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID);
   ~FLWord();
   void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();
@@ -115,7 +116,7 @@ public:
   int getFrequencyRank();
   void setFrequencyRank(int rank);
   short getNPoints();
-  unsigned short getUniqueID();
+  BBValue getUniqueID();
   int getBytesAllocated();
 
   static bool compareStringOnly(FLWord* thisWord, FLWord* word);

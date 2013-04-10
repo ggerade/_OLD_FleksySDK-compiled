@@ -12,6 +12,8 @@
 #ifndef FleksyContext_FleksyContextCommon_h
 #define FleksyContext_FleksyContextCommon_h
 
+#include <sys/syslimits.h>
+
 // standard C++ headers
 #include <iostream>
 //#include <map>
@@ -21,6 +23,7 @@
 #include <cassert>
 // Fleksy headers
 //#include <PatternRecognizer/Structures.h>
+#include "PatternRecognizer/Platform.h"
 #include "TimeFunctions.h"
 
 //#define FLassert(__CONDITION__) assert(__CONDITION__)
@@ -46,45 +49,45 @@ typedef unordered_map<word_id, probability> map_probs;
 typedef struct short_lut { map_probs data[MAX_WORD_ID]; } short_lut;
 
 class token_ids { 
- public:
+public:
   word_id data[MAX_WORD_DEPTH];
   bool bActive[MAX_WORD_DEPTH];  // flag to indicate the token is active
   bool operator==(token_ids& rhs)
   {
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        if(data[i] != rhs.data[i])
-          return false;
+    {
+      if(data[i] != rhs.data[i])
+        return false;
 
-        if(bActive[i] != rhs.bActive[i])
-          return false;
-      }
+      if(bActive[i] != rhs.bActive[i])
+        return false;
+    }
     return true;
   } // operator==
 
   bool operator!=(token_ids& rhs)
   {
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        if(data[i] != rhs.data[i])
-          return true;
+    {
+      if(data[i] != rhs.data[i])
+        return true;
 
-        if(bActive[i] != rhs.bActive[i])
-          return true;
-      }
+      if(bActive[i] != rhs.bActive[i])
+        return true;
+    }
 
     return false;  // they are equal
 
   }  // operator!=
 
   token_ids()  // constructor
+  {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
     {
-      for(int i = 0; i < MAX_WORD_DEPTH; i++)
-        {
-          data[i] = 0;
-          bActive[i] = false;
-        }
+      data[i] = 0;
+      bActive[i] = false;
     }
+  }
 
   // assignment operator
   // The assignment operator is used to copy the values from one object to another already existing object. 
@@ -99,10 +102,10 @@ class token_ids {
         return *this;
 
       for(int i = 0; i < MAX_WORD_DEPTH; i++)
-        {
-          data[i] = rhs.data[i];
-          bActive[i] = rhs.bActive[i];
-        }
+      {
+        data[i] = rhs.data[i];
+        bActive[i] = rhs.bActive[i];
+      }
 
       return *this;
     }
@@ -110,10 +113,10 @@ class token_ids {
   bool operator== (int n)  // for stop signal
   {
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        if (data[i] != n)
-          return false;
-      }
+    {
+      if (data[i] != n)
+        return false;
+    }
 
     return true;
   }
@@ -123,15 +126,15 @@ class token_ids {
   // e.g. token_ids new_tokens = old_tokens;
 
   token_ids(const token_ids& rhs)
-    {
-      // check for self-assignment
+  {
+    // check for self-assignment
 
-      for(int i = 0; i < MAX_WORD_DEPTH; i++)
-        {
-          data[i] = rhs.data[i];
-          bActive[i] = rhs.bActive[i];
-        }
-    }  // copy constructor
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
+    {
+      data[i] = rhs.data[i];
+      bActive[i] = rhs.bActive[i];
+    }
+  }  // copy constructor
 
   // print method
   void print()
@@ -139,32 +142,32 @@ class token_ids {
     // problem with thread safety in cout
     //
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        printf("tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
-      }
+    {
+      LOGI("tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+    }
     fflush(stdout);
   }  // print
 
   // special constructor
   token_ids(int n)
+  {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++)
     {
-      for(int i = 0; i < MAX_WORD_DEPTH; i++)
-        {
-          data[i] = n;
-          bActive[i] = true;
-        }
-    }  // create token_ids with non-default values
+      data[i] = n;
+      bActive[i] = true;
+    }
+  }  // create token_ids with non-default values
 
   void shift(word_id wid, bool bActiveNew = true)
   {
     int i = 0;
 
     for(i = (MAX_WORD_DEPTH-1); i > 0; i--)
-      {
-        data[i] = data[i-1];
-        //
-        bActive[i] = bActive[i-1];
-      }
+    {
+      data[i] = data[i-1];
+      //
+      bActive[i] = bActive[i-1];
+    }
 
     data[0] = wid;
     bActive[0] = bActiveNew;
@@ -176,10 +179,10 @@ class token_ids {
     char * result = new char[MAX_WORD_DEPTH*80];
 
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        sprintf(szBuf, "tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
-        strcat(result, szBuf);
-      }    
+    {
+      snprintf(szBuf, sizeof(szBuf), "tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+      strncat(result, szBuf, MAX_WORD_DEPTH*80);
+    }    
 
     return result;
   } // c_str()
@@ -237,7 +240,7 @@ class FleksyContextCommon {
 public:
   static pred_type prediction_type;  // whether unigrams, bigrams, or trigrams were used to make the prediction
   // unigram binary file name setter/getters
-  static void set_unigram_binary_file(char * in) { strcpy(szUniBinFile, in); };
+  static void set_unigram_binary_file(char * in) { strncpy(szUniBinFile, in, PATH_MAX); assert(strlen(szUniBinFile) == strlen(in)); };
   static void set_uni_bin_file(char * in) { set_unigram_binary_file(in); };
   static void set_uni_bin(char * in) { set_unigram_binary_file(in); };
   static const char * get_unigram_binary_file() { return (const char *) szUniBinFile; };
@@ -271,8 +274,8 @@ public:
 
   static void read_uni_bin(string uni_bin_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   static void printFastHdr(FastBinaryFileHeader& hdr);
- private:
-  static char szUniBinFile[128];  // file name for unigrams binary file
+private:
+  static char szUniBinFile[PATH_MAX];  // file name for unigrams binary file
 };  // class FleksyContextCommon
 
 class Prediction
@@ -290,6 +293,11 @@ public:
   bool operator<(Prediction& pred) const { return (this->weight < pred.weight); };
   bool operator>(Prediction& pred) const { return (this->weight > pred.weight); };
   
+  char * c_str() { 
+    char * ptr = new char[128];
+    snprintf(ptr, 128, "(%s, %f)", word.c_str(), weight);
+    return ptr;
+  }
   friend ostream& operator<<(ostream& out, Prediction& pred) { out << "(" << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
     
   // want to find predictions by word
@@ -305,11 +313,11 @@ string where_am_i();  // string& can cause problems -- return by value
 class FLSmartTokenizer
 {
   // class for smart tokenizing
- public:
+public:
   FLSmartTokenizer();
   FLSmartTokenizer(string separators);
   bool getNextToken(stringstream& ss, string& token);  // smart tokenizer for punctuation
- private:
+private:
   string separators;
   string head;
   string sep;

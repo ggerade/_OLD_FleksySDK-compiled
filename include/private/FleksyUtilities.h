@@ -67,7 +67,7 @@ private:
   void setWordInDictionary(const FLString& key, FLWord* word);
   void deleteWordFromDictionary(const FLString& key);
   //
-  FLAddWordResult _addWord(const FLString& wordLetters, double frequency, const FLString& printLetters, unsigned short uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues);
+  FLAddWordResult _addWord(const FLString& wordLetters, double frequency, const FLString& printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues);
   void _processWordlistLine1(FLString* wordString, kWordlistType type, const FLString& delimiter, bool calculateBlackboxValues);
   void processWordBlacklistLine(FLString* line, const FLString& delimiter2);
   void processWordlistLine(FLString* wordString, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues);
@@ -87,7 +87,7 @@ public:
   //void preloadWithPathFormat(const string& filepathFormat);
   void preloadWithContents(int wordLength, const char* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
-  void writeTables(const string& filepathFormat); //optional
+  void writeTables(const string& filepath); //optional
   void postload();
   FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText);
   FLAddWordResult addWord(const FLString& word, float frequency);

@@ -20,6 +20,8 @@ public:
   FLTypingController *tc;
   SystemsIntegrator* fleksy;
   string resourcePath;
+  // set this to have preprocessed files generated. Do not add "/" in the end.
+  string writableDirectory;
   bool isEngineLoaded;
   void loadKeyMaps();
   void postLoadSetup();

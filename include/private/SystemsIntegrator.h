@@ -53,7 +53,7 @@ public:
                        const string& trigram_hash,
                        bool alsoLoadInMemory);
   
-  void writeTablesIfNeeded(const string& filepathFormat);
+  void writeTablesIfNeeded(const string& filepath);
   void postload();
   
   FLAddWordResult addUserWord(const FLString& word, float frequency);
@@ -68,9 +68,6 @@ public:
   
   // returns FLPoint[KEY_MAX_VALUE];
   FLPoint* getKeymap(int keyboardTag);
-  
-  //test
-  vector<int> getRanksForWord(const char* letters);
   
   // Settings
   bool getSettingUseWordFrequency();
