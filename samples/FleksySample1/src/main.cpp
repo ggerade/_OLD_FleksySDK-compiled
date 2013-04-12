@@ -3,7 +3,7 @@
 
 int main(int argc, const char * argv[]) {
   
-  FleksyTester::run("FleksyResources/encrypted/en-US/");
+  FleksyTester::run("FleksySDKResources/encrypted/en-US/");
   
   return 0;
 }
