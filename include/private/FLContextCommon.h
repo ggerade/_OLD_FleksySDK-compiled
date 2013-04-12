@@ -277,6 +277,17 @@ public:
 
   static void read_uni_bin(string uni_bin_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   static void printFastHdr(FastBinaryFileHeader& hdr);
+
+  static bool IsNumber(char * str) {
+    char * ptr = str;
+    while(*ptr) {
+      if( !isdigit(*ptr) )
+        return false;
+      ptr++;
+    }
+    return true;
+  };
+
 private:
   static char szUniBinFile[PATH_MAX];  // file name for unigrams binary file
 };  // class FleksyContextCommon
@@ -301,12 +312,8 @@ public:
     snprintf(ptr, 128, "(%s, %f)", word.c_str(), weight);
     return ptr;
   }
-<<<<<<< HEAD
-  friend ostream& operator<<(ostream& out, Prediction& pred) { out << "(" << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
-=======
   friend ostream& operator<<(ostream& out, Prediction& pred) { 
     out << "(" << pred.wordID << ", " << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
->>>>>>> new libraries
     
   // want to find predictions by word
   bool operator==(const Prediction& pred) { return (this->word == pred.word); };  // const Prediction& is critical (error otherwise)
