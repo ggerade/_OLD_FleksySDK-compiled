@@ -23,6 +23,7 @@ public:
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
+  void setMaxNumberOfSuggestions(int numberOfSuggestions);
   void loadKeyMaps();
   void postLoadSetup();
   void loadKeyboardData(void* characterCoordinates, int charCoordinatesLength);

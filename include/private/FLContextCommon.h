@@ -21,10 +21,13 @@
 #include <list>
 // ANSI C Headers for C++
 #include <cassert>
+
 // Fleksy headers
 //#include <PatternRecognizer/Structures.h>
 #include "PatternRecognizer/Platform.h"
 #include "TimeFunctions.h"
+
+class triPrediction;
 
 //#define FLassert(__CONDITION__) assert(__CONDITION__)
 
@@ -298,10 +301,20 @@ public:
     snprintf(ptr, 128, "(%s, %f)", word.c_str(), weight);
     return ptr;
   }
+<<<<<<< HEAD
   friend ostream& operator<<(ostream& out, Prediction& pred) { out << "(" << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
+=======
+  friend ostream& operator<<(ostream& out, Prediction& pred) { 
+    out << "(" << pred.wordID << ", " << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
+>>>>>>> new libraries
     
   // want to find predictions by word
   bool operator==(const Prediction& pred) { return (this->word == pred.word); };  // const Prediction& is critical (error otherwise)
+  bool operator!=(const Prediction& pred) { return (this->word != pred.word); };  // const Prediction& is critical (error otherwise)
+
+  bool operator==(const triPrediction& pred); //  { return ( string( (char *) this->word.c_str() ) == pred.word); };  // const Prediction& is critical (error otherwise)
+  bool operator!=(const triPrediction& pred); //  { return ( string( (char *) this->word.c_str() ) != pred.word); };  // const Prediction& is critical (error otherwise)
+
 };
     
 // function declarations

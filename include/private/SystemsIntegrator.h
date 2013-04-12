@@ -30,7 +30,7 @@ private:
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
   list_pred filterAndNormalizeContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   
-  void addCandidate(const FLString* letters, const FLString* printLetters, const FLString* inputString, float shapeScore, bool platform, float frequency, float contextFrequency, int frequencyRank, int groupFrequencyRank, FLResponseEntryVector& candidateList);
+  void addCandidate(const FLString* letters, const FLString* printLetters, const FLString* inputString, float shapeScore, bool platform, float frequency, float contextFrequency, /*int frequencyRank, int groupFrequencyRank,*/ FLResponseEntryVector& candidateList);
 
 public:
   SystemsIntegrator();

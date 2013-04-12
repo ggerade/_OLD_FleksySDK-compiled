@@ -23,7 +23,7 @@ public:
     FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = true);
     ~FleksyAPI();
     /*
-     * Sets a path wich will be used by the
+     * Sets a path that will be used by the
      * loadResources() to load the library
      */
     void setResourcePath(const char* path);
@@ -41,7 +41,7 @@ public:
      */
     FLDictionaryChangeResult removeWordFromDictionary(FLString word);
     /*
-     * Takes x, y coordinates of the tap, optionally time when tap occured
+     * Takes x, y coordinates of the tap, optionally time when tap occurred
      * This will result in call to your FleksyListenerInterface onSetComposingText() with the character
      * that is closest to the x,y coordinate.
      */
@@ -75,11 +75,11 @@ public:
     void enter();
     /*
      * Set the cursor position. If cursorUpdates are not simulated, then this needs to be called 
-     * with the new cursor position everytime cursor moves.
+     * with the new cursor position every time cursor moves.
      */
     void cursorSelectionChanged(int selectionStart, int selectionEnd, int length = 0); //<--------------------------------------------------------length???
     /*
-     * Let Fleksy know that a change has occured in the text edior caused by external source. ex: new text was pasted by the user
+     * Let Fleksy know that a change has occurfed in the text editor caused by external source. ex: new text was pasted by the user
      */
     void editorTextChanged();
     /*
@@ -87,7 +87,7 @@ public:
      * Other modes: 
      * FLCapitalizationMode_CAP_NEXT_CHAR_ONLY - capitalize next character(aka: Shift)
      * FLCapitalizationMode_CAP_WORDS - capitalize first character of all words
-     * FLCapitalizationMode_CAP_ALL - capitalize all characters(aka: Caps Lock), 
+     * FLCapitalizationMode_CAP_ALL - capitalize all characters(aka: Caps Lock)
      */
     void setCapitalizationMode(FLCapitalizationMode mode);    
     /*

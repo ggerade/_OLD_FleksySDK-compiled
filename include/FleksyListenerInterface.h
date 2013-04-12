@@ -59,7 +59,7 @@ public:
      * Send message to the platform
      * FLMessageType_USER - some message user should see
      * FLMessageType_NO_NEXT_SUGGESTION - reached end of the suggestion list
-     * FLMessageType_NO_PREVIOUS_SUGGESTION - reached begginning of the suggestion list
+     * FLMessageType_NO_PREVIOUS_SUGGESTION - reached beginning of the suggestion list
      */
     virtual void onMessageReceived(FLMessageType type, FLString message){};
     /*
@@ -72,11 +72,11 @@ public:
      */
     virtual void onRequestAdditionalSuggestions(const FLString rawText){};
     /*
-     * Send suggestion list to the platfrom to display(aka Candidates)
+     * Send suggestion list to the platform to display(aka Candidates)
      */
     virtual void onReceiveSuggestions(std::vector<FLString> suggestions, int selectedIndex){};
     /*
-     * Send an index of suggestion platfrom should display as current suggestion
+     * Send an index of suggestion platform should display as current suggestion
      */
     virtual void onSelectedSuggestionChanged(int selectedIndex){};
 };

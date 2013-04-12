@@ -25,12 +25,9 @@ private:
   FLString* letters;
   FLString* printLetters;
 
-  // What the translation of this candidate word needs to be to match the input centroid
-  
   float frequency;
-
-  int groupFrequencyRank;
-  int frequencyRank;
+//  int groupFrequencyRank;
+//  int frequencyRank;
   
   int bytesAllocated;
   
@@ -109,12 +106,14 @@ public:
 
   const FLString* getLetters();
   const FLString* getPrintLetters();
+  
   void setFrequency(float f);
   float getFrequency();
-  void setGroupFrequencyRank(int rank);
-  int getGroupFrequencyRank();
-  int getFrequencyRank();
-  void setFrequencyRank(int rank);
+//  void setGroupFrequencyRank(int rank);
+//  int getGroupFrequencyRank();
+//  int getFrequencyRank();
+//  void setFrequencyRank(int rank);
+  
   short getNPoints();
   BBValue getUniqueID();
   int getBytesAllocated();
