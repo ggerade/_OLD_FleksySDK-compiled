@@ -20,7 +20,6 @@ using namespace std;
 class SystemsIntegrator {
   
 private:
-  bool FLEKSY_CORE_SETTING_USE_WORD_FREQUENCY;
   FleksyUtilities* utils;
   
   FLTokenPredictor* ftp;
@@ -70,9 +69,6 @@ public:
   FLPoint* getKeymap(int keyboardTag);
   
   // Settings
-  bool getSettingUseWordFrequency();
-  void setSettingUseWordFrequency(bool b);
-  
   bool getSettingUseTx();
   void setSettingUseTx(bool b);
   

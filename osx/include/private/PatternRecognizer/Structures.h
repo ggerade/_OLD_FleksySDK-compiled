@@ -55,8 +55,8 @@ typedef struct StandardDeviationResult {
 
 typedef struct VoteParameters {
   
-  float baseAngle;
-  float baseLength;
+  float basisAngle;
+  float basisLength;
   
   //TODO: We could use these to rule out translated values early
   //FLPoint baseMidpoint;

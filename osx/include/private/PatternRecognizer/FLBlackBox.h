@@ -19,7 +19,7 @@
 #define BLACKBOX_ANGLE_BUCKETS_N 12
 #define BLACKBOX_BUCKET_ANGLE_SIZE (2 * M_PI / BLACKBOX_ANGLE_BUCKETS_N)
 
-// This uses the absolute angle of the basis. See VoteParameters.baseAngle
+// This uses the absolute angle of the basis. See VoteParameters.basisAngle
 #define BLACKBOX_USE_ANGLE 1
 
 //these need to fit in 5 bits for now, so <= 31, and not conflict with ACTUAL base IDs that might be that large! TODO
