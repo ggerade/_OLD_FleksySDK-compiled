@@ -24,7 +24,6 @@ using namespace std;
 class FLWordDatabase {
 private:
   
-  bool FLEKSY_CORE_SETTING_USE_TX;
   bool FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA;
   
   FLWord* wordsByID[FLEKSY_MAX_WORDS];
@@ -64,9 +63,6 @@ private:
   void displayStats();
   
   static void printVoteParams(VoteParameters params);
-  
-  void calculateCandidateScore(FLWord* candidate, FLWord* inputWord);
-  
 
 public:
   FLWordDatabase();
@@ -74,6 +70,7 @@ public:
   
   // FLWordDatabase (QueryingMethods)
   FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, bool needscore, bool printResults);
+  void calculatePreciseCandidateScore(FLWord* candidate, FLWord* inputWord);
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private
@@ -86,13 +83,20 @@ public:
   void writeTables(const string filepath);
   BBValue generateWordID();
   
+  void clearValues();
+  
   FLWord* getWordByID(int wordID);
   
+  // these should be between 0.0 and 1.0
+  // Platform is platform suggestions
+  // Transform is transformation, unrelated to shape
+  static float SHAPE_LAYER_WEIGHT;
+  static float TRANSFORM_LAYER_WEIGHT;
+  static float CONTEXT_LAYER_WEIGHT;
+  static float PLATFORM_LAYER_WEIGHT;
+  
   // Settings
-  void setSettingUseTx(bool b);
   void setSettingPlusMinus1(bool b);
-  //
-  bool getSettingUseTx();
   bool getSettingPlusMinus1();
 };
 

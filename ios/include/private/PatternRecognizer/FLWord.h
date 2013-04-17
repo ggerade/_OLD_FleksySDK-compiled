@@ -41,7 +41,7 @@ public:
   FLPoint* rawPoints;
   LPCentroid* LPCentroids;
   
-  float votes0and7;
+  float votes0and1;
   
   //float* anchorScores;
   
@@ -123,7 +123,7 @@ public:
   static bool compareAngle(FLWord* thisWord, FLWord* word);
   static bool compareScale(FLWord* thisWord, FLWord* word);
   static bool compareTx(FLWord* thisWord, FLWord* word);
-  static bool compareExactVotesPass2(FLWord* thisWord, FLWord* word);
+  static bool compareCachedTotalDistance(FLWord* thisWord, FLWord* word);
   static bool compareShapeDistance(FLWord* thisWord, FLWord* word);
   static bool compareExactVotes(FLWord* thisWord, FLWord* word);
   static bool compareExtraVotes(FLWord* thisWord, FLWord* word);

@@ -91,7 +91,7 @@ public:
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   void writeTables(const string& filepath); //optional
   void postload();
-  FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText);
+  FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);
   FLAddWordResult addWord(const FLString& word, float frequency);
   bool removeWord(const FLString& wordLetters);
   ////////////////////

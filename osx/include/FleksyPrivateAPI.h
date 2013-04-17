@@ -32,5 +32,4 @@ public:
                   void* blackListCapital, int blackListCapitalLength, void* blackList, int blackListLength, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
 };
 
-
 #endif

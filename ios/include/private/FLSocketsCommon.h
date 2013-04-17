@@ -31,6 +31,7 @@ public:
   //~FLRequest();
   static FLRequest* FLRequestMake(int pointsN, const FLString* previousToken1, const FLString* previousToken2, bool debug = false);
   void setPlatformSuggestions(FLString* s);
+  std::vector<FLString> getPlatformSuggestions();
   int getSize();
 };
 
@@ -38,7 +39,9 @@ class FLResponseEntry {
 public:
   float stringEditDistance;
   float euclideanDistance;
+  float votes;
   float shapeScore;
+  float transformationScore;
   float overallScore;
   //float frequency;
   //int frequencyRank;

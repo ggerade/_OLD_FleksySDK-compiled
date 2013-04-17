@@ -27,10 +27,9 @@ private:
   token_ids convertToTokenIDs(FLString* token2, FLString* token1);
   float distanceBetweenLetters(FLChar c1, FLChar c2);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
-  list_pred filterAndNormalizeContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
+  FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
+  void ensureRawWordExists(FLInternalSuggestionsContainer* pwr, FLRequest* request);
   
-  void addCandidate(const FLString* letters, const FLString* printLetters, const FLString* inputString, float shapeScore, bool platform, float frequency, float contextFrequency, /*int frequencyRank, int groupFrequencyRank,*/ FLResponseEntryVector& candidateList);
-
 public:
   SystemsIntegrator();
   ~SystemsIntegrator(); 
@@ -69,8 +68,16 @@ public:
   FLPoint* getKeymap(int keyboardTag);
   
   // Settings
-  bool getSettingUseTx();
-  void setSettingUseTx(bool b);
+  void setSettingTransformLayerWeight(float weight);
+  void setSettingShapeLayerWeight(float weight);
+  void setSettingContextLayerWeight(float weight);
+  void setSettingPlatformLayerWeight(float weight);
+  
+  bool getSettingShapeLayerWeight();
+  bool getSettingTransformLayerWeight();
+  bool getSettingContextLayerWeight();
+  bool getSettingPlatformLayerWeight();
+  
   
   bool getSettingPlusMinus1();
   void setSettingPlusMinus1(bool b);

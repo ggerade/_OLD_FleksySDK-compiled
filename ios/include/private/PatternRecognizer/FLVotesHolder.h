@@ -11,7 +11,7 @@
 
 #include "CoreSettings.h"
 
-#define WORD_VOTE_SLOTS 10
+#define WORD_VOTE_SLOTS 2
 
 class FLVotesHolder {
   
