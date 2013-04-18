@@ -54,10 +54,7 @@ private:
   //wordsbyprintletters ????
   
   map<FLString, FLString> wordsBlacklistByLetters;
-  
-  static FLString alphabetFull;
-  static FLString alphabetUpper;
-  static FLString alphabetLower;
+
   
   bool loadedPreprocessedFiles[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
   bool postLoaded;
@@ -74,9 +71,7 @@ private:
   void processWordBlacklistLine(FLString* line, const FLString& delimiter2);
   void processWordlistLine(FLString* wordString, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues);
   void loadDictionary(const string& filename, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues, bool isEncrypted);
-  
-  static bool isnotalpha(FLChar c);
-  static bool ismember(FLChar item, FLString& vector);
+
    
 public:
   FleksyUtilities();
@@ -96,8 +91,6 @@ public:
   bool removeWord(const FLString& wordLetters);
   ////////////////////
   
-  static FLString onlyKeepAlphaFromString(const FLString& s);
-  
   FLPoint keymaps[4][KEY_MAX_VALUE];
   
   int loadedWordCount();
@@ -114,14 +107,7 @@ public:
   bool getLoadedPreprocessedFiles();
   bool getPostloaded();
   
-  static FLChar toupper(FLChar c);
-  static FLChar tolower(FLChar c);
-  static bool isalpha(FLChar c);
-  static bool isupper(FLChar c);
-  static bool islower(FLChar c);
-    
-    // This converts extended ascii based on the ISO-8859-1 (Latin1) character set into UTF8 multibyte characters (up to 2 multibytes)
-  static char* extendedAsciiToUtf8(const char* text);
+
 
 };
 
