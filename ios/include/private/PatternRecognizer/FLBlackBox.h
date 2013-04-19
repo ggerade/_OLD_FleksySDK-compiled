@@ -66,7 +66,7 @@ public:
   
   FLBlackBox();
   ~FLBlackBox();
-  int keyCount();
+  size_t keyCount();
   int totalValuesCount();
   
   void setValue(BBKey key, const BBValue* newValue, bool realloced);

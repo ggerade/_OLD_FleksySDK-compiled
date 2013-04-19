@@ -37,10 +37,10 @@
 #endif
 
 
-#define FLEKSY_LIBRARY_EXPIRES 0
+#define FLEKSY_LIBRARY_EXPIRES 1
 //http://www.ruddwire.com/handy-code/date-to-millisecond-calculators/
-//Tue Apr 30 2013 00:00:00 GMT-0700 (PDT)
-#define EXPIRATION_DATE_IN_SECONDS 1367305200
+//Jun 19 2013 11:24:48 GMT-0700 (PDT)
+#define EXPIRATION_DATE_IN_SECONDS 1371666288
 // set to 0 to disable. Value is approximate
 #define ALLOWED_REQUESTS_PER_WORD_LENGTH 0
 //(10 * 1000)
