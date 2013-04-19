@@ -109,9 +109,10 @@
 		12247A5B1718983E00AF16AD /* TimeFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFunctions.h; sourceTree = "<group>"; };
 		12247A5C1718983E00AF16AD /* VariousUtilities2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariousUtilities2.h; sourceTree = "<group>"; };
 		12247A9B171899D000AF16AD /* FleksySDKResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FleksySDKResources; path = ../../ios/FleksySDKResources; sourceTree = SOURCE_ROOT; };
+		1261981B1721F49C00348A5F /* API-readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "API-readme.txt"; sourceTree = "<group>"; };
 		1291D13A1721E88B00876BF3 /* FleksyLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = FleksyLib.dylib; sourceTree = "<group>"; };
 		12FFCCE91721E9940077224C /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFleksyStatic.a; sourceTree = "<group>"; };
-		2E0E175616F3D32F0033ABC1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2E0E175616F3D32F0033ABC1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = FleksySample_OSX/main.cpp; sourceTree = "<group>"; };
 		2EC422C017024A21002AE1AA /* FleksySample_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleksySample_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC422C217024A21002AE1AA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		2EC422C417024A21002AE1AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -287,6 +288,23 @@
 			path = PatternRecognizer;
 			sourceTree = "<group>";
 		};
+		126198191721F3D100348A5F /* FleksySDK */ = {
+			isa = PBXGroup;
+			children = (
+				122479F91718983E00AF16AD /* ios */,
+				12247988171893A100AF16AD /* osx */,
+			);
+			name = FleksySDK;
+			sourceTree = "<group>";
+		};
+		1261981A1721F40A00348A5F /* FleksySample_OSX */ = {
+			isa = PBXGroup;
+			children = (
+				2E0E175616F3D32F0033ABC1 /* main.cpp */,
+			);
+			name = FleksySample_OSX;
+			sourceTree = "<group>";
+		};
 		1291D1371721E88B00876BF3 /* lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +324,6 @@
 		2E0E175316F3D32F0033ABC1 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				2E0E175616F3D32F0033ABC1 /* main.cpp */,
 				2EC422E817024A7F002AE1AA /* FleksyTester.cpp */,
 				2EC422E917024A7F002AE1AA /* FleksyTester.h */,
 				DD38AC3416FD1C3E001ED568 /* FleksyListenerImplC.cpp */,
@@ -328,7 +345,6 @@
 		2EC422C817024A21002AE1AA /* FleksySample_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				122479F91718983E00AF16AD /* ios */,
 				2EC422EF17025D04002AE1AA /* AppDelegate.h */,
 				2EC422F017025D04002AE1AA /* AppDelegate.mm */,
 				2EC422C917024A21002AE1AA /* Supporting Files */,
@@ -354,9 +370,11 @@
 		DDE8716E1655DFF3008F4BA2 = {
 			isa = PBXGroup;
 			children = (
-				12247988171893A100AF16AD /* osx */,
+				1261981B1721F49C00348A5F /* API-readme.txt */,
 				2E0E175316F3D32F0033ABC1 /* src */,
+				1261981A1721F40A00348A5F /* FleksySample_OSX */,
 				2EC422C817024A21002AE1AA /* FleksySample_iOS */,
+				126198191721F3D100348A5F /* FleksySDK */,
 				2EC422C117024A21002AE1AA /* Frameworks */,
 				DDE8717A1655DFF3008F4BA2 /* Products */,
 			);
