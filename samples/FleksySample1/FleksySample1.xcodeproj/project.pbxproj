@@ -612,6 +612,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				HEADER_SEARCH_PATHS = ../../osx/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/.";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../osx/lib\"",
@@ -626,6 +627,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				HEADER_SEARCH_PATHS = ../../osx/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/.";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../osx/lib\"",
