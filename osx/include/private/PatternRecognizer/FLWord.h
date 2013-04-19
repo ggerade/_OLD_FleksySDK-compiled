@@ -34,12 +34,12 @@ private:
   void initFromPoints(short nPoints, FLPoint* points, BBValue uniqueID);
   void* allocateMemoryForItems(size_t count, size_t itemSize);
   float shapeScore(float angleDeviation, float scalePpcm, bool swapped);
-  void calculateLPCentroidsFromPoints(short nPoints, FLPoint* points);
+  //void calculateLPCentroidsFromPoints(short nPoints, FLPoint* points);
   int getRawSize();
 
 public:
   FLPoint* rawPoints;
-  LPCentroid* LPCentroids;
+  //LPCentroid* LPCentroids;
   
   float votes0and1;
   
@@ -50,15 +50,16 @@ public:
   //float* anchorScoresMax;
   
   
-  int bestSwapIndex1;
-  int bestSwapIndex2;
+//  int bestSwapIndex1;
+//  int bestSwapIndex2;
   //float bestSwapValue1;
   //float bestSwapValue2;
   
   
-  float scaleLogDeltaVariance;
-  float scalePpcm;
-  float angleDeviation;
+//  float scaleLogDeltaVariance;
+//  float scalePpcm;
+//  float angleDeviation;
+
   //float logScalePpcm;
   
   
@@ -66,11 +67,9 @@ public:
   float cachedShapeDistance;
   float cachedTransformationDistance;
 
-  float scaleMean;
-  float angleMean;
-  float txMean;
-  
-  bool filterPass;
+//  float scaleMean;
+//  float angleMean;
+//  float txMean;
  
  
   //float scaleMetaDeviation;
@@ -120,9 +119,9 @@ public:
 
   static bool compareStringOnly(FLWord* thisWord, FLWord* word);
   static bool compareNonExactVotesPass2(FLWord* thisWord, FLWord* word);
-  static bool compareAngle(FLWord* thisWord, FLWord* word);
-  static bool compareScale(FLWord* thisWord, FLWord* word);
-  static bool compareTx(FLWord* thisWord, FLWord* word);
+//  static bool compareAngle(FLWord* thisWord, FLWord* word);
+//  static bool compareScale(FLWord* thisWord, FLWord* word);
+//  static bool compareTx(FLWord* thisWord, FLWord* word);
   static bool compareCachedTotalDistance(FLWord* thisWord, FLWord* word);
   static bool compareShapeDistance(FLWord* thisWord, FLWord* word);
   static bool compareExactVotes(FLWord* thisWord, FLWord* word);

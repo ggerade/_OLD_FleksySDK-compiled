@@ -124,6 +124,9 @@ public:
    */
   bool knowsWord(FLString word);
   
+  
+  std::string getVersion();
+  
   //private:
   FleksyAPIpImpl *pImpl;
 };

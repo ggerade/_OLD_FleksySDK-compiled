@@ -81,4 +81,6 @@ public:
   
   bool getSettingPlusMinus1();
   void setSettingPlusMinus1(bool b);
+  
+  string getVersion();
 };
