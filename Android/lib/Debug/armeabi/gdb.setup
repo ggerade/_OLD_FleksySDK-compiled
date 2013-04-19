@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-set solib-search-path /Users/kostas/Desktop/Fleksy/repos/FleksySDK/Android/AndroidLibraryBuilder/obj/local/armeabi
-directory /usr/local/android-ndk/platforms/android-14/arch-arm/usr/include ../../../FleksyEngine/FleksyServer ../../../FleksyEngine/PatternRecognizer ../../../FleksyEngine/PatternRecognizer/PatternRecognizer ../../../FleksyContext ../../../FleksyTypingController ../../../Cwrappers /usr/local/android-ndk/sources/cxx-stl/gnu-libstdc++/4.7/include /usr/local/android-ndk/sources/cxx-stl/gnu-libstdc++/4.7/libs/armeabi/include /Users/kostas/Desktop/Fleksy/repos/FleksySDK/Android/AndroidLibraryBuilder/jni
-=======
 set solib-search-path /Users/vadim/FleksySDK/Android/AndroidLibraryBuilder/obj/local/armeabi
 directory /usr/local/android-ndk/platforms/android-14/arch-arm/usr/include ../../../FleksyEngine/FleksyServer ../../../FleksyEngine/PatternRecognizer ../../../FleksyEngine/PatternRecognizer/PatternRecognizer ../../../FleksyContext ../../../FleksyTypingController ../../../Cwrappers /usr/local/android-ndk/sources/cxx-stl/gnu-libstdc++/4.7/include /usr/local/android-ndk/sources/cxx-stl/gnu-libstdc++/4.7/libs/armeabi/include /Users/vadim/FleksySDK/Android/AndroidLibraryBuilder/jni
->>>>>>> new lib for Android, moved bugsense here

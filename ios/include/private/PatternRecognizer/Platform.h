@@ -9,6 +9,9 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+#include <assert.h>
+
+
 #ifdef FLEKSYNOLOGGING
 #define LOGI(...)
 #else
@@ -27,8 +30,11 @@
 #endif
 
 
-//#define FLassert(condition) assert(condition)
+#if DEBUG
 #define FLassert(condition) { if(!(condition)){ signalHandlerWithParams(-3, #condition, __func__, __FILE__, __LINE__); } }
+#else 
+#define FLassert(condition) assert(condition)
+#endif
 
 
 #define FLEKSY_LIBRARY_EXPIRES 0
