@@ -53,6 +53,8 @@ mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING"
 
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/include/FleksyPrivateAPI.h"
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/include/private"
 
 
 echo ""
@@ -62,6 +64,9 @@ rsync -aC --include='lib*.a' --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/ios/" "${F
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING"
+
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/include/FleksyPrivateAPI.h"
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/include/private"
 
 cd "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib"
 for FLEKSYSDK_COMPILED_LIB in lib*.a
@@ -85,6 +90,9 @@ rsync -aC --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/osx/" "${FLEKSYSDK_COMPILED_S
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING"
+
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/include/FleksyPrivateAPI.h"
+rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/include/private"
 
 cd "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib"
 for FLEKSYSDK_COMPILED_LIB in *.dylib

@@ -46,68 +46,16 @@
 		122479CA171893A100AF16AD /* Fleksy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleksy.h; sourceTree = "<group>"; };
 		122479CB171893A100AF16AD /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyAPI.h; sourceTree = "<group>"; };
 		122479CC171893A100AF16AD /* FleksyListenerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyListenerInterface.h; sourceTree = "<group>"; };
-		122479CD171893A100AF16AD /* FleksyPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyPrivateAPI.h; sourceTree = "<group>"; };
 		122479CE171893A100AF16AD /* FLEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLEnums.h; sourceTree = "<group>"; };
 		122479CF171893A100AF16AD /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPoint.h; sourceTree = "<group>"; };
 		122479D0171893A100AF16AD /* FLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLString.h; sourceTree = "<group>"; };
-		122479D2171893A100AF16AD /* EncryptionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionUtilities.h; sourceTree = "<group>"; };
-		122479D3171893A100AF16AD /* FLContextCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLContextCommon.h; sourceTree = "<group>"; };
-		122479D4171893A100AF16AD /* FleksyDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyDefines.h; sourceTree = "<group>"; };
-		122479D5171893A100AF16AD /* FleksyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyUtilities.h; sourceTree = "<group>"; };
-		122479D6171893A100AF16AD /* FLSingleLevelTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSingleLevelTokenPredictor.h; sourceTree = "<group>"; };
-		122479D7171893A100AF16AD /* FLSingleLevelTokenPredictorAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSingleLevelTokenPredictorAsync.h; sourceTree = "<group>"; };
-		122479D8171893A100AF16AD /* FLSocketsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSocketsCommon.h; sourceTree = "<group>"; };
-		122479D9171893A100AF16AD /* FLTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTokenPredictor.h; sourceTree = "<group>"; };
-		122479DB171893A100AF16AD /* CoreSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSettings.h; sourceTree = "<group>"; };
-		122479DC171893A100AF16AD /* FLBlackBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBlackBox.h; sourceTree = "<group>"; };
-		122479DD171893A100AF16AD /* FLBlackBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBlackBoxSerializer.h; sourceTree = "<group>"; };
-		122479DE171893A100AF16AD /* FLInternalSuggestionsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLInternalSuggestionsContainer.h; sourceTree = "<group>"; };
-		122479DF171893A100AF16AD /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPoint.h; sourceTree = "<group>"; };
-		122479E0171893A100AF16AD /* FLVotesHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLVotesHolder.h; sourceTree = "<group>"; };
-		122479E1171893A100AF16AD /* FLWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLWord.h; sourceTree = "<group>"; };
-		122479E2171893A100AF16AD /* FLWordDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLWordDatabase.h; sourceTree = "<group>"; };
-		122479E3171893A100AF16AD /* GenericCalculatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCalculatorCPP.h; sourceTree = "<group>"; };
-		122479E4171893A100AF16AD /* MathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathFunctions.h; sourceTree = "<group>"; };
-		122479E5171893A100AF16AD /* OnlineCircularCorrelatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineCircularCorrelatorCPP.h; sourceTree = "<group>"; };
-		122479E6171893A100AF16AD /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		122479E7171893A100AF16AD /* PrivateStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateStructures.h; sourceTree = "<group>"; };
-		122479E8171893A100AF16AD /* Structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structures.h; sourceTree = "<group>"; };
-		122479E9171893A100AF16AD /* SystemsIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemsIntegrator.h; sourceTree = "<group>"; };
-		122479EA171893A100AF16AD /* TimeFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFunctions.h; sourceTree = "<group>"; };
-		122479EB171893A100AF16AD /* VariousUtilities2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariousUtilities2.h; sourceTree = "<group>"; };
 		122479F7171895B200AF16AD /* FleksySDKResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FleksySDKResources; path = ../../osx/FleksySDKResources; sourceTree = SOURCE_ROOT; };
 		12247A3B1718983E00AF16AD /* Fleksy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleksy.h; sourceTree = "<group>"; };
 		12247A3C1718983E00AF16AD /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyAPI.h; sourceTree = "<group>"; };
 		12247A3D1718983E00AF16AD /* FleksyListenerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyListenerInterface.h; sourceTree = "<group>"; };
-		12247A3E1718983E00AF16AD /* FleksyPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyPrivateAPI.h; sourceTree = "<group>"; };
 		12247A3F1718983E00AF16AD /* FLEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLEnums.h; sourceTree = "<group>"; };
 		12247A401718983E00AF16AD /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPoint.h; sourceTree = "<group>"; };
 		12247A411718983E00AF16AD /* FLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLString.h; sourceTree = "<group>"; };
-		12247A431718983E00AF16AD /* EncryptionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionUtilities.h; sourceTree = "<group>"; };
-		12247A441718983E00AF16AD /* FLContextCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLContextCommon.h; sourceTree = "<group>"; };
-		12247A451718983E00AF16AD /* FleksyDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyDefines.h; sourceTree = "<group>"; };
-		12247A461718983E00AF16AD /* FleksyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyUtilities.h; sourceTree = "<group>"; };
-		12247A471718983E00AF16AD /* FLSingleLevelTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSingleLevelTokenPredictor.h; sourceTree = "<group>"; };
-		12247A481718983E00AF16AD /* FLSingleLevelTokenPredictorAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSingleLevelTokenPredictorAsync.h; sourceTree = "<group>"; };
-		12247A491718983E00AF16AD /* FLSocketsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSocketsCommon.h; sourceTree = "<group>"; };
-		12247A4A1718983E00AF16AD /* FLTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTokenPredictor.h; sourceTree = "<group>"; };
-		12247A4C1718983E00AF16AD /* CoreSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSettings.h; sourceTree = "<group>"; };
-		12247A4D1718983E00AF16AD /* FLBlackBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBlackBox.h; sourceTree = "<group>"; };
-		12247A4E1718983E00AF16AD /* FLBlackBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBlackBoxSerializer.h; sourceTree = "<group>"; };
-		12247A4F1718983E00AF16AD /* FLInternalSuggestionsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLInternalSuggestionsContainer.h; sourceTree = "<group>"; };
-		12247A501718983E00AF16AD /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPoint.h; sourceTree = "<group>"; };
-		12247A511718983E00AF16AD /* FLVotesHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLVotesHolder.h; sourceTree = "<group>"; };
-		12247A521718983E00AF16AD /* FLWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLWord.h; sourceTree = "<group>"; };
-		12247A531718983E00AF16AD /* FLWordDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLWordDatabase.h; sourceTree = "<group>"; };
-		12247A541718983E00AF16AD /* GenericCalculatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCalculatorCPP.h; sourceTree = "<group>"; };
-		12247A551718983E00AF16AD /* MathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathFunctions.h; sourceTree = "<group>"; };
-		12247A561718983E00AF16AD /* OnlineCircularCorrelatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineCircularCorrelatorCPP.h; sourceTree = "<group>"; };
-		12247A571718983E00AF16AD /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		12247A581718983E00AF16AD /* PrivateStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateStructures.h; sourceTree = "<group>"; };
-		12247A591718983E00AF16AD /* Structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structures.h; sourceTree = "<group>"; };
-		12247A5A1718983E00AF16AD /* SystemsIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemsIntegrator.h; sourceTree = "<group>"; };
-		12247A5B1718983E00AF16AD /* TimeFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFunctions.h; sourceTree = "<group>"; };
-		12247A5C1718983E00AF16AD /* VariousUtilities2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariousUtilities2.h; sourceTree = "<group>"; };
 		12247A9B171899D000AF16AD /* FleksySDKResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FleksySDKResources; path = ../../ios/FleksySDKResources; sourceTree = SOURCE_ROOT; };
 		1261981B1721F49C00348A5F /* API-readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "API-readme.txt"; sourceTree = "<group>"; };
 		1291D13A1721E88B00876BF3 /* FleksyLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = FleksyLib.dylib; sourceTree = "<group>"; };
@@ -173,53 +121,11 @@
 				122479CA171893A100AF16AD /* Fleksy.h */,
 				122479CB171893A100AF16AD /* FleksyAPI.h */,
 				122479CC171893A100AF16AD /* FleksyListenerInterface.h */,
-				122479CD171893A100AF16AD /* FleksyPrivateAPI.h */,
 				122479CE171893A100AF16AD /* FLEnums.h */,
 				122479CF171893A100AF16AD /* FLPoint.h */,
 				122479D0171893A100AF16AD /* FLString.h */,
-				122479D1171893A100AF16AD /* private */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		122479D1171893A100AF16AD /* private */ = {
-			isa = PBXGroup;
-			children = (
-				122479D2171893A100AF16AD /* EncryptionUtilities.h */,
-				122479D3171893A100AF16AD /* FLContextCommon.h */,
-				122479D4171893A100AF16AD /* FleksyDefines.h */,
-				122479D5171893A100AF16AD /* FleksyUtilities.h */,
-				122479D6171893A100AF16AD /* FLSingleLevelTokenPredictor.h */,
-				122479D7171893A100AF16AD /* FLSingleLevelTokenPredictorAsync.h */,
-				122479D8171893A100AF16AD /* FLSocketsCommon.h */,
-				122479D9171893A100AF16AD /* FLTokenPredictor.h */,
-				122479DA171893A100AF16AD /* PatternRecognizer */,
-				122479E9171893A100AF16AD /* SystemsIntegrator.h */,
-				122479EA171893A100AF16AD /* TimeFunctions.h */,
-				122479EB171893A100AF16AD /* VariousUtilities2.h */,
-			);
-			path = private;
-			sourceTree = "<group>";
-		};
-		122479DA171893A100AF16AD /* PatternRecognizer */ = {
-			isa = PBXGroup;
-			children = (
-				122479DB171893A100AF16AD /* CoreSettings.h */,
-				122479DC171893A100AF16AD /* FLBlackBox.h */,
-				122479DD171893A100AF16AD /* FLBlackBoxSerializer.h */,
-				122479DE171893A100AF16AD /* FLInternalSuggestionsContainer.h */,
-				122479DF171893A100AF16AD /* FLPoint.h */,
-				122479E0171893A100AF16AD /* FLVotesHolder.h */,
-				122479E1171893A100AF16AD /* FLWord.h */,
-				122479E2171893A100AF16AD /* FLWordDatabase.h */,
-				122479E3171893A100AF16AD /* GenericCalculatorCPP.h */,
-				122479E4171893A100AF16AD /* MathFunctions.h */,
-				122479E5171893A100AF16AD /* OnlineCircularCorrelatorCPP.h */,
-				122479E6171893A100AF16AD /* Platform.h */,
-				122479E7171893A100AF16AD /* PrivateStructures.h */,
-				122479E8171893A100AF16AD /* Structures.h */,
-			);
-			path = PatternRecognizer;
 			sourceTree = "<group>";
 		};
 		122479F91718983E00AF16AD /* ios */ = {
@@ -239,53 +145,11 @@
 				12247A3B1718983E00AF16AD /* Fleksy.h */,
 				12247A3C1718983E00AF16AD /* FleksyAPI.h */,
 				12247A3D1718983E00AF16AD /* FleksyListenerInterface.h */,
-				12247A3E1718983E00AF16AD /* FleksyPrivateAPI.h */,
 				12247A3F1718983E00AF16AD /* FLEnums.h */,
 				12247A401718983E00AF16AD /* FLPoint.h */,
 				12247A411718983E00AF16AD /* FLString.h */,
-				12247A421718983E00AF16AD /* private */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		12247A421718983E00AF16AD /* private */ = {
-			isa = PBXGroup;
-			children = (
-				12247A431718983E00AF16AD /* EncryptionUtilities.h */,
-				12247A441718983E00AF16AD /* FLContextCommon.h */,
-				12247A451718983E00AF16AD /* FleksyDefines.h */,
-				12247A461718983E00AF16AD /* FleksyUtilities.h */,
-				12247A471718983E00AF16AD /* FLSingleLevelTokenPredictor.h */,
-				12247A481718983E00AF16AD /* FLSingleLevelTokenPredictorAsync.h */,
-				12247A491718983E00AF16AD /* FLSocketsCommon.h */,
-				12247A4A1718983E00AF16AD /* FLTokenPredictor.h */,
-				12247A4B1718983E00AF16AD /* PatternRecognizer */,
-				12247A5A1718983E00AF16AD /* SystemsIntegrator.h */,
-				12247A5B1718983E00AF16AD /* TimeFunctions.h */,
-				12247A5C1718983E00AF16AD /* VariousUtilities2.h */,
-			);
-			path = private;
-			sourceTree = "<group>";
-		};
-		12247A4B1718983E00AF16AD /* PatternRecognizer */ = {
-			isa = PBXGroup;
-			children = (
-				12247A4C1718983E00AF16AD /* CoreSettings.h */,
-				12247A4D1718983E00AF16AD /* FLBlackBox.h */,
-				12247A4E1718983E00AF16AD /* FLBlackBoxSerializer.h */,
-				12247A4F1718983E00AF16AD /* FLInternalSuggestionsContainer.h */,
-				12247A501718983E00AF16AD /* FLPoint.h */,
-				12247A511718983E00AF16AD /* FLVotesHolder.h */,
-				12247A521718983E00AF16AD /* FLWord.h */,
-				12247A531718983E00AF16AD /* FLWordDatabase.h */,
-				12247A541718983E00AF16AD /* GenericCalculatorCPP.h */,
-				12247A551718983E00AF16AD /* MathFunctions.h */,
-				12247A561718983E00AF16AD /* OnlineCircularCorrelatorCPP.h */,
-				12247A571718983E00AF16AD /* Platform.h */,
-				12247A581718983E00AF16AD /* PrivateStructures.h */,
-				12247A591718983E00AF16AD /* Structures.h */,
-			);
-			path = PatternRecognizer;
 			sourceTree = "<group>";
 		};
 		126198191721F3D100348A5F /* FleksySDK */ = {
