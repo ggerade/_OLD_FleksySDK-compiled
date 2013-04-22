@@ -51,6 +51,8 @@ echo "Staging Android..."
 rsync -aC --include='lib*.so' --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib"
+rsync -aC --exclude='Release' --exclude='Debug' "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib/"
+
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING"
 
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/include/FleksyPrivateAPI.h"
