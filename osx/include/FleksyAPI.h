@@ -24,7 +24,8 @@ public:
   ~FleksyAPI();
   /*
    * Sets a path that will be used by the
-   * loadResources() to load the library
+   * loadResources() to load the library. This also loads the keyboard maps so that the client can 
+   * use getKeymapForKeyboard and draw the UI, before calling loadResources.
    */
   void setResourcePath(const char* path);
   /*
@@ -97,13 +98,13 @@ public:
   
   /*
    * Returns active keyboard
-   * FLKeyboardID_QWERTY (1)
+   * FLKeyboardID_QWERTY  (1)
    * FLKeyboardID_NUMBERS (2)
    * FLKeyboardID_SYMBOLS (3)
    */
   FLKeyboardID getActiveKeyboardID();
   /*
-   * Returns keymap for KeyboardID containing character and it's location on the screen
+   * Returns keymap for KeyboardID containing character and its location on the screen
    * can be used to draw keyboard.
    */
   std::map<FLChar, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);

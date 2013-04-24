@@ -14,6 +14,7 @@
 #include <PatternRecognizer/FLBlackBox.h>
 #include <PatternRecognizer/FLWordDatabase.h>
 #include <PatternRecognizer/FLVotesHolder.h>
+#include <PatternRecognizer/FLFile.h>
 #include "FleksyDefines.h"
 #include <map>
 
@@ -82,8 +83,9 @@ public:
   ///////  API  ///////
   void loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
-  void preloadWithContents(int wordLength, const char* contents, size_t contentLength);
+  void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
+  void loadDictionary(FLFile& f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   void writeTables(const string& filepath); //optional
   void postload();
   FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);

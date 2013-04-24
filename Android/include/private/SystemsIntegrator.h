@@ -40,8 +40,10 @@ public:
   void loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
   // TODO: preprocessed file should include wordLength and length info
-  void preloadWithContents(int wordLength, const char* contents, size_t contentLength);
+  void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
+  
+  void loadDictionary(FLFile& f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   
   void loadContextData(const string& unigram_file,
                        const string& bigram_file,

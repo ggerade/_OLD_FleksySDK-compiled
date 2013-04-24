@@ -9,6 +9,8 @@
 #ifndef FleksyLib_FleksyPrivateAPI_h
 #define FleksyLib_FleksyPrivateAPI_h
 
+#include "FLFile.h"
+
 class FLTypingController;
 class SystemsIntegrator;
 
@@ -27,9 +29,8 @@ public:
   void loadKeyMaps();
   void postLoadSetup();
   void loadKeyboardData(void* characterCoordinates, int charCoordinatesLength);
-  void loadPreprocessedFile(int wordLength, char* preprocessedFile, int preprocessedFileLength);
-  void initialize(void* preloaded, int preloadedLength, void* wordlist, int wordlistLength,
-                  void* blackListCapital, int blackListCapitalLength, void* blackList, int blackListLength, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
+  void loadPreprocessedFile(int wordLength, const void* preprocessedFile, int preprocessedFileLength);
+  void initialize(FLFile* preloaded, FLFile* wordlist, FLFile* blackListCapital, FLFile* blackList, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
 };
 
 #endif

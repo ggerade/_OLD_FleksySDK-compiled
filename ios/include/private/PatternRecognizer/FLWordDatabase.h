@@ -79,7 +79,7 @@ public:
   void calculateBlackboxValues();
   bool preprocessedFilesExist(const string filepathFormat);
   void loadTablesWithPathFormat(const string filepathFormat);
-  void loadTableWithContents(int wordLength, const char* contents, size_t length);
+  void loadTableWithContents(int wordLength, const void* contents, size_t length);
   void writeTables(const string filepath);
   BBValue generateWordID();
   
