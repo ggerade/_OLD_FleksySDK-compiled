@@ -253,6 +253,10 @@ public:
   static void set_uni_bin(char * in) { set_unigram_binary_file(in); };
   static const char * get_unigram_binary_file() { return (const char *) szUniBinFile; };
   static const char * get_uni_bin_file() { return get_unigram_binary_file(); };
+
+  // FLFile member functions
+  static void set_unigram_fl_file(FLFile *infile) { unigram_fl_file = infile; };
+  static FLFile* get_unigram_fl_file() { return unigram_fl_file; };
   
   static probability minProbLog;
   static probability maxProbLog;
@@ -274,7 +278,7 @@ public:
   static void normalizePreds(list_pred& preds);
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
   // fast binary file support code (may be used by FLContextProducer or FLTokenPredictor)
-  static FastBinaryFileHeader readFastHdr(FLFile * myfile, char ** phdr_data, const char * caller);
+  static FastBinaryFileHeader readFastHdr(FLFile * myfile, char ** phdr_data = nullptr, const char * caller = nullptr);
   static FastBinaryFileHeader readFastHdr(string fast_bin_file, char** phdr_data = NULL, const char * caller = NULL);
   static void readFastBinaryFile(const char * filename, short_lut& alt_table, FLSingleLevelTokenPredictor *pPredictor = NULL);  // read fast binary file into lookup table
 
@@ -282,6 +286,7 @@ public:
   static void combinePreds(list_pred& candidates, list_pred& bi_candidates);
 
   static void read_uni_bin(string uni_bin_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
+  static void read_uni_bin(FLFile* unigram_fl_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   static void printFastHdr(FastBinaryFileHeader& hdr);
 
   static bool IsNumber(char * str) {
@@ -296,6 +301,7 @@ public:
 
 private:
   static char szUniBinFile[PATH_MAX];  // file name for unigrams binary file
+  static FLFile * unigram_fl_file;
 };  // class FleksyContextCommon
 
 class Prediction
