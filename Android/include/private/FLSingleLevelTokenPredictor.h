@@ -18,7 +18,9 @@
 #include <vector>
 #include <fstream>
 // Fleksy headers
+#include <PatternRecognizer/FLFile.h>
 #include "FLContextCommon.h"
+#include "FLTrigramsBin.h"
 
 class FLSingleLevelTokenPredictor {
 
@@ -27,11 +29,14 @@ class FLSingleLevelTokenPredictor {
   
   FILE* fileHandle;
   size_t filesize;
+
+  FLFile* fl_file = nullptr;
   
   short_lut table;
 
 private:
 
+  static FLTrigramsBin * fl_trigrams_bin;
   static int nPredictors;
   FastBinaryFileHeader hdr;  // version of binary file (>= 100 for fast binary files with an index)
   bool active;

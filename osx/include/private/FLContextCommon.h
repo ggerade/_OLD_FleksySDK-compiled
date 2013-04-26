@@ -24,20 +24,25 @@
 
 // Fleksy headers
 //#include <PatternRecognizer/Structures.h>
-#include "PatternRecognizer/Platform.h"
+#include <PatternRecognizer/Platform.h>
+#include <PatternRecognizer/FLFile.h>
+
 #include "TimeFunctions.h"
 
 class triPrediction;
 
 //#define FLassert(__CONDITION__) assert(__CONDITION__)
 
-#define MAX_WORD_ID 65000
-#define MAX_WORD_DEPTH 2  // was 2 (jfm)
+#define MAX_WORD_ID (65000)
+#define MAX_WORD_DEPTH (2)  // was 2 (jfm)
 
 // max count of trace messages reported by functions
 // once function has been called FL_MAX_COUNT times, it goes silent
 const unsigned int FL_MAX_COUNT = 5;  // default to zero (set to non-zero such as 5 for trace debuggin)
 const unsigned int FL_COCA_SIZE = 420170105;  // think this is the number of words in the Mark Davies COCA corpus (our training set)  -- jfm
+const unsigned int FL_TRIGRAM_SIGNIFICANT_COUNT = 1;  // used in combinePreds to decide what to do if both bigrams and trigrams make a prediction
+
+
 const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine whether the absence of a trigram or bigram gives statistically signficant information on the probability of the bigram or trigram.  If unigram frequency predicts a count above this value, then lack of unigram/bigram gives information -- use 0 prob estimate in this case.
 const unsigned int FL_MAX_CANDIDATES = 1000;  // maximum number of candidates returned (for unigrams right now)
 const double       FL_UNI_SCALE = 0.1;  // max range for unigram probability (bit larger than probability of "the")
@@ -269,6 +274,7 @@ public:
   static void normalizePreds(list_pred& preds);
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
   // fast binary file support code (may be used by FLContextProducer or FLTokenPredictor)
+  static FastBinaryFileHeader readFastHdr(FLFile * myfile, char ** phdr_data, const char * caller);
   static FastBinaryFileHeader readFastHdr(string fast_bin_file, char** phdr_data = NULL, const char * caller = NULL);
   static void readFastBinaryFile(const char * filename, short_lut& alt_table, FLSingleLevelTokenPredictor *pPredictor = NULL);  // read fast binary file into lookup table
 

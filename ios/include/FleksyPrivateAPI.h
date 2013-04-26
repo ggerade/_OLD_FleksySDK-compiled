@@ -10,6 +10,7 @@
 #define FleksyLib_FleksyPrivateAPI_h
 
 #include "FLFile.h"
+#include "FLResourceArchive.h"
 
 class FLTypingController;
 class SystemsIntegrator;
@@ -22,6 +23,7 @@ public:
   FLTypingController *tc;
   SystemsIntegrator* fleksy;
   string resourcePath;
+  FLResourceArchive *resourceArchive = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
@@ -30,6 +32,7 @@ public:
   void postLoadSetup();
   void loadKeyboardData(void* characterCoordinates, int charCoordinatesLength);
   void loadPreprocessedFile(int wordLength, const void* preprocessedFile, int preprocessedFileLength);
+  void setResourceFLFile(FLFile* file);
   void initialize(FLFile* preloaded, FLFile* wordlist, FLFile* blackListCapital, FLFile* blackList, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
 };
 

@@ -28,6 +28,7 @@ public:
    * use getKeymapForKeyboard and draw the UI, before calling loadResources.
    */
   void setResourcePath(const char* path);
+  void setResourceFile(const char *file);
   /*
    * Loads the resources from the path set by setResourcePath
    * After this Fleksy is ready for input

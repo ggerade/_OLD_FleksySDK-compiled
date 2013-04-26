@@ -27,6 +27,4 @@ namespace VariousUtilities2 {
   void readCharacterLine(const FLString& line, FLPoint* dictionary, FLString* alphabet);
 
   FLChar getNearestCharForPoint(FLPoint& target, FLPoint* keys);
-  
-  FLString getStringFromFile(const string& filename, bool isEncrypted);
 };

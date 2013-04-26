@@ -24,19 +24,22 @@ private:
   int childCount;
   ////////////////
   
-  string filepath;
+  string tag;
   
-  FILE* file;
+  // see if we really need this other than for grabbing the file size when constructed from a file path
+  FILE* file = NULL;
   int fd;
   off_t startOffset;
+  off_t currentRelativeOffset;
   size_t length;
   
-  void* contents;
+  void* contents = NULL;
   
   bool memoryMapped;
   
   void init(off_t _startOffset, size_t _length, FLFile* parent);
-  void* getContentsWithOffset(bool memoryMapped, off_t offset);
+  void* getContentsWithOffset(off_t offset);
+  void runTest();
   
   
 //////////////////
@@ -52,13 +55,20 @@ public:
   // Parent FLFile constructor
   FLFile(FLFile* _parent, string tag, off_t startOffset, size_t _length);
 
-  // TODO methods to "seek" and read (for context)
-  //void reset();
-  //void read(char* out, size_t length);
+  
+  void read(char* outBuffer, size_t length);
+  
+  // offset is relative from begining of file
+  void seek(off_t offset);
+  
+  bool is_open();
+  bool good();
+  
+  
   
   void* getContents(bool memoryMapped = USE_MEMORY_MAP);
   size_t getLength();
-
+  string getTag();
   
   ~FLFile();
 };
