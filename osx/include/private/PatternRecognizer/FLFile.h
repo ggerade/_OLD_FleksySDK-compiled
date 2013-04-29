@@ -12,7 +12,7 @@
 #include <iostream>
 #include <iosfwd>
 
-#define USE_MEMORY_MAP 0
+#define USE_MEMORY_MAP 1
 
 using namespace std;
 

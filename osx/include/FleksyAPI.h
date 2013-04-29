@@ -28,6 +28,9 @@ public:
    * use getKeymapForKeyboard and draw the UI, before calling loadResources.
    */
   void setResourcePath(const char* path);
+  /*
+   * Sets the resource file with given full path to the resource file
+   */
   void setResourceFile(const char *file);
   /*
    * Loads the resources from the path set by setResourcePath

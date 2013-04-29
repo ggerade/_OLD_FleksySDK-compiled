@@ -17,6 +17,7 @@ class SystemsIntegrator;
 
 class FleksyAPIpImpl{
 private:
+  FLFile *resourceArchiveFile = NULL;
   FLResourceArchive *resourceArchive = NULL;
   string resourcePath;
   
