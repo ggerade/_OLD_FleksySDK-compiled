@@ -16,7 +16,7 @@ void FleksyTester::run(const char* resourcePath) {
   FleksyListenerImplC* listener = new FleksyListenerImplC();
   FleksyAPI* api = new FleksyAPI(*listener);
   
-  api->setResourcePath(resourcePath);
+  api->setResourceFile(resourcePath);
   api->loadResources();
   
   ///////  BEGIN USAGE  ///////

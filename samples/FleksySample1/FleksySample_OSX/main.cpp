@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
   if(realpath(argv[0], resolved_path) == 0) { fprintf(stderr, "Unable to resolve path to executable, realpath() failed: %s\n", strerror(errno)); exit(1); }
 
   char FleksySDKResourcesPath[PATH_MAX];
-  snprintf(FleksySDKResourcesPath, sizeof(FleksySDKResourcesPath), "%s/FleksySDKResources/encrypted/en-US/", dirname(resolved_path));
+  snprintf(FleksySDKResourcesPath, sizeof(FleksySDKResourcesPath), "%s/FleksySDKResources/encrypted/resourceArchive-en-US.jet", dirname(resolved_path));
 
   FleksyTester::run(FleksySDKResourcesPath);
 

@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-  NSString* resourcePath = [NSString stringWithFormat:@"%@/FleksySDKResources/encrypted/en-US/", [[NSBundle mainBundle] bundlePath]];
+  NSString* resourcePath = [NSString stringWithFormat:@"%@/FleksySDKResources/encrypted/resourceArchive-en-US.jet", [[NSBundle mainBundle] bundlePath]];
   FleksyTester::run(resourcePath.UTF8String);
   
   return YES;
