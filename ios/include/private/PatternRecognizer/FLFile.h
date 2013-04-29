@@ -20,6 +20,10 @@ class FLFile {
 
 private:
   
+  static int nFiles;
+  
+  int fileID;
+  
   FLFile* parent;
   int childCount;
   ////////////////
@@ -54,6 +58,9 @@ public:
   
   // Parent FLFile constructor
   FLFile(FLFile* _parent, string tag, off_t startOffset, size_t _length);
+
+  // Parent FLFile "copy constructor"
+  FLFile(FLFile* _parent);
 
   
   void read(char* outBuffer, size_t length);

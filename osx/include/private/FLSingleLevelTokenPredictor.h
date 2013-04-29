@@ -55,9 +55,12 @@ private:
   // fast binary version
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
-  void read_uni_bin(string uni_bin_file);
+  void read_uni_bin(string uni_bin_file);   // string file-spec version
+  void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
+  void init(FLFile * infile, bool alsoLoadInMemory);  // used by different signature constructors
 public:
-  FLSingleLevelTokenPredictor(const string& filename, const string& filehash, bool alsoLoadInMemory);
+  FLSingleLevelTokenPredictor(const string& filename, const string& filehash, bool alsoLoadInMemory);  
+  FLSingleLevelTokenPredictor(FLFile * infile, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictor();
   
   // checkConsistency: will use both normal and memoryless methods, ensures they are consistent and returns the memoryless results

@@ -23,11 +23,14 @@ public:
   FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = true);
   ~FleksyAPI();
   /*
-   * Sets a path that will be used by the
-   * loadResources() to load the library. This also loads the keyboard maps so that the client can 
-   * use getKeymapForKeyboard and draw the UI, before calling loadResources.
+   Deprecated. Use setResourceFile instead.
    */
   void setResourcePath(const char* path);
+  /*
+   * Sets the resource file that will be used by
+   * loadResources() to load the library. This also loads the keyboard maps so that the client can
+   * use getKeymapForKeyboard and draw the UI, before calling loadResources.
+   */
   void setResourceFile(const char *file);
   /*
    * Loads the resources from the path set by setResourcePath
