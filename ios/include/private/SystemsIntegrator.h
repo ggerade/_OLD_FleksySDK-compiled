@@ -45,13 +45,7 @@ public:
   
   void loadDictionary(FLFile& f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   
-  void loadContextData(const string& unigram_file,
-                       const string& bigram_file,
-                       const string& trigram_file,
-                       const string& unigram_hash,
-                       const string& bigram_hash,
-                       const string& trigram_hash,
-                       bool alsoLoadInMemory);
+  void loadContextData(FLFile* file1, FLFile* file2, FLFile* file3, bool alsoLoadInMemory);
   
   void writeTablesIfNeeded(const string& filepath);
   void postload();

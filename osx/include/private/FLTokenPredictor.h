@@ -59,6 +59,11 @@ public:
                    const string& bigram_hash,
                    bool alsoLoadInMemory); 
 
+
+  FLTokenPredictor(FLFile * unigram_fl_file, 
+                   FLFile * bigram_fl_file,
+                   FLFile * trigram_fl_file,
+                   bool alsoLoadInMemory); 
     
     // DESTRUCTOR
   ~FLTokenPredictor();

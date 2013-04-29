@@ -258,6 +258,9 @@ public:
   static void set_unigram_fl_file(FLFile *infile) { unigram_fl_file = infile; };
   static FLFile* get_unigram_fl_file() { return unigram_fl_file; };
   
+  static void set_bigram_fl_file(FLFile * infile) { bigram_fl_file = infile; };
+  static FLFile * get_bigram_fl_file() { return bigram_fl_file; };
+
   static probability minProbLog;
   static probability maxProbLog;
   
@@ -302,6 +305,7 @@ public:
 private:
   static char szUniBinFile[PATH_MAX];  // file name for unigrams binary file
   static FLFile * unigram_fl_file;
+  static FLFile * bigram_fl_file;
 };  // class FleksyContextCommon
 
 class Prediction

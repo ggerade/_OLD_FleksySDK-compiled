@@ -16,24 +16,33 @@ class FLTypingController;
 class SystemsIntegrator;
 
 class FleksyAPIpImpl{
+private:
+  FLResourceArchive *resourceArchive = NULL;
+  string resourcePath;
+  
+  FLFile* unigramFile;
+  FLFile* bigramFile;
+  FLFile* trigramFile;
+  
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener, bool simulateSystemCursorUpdates = false);
   ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
   FLTypingController *tc;
   SystemsIntegrator* fleksy;
-  string resourcePath;
-  FLResourceArchive *resourceArchive = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
+  string getResourceDescription();
   void setMaxNumberOfSuggestions(int numberOfSuggestions);
   void loadKeyMaps();
   void postLoadSetup();
-  void loadKeyboardData(void* characterCoordinates, int charCoordinatesLength);
-  void loadPreprocessedFile(int wordLength, const void* preprocessedFile, int preprocessedFileLength);
+  void loadKeyboardData();
+  void loadPreprocessedFile(int wordLength, const void* preprocessedFile, size_t preprocessedFileLength);
   void setResourceFLFile(FLFile* file);
-  void initialize(FLFile* preloaded, FLFile* wordlist, FLFile* blackListCapital, FLFile* blackList, string unigramFile, string bigramFile, string trigramFile, bool isEncrypted = true);
+  void setResourcePath(string path);
+  FLFile* FLFileForFileName(const char *filename);
+  void initialize(FLFile* preloaded, FLFile* wordlist, FLFile* blackListCapital, FLFile* blackList, bool isEncrypted = true);
 };
 
 #endif
