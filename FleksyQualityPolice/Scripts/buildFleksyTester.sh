@@ -39,13 +39,11 @@ FLEKSYQP_BUILD_DIR="${FLEKSYQP_ROOT_DIR}/build"
 FLEKSYSDK_COMPILED_ROOT_DIR=$(canonpath "${FLEKSYQP_ROOT_DIR}/..")
 FLEKSYSDK_COMPILED_ANDROID_JAR="${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/lib/fleksy.jar"
 
-
 cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"
 
 rm -rf "${FLEKSYQP_BUILD_DIR}"
 
 mkdir "${FLEKSYQP_BUILD_DIR}"
-
 
 cd "${FLEKSYQP_ROOT_DIR}"
 
@@ -57,17 +55,22 @@ echo ""
 echo "Compiling 'FleksyQualityPolice'..."
 
 # Compile the java sources
-javac -source 1.6 -target 1.6 -cp "${FLEKSYSDK_COMPILED_ANDROID_JAR}" src/engine/*.java src/utils/*.java src/views/*.java -d bin
-
+#javac -source 1.6 -target 1.6 -cp "${FLEKSYSDK_COMPILED_ANDROID_JAR}" src/engine/*.java src/utils/*.java src/views/*.java -d bin
+javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
 echo ""
 echo "Creating 'FleksyTester.jar'..."
 
 # Create the fleksy.jar file in FleksySDK-compiled/compiled...
-jar cf "${FLEKSYQP_BUILD_DIR}/FleksyTester.jar" -C bin/ . *src
-echo "... jar file: '${FLEKSYQP_BUILD_DIR}/FleksyTester.jar'."
+#jar cfvm build/FleksyTester.jar manifest.txt -C bin/ . *src "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
+ant
+
+pwd
+mv "${FLEKSYQP_BUILD_DIR}/FleksyTester.jar" "${FLEKSYQP_ROOT_DIR}"
+
+echo "... jar file: '${FLEKSYQP_ROOT_DIR}/FleksyTester.jar'."
 
 rm -rf bin
-
+rm -rf build
 
 echo ""
-echo "WARNING: This script does not currently produce a working 'FleksyTest.jar' file!"
+#echo "WARNING: This script does not currently produce a working 'FleksyTest.jar' file!"
