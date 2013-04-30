@@ -99,7 +99,7 @@ public class FleksyInterface extends FleksyListenerInterface{
 
 	@Override
 	public void onRequestAdditionalSuggestions(String rawText) { //BEFORE SWIPING, SEND TO SERVER FOR SUGGESTIONS
-		FleksyEngine.rawText = rawText;
+		FleksyEngine.rawTxt = rawText;
 	}
 
 	@Override

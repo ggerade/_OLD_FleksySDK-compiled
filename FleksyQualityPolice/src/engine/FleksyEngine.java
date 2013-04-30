@@ -22,7 +22,7 @@ public class FleksyEngine {
 	private static EngineLoader engineLoader;
 	public static FleksyInterface cOutput;
 	
-	public static String rawText = "";
+	public static String rawTxt = "";
 	private static String latestText = "";
 	public static boolean upperCase = false;
 	public static boolean sendingTaps = false;
@@ -69,7 +69,7 @@ public class FleksyEngine {
 	
 	public static void initializeSuggestions(boolean android){
 		if(online){
-			String rawInput = rawText;
+			String rawInput = rawTxt;
 			try{
 				String suggestions = client.getSuggestionsFor(rawInput);
 				TestEngine.action = "Initializing Suggestions for " + rawInput + " which returned " + suggestions;
@@ -130,20 +130,17 @@ public class FleksyEngine {
 	}
 	
 	private static void loadEngine(String version) {
-		final String basePath = "../submodules/FleksySDK-compiled/osx";
+		final String basePath = "../Android";
 		try{
 	    	api = new FleksyAPI();
-		    cOutput = new FleksyInterface(basePath + "/lib/" + version + "/Fleksylib.dylib");
+		    cOutput = new FleksyInterface("../osx/lib/" + version + "/Fleksylib.dylib");
 		    userWordList = new UserWordListImpl();
 	        engineLoader = new EngineLoader();
+	        
 //	        File file = new File(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English")); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
-
-	        //	        RandomAccessFile stream = new RandomAccessFile(file, "rw"); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
-
+//	        RandomAccessFile stream = new RandomAccessFile(file, "rw"); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 //	        FLFileDescriptor descriptor = new FLFileDescriptor(stream.getFD(), stream.getFilePointer(), file.length()); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
-
-	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English"), 
-	        		api, userWordList, true);
+	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English"), api, userWordList, true);
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
 		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.value());

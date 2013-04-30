@@ -190,16 +190,16 @@ public class Client implements Runnable{
 		String str = null;
 		try {
 			// write text to the socket
-//			Log.i(TAG, "Writing: " + word);
+			Log.d("Writing: " + word);
 			DataOutputStream out = new DataOutputStream(server.getOutputStream());
 			out.writeBytes(word + "\n");
 			out.flush();
 
 			// read text from the socket
-			//Log.d("Waiting on Suggestions for: " + word);
+			Log.d("Waiting on Suggestions for: " + word);
 			BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			str = in.readLine();
-			//Log.d("Returned Suggestions: " + str);
+			Log.d("Returned Suggestions: " + str);
 			// close the reader, and return the results as a String
 		} catch (Exception e) {
 			FleksyEngine.online = false;

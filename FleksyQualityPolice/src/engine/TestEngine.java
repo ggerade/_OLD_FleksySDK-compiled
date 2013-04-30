@@ -39,6 +39,7 @@ public class TestEngine {
 	public TestEngine(int noise, int error, int shift, boolean encore){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
 			loadTests(TestPath);
+			if(failed){ return; }
 			reader = new Reader();
 			definer = new Definer();
 			converter = new Converter(320, 216, noise, error, shift);
@@ -153,6 +154,11 @@ public class TestEngine {
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 
+		if(listOfFiles == null){
+			failed = true;
+			Log.e(TAG, "No Files Detected! Closing Tester.");
+			return;
+		}
 	    for (File file : listOfFiles) {
 	      if (file.isFile()) {
 	    	  if(file.getName().contains("txt")){
