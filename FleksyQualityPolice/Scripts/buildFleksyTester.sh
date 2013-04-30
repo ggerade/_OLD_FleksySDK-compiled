@@ -55,22 +55,17 @@ echo ""
 echo "Compiling 'FleksyQualityPolice'..."
 
 # Compile the java sources
-#javac -source 1.6 -target 1.6 -cp "${FLEKSYSDK_COMPILED_ANDROID_JAR}" src/engine/*.java src/utils/*.java src/views/*.java -d bin
-javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
+javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}" -bootclasspath /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Classes/classes.jar
 echo ""
 echo "Creating 'FleksyTester.jar'..."
+ant -buildfile buildJar.xml
 
-# Create the fleksy.jar file in FleksySDK-compiled/compiled...
-#jar cfvm build/FleksyTester.jar manifest.txt -C bin/ . *src "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
-ant
-
-pwd
 mv "${FLEKSYQP_BUILD_DIR}/FleksyTester.jar" "${FLEKSYQP_ROOT_DIR}"
 
-echo "... jar file: '${FLEKSYQP_ROOT_DIR}/FleksyTester.jar'."
+echo "Moved FleksyTester.jar file to: '${FLEKSYQP_ROOT_DIR}/FleksyTester.jar'."
 
+# Clean up
 rm -rf bin
 rm -rf build
 
 echo ""
-#echo "WARNING: This script does not currently produce a working 'FleksyTest.jar' file!"
