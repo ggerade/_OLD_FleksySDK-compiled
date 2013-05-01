@@ -258,7 +258,7 @@ public class Converter {
 			shift.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Shifting";
-		FleksyEngine.api.setCapitalizationMode(FLEnums.FLCapitalizationMode.FLCapitalizationMode_CAP_NEXT_CHAR_ONLY.ordinal());
+		FleksyEngine.api.toggleShift();
 		FleksyEngine.recreateSwipe("#S");
 		return shift;
 	}
