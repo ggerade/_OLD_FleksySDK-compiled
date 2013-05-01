@@ -8,6 +8,8 @@
 // POSIC headers
 #include <pthread.h>
 
+#define MAXIMUM_REQUESTS_BEFORE_BLOCKING 2
+
 class FLSingleLevelTokenPredictorAsync : public FLSingleLevelTokenPredictor {
 public:
   static double peekWait;
@@ -43,13 +45,15 @@ private:
   void getNextRequest(token_ids& result); // for producer to fetch next request or block until there is one
   static void* producerThread(void* arg); //wrapper for instance method
   void producerThread(); // where the processing is done
+  size_t numberOfPendingRequests();
 
 public:
   FLSingleLevelTokenPredictorAsync(const string& filename, const string& filehash, bool alsoLoadInMemory);
   FLSingleLevelTokenPredictorAsync(FLFile * infile, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictorAsync();
   
-  // this is guaranteed not to block. Client can send multiple requests and they will all be processed in FIFO order
+  // this is guaranteed not to block unless we already have more than MAXIMUM_REQUESTS_BEFORE_BLOCKING requests.
+  // Client can send multiple requests and they will all be processed in FIFO order
   void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
   // this may block until results for this tokenID are calculated
