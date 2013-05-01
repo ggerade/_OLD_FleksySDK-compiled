@@ -20,8 +20,6 @@ private:
   
   BBValue uniqueID;
   
-  short nPoints;
-  
   FLString* letters;
   FLString* printLetters;
 
@@ -38,6 +36,8 @@ private:
   int getRawSize();
 
 public:
+  short nPoints;
+
   FLPoint* rawPoints;
   //LPCentroid* LPCentroids;
   

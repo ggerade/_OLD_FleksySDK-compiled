@@ -25,6 +25,9 @@ private:
   FLFile* bigramFile;
   FLFile* trigramFile;
   
+  FLPoint internalKeyboardSize;
+  FLPoint externalKeyboardSize;
+  
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener, bool simulateSystemCursorUpdates = false);
   ~FleksyAPIpImpl();
@@ -34,6 +37,8 @@ public:
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
+  void setExternalKeyboardSize(FLPoint xy);
+  FLPoint transformPoint(FLPoint p, bool inverse);
   string getResourceDescription();
   void setMaxNumberOfSuggestions(int numberOfSuggestions);
   void loadKeyMaps();

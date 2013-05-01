@@ -45,10 +45,19 @@ public:
    * Returns FLDictionaryChangeResult_SUCCESS if word was added, FLDictionaryChangeResult_NOT_FOUND if word is not in the dictionary
    */
   FLDictionaryChangeResult removeWordFromDictionary(FLString word);
+  
   /*
-   * Takes x, y coordinates of the tap, optionally time when tap occurred
+   * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
+   * You should call this on initialization and whenever the keyboard size may have changed in the UI (eg. switching between
+   * portrait and landscape orientations). Note that this frame should only cover the letter keys (eg QWERTY...) and not any of the
+   * control keys such as the spacebar.
+   */
+  void setPlatformKeyboardSize(float width, float height);
+  
+  /*
+   * Takes x,y coordinates of the tap, optionally time when tap occurred. Coordinates should be within the range set by |setPlatformKeyboardSize|
    * This will result in call to your FleksyListenerInterface onSetComposingText() with the character
-   * that is closest to the x,y coordinate.
+   * that is closest to the x,y coordinates.
    */
   void sendTap(float x, float y, long long time = 0);
   /*
@@ -129,6 +138,7 @@ public:
    */
   bool knowsWord(FLString word);
   
+  void toggleShift();
   
   std::string getVersion();
   

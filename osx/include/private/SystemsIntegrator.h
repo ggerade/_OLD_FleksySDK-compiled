@@ -37,7 +37,7 @@ public:
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);
   
-  void loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
+  FLPoint loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
   // TODO: preprocessed file should include wordLength and length info
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
