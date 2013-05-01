@@ -12,7 +12,6 @@
 
 enum FLCapitalizationMode{
   FLCapitalizationMode_CAP_SENTENCES,
-  FLCapitalizationMode_CAP_NEXT_CHAR_ONLY,
   FLCapitalizationMode_CAP_WORDS,
   FLCapitalizationMode_CAP_ALL,
   FLCapitalizationMode_CAP_OFF
@@ -23,7 +22,6 @@ enum FLKeyboardID{
   FLKeyboardID_NUMBERS,
   FLKeyboardID_SYMBOLS,
 };
-
 
 enum FLCorrectionMode{
   FLCorrectionMode_ALWAYS,
