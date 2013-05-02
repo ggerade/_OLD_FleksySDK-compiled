@@ -49,7 +49,7 @@ class FleksyUtilities {
 private:
   FLWordDatabase* wordDatabase;
   
-  map<int, FLWordList*> wordsByLength; // length 0 holds special non-words like "." and ","
+  map<size_t, FLWordList*> wordsByLength; // length 0 holds special non-words like "." and ","
   map<FLString, FLWord*> _wordsByLetters; // renamed with underscore to enforce method get+set and avoid direct [] operator which may create keys that didn't exist
  
   //wordsbyprintletters ????
@@ -95,7 +95,7 @@ public:
   
   FLPoint keymaps[4][KEY_MAX_VALUE];
   
-  int loadedWordCount();
+  size_t loadedWordCount();
   bool isWordInDictionary(const FLString& printLetters, bool allowLowerCase);
   FLWord* getWordByString(const FLString& s, bool allowLowerCase = false);
   FLWord* getRandomWord(int length);

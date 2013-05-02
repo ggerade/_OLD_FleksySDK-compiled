@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
-#ifndef __FleksyLib__FLFile__
-#define __FleksyLib__FLFile__
+#ifndef FLFILE_HEADER
+#define FLFILE_HEADER
+
+#define FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION 1
 
 #include <iostream>
 #include <iosfwd>
@@ -19,8 +21,6 @@ using namespace std;
 class FLFile {
 
 private:
-  
-  static int nFiles;
   
   int fileID;
   
@@ -43,7 +43,6 @@ private:
   
   void init(off_t _startOffset, size_t _length, FLFile* parent);
   void* getContentsWithOffset(off_t offset);
-  void runTest();
   
   
 //////////////////
@@ -80,4 +79,8 @@ public:
   ~FLFile();
 };
 
-#endif /* defined(__FleksyLib__FLFile__) */
+#if FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION
+#include "FLFile.cpp"
+#endif
+
+#endif /* defined(FLFILE_HEADER) */
