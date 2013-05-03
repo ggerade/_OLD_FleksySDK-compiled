@@ -23,10 +23,6 @@ public:
   FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = true);
   ~FleksyAPI();
   /*
-   Deprecated. Use setResourceFile instead.
-   */
-  void setResourcePath(const char* path);
-  /*
    * Sets the resource file that will be used by
    * loadResources() to load the library. This also loads the keyboard maps so that the client can
    * use getKeymapForKeyboard and draw the UI, before calling loadResources.
@@ -65,14 +61,14 @@ public:
    * <word> -> <word >
    * <word > -> <word. >
    */
-  void space();
+  void space(bool buttonPress = false);
   /*
    * If singleCharacterOnly = true, always deletes only 1 character
    * Otherwise, what is deleted depends on the cursor position
    * If cursor is a space after the word <word |> then space and a word will be deleted
    * if cursor is in the middle of a word <wor|d > only one character will be deleted.
    */
-  void backspace(bool singleCharacterOnly = false);
+  void backspace(bool buttonPress = false);
   /*
    * Replaces current word with the previous word on the suggestion list
    * If cursor is in the middle of the word, cursor will be moved to the end <wor|d1 > -> <word0 |>
@@ -95,7 +91,15 @@ public:
   /*
    * Let Fleksy know that a change has occurfed in the text editor caused by external source. ex: new text was pasted by the user
    */
+  // REMOVE THIS!
   void editorTextChanged();
+  
+  //
+  void startTypingSession();
+  
+  //
+  void endTypingSession();
+  
   /*
    * Sets the capitalization mode. By default FLCapitalizationMode_CAP_SENTENCES which will capitalize first character of each sentence
    * Other modes:

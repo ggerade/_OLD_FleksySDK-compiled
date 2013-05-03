@@ -24,24 +24,23 @@ private:
   
   int fileID;
   
-  FLFile* parent;
-  int childCount;
+  FLFile* parent = NULL;
+  int childCount = 0;
   ////////////////
   
   string tag;
   
   // see if we really need this other than for grabbing the file size when constructed from a file path
-  FILE* file = NULL;
-  int fd;
-  off_t startOffset;
-  off_t currentRelativeOffset;
-  size_t length;
+  int fd = -1;
+  off_t startOffset = 0;
+  off_t currentRelativeOffset = 0;
+  size_t length = 0;
   
   void* contents = NULL;
   
-  bool memoryMapped;
+  bool memoryMapped = false;
   
-  void init(off_t _startOffset, size_t _length, FLFile* parent);
+  void init(off_t _startOffset, size_t *_length, FLFile* parent);
   void* getContentsWithOffset(off_t offset);
   
   
