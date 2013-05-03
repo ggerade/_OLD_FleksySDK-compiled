@@ -20,7 +20,7 @@ class FleksyAPIpImpl;
 class FleksyAPI{
   
 public:
-  FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = true);
+  FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = false);
   ~FleksyAPI();
   /*
    * Sets the resource file that will be used by
@@ -87,7 +87,7 @@ public:
    * Set the cursor position. If cursorUpdates are not simulated, then this needs to be called
    * with the new cursor position every time cursor moves.
    */
-  void cursorSelectionChanged(int selectionStart, int selectionEnd, int length = 0); //<--------------------------------------------------------length???
+  void cursorSelectionChanged(int selectionStart, int selectionEnd);
   /*
    * Let Fleksy know that a change has occurfed in the text editor caused by external source. ex: new text was pasted by the user
    */
