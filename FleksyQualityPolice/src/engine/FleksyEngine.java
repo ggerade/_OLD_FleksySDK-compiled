@@ -144,7 +144,7 @@ public class FleksyEngine {
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
 		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.value());
-		    api.editorTextChanged();
+		    api.startTypingSession();
 		}catch(Exception e){
 	    	Log.e(TAG, "LoadEngine Failed : " + e.getLocalizedMessage());
 	    	e.printStackTrace();

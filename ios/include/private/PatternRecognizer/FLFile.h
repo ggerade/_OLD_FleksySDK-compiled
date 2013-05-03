@@ -9,7 +9,7 @@
 #ifndef FLFILE_HEADER
 #define FLFILE_HEADER
 
-#define FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION 1
+#define FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION 0
 
 #include <iostream>
 #include <iosfwd>
