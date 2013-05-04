@@ -1,13 +1,12 @@
 //
 //  FLPoint.h
-//  PatternRecognizer
+//  FleksySDK
 //
-//  Created by Kostas Eleftheriou on 11/26/12.
-//  Copyright (c) 2012 Syntellia Inc. All rights reserved.
+//  Copyright (c) 2013 Syntellia Inc. All rights reserved.
 //
 
-#ifndef PatternRecognizer_FLPoint_h
-#define PatternRecognizer_FLPoint_h
+#ifndef __FleksySDK_FLPoint_h__
+#define __FleksySDK_FLPoint_h__
 
 #ifdef __APPLE__
 #include "TargetConditionals.h"
@@ -35,4 +34,4 @@ static inline FLPoint FLPointMake(float x, float y) {
 
 #endif
 
-#endif
+#endif /* defined(__FleksySDK_FLPoint_h__) */

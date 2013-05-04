@@ -25,7 +25,7 @@
         <attribute name="Built-By" value="${user.name}" />
         <attribute name="Main-Class" value="${main.class}" />
         
-        <attribute name="Class-Path" value="../Android/lib/fleksy.jar" />
+        <attribute name="Class-Path" value="../Android/lib/FleksyAPI.jar" />
       </manifest>
       
     </jar>

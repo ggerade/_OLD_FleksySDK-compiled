@@ -1,14 +1,12 @@
 //
 //  FLEnums.h
-//  FleksyLib
+//  FleksySDK
 //
-//  Created by Vadim Maximov on 3/19/13.
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
-#ifndef FleksyLib_FLEnums_h
-#define FleksyLib_FLEnums_h
-
+#ifndef __FleksySDK_FLEnums_h__
+#define __FleksySDK_FLEnums_h__
 
 enum FLCapitalizationMode{
   FLCapitalizationMode_CAP_SENTENCES,
@@ -36,11 +34,13 @@ enum FLMessageType{
   FLMessageType_EXIT,
   FLMessageType_ERROR
 };
+
 //passed in as a parameter in onDictionaryModified
 enum FLDictionaryChangeEvent{
   FLDictionaryChangeEvent_ADD,
   FLDictionaryChangeEvent_REMOVE
 };
+
 //Result when called from JAVA
 enum FLDictionaryChangeResult{
   FLDictionaryChangeResult_SUCCESS,
@@ -49,4 +49,4 @@ enum FLDictionaryChangeResult{
   FLDictionaryChangeResult_ERROR
 };
 
-#endif
+#endif /* defined(__FleksySDK_FLEnums_h__) */
