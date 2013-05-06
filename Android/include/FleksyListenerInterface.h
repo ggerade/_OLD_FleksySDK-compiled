@@ -1,5 +1,12 @@
-#ifndef FLEKSYLISTENERINTERFACE
-#define FLEKSYLISTENERINTERFACE
+//
+//  FleksyListenerInterface.h
+//  FleksySDK
+//
+//  Copyright (c) 2013 Syntellia. All rights reserved.
+//
+
+#ifndef __FleksySDK_FleksyListenerInterface_h__
+#define __FleksySDK_FleksyListenerInterface_h__
 
 #include <string>
 #include <vector>
@@ -29,9 +36,9 @@ public:
    */
   virtual void onChangeSelection(int selectionStart, int selectionEnd) = 0;
   /*
-   * Request editor state which includes full text that is currentely in the editor and
+   * Request editor state which includes full text that is currently in the editor and
    * selection of region. if selectionStart = selectionEnd, indicates cursor position
-   * This is used to determine intital editor state
+   * This is used to determine initial editor state
    */
   virtual FLExternalEditorState onRequestEditorState() = 0;
   
@@ -56,19 +63,18 @@ public:
    */
   virtual void onCaseChanged(bool upperCase){};
   /*
-   * Called when the capitalizaion mode changes
-   * TODO add better comments
+   * Called when the capitalization mode changes
    */
   virtual void onCapitalizationModeChanged(FLCapitalizationMode mode){};
   /*
    * Send message to the platform
-   * FLMessageType_USER - some message user should see
-   * FLMessageType_NO_NEXT_SUGGESTION - reached end of the suggestion list
+   * FLMessageType_USER                   - some message user should see
+   * FLMessageType_NO_NEXT_SUGGESTION     - reached end of the suggestion list
    * FLMessageType_NO_PREVIOUS_SUGGESTION - reached beginning of the suggestion list
    */
   virtual void onMessageReceived(FLMessageType type, FLString message){};
   /*
-   * FLDictionaryChangeEvent_ADDED - word was added to the dictionary
+   * FLDictionaryChangeEvent_ADDED   - word was added to the dictionary
    * FLDictionaryChangeEvent_REMOVED - word was removed from the dictionary
    */
   virtual void onDictionaryModified(FLDictionaryChangeEvent event, FLString word){};
@@ -86,4 +92,4 @@ public:
   virtual void onSelectedSuggestionChanged(int selectedIndex){};
 };
 
-#endif
+#endif /* defined(__FleksySDK_FleksyListenerInterface_h__) */
