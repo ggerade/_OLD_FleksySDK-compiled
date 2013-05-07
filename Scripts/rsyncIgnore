@@ -1,0 +1,81 @@
+# Taken from the rsync man page for the `--cvs-exclude` option.
+#
+# Note: `*.Z` and `*.so` are on the list of `--cvs-exclude`, but were removed here.
+
+RCS
+SCCS
+CVS
+CVS.adm
+RCSLOG
+cvslog.*
+tags
+TAGS
+.make.state
+.nse_depinfo
+*~
+#*
+.#*
+,*
+_$*
+*$
+*.old
+*.bak
+*.BAK
+*.orig
+*.rej
+.del-*
+*.a
+*.olb
+*.o
+*.obj
+*.exe
+*.elc
+*.ln
+core
+.svn/
+
+# The following were added in addition to those listed in `--cvs-exclude`:
+
+# Some files that are specific to FleksySDK-compiled:
+
+include/private/
+include/FleksyPrivateAPI.h
+NOKIA-FleksySample2.zip
+
+# No git stuff.
+.git/
+.gitignore
+
+# No Mac files
+
+.DS_Store
+.Trash/
+
+
+
+# No `xcodebuild` build/ directories.
+
+build/
+
+# No Xcode project user local directories and files.
+
+*.xcodeproj/xcuserdata
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace
+*.xcodeproj/project.xcworkspace/
+
+# Possible user local files that shouldn't be included.
+
+# No user local shell stuff.
+.bash_history
+.cshrc
+.history
+.lesshst
+.profile
+.tcsh*
+
+# No SSH stuff.
+.ssh/
+
+# No gdb stuff
+.gdb*

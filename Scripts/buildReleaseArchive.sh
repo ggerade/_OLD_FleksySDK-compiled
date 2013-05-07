@@ -48,33 +48,28 @@ mkdir -p "${FLEKSYSDK_COMPILED_STAGE_DIR}"
 echo ""
 echo "Staging Android..."
 
-rsync -aC --include='lib*.so' --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/"
+rsync -a --include='lib*.so' --exclude-from="${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/rsyncIgnore" --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib"
-rsync -aC --exclude='Release' --exclude='Debug' "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib/"
+rsync -a --exclude-from="${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/rsyncIgnore" --exclude='Release' --exclude='Debug' "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib/"
 
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/lib_STAGING"
 
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/include/FleksyPrivateAPI.h"
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/Android/include/private"
 
 
 echo ""
 echo "Staging iOS..."
 
-rsync -aC --include='lib*.a' --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/ios/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/"
+rsync -a --include='lib*.a' --exclude-from="${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/rsyncIgnore" --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/ios/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib_STAGING"
-
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/include/FleksyPrivateAPI.h"
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/include/private"
 
 cd "${FLEKSYSDK_COMPILED_STAGE_DIR}/ios/lib"
 for FLEKSYSDK_COMPILED_LIB in lib*.a
 do
     echo "Stripping debug symbols from iOS lib      : '${FLEKSYSDK_COMPILED_LIB}'..."
-    /usr/bin/strip -S "${FLEKSYSDK_COMPILED_LIB}"
+    /usr/bin/strip -S "${FLEKSYSDK_COMPILED_LIB}" 2>&1 | perl -e 'while(<>) { s/^\/usr\/bin\/strip: input object file stripped: (.*?)libFleksyStatic\.a\(FLFile\.o\) \(for architecture [^\)]+\)\n$//; print $_; }'
     echo "Verifing expected architectures in iOS lib: '${FLEKSYSDK_COMPILED_LIB}'..."
     lipo "${FLEKSYSDK_COMPILED_LIB}" -verify_arch i386
     lipo "${FLEKSYSDK_COMPILED_LIB}" -verify_arch armv7
@@ -88,13 +83,10 @@ cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"
 echo ""
 echo "Staging OSX..."
 
-rsync -aC --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/osx/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/"
+rsync -a --exclude-from="${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/rsyncIgnore" --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/osx/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING"
 mv "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING/Release" "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib_STAGING"
-
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/include/FleksyPrivateAPI.h"
-rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/include/private"
 
 cd "${FLEKSYSDK_COMPILED_STAGE_DIR}/osx/lib"
 for FLEKSYSDK_COMPILED_LIB in *.dylib
@@ -114,7 +106,7 @@ echo ""
 echo "Staging samples..."
 
 mkdir -p "${FLEKSYSDK_COMPILED_STAGE_DIR}/samples"
-rsync -aC --exclude='*.xcodeproj/xcuserdata' --exclude='*.xcodeproj/project.xcworkspace' --exclude='build' --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/samples/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/samples/"
+rsync -a --exclude-from="${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/rsyncIgnore" --delete "${FLEKSYSDK_COMPILED_ROOT_DIR}/samples/" "${FLEKSYSDK_COMPILED_STAGE_DIR}/samples/"
 rm -rf "${FLEKSYSDK_COMPILED_STAGE_DIR}/samples/NOKIA-FleksySample2.zip"
 
 
