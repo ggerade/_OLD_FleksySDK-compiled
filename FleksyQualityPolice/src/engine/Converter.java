@@ -281,7 +281,7 @@ public class Converter {
 			swipeRight.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Space";
-		FleksyEngine.api.space();
+		FleksyEngine.api.space(false);
 		FleksyEngine.recreateSwipe("#R");
 		return swipeRight;
 	}
