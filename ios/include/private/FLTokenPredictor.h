@@ -33,33 +33,7 @@ protected:
   
 public:
   
-  // filename1 is looking 2 words back, filename2 is looking 1 word back. Empty strings can be used to deactivate the different look back levels
-  // FLTokenPredictor(const string& filename1, const string& filename2, const string& filehash1, const string& filehash2, bool alsoLoadInMemory, void* utils = NULL  
-
   // CONSTRUCTORS
-  FLTokenPredictor(const string& unigram_file, 
-                   const string& bigram_file,
-                   const string& trigram_file,
-                   const string& unigram_hash, 
-                   const string& bigram_hash,
-                   const string& trigram_hash,
-                   bool alsoLoadInMemory);
-
-
-  FLTokenPredictor(const string& unigram_file, 
-                   const string& bigram_file,
-                   FLFile* trigram_fl_file,
-                   const string& unigram_hash, 
-                   const string& bigram_hash,
-                   bool alsoLoadInMemory);
-
-  FLTokenPredictor(FLFile * unigram_fl_file, 
-                   const string& bigram_file,
-                   FLFile * trigram_fl_file,
-                   const string& bigram_hash,
-                   bool alsoLoadInMemory); 
-
-
   FLTokenPredictor(FLFile * unigram_fl_file, 
                    FLFile * bigram_fl_file,
                    FLFile * trigram_fl_file,
@@ -83,7 +57,7 @@ public:
   //
   // see also token_ids::shift (in FLContextCommon.h)
 
-  // wrapper function of the abvove two step process
+  // wrapper function of the above two step process
   void getNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
   
   string getDescription();

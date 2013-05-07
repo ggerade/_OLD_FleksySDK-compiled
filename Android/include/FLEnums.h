@@ -32,6 +32,7 @@ enum FLMessageType{
   FLMessageType_NO_NEXT_SUGGESTION,
   FLMessageType_NO_PREVIOUS_SUGGESTION,
   FLMessageType_EXIT,
+  FLMessageType_EVENT,
   FLMessageType_ERROR
 };
 
