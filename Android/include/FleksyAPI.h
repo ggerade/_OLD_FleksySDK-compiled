@@ -99,7 +99,7 @@ public:
   /*
    * Let Fleksy know that a change has occurred in the text editor caused by external source (e.g., new text was pasted by the user).
    */
-  void startTypingSession();
+  void startTypingSession(bool platformMovesCursor = false);
   
   /*
    * Call this when the user is done with entering text(closed app/keyboard)
