@@ -9,7 +9,7 @@
 #ifndef FLFILE_HEADER
 #define FLFILE_HEADER
 
-#define FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION 0
+#define FLFILE_FLATTEN_FOR_INLINE_OPTIMIZATION 1
 
 #include <iostream>
 #include <iosfwd>
@@ -24,23 +24,24 @@ private:
   
   int fileID;
   
-  FLFile* parent = NULL;
-  int childCount = 0;
+  FLFile* parent;
+  int childCount;
   ////////////////
   
   string tag;
   
   // see if we really need this other than for grabbing the file size when constructed from a file path
-  int fd = -1;
-  off_t startOffset = 0;
-  off_t currentRelativeOffset = 0;
-  size_t length = 0;
+  FILE* file = NULL;
+  int fd;
+  off_t startOffset;
+  off_t currentRelativeOffset;
+  size_t length;
   
   void* contents = NULL;
   
-  bool memoryMapped = false;
+  bool memoryMapped;
   
-  void init(off_t _startOffset, size_t *_length, FLFile* parent);
+  void init(off_t _startOffset, size_t _length, FLFile* parent);
   void* getContentsWithOffset(off_t offset);
   
   

@@ -21,9 +21,9 @@ private:
   FLResourceArchive *resourceArchive = NULL;
   string resourcePath;
   
-  FLFile* unigramFile;
-  FLFile* bigramFile;
-  FLFile* trigramFile;
+  FLFile* unigramFile = NULL;
+  FLFile* bigramFile = NULL;
+  FLFile* trigramFile = NULL;
   
   FLPoint internalKeyboardSize;
   FLPoint externalKeyboardSize;
@@ -32,8 +32,8 @@ public:
   FleksyAPIpImpl(FleksyListenerInterface &listener, bool simulateSystemCursorUpdates = false);
   ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
-  FLTypingController *tc;
-  SystemsIntegrator* fleksy;
+  FLTypingController *tc = NULL;
+  SystemsIntegrator* fleksy = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;

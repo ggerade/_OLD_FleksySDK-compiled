@@ -23,6 +23,11 @@ public:
   ~FleksyAPI();
   
   /*
+   Deprecated. Use setResourceFile instead.
+   */
+  void setResourcePath(const char* path);
+  
+  /*
    * Set the resource file that will be used by loadResources(). This also loads the keyboard maps so that the client can use
    * getKeymapForKeyboard() to draw the UI before calling loadResources().
    */
@@ -64,7 +69,7 @@ public:
    * <word> -> <word >
    * <word > -> <word. >
    */
-  void space(bool buttonPress = false);
+  void space();
   
   /*
    * If buttonPress = true, then backspace() will delete just a single character.
@@ -94,18 +99,11 @@ public:
   /*
    * Set the cursor position. If cursorUpdates are not simulated this needs to be called with the new cursor position every time the cursor moves.
    */
-  void cursorSelectionChanged(int selectionStart, int selectionEnd);
-  
+  void cursorSelectionChanged(int selectionStart, int selectionEnd, int length = 0);
   /*
    * Let Fleksy know that a change has occurred in the text editor caused by external source (e.g., new text was pasted by the user).
    */
-  void startTypingSession();
-  
-  /*
-   * Call this when the user is done with entering text(closed app/keyboard)
-   * IMPORTANT: After calling endTypingSession(), startTypingSession() must be called before making any other calls to the API.
-   */
-  void endTypingSession();
+  void editorTextChanged();
   
   /*
    * Sets the capitalization mode. By default FLCapitalizationMode_CAP_SENTENCES which will capitalize first character of each sentence.
@@ -151,11 +149,6 @@ public:
    * Returns a boolean value that indicates whether or not Fleksy knows a word.
    */
   bool knowsWord(FLString word);
-  
-  /*
-   * Sets whether voice feedback is enabled.
-   */
-  void setVoiceFeedback(bool voiceFeedbackEnabled);
   
   /*
    * Toggles whether the shift button is pressed.
