@@ -30,7 +30,9 @@ class FLSingleLevelTokenPredictor {
   FILE* fileHandle;
   size_t filesize;
 
-  FLFile* fl_file = nullptr;
+  FLFile* fl_unigrams_file = nullptr;
+  FLFile* fl_bigrams_file = nullptr;
+  FLFile* fl_trigrams_file = nullptr;
   
   short_lut table;
 
@@ -57,10 +59,9 @@ private:
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
   void read_uni_bin(string uni_bin_file);   // string file-spec version
   void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
-  void init(FLFile * infile, bool alsoLoadInMemory);  // used by different signature constructors
+  void init(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);  // used by different signature constructors
 public:
-  FLSingleLevelTokenPredictor(const string& filename, const string& filehash, bool alsoLoadInMemory);  
-  FLSingleLevelTokenPredictor(FLFile * infile, bool alsoLoadInMemory);
+  FLSingleLevelTokenPredictor(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictor();
   
   // checkConsistency: will use both normal and memoryless methods, ensures they are consistent and returns the memoryless results

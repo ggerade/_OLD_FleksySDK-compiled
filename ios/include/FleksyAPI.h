@@ -1,13 +1,12 @@
 //
-//  FLSystemInput.h
-//  FleksyApiTest
+//  FleksyAPI.h
+//  FleksySDK
 //
-//  Created by Vadim Maximov on 12/10/12.
-//  Copyright (c) 2012 Syntellia. All rights reserved.
+//  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
-#ifndef __FleksyAPI__
-#define __FleksyAPI__
+#ifndef __FleksySDK_FleksyAPI_h__
+#define __FleksySDK_FleksyAPI_h__
 
 #include <map>
 #include "FleksyListenerInterface.h"
@@ -24,39 +23,38 @@ public:
   ~FleksyAPI();
   
   /*
-   * Sets the resource file that will be used by
-   * loadResources() to load the library. This also loads the keyboard maps so that the client can
-   * use getKeymapForKeyboard and draw the UI, before calling loadResources.
+   * Set the resource file that will be used by loadResources(). This also loads the keyboard maps so that the client can use
+   * getKeymapForKeyboard() to draw the UI before calling loadResources().
    */
   void setResourceFile(const char *file);
   
   /*
-   * Loads the resources from the path set by setResourcePath
-   * After this Fleksy is ready for input
+   * Loads the resources from the file set by setResourceFile().
+   * After this Fleksy is ready for input.
    */
   void loadResources();
   
   /*
-   * Returns FLDictionaryChangeResult_SUCCESS if word was added, FLDictionaryChangeResult_EXISTS if word is already in the dictionary
+   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_EXISTS if the word was already in the dictionary.
    */
   FLDictionaryChangeResult addWordToDictionary(FLString word);
   
   /*
-   * Returns FLDictionaryChangeResult_SUCCESS if word was added, FLDictionaryChangeResult_NOT_FOUND if word is not in the dictionary
+   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_NOT_FOUND if the word was not in the dictionary.
    */
   FLDictionaryChangeResult removeWordFromDictionary(FLString word);
   
   /*
    * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
-   * You should call this on initialization and whenever the keyboard size may have changed in the UI (eg. switching between
-   * portrait and landscape orientations). Note that this frame should only cover the letter keys (eg QWERTY...) and not any of the
-   * control keys such as the spacebar.
+   * You should call this on initialization and whenever the keyboard size may have changed in the UI (e.g., switching between portrait
+   * and landscape orientations). Note that this frame should only cover the letter keys (e.g., QWERTY...) and not any of the control
+   * keys such as the spacebar.
    */
   void setPlatformKeyboardSize(float width, float height);
   
   /*
-   * Takes x,y coordinates of the tap, optionally time when tap occurred. Coordinates should be within the range set by |setPlatformKeyboardSize|
-   * This will result in call to your FleksyListenerInterface onSetComposingText() with the character
+   * Takes x,y coordinates of the tap and optionally the time when tap occurred. Coordinates should be within the range set by
+   * |setPlatformKeyboardSize|. This will result in a call to your FleksyListenerInterface onSetComposingText() with the character
    * that is closest to the x,y coordinates.
    */
   void sendTap(float x, float y, long long time = 0);
@@ -69,64 +67,62 @@ public:
   void space(bool buttonPress = false);
   
   /*
-   * If singleCharacterOnly = true, always deletes only 1 character
-   * Otherwise, what is deleted depends on the cursor position
-   * If cursor is a space after the word <word |> then space and a word will be deleted
-   * if cursor is in the middle of a word <wor|d > only one character will be deleted.
+   * If buttonPress = true, then backspace() will delete just a single character.
+   * Otherwise, what is deleted depends on the cursor position.
+   * If the character before the cursor is a space after a word (i.e., <the word |>), then the space and the word will be deleted (i.e., <the |>).
+   * If the cursor is in the middle of a word (i.e., <wor|d >), then only a single character will be deleted (i.e., <the wo|d >).
    */
   void backspace(bool buttonPress = false);
   
   /*
-   * Replaces current word with the previous word on the suggestion list
-   * If cursor is in the middle of the word, cursor will be moved to the end <wor|d1 > -> <word0 |>
+   * Replaces the current word with the previous word on the suggestion list.
+   * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the previous suggestion replacement word (i.e., <wor|d1 > -> <word0 |>).
    */
   void previousSuggestion();
   
   /*
-   * Replaces current word with the next word on the suggestion list
-   * If cursor is in the middle of the word, cursor will be moved to the end <wor|d0 > -> <word1 |>
+   * Replaces current word with the next word on the suggestion list.
+   * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the next suggestion replacement word (i.e., <wor|d0 > -> <word1 |>).
    */
   void nextSuggestion();
   
   /*
-   * Will send '\n' as entered text
+   * Will send '\n' as entered text.
    */
   void enter();
   
   /*
-   * Set the cursor position. If cursorUpdates are not simulated, then this needs to be called
-   * with the new cursor position every time cursor moves.
+   * Set the cursor position. If cursorUpdates are not simulated this needs to be called with the new cursor position every time the cursor moves.
    */
   void cursorSelectionChanged(int selectionStart, int selectionEnd);
   
   /*
-   * Let Fleksy know that a change has occurred in the text editor caused by external source. ex: new text was pasted by the user, started typing in a new field
+   * Let Fleksy know that a change has occurred in the text editor caused by external source (e.g., new text was pasted by the user).
    */
-  void startTypingSession();
+  void startTypingSession(bool platformMovesCursor = false);
   
   /*
    * Call this when the user is done with entering text(closed app/keyboard)
-   * Must call startTypingSession() after this call before making any other
-   * calls to the API
+   * IMPORTANT: After calling endTypingSession(), startTypingSession() must be called before making any other calls to the API.
    */
   void endTypingSession();
   
   /*
-   * Sets the capitalization mode. By default FLCapitalizationMode_CAP_SENTENCES which will capitalize first character of each sentence
+   * Sets the capitalization mode. By default FLCapitalizationMode_CAP_SENTENCES which will capitalize first character of each sentence.
    * Other modes:
-   * FLCapitalizationMode_CAP_NEXT_CHAR_ONLY - capitalize next character(aka: Shift)
-   * FLCapitalizationMode_CAP_WORDS - capitalize first character of all words
-   * FLCapitalizationMode_CAP_ALL - capitalize all characters(aka: Caps Lock)
+   * FLCapitalizationMode_CAP_NEXT_CHAR_ONLY - capitalize the next character. (aka: Shift)
+   * FLCapitalizationMode_CAP_WORDS          - capitalize the first character of all words.
+   * FLCapitalizationMode_CAP_ALL            - capitalize all characters. (aka: Caps Lock)
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
   
   /*
-   * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS
+   * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
    */
   void setActiveKeyboard(FLKeyboardID keyboardID);
   
   /*
-   * Returns active keyboard
+   * Returns active keyboard.
    * FLKeyboardID_QWERTY  (1)
    * FLKeyboardID_NUMBERS (2)
    * FLKeyboardID_SYMBOLS (3)
@@ -134,15 +130,14 @@ public:
   FLKeyboardID getActiveKeyboardID();
   
   /*
-   * Returns keymap for KeyboardID containing character and its location on the screen
-   * can be used to draw keyboard.
+   * Returns a keymap for KeyboardID containing the keyboards characters and their locations on the screen.
    */
   std::map<FLChar, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
   
   /*
    * Sets the correction mode.
    * FLCorrectionMode_ALWAYS = ON
-   * FLCorrectionMode_OFF will not correct and will always delete only one character at a time
+   * FLCorrectionMode_OFF will not make corrections and will only delete a single character at a time.
    */
   void setCorrectionMode(FLCorrectionMode mode);
   
@@ -153,17 +148,17 @@ public:
   void setAdditionalSuggestions(FLString rawText, FLString suggestionList);
   
   /*
-   * Check if Fleksy knows the word
+   * Returns a boolean value that indicates whether or not Fleksy knows a word.
    */
   bool knowsWord(FLString word);
   
   /*
-   * Enables/Disables voice feedback
+   * Sets whether voice feedback is enabled.
    */
-  void setVoiceFeedback(bool isOn);
+  void setVoiceFeedback(bool voiceFeedbackEnabled);
   
   /*
-   * Call this when shift button is pressed
+   * Toggles whether the shift button is pressed.
    */
   void toggleShift();
   
@@ -174,4 +169,4 @@ public:
 };
 
 
-#endif /* defined(__FleksyApi__) */
+#endif /* defined(__FleksySDK_FleksyAPI_h__) */

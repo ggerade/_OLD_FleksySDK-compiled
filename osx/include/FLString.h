@@ -1,5 +1,12 @@
-#ifndef FLSTRING_H
-#define FLSTRING_H
+//
+//  FLString.h
+//  FleksySDK
+//
+//  Copyright (c) 2013 Syntellia. All rights reserved.
+//
+
+#ifndef __FleksySDK_FLString_h__
+#define __FleksySDK_FLString_h__
 
 #define FLEKSY_USE_WIDE_CHARS 0
 
@@ -34,4 +41,4 @@ typedef std::basic_string <FLChar> FLString;
 
 #define NSStringToString _NSStringToStringUTF8
 
-#endif
+#endif /* defined(__FleksySDK_FLString_h__) */

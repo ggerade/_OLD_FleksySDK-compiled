@@ -21,6 +21,12 @@ class FLTrigramsBin
   static FLTrigramsBin* getInstance(FLFile *);
   static int nVerbosity;
 
+  static void getNextCandidatesList(FLFile * tri_file,
+                                    list_pred& result, 
+                                    token_ids previousTokenIDs, 
+                                    int resultsLimit, 
+                                    probability pThreshold);
+
   static void getNextCandidatesList(list_pred& result, 
                                     token_ids previousTokenIDs, 
                                     int resultsLimit, 
