@@ -27,7 +27,7 @@ enum FLCorrectionMode{
 };
 
 enum FLMessageType{
-  FLMessageType_USER,
+  FLMessageType_DISPLAY_TO_USER,
   FLMessageType_DEBUG,
   FLMessageType_NO_NEXT_SUGGESTION,
   FLMessageType_NO_PREVIOUS_SUGGESTION,

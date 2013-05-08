@@ -60,6 +60,8 @@ private:
   void read_uni_bin(string uni_bin_file);   // string file-spec version
   void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
   void init(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);  // used by different signature constructors
+  void getUnigramPredictions(list_pred& result, token_ids previous_tokens);
+  
 public:
   FLSingleLevelTokenPredictor(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictor();
