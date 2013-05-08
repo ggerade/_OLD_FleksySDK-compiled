@@ -29,13 +29,13 @@ public class Definer {
 		keyboard = new ArrayList<Key>();
 		try{
 			Log.d("QWERTY");
-			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.value())){
+			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.ordinal())){
 				float x = key.x;
 				float y = key.y;
 				keyboard.add(new Key(key.label,x,y));
 			}
 			Log.d("Symbols");
-			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_SYMBOLS.value())){
+			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_SYMBOLS.ordinal())){
 				float x = key.x;
 				float y = key.y;
 				Key k = new Key(key.label,x,y);
