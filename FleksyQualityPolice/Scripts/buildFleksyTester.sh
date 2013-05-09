@@ -55,7 +55,7 @@ echo ""
 echo "Compiling 'FleksyQualityPolice'..."
 
 # Compile the java sources
-javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}" -bootclasspath /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Classes/classes.jar
+javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
 echo ""
 echo "Creating 'FleksyTester.jar'..."
 ant -buildfile buildJar.xml
