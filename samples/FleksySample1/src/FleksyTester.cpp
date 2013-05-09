@@ -22,19 +22,19 @@ void FleksyTester::run(const char* resourcePath) {
   ///////  BEGIN USAGE  ///////
   
   printf("\n [type hello]\n\n");
-  api->sendTap(195, 108, 0);
-  api->sendTap(80, 36, 0);
-  api->sendTap(300, 100, 0);
-  api->sendTap(300, 100, 0);
-  api->sendTap(270, 40, 0);
+  api->sendTap(195, 108);
+  api->sendTap(80, 36);
+  api->sendTap(300, 100);
+  api->sendTap(300, 100);
+  api->sendTap(270, 40);
   api->space();
   
   printf("\n [type world]\n\n");
-  api->sendTap(48, 36, 0);
-  api->sendTap(270, 36, 0);
-  api->sendTap(112, 36, 0);
-  api->sendTap(302, 108, 0);
-  api->sendTap(88, 108, 0);
+  api->sendTap(48, 36);
+  api->sendTap(270, 36);
+  api->sendTap(112, 36);
+  api->sendTap(302, 108);
+  api->sendTap(88, 108);
   api->space();
   
   printf("\n [add a period]\n\n");

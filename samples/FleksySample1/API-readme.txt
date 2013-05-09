@@ -20,7 +20,7 @@ FleksyListenerImpl* listenerImpl = new FleksyListenerImpl();
 //Create FleksyAPI object and pass in your FleksyListenerInterface implementation.
 FleksyAPI api = new FleksyAPI(listenerImpl);
 //Calling this will result in a call to onSetComposingText(const FLString text) with text = "h" in your FleksyListenerImpl;
-api.sys->sendTap(195, 108, 0);
+api.sys->sendTap(195, 108);
 
 onSetComposingRegion() and onSetComposingText():
 These two functions work together to create text
@@ -29,23 +29,23 @@ is presented as underlined or highlighted indicating that it's being edited righ
 region with the new text.
 
 Program flow with FleksyAPI and FleksyListenerInterface calls when typing "Hello"
-api->sendTap(195, 108, 0);
+api->sendTap(195, 108);
 onSetComposingRegion(start:0,end:0)
 onSetComposingText("H")
 
-api->sendTap(80, 36, 0);
+api->sendTap(80, 36);
 onSetComposingRegion(start:0,end:1)
 onSetComposingText("He")
 
-api->sendTap(300, 100, 0);
+api->sendTap(300, 100);
 onSetComposingRegion(start:0,end:2)
 onSetComposingText("Hel")
 
-api->sendTap(300, 100, 0);
+api->sendTap(300, 100);
 onSetComposingRegion(start:0,end:3)
 onSetComposingText("Hell")
 
-api->sendTap(270, 40, 0);
+api->sendTap(270, 40);
 onSetComposingRegion(start:0,end:4)
 onSetComposingText("Hello")
 
