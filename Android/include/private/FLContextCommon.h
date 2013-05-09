@@ -44,7 +44,7 @@ const unsigned int FL_TRIGRAM_SIGNIFICANT_COUNT = 1;  // used in combinePreds to
 
 
 const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine whether the absence of a trigram or bigram gives statistically signficant information on the probability of the bigram or trigram.  If unigram frequency predicts a count above this value, then lack of unigram/bigram gives information -- use 0 prob estimate in this case.
-const unsigned int FL_MAX_CANDIDATES = 1000;  // maximum number of candidates returned (for unigrams right now)
+const unsigned int FL_MAX_CANDIDATES = 9991000;  // maximum number of candidates returned (for unigrams right now)
 const double       FL_UNI_SCALE = 0.1;  // max range for unigram probability (bit larger than probability of "the")
 const unsigned int FL_READ_REPORT = 20000;  // report read info every FL_READ_REPORT reads (when FL_FLEKSY_TRACE set)
 const int FL_STOP_SIGNAL = -1;   // code to stop threads
