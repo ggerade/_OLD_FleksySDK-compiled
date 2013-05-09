@@ -9,6 +9,8 @@
 #ifndef FleksyLib_FleksyPrivateAPI_h
 #define FleksyLib_FleksyPrivateAPI_h
 
+#include "FLPoint.h"
+#include "FleksyListenerInterface.h"
 #include "FLFile.h"
 #include "FLResourceArchive.h"
 
@@ -29,11 +31,11 @@ private:
   FLPoint externalKeyboardSize;
   
 public:
-  FleksyAPIpImpl(FleksyListenerInterface &listener, bool simulateSystemCursorUpdates = false);
+  FleksyAPIpImpl(FleksyListenerInterface &listener);
   ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
   FLTypingController *tc = NULL;
-  SystemsIntegrator* fleksy = NULL;
+  SystemsIntegrator *fleksy = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;

@@ -19,7 +19,7 @@ class FleksyAPIpImpl;
 class FleksyAPI{
   
 public:
-  FleksyAPI(FleksyListenerInterface &listener, bool platformMovesCursor = false);
+  FleksyAPI(FleksyListenerInterface &listener);
   ~FleksyAPI();
   
   /*
