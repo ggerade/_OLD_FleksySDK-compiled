@@ -31,8 +31,6 @@
 
 class triPrediction;
 
-//#define FLassert(__CONDITION__) assert(__CONDITION__)
-
 #define MAX_WORD_ID (65000)
 #define MAX_WORD_DEPTH (2)  // was 2 (jfm)
 
@@ -242,24 +240,14 @@ typedef vector<Prediction> list_pred;  // a vector of predictions
 // data type for table of predictions
 typedef unordered_map<FLString, list_pred*> Predictions;
 
-class FLContextProducer; // forward declaration
-
 class FleksyContextCommon {
+  
+private:
+  static word_id reconstructWordID(unsigned char byte1, unsigned char byte2);
+  static probability readProbability(unsigned char z);
+
 public:
   static pred_type prediction_type;  // whether unigrams, bigrams, or trigrams were used to make the prediction
-  // unigram binary file name setter/getters
-  static void set_unigram_binary_file(char * in) { strncpy(szUniBinFile, in, PATH_MAX); assert(strlen(szUniBinFile) == strlen(in)); };
-  static void set_uni_bin_file(char * in) { set_unigram_binary_file(in); };
-  static void set_uni_bin(char * in) { set_unigram_binary_file(in); };
-  static const char * get_unigram_binary_file() { return (const char *) szUniBinFile; };
-  static const char * get_uni_bin_file() { return get_unigram_binary_file(); };
-
-  // FLFile member functions
-  static void set_unigram_fl_file(FLFile *infile) { unigram_fl_file = infile; };
-  static FLFile* get_unigram_fl_file() { return unigram_fl_file; };
-  
-  static void set_bigram_fl_file(FLFile * infile) { bigram_fl_file = infile; };
-  static FLFile * get_bigram_fl_file() { return bigram_fl_file; };
 
   static probability minProbLog;
   static probability maxProbLog;
@@ -268,10 +256,13 @@ public:
   static void writeProbability(probability p, ofstream& myfile);
   static void writeTerminatingValue(ofstream& myfile);
 
-  static word_id reconstructWordID(unsigned char byte1, unsigned char byte2);
-  static word_id readWordID(const char* data, long& pointer);
-  static probability readProbability(unsigned char z);
-  static probability readProbability(const char* data, long& pointer);
+  static word_id readWordID(FLFile* file);
+
+  //TODO offset typedef. Signed or unsigned?
+  static int readOffset(FLFile* file);
+  
+  static probability readProbability(FLFile* file);
+
   
   static bool predictionCompare(Prediction p1, Prediction p2);
 
@@ -282,13 +273,11 @@ public:
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
   // fast binary file support code (may be used by FLContextProducer or FLTokenPredictor)
   static FastBinaryFileHeader readFastHdr(FLFile * myfile, char ** phdr_data = nullptr, const char * caller = nullptr);
-  static FastBinaryFileHeader readFastHdr(string fast_bin_file, char** phdr_data = NULL, const char * caller = NULL);
-  static void readFastBinaryFile(const char * filename, short_lut& alt_table, FLSingleLevelTokenPredictor *pPredictor = NULL);  // read fast binary file into lookup table
+  //static void readFastBinaryFile(const char * filename, short_lut& alt_table, FLSingleLevelTokenPredictor *pPredictor = NULL);  // read fast binary file into lookup table
 
   static int nVerbosity;  // verbosity level
   static void combinePreds(list_pred& candidates, list_pred& bi_candidates);
 
-  static void read_uni_bin(string uni_bin_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   static void read_uni_bin(FLFile* unigram_fl_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   static void printFastHdr(FastBinaryFileHeader& hdr);
 
@@ -301,11 +290,6 @@ public:
     }
     return true;
   };
-
-private:
-  static char szUniBinFile[PATH_MAX];  // file name for unigrams binary file
-  static FLFile * unigram_fl_file;
-  static FLFile * bigram_fl_file;
 };  // class FleksyContextCommon
 
 class Prediction
@@ -316,8 +300,6 @@ public:
   probability weight;
   // constructors
   Prediction(word_id shortWordID, probability p) { assert(p); wordID = shortWordID, weight = p; };
-  //Prediction() { word = FLStringMake(""); weight = 0.0; };
-  Prediction(FLString& str, double wt) {  assert(wt); word = str; weight = wt; };
   // destructors
   ~Prediction() { };
   bool operator<(Prediction& pred) const { return (this->weight < pred.weight); };

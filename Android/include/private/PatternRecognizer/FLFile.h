@@ -66,6 +66,8 @@ public:
   // offset is relative from begining of file
   void seek(off_t offset);
   
+  off_t tellg();
+  
   bool is_open();
   bool good();
   
