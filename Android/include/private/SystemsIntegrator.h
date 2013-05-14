@@ -25,7 +25,7 @@ private:
   FLTokenPredictor* ftp;
 
   token_ids convertToTokenIDs(FLString* token2, FLString* token1);
-  float distanceBetweenLetters(FLChar c1, FLChar c2);
+  float distanceBetweenLetters(FLChar c1, FLChar c2, FLKeyboardID keyboardID);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
   FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   void ensureRawWordExists(FLInternalSuggestionsContainer* pwr, FLRequest* request);
@@ -56,13 +56,12 @@ public:
   
   // caller needs to free pointer when done
   FLPoint* pointsFromLetters(const FLString& letters);
-  FLPoint getPointForChar(FLChar c, int keyboard);
+  FLPoint getPointForChar(FLChar c, FLKeyboardID keyboard);
   
   FLWord* getWordByString(const FLString& s, bool allowLowerCase);
   
-  // returns FLPoint[KEY_MAX_VALUE];
-  FLPoint* getKeymap(int keyboardTag);
-  
+  FLKeyboard* getKeyboard();
+
   // Settings
   void setSettingTransformLayerWeight(float weight);
   void setSettingShapeLayerWeight(float weight);

@@ -27,12 +27,16 @@ private:
   bool FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA;
   
   FLWord* wordsByID[FLEKSY_MAX_WORDS];
-  FLBlackBox* blackboxesByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
+  FLBlackBox* blackboxesByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index
   BBValue maxWordID;
   FLVotesHolder* votesHolder;
 
-  FLWordList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
-  // TODO: move allWords, wordsByLetters, wordsBlacklistByLetters etc here or subclass.
+  FLWordList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
+
+  
+  map<FLString, FLWord*> wordsByLetters;
+  map<FLString, FLString> wordsBlacklistByLetters;
+
   
   //returns point of word with index bi, OR fixed points BASEPOINT_CUSTOM1_ID or BASEPOINT_CUSTOM2_ID
   FLPoint getBasePointOfWord(FLWord* word, int bi);
@@ -68,6 +72,8 @@ public:
   FLWordDatabase();
   ~FLWordDatabase();
   
+  FLWordList* allWords;
+
   // FLWordDatabase (QueryingMethods)
   FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, bool needscore, bool printResults);
   void calculatePreciseCandidateScore(FLWord* candidate, FLWord* inputWord);
@@ -86,7 +92,14 @@ public:
   void clearValues();
   
   FLWord* getWordByID(int wordID);
-  
+
+  //
+  FLWord* getWordFromDictionary(const FLString& key);
+  void setWordInDictionary(const FLString& key, FLWord* word);
+  //
+  bool isWordInBlacklist(const FLString& printLetters);
+  void addWordToBlacklist(const FLString& word);
+
   // these should be between 0.0 and 1.0
   // Platform is platform suggestions
   // Transform is transformation, unrelated to shape

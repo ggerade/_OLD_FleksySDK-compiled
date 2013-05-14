@@ -16,9 +16,11 @@ enum FLCapitalizationMode{
 };
 
 enum FLKeyboardID{
-  FLKeyboardID_QWERTY,
+  FLKeyboardID_QWERTY_LOWER,
+  FLKeyboardID_QWERTY_UPPER,
   FLKeyboardID_NUMBERS,
   FLKeyboardID_SYMBOLS,
+  FLKeyboardID_NUMBER_OF_KEYBOARDS
 };
 
 enum FLCorrectionMode{

@@ -43,7 +43,6 @@ public:
   FLPoint transformPoint(FLPoint p, bool inverse);
   string getResourceDescription();
   void setMaxNumberOfSuggestions(int numberOfSuggestions);
-  void loadKeyMaps();
   void postLoadSetup();
   void loadKeyboardData();
   void loadPreprocessedFile(int wordLength, const void* preprocessedFile, size_t preprocessedFileLength);

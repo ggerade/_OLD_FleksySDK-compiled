@@ -143,7 +143,7 @@ public class FleksyEngine {
 	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English"), api, userWordList, true);
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
-		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.ordinal());
+		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal());
 		    api.startTypingSession(false);
 		    
 		}catch(Exception e){

@@ -27,7 +27,6 @@ class FLSingleLevelTokenPredictor {
   string _filename;
   string _filehash;
   
-  FILE* fileHandle;
   size_t filesize;
 
   FLFile* fl_unigrams_file = nullptr;
@@ -38,16 +37,12 @@ class FLSingleLevelTokenPredictor {
 
 private:
 
-  static FLTrigramsBin * fl_trigrams_bin;
+  FLTrigramsBin * fl_trigrams_bin;
   static int nPredictors;
   FastBinaryFileHeader hdr;  // version of binary file (>= 100 for fast binary files with an index)
   bool active;
   bool hasInMemoryData = false;
-  word_id getNextLongWordID(long endOffset);
   
-  bool ensureNonMidSentinel();
-  int search(word_id longWordID, long startOffset, long middleOffset, long endOffset, int depth);
-
   // this returns from table loaded in memory
   void getNextCandidatesNormal(map_probs& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
  
@@ -57,7 +52,6 @@ private:
   // fast binary version
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
-  void read_uni_bin(string uni_bin_file);   // string file-spec version
   void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
   void init(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);  // used by different signature constructors
   void getUnigramPredictions(list_pred& result, token_ids previous_tokens);

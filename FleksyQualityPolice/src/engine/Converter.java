@@ -226,7 +226,7 @@ public class Converter {
 				FleksyEngine.recreateTapEvent(tap.printPoints());
 				output.add(tap);
 			}
-			FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.ordinal());
+			FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal());
 		}
 		
 		output = settingSuggestions(output, time, indx, false); //SWIPE RIGHT

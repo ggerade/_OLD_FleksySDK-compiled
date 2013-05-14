@@ -10,6 +10,7 @@
 #include <FLPoint.h>
 
 #include "TimeFunctions.h"
+#include "FLKeyboard.h"
 
 #include <string>
 #include <vector>
@@ -23,8 +24,7 @@ namespace VariousUtilities2 {
 
   FLString& trim(FLString &s);
   
-  int getCharacterLineType(const FLString& line);
-  void readCharacterLine(const FLString& line, FLPoint* dictionary, FLString* alphabet);
+  FLKeyboardID getCharacterLineType(const FLString& line);
+  void readCharacterLine(const FLString& line, FLKeyboard& keyboard, FLKeyboardID keyboardID, FLString* alphabet);
 
-  FLChar getNearestCharForPoint(FLPoint& target, FLPoint* keys);
 };

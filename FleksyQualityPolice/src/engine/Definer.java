@@ -29,7 +29,7 @@ public class Definer {
 		keyboard = new ArrayList<Key>();
 		try{
 			Log.d("QWERTY");
-			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY.ordinal())){
+			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal())){
 				float x = key.x;
 				float y = key.y;
 				keyboard.add(new Key(key.label,x,y));

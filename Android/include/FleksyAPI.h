@@ -110,9 +110,10 @@ public:
   /*
    * Sets the capitalization mode. By default FLCapitalizationMode_CAP_SENTENCES which will capitalize first character of each sentence.
    * Other modes:
-   * FLCapitalizationMode_CAP_NEXT_CHAR_ONLY - capitalize the next character. (aka: Shift)
    * FLCapitalizationMode_CAP_WORDS          - capitalize the first character of all words.
    * FLCapitalizationMode_CAP_ALL            - capitalize all characters. (aka: Caps Lock)
+   * FLCapitalizationMode_CAP_SENTENCES      - capitalize firs charachter of every sentance
+   * FLCapitalizationMode_CAP_OFF            - nothing will be capitalized automatically
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
   
@@ -123,7 +124,7 @@ public:
   
   /*
    * Returns active keyboard.
-   * FLKeyboardID_QWERTY  (1)
+   * FLKeyboardID_QWERTY_UPPER  (1)
    * FLKeyboardID_NUMBERS (2)
    * FLKeyboardID_SYMBOLS (3)
    */
