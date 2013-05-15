@@ -46,9 +46,7 @@ private:
   bool loadedPreprocessedFiles[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
   bool postLoaded;
   
-  FLChar getNearestLetterForPoint(FLPoint& target);
-
-  FLAddWordResult _addWord(const FLString& wordLetters, double frequency, const FLString& printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues);
+  FLAddWordResult _addWord(const FLString& wordLetters, const FLString& printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues);
   void _processWordlistLine1(FLString* wordString, kWordlistType type, const FLString& delimiter, bool calculateBlackboxValues);
   void processWordBlacklistLine(FLString* line, const FLString& delimiter2);
   void processWordlistLine(FLString* wordString, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues);
@@ -60,7 +58,6 @@ public:
   ~FleksyUtilities();
   
   ///////  API  ///////
-  FLPoint loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
@@ -68,20 +65,17 @@ public:
   void writeTables(const string& filepath); //optional
   void postload();
   FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);
-  FLAddWordResult addWord(const FLString& word, float frequency);
+  FLAddWordResult addWord(const FLString& word);
   bool removeWord(const FLString& wordLetters);
   ////////////////////
   
-  FLKeyboard keyboard;
+  FLKeyboardPtr keyboard;
+  FLPoint loadKeyboardData(FLFile *keyboardFile, bool isEncrypted);
   
   size_t loadedWordCount();
   bool isWordInDictionary(const FLString& printLetters, bool allowLowerCase);
   FLWord* getWordByString(const FLString& s, bool allowLowerCase = false);
   //FLWord* getRandomWord(int length);
-  FLPoint* pointsFromLetters(const FLString& letters);
-  FLString lettersFromPoints(FLPoint* points, short nPoints);
-  FLPoint getPointForChar(FLChar c, FLKeyboardID keyboardID);
-  float getDistanceBetweenLetters(FLChar c1, FLChar c2);
   
   
   FLWordDatabase* getWordDatabase();

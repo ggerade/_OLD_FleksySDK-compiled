@@ -23,7 +23,7 @@ private:
   FLString* letters;
   FLString* printLetters;
 
-  float frequency;
+  //float frequency;
 //  int groupFrequencyRank;
 //  int frequencyRank;
   
@@ -93,7 +93,7 @@ public:
   ////////////////////
 
   FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
-  FLWord(const FLString* letters, float frequency, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID);
+  FLWord(const FLString* letters, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID);
   ~FLWord();
   void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();
@@ -106,8 +106,8 @@ public:
   const FLString* getLetters();
   const FLString* getPrintLetters();
   
-  void setFrequency(float f);
-  float getFrequency();
+//  void setFrequency(float f);
+//  float getFrequency();
 //  void setGroupFrequencyRank(int rank);
 //  int getGroupFrequencyRank();
 //  int getFrequencyRank();

@@ -256,7 +256,10 @@ public:
   static void writeProbability(probability p, ofstream& myfile);
   static void writeTerminatingValue(ofstream& myfile);
 
-  static word_id readWordID(FLFile* file);
+  static word_id readWordID(char* data, long& pointer);
+  static probability readProbability(char* data, long& pointer);
+  
+  static word_id readWordID(FLFile* file, bool invert = false);
 
   //TODO offset typedef. Signed or unsigned?
   static int readOffset(FLFile* file);

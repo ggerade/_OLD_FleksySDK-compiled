@@ -37,7 +37,7 @@ public:
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);
   
-  FLPoint loadKeyboardData(void* data, size_t dataLength, bool isEncrypted);
+  FLPoint loadKeyboardData(FLFile *keyboardFile, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
   // TODO: preprocessed file should include wordLength and length info
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
@@ -50,7 +50,7 @@ public:
   void writeTablesIfNeeded(const string& filepath);
   void postload();
   
-  FLAddWordResult addUserWord(const FLString& word, float frequency);
+  FLAddWordResult addUserWord(const FLString& word);
   bool removeUserWord(const FLString& word);
   bool wordExists(const FLString& word, bool allowLowerCase);
   
@@ -60,7 +60,7 @@ public:
   
   FLWord* getWordByString(const FLString& s, bool allowLowerCase);
   
-  FLKeyboard* getKeyboard();
+  FLKeyboardPtr& getKeyboard();
 
   // Settings
   void setSettingTransformLayerWeight(float weight);
