@@ -13,7 +13,7 @@ struct FLTypingControllerAction{
   bool isUpperCase = false;
   int cursorPosition; // used if action is MC = moved cursor or O = expected output
   int keyboardNumber;
-  std::string character; //userd if action is send character
+  std::string character; //used if action is send character
   std::string expectedOutput; // used if action is check O.
   int cursorPosRelation; //-1 = -, 1 = +, 0 = exact position
   int blockIndex;

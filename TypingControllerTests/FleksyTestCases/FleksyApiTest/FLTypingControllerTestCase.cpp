@@ -121,7 +121,7 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
     return 0;
   }
   else if(actionType == "BF"){
-    tc.backAndForthSwipe();
+    api->backspace(true);
     return checkSuggestion(action);
   }
   else if(actionType == "SHC"){
