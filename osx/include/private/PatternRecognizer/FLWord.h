@@ -90,10 +90,12 @@ public:
 
   float contextFrequency;
   
+  bool canBeRemovedByUser;
+  
   ////////////////////
 
   FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
-  FLWord(const FLString* letters, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID);
+  FLWord(const FLString* letters, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID, bool canBeRemoved);
   ~FLWord();
   void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();

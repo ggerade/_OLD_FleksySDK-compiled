@@ -112,7 +112,7 @@ public:
    * Other modes:
    * FLCapitalizationMode_CAP_WORDS          - capitalize the first character of all words.
    * FLCapitalizationMode_CAP_ALL            - capitalize all characters. (aka: Caps Lock)
-   * FLCapitalizationMode_CAP_SENTENCES      - capitalize firs charachter of every sentance
+   * FLCapitalizationMode_CAP_SENTENCES      - capitalize first character of every sentence
    * FLCapitalizationMode_CAP_OFF            - nothing will be capitalized automatically
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
