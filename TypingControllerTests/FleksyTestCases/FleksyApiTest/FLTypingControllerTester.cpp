@@ -8,7 +8,6 @@
 
 #include "FLTypingControllerTester.h"
 #include "VariousUtilities2.h"
-//#include "FleksyPrivateAPI.h"
 #include "TimeFunctions.h"
 
 
@@ -17,11 +16,13 @@ FLTypingControllerTester::FLTypingControllerTester(){
   api = new FleksyAPI(*fleksyListener);
   tc = api->pImpl->tc;
 }
+
 FLTypingControllerTester::~FLTypingControllerTester(){
   delete fleksyListener;
   delete api;
   deleteTestInfos();
 }
+
 void FLTypingControllerTester::deleteTestInfos(){
   for(FLTestInfo *tI : testInfos){
     delete tI;
@@ -86,7 +87,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
     getline(fin, line);
     
     if(line.find("Test") == 0){//test
-      FLTypingControllerTestCase *testCase = new FLTypingControllerTestCase(*tc, *fleksyListener);
+      FLTypingControllerTestCase *testCase = new FLTypingControllerTestCase(*tc, *fleksyListener, api);
       testCases.push_back(testCase);
       getLastTestCase()->testInfo->testName = line;
     }
@@ -373,11 +374,20 @@ void FLTypingControllerTester::runTests(bool breakOnFail){
     }
     catch (std::runtime_error er) {
       printf("Error while running test: %s, Error: %s\n", testCases[i]->testInfo->testName.c_str(), er.what());
-      testCases[i]->testInfo->printTestInfo();
+      CheckType error;
+      error.isError = true;
+      error.type = "Runtime Error: ";
+      error.type.append(er.what());
+      error.result.append(testCases[i]->getLastActionInfo());
+      testCases[i]->testInfo->addCheckType(error);
     }
     catch(std::exception ex){
       printf("Exception while running test: %s, Exception: %s\n", testCases[i]->testInfo->testName.c_str(), ex.what());
-      testCases[i]->testInfo->printTestInfo();
+      CheckType error;
+      error.isError = true;
+      error.type = ex.what();
+      error.result.append(testCases[i]->getLastActionInfo());
+      testCases[i]->testInfo->addCheckType(error);
     }
     
     if(result == 1){//failed test
@@ -396,6 +406,7 @@ void FLTypingControllerTester::runTests(bool breakOnFail){
         return;
       }
   }
+  
   printf("\nTest Results:\n");
   int numFailed = 0;
   int numPassed = 0;

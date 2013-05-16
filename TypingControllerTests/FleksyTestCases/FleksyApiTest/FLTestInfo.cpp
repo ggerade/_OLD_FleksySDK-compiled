@@ -22,6 +22,10 @@ void FLTestInfo::addCheckType(CheckType type){
 void FLTestInfo::printTestInfo(){
   printf("%s details:\n", testName.c_str());
   for(CheckType check : testStages){
-    printf("Check Type: %s, Result: %s\n", check.type.c_str(), check.result.c_str());
+    if(check.isError){
+      printf("Exception Type: %s, Caused by: %s\n", check.type.c_str(), check.result.c_str());
+    }else{
+      printf("Check Type: %s, Result: %s\n", check.type.c_str(), check.result.c_str());
+    }
   }
 }

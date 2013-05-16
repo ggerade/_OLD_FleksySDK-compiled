@@ -3,8 +3,9 @@
 
 using namespace std;
 
-FLTypingControllerTestCase::FLTypingControllerTestCase(FLTypingController &typingController, FleksyListenerImplC &outImpl) : tc(typingController), out(outImpl){
+FLTypingControllerTestCase::FLTypingControllerTestCase(FLTypingController &typingController, FleksyListenerImplC &outImpl, FleksyAPI *api) : tc(typingController), out(outImpl){
   testInfo = new FLTestInfo("");
+  this->api = api;
 }
 
 FLTypingControllerTestCase::~FLTypingControllerTestCase(){
@@ -27,31 +28,34 @@ int FLTypingControllerTestCase::run(){
   }
   return result;
 }
+
 int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
   string actionType = action->action;
+  lastActionInfo = actionType;
   
   if(actionType == "SC"){
     tc.sendCharacter(action->character[0]);
     return checkSuggestion(action);
   }
   else if(actionType == "SR"){
-    tc.swipeRight(false);
+    api->space(false);
     return checkSuggestion(action);
   }
   else if(actionType == "SL"){
-    tc.swipeLeft();
+    api->backspace(false);
     return checkSuggestion(action);
   }
   else if(actionType == "SD"){
-    tc.swipeDown();
+    api->nextSuggestion();
     return checkSuggestion(action);
   }
   else if(actionType == "SU"){
-    tc.swipeUp();
+    api->previousSuggestion();
     return checkSuggestion(action);
   }
   else if(actionType == "KB"){
-    tc.setActiveKeyboard((FLKeyboardID)(action->keyboardNumber));
+    lastActionInfo.append(" " + to_string(action->keyboardNumber));
+    api->setActiveKeyboard((FLKeyboardID)(action->keyboardNumber));
     return 0;
   }
   else if(actionType == "AC"){
@@ -62,15 +66,16 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
     else{
       mode = FLCorrectionMode_OFF;
     }
-    tc.setCorrectionMode(mode);
+    lastActionInfo.append(" FLCorrectionMode: " + to_string(mode));
+    api->setCorrectionMode(mode);
     return 0;
   }
   else if(actionType == "SH"){
-    tc.shiftPressed("TCTestCase");
+    api->toggleShift();
     return 0;
   }
   else if(actionType == "NL"){
-    tc.enterSwipe();
+    api->enter();
     return checkSuggestion(action);
   }
   else if(actionType == "MC"){
@@ -84,19 +89,21 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
     else if(action->cursorPosRelation == -1){
       newCursorPos = tc.getCursorPosition() - action->cursorPosition;
     }
+    lastActionInfo.append(" to: " + to_string(newCursorPos));
     out.onChangeSelection(newCursorPos, newCursorPos);
-    tc.cursorSelectionChanged(newCursorPos, newCursorPos);
+    api->cursorSelectionChanged(newCursorPos, newCursorPos);
     return checkSuggestion(action);
   }
   else if(actionType == "ST"){
     out.TESTsetScreenText(action->expectedOutput);
-    tc.parseExistingText();
+    api->startTypingSession();
     return 0;
   }
   else if(actionType == "MC end"){
     int newCursorPos = (int)tc.getTextFromTextBlocks().length();
+    lastActionInfo.append(" to: " + to_string(newCursorPos));
      out.onChangeSelection(newCursorPos, newCursorPos);
-     tc.cursorSelectionChanged(newCursorPos, newCursorPos);
+     api->cursorSelectionChanged(newCursorPos, newCursorPos);
     return 0;
   }
   else if(actionType == "EC end"){
@@ -125,24 +132,24 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
     return checkTextBlockCursor(tbCursor, action);
   }
   else if (actionType == "SEL"){
-    tc.cursorSelectionChanged(action->selectionStart, action->selectionEnd);
+    lastActionInfo.append(" start: " + to_string(action->selectionStart) + " end: " + to_string(action->selectionEnd));
+    api->cursorSelectionChanged(action->selectionStart, action->selectionEnd);
     out.onChangeSelection(action->selectionStart, action->selectionEnd);
     return checkCursorSelection(action);
   }
   else if(actionType == "EUL"){
     return checkComposingRegion(action);
   }
-//  else if(actionType == "OUS"){
-//    tc.onUpdateSelection(action->onUpdateSelectionVals[0], action->onUpdateSelectionVals[1], action->onUpdateSelectionVals[2], action->onUpdateSelectionVals[3]);
-//    return 0;
-//  }
   else if(actionType == "CAPS"){
+    FLCapitalizationMode mode;
     if(action->isUpperCase){
-       tc.setCapitalizationMode(FLCapitalizationMode_CAP_ALL);
+      mode = FLCapitalizationMode_CAP_ALL;
     }
     else{
-      tc.setCapitalizationMode(FLCapitalizationMode_CAP_SENTENCES);
+      mode = FLCapitalizationMode_CAP_SENTENCES;
     }
+    lastActionInfo.append(" FLCapitalizationMode: " + to_string(mode));
+    api->setCapitalizationMode(mode);
     return 0;
   }
   else{
@@ -150,6 +157,11 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
     return 1;
   }
 }
+
+string FLTypingControllerTestCase::getLastActionInfo(){
+  return lastActionInfo;
+}
+
 int FLTypingControllerTestCase::checkText(FLTypingController &tc, FLTypingControllerAction *action){
   CheckType checkType;
   checkType.type = "ET";
@@ -171,6 +183,7 @@ int FLTypingControllerTestCase::checkText(FLTypingController &tc, FLTypingContro
   testInfo->addCheckType(checkType);
   return 1;
 }
+
 int FLTypingControllerTestCase::checkCursorPosition(FLTypingController &tc, FLTypingControllerAction *action){
   CheckType checkType;
   checkType.type = "EC";
@@ -195,6 +208,7 @@ int FLTypingControllerTestCase::checkCursorPosition(FLTypingController &tc, FLTy
   testInfo->addCheckType(checkType);
   return 1;
 }
+
 int FLTypingControllerTestCase::checkTextBlockCursor(FLTextBlockCursor *tbCursor, FLTypingControllerAction *action){
   CheckType checkType;
   checkType.type = "TBC";
@@ -221,9 +235,11 @@ int FLTypingControllerTestCase::checkTextBlockCursor(FLTextBlockCursor *tbCursor
   testInfo->addCheckType(checkType);
   return 1;
 }
+
 string FLTypingControllerTestCase::getStringForBoolean(bool b){
   return (b)?"true":"false";
 }
+
 int FLTypingControllerTestCase::checkShiftState(FLTypingControllerAction *action){
   CheckType checkType;
   checkType.type = "SH";

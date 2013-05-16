@@ -16,6 +16,7 @@
 struct CheckType{
   std::string type;
   std::string result;
+  bool isError = false;
 };
 
 class FLTestInfo{

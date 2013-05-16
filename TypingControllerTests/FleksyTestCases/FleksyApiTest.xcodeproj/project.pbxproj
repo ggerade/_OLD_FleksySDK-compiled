@@ -16,7 +16,6 @@
 		DDE8719D1655E0A5008F4BA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDE8718A1655E009008F4BA2 /* main.cpp */; };
 		DDE8719E1655E0B1008F4BA2 /* FleksyListenerImplC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDE871861655E009008F4BA2 /* FleksyListenerImplC.cpp */; };
 		DDE871A21656D0E8008F4BA2 /* FLTypingControllerTestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDE871A01656D0E8008F4BA2 /* FLTypingControllerTestCase.cpp */; };
-		DDE871A51656D36D008F4BA2 /* FLTypingControllerAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDE871A31656D36C008F4BA2 /* FLTypingControllerAction.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,8 +45,6 @@
 		DDE8718A1655E009008F4BA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DDE871A01656D0E8008F4BA2 /* FLTypingControllerTestCase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FLTypingControllerTestCase.cpp; sourceTree = "<group>"; };
 		DDE871A11656D0E8008F4BA2 /* FLTypingControllerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTypingControllerTestCase.h; sourceTree = "<group>"; };
-		DDE871A31656D36C008F4BA2 /* FLTypingControllerAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FLTypingControllerAction.cpp; sourceTree = "<group>"; };
-		DDE871A41656D36C008F4BA2 /* FLTypingControllerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTypingControllerAction.h; sourceTree = "<group>"; };
 		DDE871A9165AC8C4008F4BA2 /* typingControllerTestCases */ = {isa = PBXFileReference; lastKnownFileType = text; path = typingControllerTestCases; sourceTree = "<group>"; };
 		DDE871B3165C7F37008F4BA2 /* FleksyListenerImplC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FleksyListenerImplC.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,8 +92,6 @@
 				DD255CBC16C02AF800F0BC2A /* FLTypingControllerTester.h */,
 				DDE871A01656D0E8008F4BA2 /* FLTypingControllerTestCase.cpp */,
 				DDE871A11656D0E8008F4BA2 /* FLTypingControllerTestCase.h */,
-				DDE871A31656D36C008F4BA2 /* FLTypingControllerAction.cpp */,
-				DDE871A41656D36C008F4BA2 /* FLTypingControllerAction.h */,
 			);
 			path = FleksyApiTest;
 			sourceTree = "<group>";
@@ -164,7 +159,6 @@
 				DDE8719E1655E0B1008F4BA2 /* FleksyListenerImplC.cpp in Sources */,
 				DD9A57B216DE782700248D69 /* FLTypingControllerTester.cpp in Sources */,
 				DDE871A21656D0E8008F4BA2 /* FLTypingControllerTestCase.cpp in Sources */,
-				DDE871A51656D36D008F4BA2 /* FLTypingControllerAction.cpp in Sources */,
 				DDE61F04170F3F6300DB8BDB /* FLTestInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
