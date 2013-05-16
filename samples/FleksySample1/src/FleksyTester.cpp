@@ -18,6 +18,8 @@ void FleksyTester::run(const char* resourcePath) {
   
   api->setResourceFile(resourcePath);
   api->loadResources();
+  api->setPlatformKeyboardSize(320.0f, 216.0f);
+  api->startTypingSession();
   
   ///////  BEGIN USAGE  ///////
   
@@ -58,6 +60,8 @@ void FleksyTester::run(const char* resourcePath) {
   api->backspace();
   api->backspace();
   
+  api->endTypingSession();
+
   delete api;
   api = NULL;
 

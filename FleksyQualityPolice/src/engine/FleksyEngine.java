@@ -142,6 +142,7 @@ public class FleksyEngine {
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
 		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal());
+                    api.setPlatformKeyboardSize(320, 216);
 		    api.startTypingSession(false);
 		    
 		}catch(Exception e){
