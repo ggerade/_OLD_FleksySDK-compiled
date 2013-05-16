@@ -41,6 +41,8 @@ private:
   bool memoryMapped = false;
   
   void init(off_t _startOffset, size_t *_length, FLFile* parent);
+  void cleanup();
+
   void* getContentsWithOffset(off_t offset);
   
   

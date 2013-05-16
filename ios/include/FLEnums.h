@@ -52,4 +52,9 @@ enum FLDictionaryChangeResult{
   FLDictionaryChangeResult_ERROR
 };
 
+enum FLDeleteMode{
+  FLDeleteMode_VARIABLE,
+  FLDeleteMode_WHOLE_WORD
+};
+
 #endif /* defined(__FleksySDK_FLEnums_h__) */

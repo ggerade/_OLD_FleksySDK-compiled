@@ -36,6 +36,8 @@ private:
   FLString alphabetUpper;
   FLString alphabetLower;
 
+  bool ismember(FLChar item, FLString& vector, bool table = USE_TABLES_BY_DEFAULT);
+
 public:
   FLKeyboard(FLFile *keyboardFile, bool isEncrypted);
   ~FLKeyboard();
@@ -63,8 +65,6 @@ public:
   bool isalpha(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
   bool isupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
   bool islower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-
-  bool ismember(FLChar item, FLString& vector, bool table = USE_TABLES_BY_DEFAULT);
 
   FLString onlyKeepAlphaFromString(const FLString& s);
 

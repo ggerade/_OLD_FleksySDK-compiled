@@ -54,7 +54,7 @@ private:
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
   void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
   void init(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);  // used by different signature constructors
-  void getUnigramPredictions(list_pred& result, token_ids previous_tokens);
+  void getBiasedUnigramPredictions(list_pred& result, token_ids previous_tokens);
   
 public:
   FLSingleLevelTokenPredictor(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);
@@ -79,7 +79,7 @@ public:
 
 public:
   // n-gram combination members (jfm)
-  unordered_map<word_id, double> unigram_map;
+  unordered_map<word_id, probability> unigram_map;
   list_pred unigram_candidates;  
 };
 

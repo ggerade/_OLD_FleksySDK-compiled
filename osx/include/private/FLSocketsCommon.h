@@ -55,7 +55,7 @@ public:
   FLChar letters[];
   //////////////////////////////////////////
   static FLResponseEntry* FLResponseEntryMake(const FLString* letters);
-  int getSize();
+  size_t getSize();
 };
 
 typedef std::vector<FLResponseEntry*> FLResponseEntryVector;
