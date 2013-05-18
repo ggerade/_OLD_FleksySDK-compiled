@@ -20,5 +20,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Android/lib/FleksyAPI.jar</locationURI>
 		</link>
+		<link>
+			<name>Assets/FleksyPrivateAPI.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Android/lib/FleksyPrivateAPI.jar</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

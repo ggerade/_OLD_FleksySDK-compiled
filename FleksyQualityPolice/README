@@ -38,6 +38,12 @@ e#	: Sets error to # on execution
 s#	: Sets shift to # on execution
 g#	: Sets accuracy goal to # on execution
 
+Private APIs
+-tlw	:	setSettingTransformLayerWeight
+-slw	:	setSettingShapeLayerWeight
+-clw	:	setSettingContextLayerWeight
+-plw	:	setSettingPlatformLayerWeight
+
 * 	requires working Android server connection
 **	buggy
 

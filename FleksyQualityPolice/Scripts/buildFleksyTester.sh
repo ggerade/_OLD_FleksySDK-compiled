@@ -38,6 +38,7 @@ FLEKSYQP_BUILD_DIR="${FLEKSYQP_ROOT_DIR}/build"
 
 FLEKSYSDK_COMPILED_ROOT_DIR=$(canonpath "${FLEKSYQP_ROOT_DIR}/..")
 FLEKSYSDK_COMPILED_ANDROID_JAR="${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/lib/FleksyAPI.jar"
+FLEKSYSDK_COMPILED_ANDROID_PRIVATE_JAR="${FLEKSYSDK_COMPILED_ROOT_DIR}/Android/lib/FleksyPrivateAPI.jar"
 
 cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"
 
@@ -55,7 +56,7 @@ echo ""
 echo "Compiling 'FleksyQualityPolice'..."
 
 # Compile the java sources
-javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}"
+javac -source 1.6 -target 1.6 src/engine/*.java src/utils/*.java src/views/*.java -d bin -classpath "${FLEKSYSDK_COMPILED_ANDROID_JAR}":"${FLEKSYSDK_COMPILED_ANDROID_PRIVATE_JAR}"
 echo ""
 echo "Creating 'FleksyTester.jar'..."
 ant -buildfile buildJar.xml

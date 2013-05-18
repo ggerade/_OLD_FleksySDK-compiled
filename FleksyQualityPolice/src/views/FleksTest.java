@@ -2,6 +2,8 @@ package views;
 
 import java.util.Scanner;
 
+import com.syntellia.fleksy.internal.api.FleksyPrivateAPI;
+
 import utils.DataManager;
 import utils.Debugger;
 import utils.Log;
@@ -44,6 +46,11 @@ public class FleksTest {
 	private final static String X_IP = "-ip";
 	private final static String LRN2 = "-ll";
 	
+	private final static String STLW = "-tlw";
+	private final static String SSLW = "-slw";
+	private final static String SCLW = "-clw";
+	private final static String SPLW = "-plw";
+	
 	private static Scanner input;
 	private final static int FAIL = 23;
 	protected static TestEngine mainEngine;
@@ -51,7 +58,11 @@ public class FleksTest {
 	private static boolean debugging = false;
 	private final static String Alt = "6RAPES";
 	
+	private static FleksyPrivateAPI privateAPI;
+	private static String [] myArgs;
+	
 	public static void main(String[] args){
+		myArgs = args;
 		initialOperations();
 		if(Debugger.proceeding(Debugger.Level.INITIALIZE)){
 			handleArguments(args);
@@ -72,6 +83,34 @@ public class FleksTest {
 				}
 			}
 		});
+	}
+	
+	private static void handlePostLoadArguments(){
+		privateAPI = new FleksyPrivateAPI();
+			for(int i = 0; i <  myArgs.length; i++){
+			
+				String a = myArgs[i];
+				if(a.contains(STLW)){
+					float weight = Float.parseFloat(myArgs[i + 1]);
+					System.out.println("setSettingTransformLayerWeight(" + weight + ")");
+					privateAPI.setSettingTransformLayerWeight(weight);
+				}
+				else if(a.contains(SSLW)){
+					float weight = Float.parseFloat(myArgs[i + 1]);
+					System.out.println("setSettingShapeLayerWeight(" + weight + ")");
+					privateAPI.setSettingShapeLayerWeight(weight);
+				}
+				else if(a.contains(SCLW)){
+					float weight = Float.parseFloat(myArgs[i + 1]);
+					System.out.println("setSettingContextLayerWeight(" + weight + ")");
+					privateAPI.setSettingContextLayerWeight(weight);
+				}
+				else if(a.contains(SPLW)){
+					float weight = Float.parseFloat(myArgs[i + 1]);
+					System.out.println("setSettingPlatformLayerWeight(" + myArgs[i + 1] + ")");
+					privateAPI.setSettingPlatformLayerWeight(weight);
+				}
+			}
 	}
 	
 	private static void handleArguments(String[] args){
@@ -139,6 +178,9 @@ public class FleksTest {
 			Log.err("Loading Engine Failed! Testing Failed! Exiting Environment! Good Day Sir!\n");
 			return;
 		}
+		
+		handlePostLoadArguments();
+		
 		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), (learn || tapper));
 		FleksyEngine.closeClient();
 	}
