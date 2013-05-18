@@ -43,7 +43,7 @@ const unsigned int FL_TRIGRAM_SIGNIFICANT_COUNT = 1;  // used in combinePreds to
 
 const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine whether the absence of a trigram or bigram gives statistically signficant information on the probability of the bigram or trigram.  If unigram frequency predicts a count above this value, then lack of unigram/bigram gives information -- use 0 prob estimate in this case.
 const unsigned int FL_MAX_CANDIDATES = 9991000;  // maximum number of candidates returned (for unigrams right now)
-const double       FL_UNI_SCALE = 0.1;  // max range for unigram probability (bit larger than probability of "the")
+const float        FL_UNI_SCALE = 0.1f;  // max range for unigram probability (bit larger than probability of "the")
 const unsigned int FL_READ_REPORT = 20000;  // report read info every FL_READ_REPORT reads (when FL_FLEKSY_TRACE set)
 const int FL_STOP_SIGNAL = -1;   // code to stop threads
 
@@ -219,6 +219,7 @@ enum pred_type { bigram = 0,
                  unknown
 };
 
+/*
 static bool tokensAreEqual(token_ids& tokens1, token_ids& tokens2) {
   for (int i = 0; i < MAX_WORD_DEPTH; i++) {
     if (tokens1.data[i] != tokens2.data[i]) {
@@ -227,6 +228,7 @@ static bool tokensAreEqual(token_ids& tokens1, token_ids& tokens2) {
   }
   return true;
 }
+*/
 
 typedef list<FLString> list_string;
 
@@ -254,18 +256,21 @@ public:
   
   static void writeWordID(word_id tokenID, ofstream& myfile);
   static void writeProbability(probability p, ofstream& myfile);
+  static void writeUnigramProbability(probability p, ofstream& myfile);
   static void writeTerminatingValue(ofstream& myfile);
 
   static word_id readWordID(char* data, long& pointer);
   static probability readProbability(char* data, long& pointer);
   
-  static word_id readWordID(FLFile* file, bool invert = false);
+  static probability readUnigramProbability(FLFilePtr &file);
+  static probability readUnigramProbability(unsigned char z);
+
+  static word_id readWordID(FLFilePtr &file, bool invert = false);
 
   //TODO offset typedef. Signed or unsigned?
-  static int readOffset(FLFile* file);
+  static int readOffset(FLFilePtr &file);
   
-  static probability readProbability(FLFile* file);
-
+  static probability readProbability(FLFilePtr &file);
   
   static bool predictionCompare(Prediction p1, Prediction p2);
 
@@ -275,7 +280,7 @@ public:
   static void normalizePreds(list_pred& preds);
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
   // fast binary file support code (may be used by FLContextProducer or FLTokenPredictor)
-  static FastBinaryFileHeader readFastHdr(FLFile * myfile, char ** phdr_data = nullptr, const char * caller = nullptr);
+  static FastBinaryFileHeader readFastHdr(FLFilePtr &myfile, char ** phdr_data = nullptr, const char * caller = nullptr);
   //static void readFastBinaryFile(const char * filename, short_lut& alt_table, FLSingleLevelTokenPredictor *pPredictor = NULL);  // read fast binary file into lookup table
 
   static int nVerbosity;  // verbosity level
@@ -283,7 +288,11 @@ public:
 
   //ONLY USE ONE OF THESE TWO. read_temp_unigrams is temporary until unigram binary file is fixed
   static void read_temp_unigrams(unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
-  static void read_uni_bin(FLFile* unigram_fl_file, unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
+  static void read_uni_bin(FLFilePtr &unigram_fl_file, unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
+
+  // older read_uni_bin used by FLContextTester (JOHNM)
+  //
+  static void read_uni_bin_old(FLFilePtr &unigram_fl_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
 
@@ -296,6 +305,8 @@ public:
     }
     return true;
   };
+friend class FLContextProducer;
+
 };  // class FleksyContextCommon
 
 class Prediction

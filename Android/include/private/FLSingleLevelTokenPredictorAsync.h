@@ -48,7 +48,7 @@ private:
   size_t numberOfPendingRequests();
 
 public:
-  FLSingleLevelTokenPredictorAsync(FLFile * uni_file, FLFile * infile, FLFile* tri_file, bool alsoLoadInMemory);
+  FLSingleLevelTokenPredictorAsync(FLFilePtr &uni_file, FLFilePtr &infile, FLFilePtr &tri_file, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictorAsync();
   
   // this is guaranteed not to block unless we already have more than MAXIMUM_REQUESTS_BEFORE_BLOCKING requests.

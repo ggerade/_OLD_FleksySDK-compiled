@@ -90,6 +90,12 @@ public:
    * Send an index of suggestion platform should display as current suggestion
    */
   virtual void onSelectedSuggestionChanged(int selectedIndex){};
+  
+  
+  //New experimental stuff
+  
+  virtual void onButtonUp(FLChar character){};
+  
 };
 
 #endif /* defined(__FleksySDK_FleksyListenerInterface_h__) */

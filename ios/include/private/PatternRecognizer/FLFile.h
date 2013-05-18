@@ -13,10 +13,14 @@
 
 #include <iostream>
 #include <iosfwd>
+#include <memory>
 
 #define USE_MEMORY_MAP 1
 
 using namespace std;
+
+class FLFile;
+typedef std::shared_ptr<FLFile> FLFilePtr;
 
 class FLFile {
 
@@ -24,8 +28,7 @@ private:
   
   int fileID;
   
-  FLFile* parent = NULL;
-  int childCount = 0;
+  FLFilePtr parent;
   ////////////////
   
   string tag;
@@ -40,7 +43,7 @@ private:
   
   bool memoryMapped = false;
   
-  void init(off_t _startOffset, size_t *_length, FLFile* parent);
+  void init(off_t _startOffset, size_t *_length, FLFilePtr *parent);
   void cleanup();
 
   void* getContentsWithOffset(off_t offset);
@@ -57,10 +60,10 @@ public:
   FLFile(int fileDescriptor, off_t startOffset = 0, size_t length = 0);
   
   // Parent FLFile constructor
-  FLFile(FLFile* _parent, string tag, off_t startOffset, size_t _length);
+  FLFile(FLFilePtr &_parent, string tag, off_t startOffset, size_t _length);
 
   // Parent FLFile "copy constructor"
-  FLFile(FLFile* _parent);
+  FLFile(FLFilePtr &_parent);
 
   
   void read(char* outBuffer, size_t length);

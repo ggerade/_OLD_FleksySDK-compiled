@@ -34,9 +34,9 @@ protected:
 public:
   
   // CONSTRUCTORS
-  FLTokenPredictor(FLFile * unigram_fl_file, 
-                   FLFile * bigram_fl_file,
-                   FLFile * trigram_fl_file,
+  FLTokenPredictor(FLFilePtr &unigram_fl_file,
+                   FLFilePtr &bigram_fl_file,
+                   FLFilePtr &trigram_fl_file,
                    bool alsoLoadInMemory); 
     
     // DESTRUCTOR

@@ -61,7 +61,7 @@ public:
   //void preloadWithPathFormat(const string& filepathFormat);
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
-  void loadDictionary(FLFile& f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
+  void loadDictionary(FLFilePtr &f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   void writeTables(const string& filepath); //optional
   void postload();
   FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);
@@ -70,7 +70,7 @@ public:
   ////////////////////
   
   FLKeyboardPtr keyboard;
-  FLPoint loadKeyboardData(FLFile *keyboardFile, bool isEncrypted);
+  FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
   
   size_t loadedWordCount();
   bool isWordInDictionary(const FLString& printLetters, bool allowLowerCase);

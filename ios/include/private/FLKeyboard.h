@@ -25,7 +25,7 @@ private:
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
   
-  void loadKeyboardData(FLFile *keyboardFile, bool isEncrypted);
+  void loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
   FLChar getNearestLetterForPoint(FLPoint& target);
 
   FLChar toupper_table[256];
@@ -39,7 +39,7 @@ private:
   bool ismember(FLChar item, FLString& vector, bool table = USE_TABLES_BY_DEFAULT);
 
 public:
-  FLKeyboard(FLFile *keyboardFile, bool isEncrypted);
+  FLKeyboard(FLFilePtr &keyboardFile, bool isEncrypted);
   ~FLKeyboard();
   
   FLPoint getKeyboardSize();

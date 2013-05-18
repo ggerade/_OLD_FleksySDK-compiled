@@ -37,15 +37,15 @@ public:
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);
   
-  FLPoint loadKeyboardData(FLFile *keyboardFile, bool isEncrypted);
+  FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
   //void preloadWithPathFormat(const string& filepathFormat);
   // TODO: preprocessed file should include wordLength and length info
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
   void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   
-  void loadDictionary(FLFile& f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
+  void loadDictionary(FLFilePtr &f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   
-  void loadContextData(FLFile* file1, FLFile* file2, FLFile* file3, bool alsoLoadInMemory);
+  void loadContextData(FLFilePtr &file1, FLFilePtr &file2, FLFilePtr &file3, bool alsoLoadInMemory);
   
   void writeTablesIfNeeded(const string& filepath);
   void postload();
@@ -68,10 +68,10 @@ public:
   void setSettingContextLayerWeight(float weight);
   void setSettingPlatformLayerWeight(float weight);
   
-  bool getSettingShapeLayerWeight();
-  bool getSettingTransformLayerWeight();
-  bool getSettingContextLayerWeight();
-  bool getSettingPlatformLayerWeight();
+  float getSettingShapeLayerWeight();
+  float getSettingTransformLayerWeight();
+  float getSettingContextLayerWeight();
+  float getSettingPlatformLayerWeight();
   
   
   bool getSettingPlusMinus1();

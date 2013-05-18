@@ -29,9 +29,9 @@ class FLSingleLevelTokenPredictor {
   
   size_t filesize;
 
-  FLFile* fl_unigrams_file = nullptr;
-  FLFile* fl_bigrams_file = nullptr;
-  FLFile* fl_trigrams_file = nullptr;
+  FLFilePtr fl_unigrams_file;
+  FLFilePtr fl_bigrams_file;
+  FLFilePtr fl_trigrams_file;
   
   short_lut table;
 
@@ -52,12 +52,12 @@ private:
   // fast binary version
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
-  void read_uni_bin(FLFile * uni_fl_file);  // FLFile version
-  void init(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);  // used by different signature constructors
+  void read_uni_bin(FLFilePtr &uni_fl_file);  // FLFile version
+  void init(FLFilePtr &uni_file, FLFilePtr &infile, FLFilePtr &tri_file, bool alsoLoadInMemory);  // used by different signature constructors
   void getBiasedUnigramPredictions(list_pred& result, token_ids previous_tokens);
   
 public:
-  FLSingleLevelTokenPredictor(FLFile* uni_file, FLFile * infile, FLFile * tri_file, bool alsoLoadInMemory);
+  FLSingleLevelTokenPredictor(FLFilePtr &uni_file, FLFilePtr &infile, FLFilePtr &tri_file, bool alsoLoadInMemory);
   ~FLSingleLevelTokenPredictor();
   
   // checkConsistency: will use both normal and memoryless methods, ensures they are consistent and returns the memoryless results
@@ -79,7 +79,8 @@ public:
 
 public:
   // n-gram combination members (jfm)
-  unordered_map<word_id, probability> unigram_map;
+  //unordered_map<word_id, probability> unigram_map;  // Kostas workaround
+  unordered_map<word_id, double> unigram_map;         // old way
   list_pred unigram_candidates;  
 };
 

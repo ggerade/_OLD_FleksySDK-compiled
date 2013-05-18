@@ -13,19 +13,15 @@
 #include "FleksyListenerInterface.h"
 #include "FLFile.h"
 #include "FLResourceArchive.h"
+#include "FLMotionEventManager.h"
 
 class FLTypingController;
 class SystemsIntegrator;
 
 class FleksyAPIpImpl{
 private:
-  FLFile *resourceArchiveFile = NULL;
-  FLResourceArchive *resourceArchive = NULL;
+  FLResourceArchivePtr resourceArchive;
   string resourcePath;
-  
-  FLFile* unigramFile = NULL;
-  FLFile* bigramFile = NULL;
-  FLFile* trigramFile = NULL;
   
   FLPoint internalKeyboardSize;
   FLPoint externalKeyboardSize;
@@ -36,6 +32,8 @@ public:
   FleksyListenerInterface &out;
   FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
+  
+  FLMotionEventManager *motionManager = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
@@ -46,10 +44,21 @@ public:
   void postLoadSetup();
   void loadKeyboardData();
   void loadPreprocessedFile(int wordLength, const void* preprocessedFile, size_t preprocessedFileLength);
-  void setResourceFLFile(FLFile* file);
+  void setResourceFLFile(FLFilePtr &file);
   void setResourcePath(string path);
-  FLFile* FLFileForFileName(const char *filename);
-  void initialize(FLFile* preloaded, FLFile* wordlist, FLFile* blackListCapital, FLFile* blackList, bool isEncrypted = true);
+  FLFilePtr FLFileForFileName(const char *filename);
+  void initialize(FLFilePtr &preloaded, FLFilePtr &wordlist, FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);
+  
+  // Settings
+  void setSettingTransformLayerWeight(float weight);
+  void setSettingShapeLayerWeight(float weight);
+  void setSettingContextLayerWeight(float weight);
+  void setSettingPlatformLayerWeight(float weight);
+  
+  float getSettingShapeLayerWeight();
+  float getSettingTransformLayerWeight();
+  float getSettingContextLayerWeight();
+  float getSettingPlatformLayerWeight();
 };
 
 #endif

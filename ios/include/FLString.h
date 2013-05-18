@@ -23,6 +23,8 @@ typedef wchar_t FLChar;
 #define TEXT(s) L ## s
 #define flatoi(s) atoi(string(s.begin(), s.end()).c_str())
 #define flatof(s) atof(string(s.begin(), s.end()).c_str())
+#define flstrtod(s) strtod(string(s.begin(), s.end()).c_str(), NULL)
+#define flstrtof(s) strtof(string(s.begin(), s.end()).c_str(), NULL)
 #else
 #include <string>
 typedef unsigned char FLChar;
@@ -37,6 +39,8 @@ typedef std::basic_string <FLChar> FLString;
 //#define FLString(s) FLString((char*)s)
 #define flatoi(s) atoi(string(s.begin(), s.end()).c_str())
 #define flatof(s) atof(string(s.begin(), s.end()).c_str())
+#define flstrtod(s) strtod(string(s.begin(), s.end()).c_str(), NULL)
+#define flstrtof(s) strtof(string(s.begin(), s.end()).c_str(), NULL)
 #endif
 
 #define NSStringToString _NSStringToStringUTF8

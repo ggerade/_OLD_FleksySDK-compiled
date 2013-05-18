@@ -24,14 +24,14 @@ typedef struct {
 class FLResourceArchive {
 
 public:
-  FLResourceArchive(FLFile *file);
+  FLResourceArchive(FLFilePtr &file);
   ~FLResourceArchive();
 
-  FLFile *FLFileForFileName(const char *fileName);
+  FLFilePtr FLFileForFileName(const char *fileName);
   string getTag();
 
 private:
-  FLFile *archiveFile = NULL;
+  FLFilePtr archiveFile;// = NULL;
   const unsigned char *archiveBytes = NULL;
   size_t archiveLength = 0;
 
@@ -71,5 +71,7 @@ private:
     FLFileEntry *fileEntries = NULL;
   } tableOfContents;
 };
+
+typedef std::shared_ptr<FLResourceArchive> FLResourceArchivePtr;
 
 #endif /* defined(__FleksyLib__FLResourceArchive__) */

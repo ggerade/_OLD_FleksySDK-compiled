@@ -17,7 +17,7 @@
 
 // 30 degrees
 #define BLACKBOX_ANGLE_BUCKETS_N 12
-#define BLACKBOX_BUCKET_ANGLE_SIZE (2 * M_PI / BLACKBOX_ANGLE_BUCKETS_N)
+#define BLACKBOX_BUCKET_ANGLE_SIZE (2.0f * (float)M_PI / (float)BLACKBOX_ANGLE_BUCKETS_N)
 
 // This uses the absolute angle of the basis. See VoteParameters.basisAngle
 #define BLACKBOX_USE_ANGLE 1

@@ -6,14 +6,24 @@
 #include "FLContextCommon.h"
 #include <PatternRecognizer/FLFile.h>
 
+// !!! NO HARDCODED PATHS HERE, DEFINE THOSE IN APPLICATION (eg ContextTester) !!!
+#define FL_TRIGRAM_BIN_FILE "binary_files/file3"  // write directly to file3
+//#define FL_TRIGRAM_BIN_FILE "binary_files/put.trigram.binary.file.here"
+
 typedef unsigned int BYTE_OFFSET;
 
 class FLTrigramsBin
 {
  public:
-  FLTrigramsBin(FLFile *);
+  FLTrigramsBin(FLFilePtr &); // constructor
   ~FLTrigramsBin();
   static int nVerbosity;
+
+  void getNextCandidatesList(FLFilePtr &tri_file,
+                                    list_pred& result, 
+                                    token_ids previousTokenIDs, 
+                                    int resultsLimit, 
+                                    probability pThreshold);
 
   void getNextCandidatesList(list_pred& result, 
                                     token_ids previousTokenIDs, 
@@ -25,25 +35,9 @@ class FLTrigramsBin
   static unsigned int myhash(unsigned int n);
   void readHdr();
 
-//  static void set_hdr_offset(unsigned int offset) { hdr_offset = offset; };
-//  static unsigned int get_hdr_offset() { return hdr_offset; };
-//
-//  static void set_col_table_size(unsigned int size) { col_table_size = size; };
-//  static unsigned int get_col_table_size() { return col_table_size; };
-//
-//  static void add_extra_bytes(char * data, int nBytes) 
-//  { 
-//    extra_bytes = new char[nBytes];
-//    for(int i=0; i < nBytes; i++)
-//      extra_bytes[i] = data[i];
-//
-//    set_hdr_offset(sizeof(FastBinaryFileHeader) + 4 + nBytes);
-//  }
-//
-//  static char *extra_bytes;
-  
+  FLFilePtr trigram_bin_file;   // FLFile object for trigram binary file
+
  private:
-  FLFile* trigram_bin_file;
   // offsets/sizes for header of binary file
   //
   unsigned int hdr_offset;  // header offset in bytes (size of binary file header)
