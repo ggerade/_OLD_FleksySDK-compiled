@@ -228,6 +228,7 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "../../osx/include/**";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/.";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../osx/lib,
@@ -244,6 +245,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = "../../osx/include/**";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/.";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../../osx/lib,

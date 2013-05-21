@@ -1,12 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/param.h>
+#include <string.h>
+#include <errno.h>
+#include <libgen.h>
+#include <unistd.h>
+
 #include <iostream>
 #include "FLTypingControllerTester.h"
 
 using namespace std;
 
-FLTypingControllerTester tester;
-
-int main(int argc, const char * argv[]) {
+int runTests(char *executablePath) {
   int returnResult = 1;
+
+  FLTypingControllerTester tester(executablePath);
 
   try {
     tester.setup();
@@ -19,6 +27,22 @@ int main(int argc, const char * argv[]) {
   } catch(...){
     printf("I'm here ERROR!\n");
   }
+
+  return(returnResult);
+}
+
+int main(int argc, const char * argv[]) {
+  int returnResult = 1;
+
+  char executablePath[PATH_MAX];
+  if(realpath(argv[0], executablePath) == 0) { fprintf(stderr, "Unable to resolve path to executable, realpath() failed: %s\n", strerror(errno)); goto exitNow; }
+
+  try {
+    returnResult = runTests(executablePath);
+  } catch(...) {
+    printf("An exception was thrown...\n");
+  }
   
+exitNow:
   return returnResult;
 }

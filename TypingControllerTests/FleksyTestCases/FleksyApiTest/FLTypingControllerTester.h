@@ -9,8 +9,18 @@
 #ifndef FLTYPINGCONTROLLERTESTER
 #define FLTYPINGCONTROLLERTESTER
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/param.h>
+#include <string.h>
+#include <errno.h>
+#include <libgen.h>
+#include <unistd.h>
+
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <stdexcept>
 #include "FLTypingController.h"
 #include "FLTypingControllerTestCase.h"
 #include "FleksyListenerImplC.h"
@@ -21,7 +31,7 @@
 class FLTypingControllerTester{
   
 public:
-  FLTypingControllerTester();
+  FLTypingControllerTester(char *executableResourcesPath);
   ~FLTypingControllerTester();
   void setup();
   void runTests(bool breakOnFail);
@@ -29,6 +39,8 @@ public:
   void doBackSpace();
 private:
   
+  string executableResourcesPathString;
+
   FleksyAPI *api;
   FleksyListenerImplC *fleksyListener;
   FLTypingController *tc;

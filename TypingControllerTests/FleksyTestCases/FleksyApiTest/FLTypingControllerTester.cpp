@@ -11,7 +11,8 @@
 #include "TimeFunctions.h"
 
 
-FLTypingControllerTester::FLTypingControllerTester(){
+FLTypingControllerTester::FLTypingControllerTester(char *executableResourcesPath){
+  executableResourcesPathString = dirname(executableResourcesPath);
   fleksyListener = new FleksyListenerImplC();
   api = new FleksyAPI(*fleksyListener);
   tc = api->pImpl->tc;
@@ -70,11 +71,15 @@ void FLTypingControllerTester::deleteDataFromPreviousTest(FLTypingController &tc
 
 void FLTypingControllerTester::createFLTypingControllerTestCases(){
   
+  char testCasesPath[PATH_MAX];
+  snprintf(testCasesPath, sizeof(testCasesPath), "%s/typingControllerTestCases", executableResourcesPathString.c_str());
+
   ifstream fin;
-  fin.open("typingControllerTestCases");
+  fin.open(testCasesPath);
   if (!fin.good()){
-    printf("FILE NOT FOUND\n");
-    return;
+    char errorMessage[1024 + PATH_MAX];
+    snprintf(errorMessage, sizeof(errorMessage), "Unable to open file: '%s'", testCasesPath);
+    throw std::runtime_error(errorMessage);
   }
   else{
     printf("Test File found\n");
@@ -322,8 +327,13 @@ void FLTypingControllerTester::printTestCases(){
 
 void FLTypingControllerTester::setup(){
   
-  printf("Staring setup...\n");
-  api->setResourceFile("encrypted/resourceArchive-en-US.jet");
+  printf("Starting setup...\n");
+
+  char jetResourcePath[PATH_MAX];
+  snprintf(jetResourcePath, sizeof(jetResourcePath), "%s/encrypted/resourceArchive-en-US.jet", executableResourcesPathString.c_str());
+  printf("Using Jet Resources at: '%s'\n", jetResourcePath);
+
+  api->setResourceFile(jetResourcePath);
   api->loadResources();
   
   createFLTypingControllerTestCases();
