@@ -227,13 +227,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "../../../../../FleksySDK-source\"/**";
+				HEADER_SEARCH_PATHS = "../../osx/include/**";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/compiled\"",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/osx/lib/Release\"",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/osx/lib/Debug\"",
-					"\"$(SRCROOT)/../../osx/lib/Debug\"",
+					../../osx/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -246,13 +243,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
-				HEADER_SEARCH_PATHS = "../../../../../FleksySDK-source\"/**";
+				HEADER_SEARCH_PATHS = "../../osx/include/**";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/compiled\"",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/osx/lib/Release\"",
-					"\"$(SRCROOT)/../AndroidFleksy/submodules/FleksySDK-compiled/osx/lib/Debug\"",
-					"\"$(SRCROOT)/../../osx/lib/Debug\"",
+					../../osx/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
