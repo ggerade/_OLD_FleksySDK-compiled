@@ -43,12 +43,11 @@ private:
   bool active;
   bool hasInMemoryData = false;
   
+  void fileSanityChecks();
+  
   // this returns from table loaded in memory
   void getNextCandidatesNormal(map_probs& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
  
-  // this will read the context file and pull requested data
-
-  void prepareNextCandidatesMemoryless(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
   // fast binary version
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
@@ -61,9 +60,9 @@ public:
   ~FLSingleLevelTokenPredictor();
   
   // checkConsistency: will use both normal and memoryless methods, ensures they are consistent and returns the memoryless results
-  //  void getNextCandidatesList(list_pred& result, word_id previousTokenID, int resultsLimit = 0, probability pThreshold = 0);
-  void getNextCandidatesList(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
-
+  //void getNextCandidatesList(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
+  void prepareNextCandidatesMemoryless(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
+  
   void setActive(bool b);
   bool isActive();
   

@@ -18,7 +18,6 @@ public:
 private:
   unsigned int counter = 0;  // for debug trace
 
-  token_ids previous_tokens;
   // MUTEXES
   // simple print mutex
   pthread_mutex_t print_mutex = PTHREAD_MUTEX_INITIALIZER;

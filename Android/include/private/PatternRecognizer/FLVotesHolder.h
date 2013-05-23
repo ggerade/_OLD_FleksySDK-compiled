@@ -16,7 +16,7 @@
 class FLVotesHolder {
   
 private:
-  float votes[WORD_VOTE_SLOTS][FLEKSY_MAX_WORDS];
+  float votes[WORD_VOTE_SLOTS][FL_MAX_WORD_ID];
 
 public:
   FLVotesHolder();

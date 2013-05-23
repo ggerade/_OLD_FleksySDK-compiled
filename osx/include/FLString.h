@@ -8,6 +8,8 @@
 #ifndef __FleksySDK_FLString_h__
 #define __FleksySDK_FLString_h__
 
+#include <memory>
+
 #define FLEKSY_USE_WIDE_CHARS 0
 
 #include <iostream>
@@ -44,5 +46,7 @@ typedef std::basic_string <FLChar> FLString;
 #endif
 
 #define NSStringToString _NSStringToStringUTF8
+
+typedef std::shared_ptr<FLString> FLStringPtr;
 
 #endif /* defined(__FleksySDK_FLString_h__) */

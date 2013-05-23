@@ -23,7 +23,7 @@
 #include <cassert>
 
 // Fleksy headers
-//#include <PatternRecognizer/Structures.h>
+#include <PatternRecognizer/CoreSettings.h>
 #include <PatternRecognizer/Platform.h>
 #include <PatternRecognizer/FLFile.h>
 
@@ -31,7 +31,6 @@
 
 class triPrediction;
 
-#define MAX_WORD_ID (65000)
 #define MAX_WORD_DEPTH (2)  // was 2 (jfm)
 
 // max count of trace messages reported by functions
@@ -45,102 +44,60 @@ const unsigned int FL_SIGNIFICANT_COUNT = 100; // was 20; // used to determine w
 const unsigned int FL_MAX_CANDIDATES = 9991000;  // maximum number of candidates returned (for unigrams right now)
 const float        FL_UNI_SCALE = 0.1f;  // max range for unigram probability (bit larger than probability of "the")
 const unsigned int FL_READ_REPORT = 20000;  // report read info every FL_READ_REPORT reads (when FL_FLEKSY_TRACE set)
-const int FL_STOP_SIGNAL = -1;   // code to stop threads
 
 using namespace std;
 
 typedef int word_id;
 typedef float probability;
 typedef unordered_map<word_id, probability> map_probs;
-typedef struct short_lut { map_probs data[MAX_WORD_ID]; } short_lut;
+typedef struct short_lut { map_probs data[FL_MAX_WORD_ID]; } short_lut;
 
-class token_ids { 
+#define FL_NO_TOKEN       0
+#define FL_UNKNOWN_TOKEN -1
+#define FL_ANY_TOKEN     -2
+#define FL_STOP_SIGNAL   -3
+
+#define IS_TOKEN_VALID_FOR_SEARCH(_token_id_) ( \
+ _token_id_ != FL_NO_TOKEN && \
+ _token_id_ != FL_UNKNOWN_TOKEN && \
+ _token_id_ != FL_ANY_TOKEN && \
+ _token_id_ != FL_STOP_SIGNAL && \
+ _token_id_ < FL_MAX_WORD_ID \
+)
+
+
+class token_ids {
 public:
   word_id data[MAX_WORD_DEPTH];
-  bool bActive[MAX_WORD_DEPTH];  // flag to indicate the token is active
-  bool operator==(token_ids& rhs)
-  {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      if(data[i] != rhs.data[i])
-        return false;
-
-      if(bActive[i] != rhs.bActive[i])
-        return false;
-    }
-    return true;
-  } // operator==
-
-  bool operator!=(token_ids& rhs)
-  {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      if(data[i] != rhs.data[i])
-        return true;
-
-      if(bActive[i] != rhs.bActive[i])
-        return true;
-    }
-
-    return false;  // they are equal
-
-  }  // operator!=
-
-  token_ids()  // constructor
-  {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      data[i] = 0;
-      bActive[i] = false;
-    }
+  
+  void reset(word_id defaultValue = FL_NO_TOKEN) {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++) { data[i] = defaultValue; }
+  }
+  
+  token_ids(word_id n = FL_NO_TOKEN) {
+    reset(n);
   }
 
-  // assignment operator
-  // The assignment operator is used to copy the values from one object to another already existing object. 
-  // The key words here are “already existing”.
-  // e.g.
-  // token_ids old_tokens1, old_tokens2;
-  // old_tokens2 = old_tokens1;
- 
-  token_ids& operator= (const token_ids &rhs)
-    {
-      if(this == &rhs)
-        return *this;
-
-      for(int i = 0; i < MAX_WORD_DEPTH; i++)
-      {
-        data[i] = rhs.data[i];
-        bActive[i] = rhs.bActive[i];
+  
+  bool isEqualToTokens(const token_ids& t) {
+    for(int i = 0; i < MAX_WORD_DEPTH; i++) { if(data[i] != t.data[i]) return false; }
+    return true;
+  }
+  
+  bool isStopSignal() { return isEqualToTokens(token_ids(FL_STOP_SIGNAL)); }
+  
+  int activeTokens() {
+    int result = 0;
+    // Note: we are searching backwards, and will return as soon as we hit the first non-valid/non-active token
+    for (int i = 0; i < MAX_WORD_DEPTH; i++) {
+      if (data[i] == FL_NO_TOKEN || data[i] == FL_STOP_SIGNAL) {
+        return result;
+      } else {
+        result++;
       }
-
-      return *this;
     }
-
-  bool operator== (int n)  // for stop signal
-  {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      if (data[i] != n)
-        return false;
-    }
-
-    return true;
+    return result;
   }
-
-  // copy constructor
-  // A copy constructor is a special constructor that initializes a new object from an existing object.
-  // e.g. token_ids new_tokens = old_tokens;
-
-  token_ids(const token_ids& rhs)
-  {
-    // check for self-assignment
-
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      data[i] = rhs.data[i];
-      bActive[i] = rhs.bActive[i];
-    }
-  }  // copy constructor
 
   // print method
   void print()
@@ -149,35 +106,11 @@ public:
     //
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
     {
-      LOGI("tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+      LOGI("tokens_id.data[%d] %d\n", i, data[i]);
     }
     fflush(stdout);
   }  // print
 
-  // special constructor
-  token_ids(int n)
-  {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      data[i] = n;
-      bActive[i] = true;
-    }
-  }  // create token_ids with non-default values
-
-  void shift(word_id wid, bool bActiveNew = true)
-  {
-    int i = 0;
-
-    for(i = (MAX_WORD_DEPTH-1); i > 0; i--)
-    {
-      data[i] = data[i-1];
-      //
-      bActive[i] = bActive[i-1];
-    }
-
-    data[0] = wid;
-    bActive[0] = bActiveNew;
-  }
 
   char * c_str()
   {
@@ -186,7 +119,7 @@ public:
 
     for(int i = 0; i < MAX_WORD_DEPTH; i++)
     {
-      snprintf(szBuf, sizeof(szBuf), "tokens_id.data[%d] %d  tokens_id.bActive[%d] %d\n", i, data[i], i, bActive[i] );
+      snprintf(szBuf, sizeof(szBuf), "tokens_id.data[%d] %d\n", i, data[i]);
       strncat(result, szBuf, MAX_WORD_DEPTH*80);
     }    
 
@@ -194,6 +127,9 @@ public:
   } // c_str()
 
 };  // class token_ids
+
+static token_ids STOP_SIGNAL = token_ids(FL_STOP_SIGNAL);
+
 
 // fast binary file header
 static constexpr int FleksyCode = ( 42 | (42 << 8) | (42 << 16) | (42 << 24) );  // start code for Fleksy Fast Binary File
@@ -219,16 +155,6 @@ enum pred_type { bigram = 0,
                  unknown
 };
 
-/*
-static bool tokensAreEqual(token_ids& tokens1, token_ids& tokens2) {
-  for (int i = 0; i < MAX_WORD_DEPTH; i++) {
-    if (tokens1.data[i] != tokens2.data[i]) {
-      return false;
-    }
-  }
-  return true;
-}
-*/
 
 typedef list<FLString> list_string;
 
@@ -295,6 +221,8 @@ public:
   static void read_uni_bin_old(FLFilePtr &unigram_fl_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
+  
+  static size_t addPredictions(list_pred& result, FLFilePtr file, int count = 0);
 
   static bool IsNumber(char * str) {
     char * ptr = str;
@@ -316,7 +244,16 @@ public:
   FLString word;
   probability weight;
   // constructors
-  Prediction(word_id shortWordID, probability p) { assert(p); wordID = shortWordID, weight = p; };
+  Prediction(word_id shortWordID, probability p, bool occurences = false) {
+    assert(p > 0);
+    if (occurences) {
+      assert(p >= 1);
+    } else {
+      assert(p <= 1);
+    }
+    wordID = shortWordID;
+    weight = p;
+  };
   // destructors
   ~Prediction() { };
   bool operator<(Prediction& pred) const { return (this->weight < pred.weight); };

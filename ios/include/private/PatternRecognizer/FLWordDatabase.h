@@ -14,19 +14,24 @@
 #include "FLVotesHolder.h"
 #include "FLInternalSuggestionsContainer.h"
 #include "FLWord.h"
+#include "FLString.h"
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <string.h>
 
 using namespace std;
 
 #define MIN_BASE_LENGTH 50
+
+typedef uint16_t FLTokenID;
 
 class FLWordDatabase {
 private:
   
   bool FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA;
   
-  FLWord* wordsByID[FLEKSY_MAX_WORDS];
+  FLWord* wordsByID[FL_MAX_WORD_ID];
   FLBlackBox* blackboxesByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index
   BBValue maxWordID;
   FLVotesHolder* votesHolder;
@@ -68,6 +73,22 @@ private:
   
   static void printVoteParams(VoteParameters params);
 
+  struct FLStringPtrHash {
+    std::size_t operator()(const FLStringPtr& k) const {
+      const unsigned char *ptr = k->c_str();
+      std::size_t hash = 1402737925UL;
+      while((*ptr) != 0) { hash = ((((hash << 5) + hash) + ((*ptr) - 29)) ^ (hash >> 19)); ptr++; }
+      return(hash);
+    }
+  };
+
+  struct FLStringPtrEqual {
+    bool operator()(const FLStringPtr& lhs, const FLStringPtr& rhs) const { return((strcmp((const char *)lhs->c_str(), (const char *)rhs->c_str()) == 0) ? true : false); }
+  };
+
+  std::unordered_map<FLTokenID, FLStringPtr> tokenIDToStringMap;
+  std::unordered_map<FLStringPtr, FLTokenID, FLStringPtrHash, FLStringPtrEqual> stringToTokenIDMap;
+
 public:
   FLWordDatabase();
   ~FLWordDatabase();
@@ -92,6 +113,10 @@ public:
   void clearValues();
   
   FLWord* getWordByID(int wordID);
+
+  bool getTokenIDForFLString(FLStringPtr &string, FLTokenID *tokenIDRef);
+  bool getFLStringForTokenID(FLTokenID tokenID, FLStringPtr &string);
+  void addWordToTokenDatabase(const FLString &wordString, BBValue uniqueID);
 
   //
   FLWord* getWordFromDictionary(const FLString& key);

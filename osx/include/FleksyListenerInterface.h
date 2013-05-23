@@ -96,6 +96,7 @@ public:
   
   virtual void onButtonUp(FLChar character){};
   
+  virtual ~FleksyListenerInterface(){};
 };
 
 #endif /* defined(__FleksySDK_FleksyListenerInterface_h__) */

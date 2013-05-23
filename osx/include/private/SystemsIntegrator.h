@@ -20,10 +20,8 @@ using namespace std;
 class SystemsIntegrator {
   
 private:
-  FleksyUtilities* utils;
   
-  FLTokenPredictor* ftp;
-
+  word_id getTokenID(FLString* token);
   token_ids convertToTokenIDs(FLString* token2, FLString* token1);
   float distanceBetweenLetters(FLChar c1, FLChar c2, FLKeyboardID keyboardID);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
@@ -32,8 +30,11 @@ private:
   
 public:
   SystemsIntegrator();
-  ~SystemsIntegrator(); 
-  
+  ~SystemsIntegrator();
+
+  FleksyUtilities* utils;
+  FLTokenPredictor* ftp;
+
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);
   

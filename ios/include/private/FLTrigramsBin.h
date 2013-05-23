@@ -6,10 +6,6 @@
 #include "FLContextCommon.h"
 #include <PatternRecognizer/FLFile.h>
 
-// !!! NO HARDCODED PATHS HERE, DEFINE THOSE IN APPLICATION (eg ContextTester) !!!
-#define FL_TRIGRAM_BIN_FILE "binary_files/file3"  // write directly to file3
-//#define FL_TRIGRAM_BIN_FILE "binary_files/put.trigram.binary.file.here"
-
 typedef unsigned int BYTE_OFFSET;
 
 class FLTrigramsBin
@@ -18,12 +14,6 @@ class FLTrigramsBin
   FLTrigramsBin(FLFilePtr &); // constructor
   ~FLTrigramsBin();
   static int nVerbosity;
-
-  void getNextCandidatesList(FLFilePtr &tri_file,
-                                    list_pred& result, 
-                                    token_ids previousTokenIDs, 
-                                    int resultsLimit, 
-                                    probability pThreshold);
 
   void getNextCandidatesList(list_pred& result, 
                                     token_ids previousTokenIDs, 
