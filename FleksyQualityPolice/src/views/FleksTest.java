@@ -107,7 +107,7 @@ public class FleksTest {
 				}
 				else if(a.contains(SPLW)){
 					float weight = Float.parseFloat(myArgs[i + 1]);
-					System.out.println("setSettingPlatformLayerWeight(" + myArgs[i + 1] + ")");
+					System.out.println("setSettingPlatformLayerWeight(" + weight + ")");
 					privateAPI.setSettingPlatformLayerWeight(weight);
 				}
 			}
