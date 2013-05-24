@@ -347,7 +347,7 @@ void FLTypingControllerTester::doBackSpace(){
   api->backspace();
 }
 
-void FLTypingControllerTester::runTests(bool breakOnFail){
+bool FLTypingControllerTester::runTests(bool breakOnFail){
   printf("Starting Tests\n");
   
 //  api->startTypingSession(true);
@@ -413,7 +413,7 @@ void FLTypingControllerTester::runTests(bool breakOnFail){
       if(breakOnFail && !testCases[i]->testInfo->passed){
         printf("\nTest %s FAILED!\n", testCases[i]->testInfo->testName.c_str());
         testCases[i]->testInfo->printTestInfo();
-        return;
+        return(false);
       }
   }
   
@@ -437,5 +437,7 @@ void FLTypingControllerTester::runTests(bool breakOnFail){
   float percentPass = ((float)numPassed / (float)totalTests) * 100;
   float percentFail = ((float)numFailed / (float)totalTests) * 100;
   printf("Number of tests run: %i, Passed: %i(%.2f%%), Failed: %i(%.2f%%)\n", totalTests, numPassed, percentPass,  numFailed,  percentFail);
+
+  return(((totalTests > 0) && (numFailed == 0)) ? true : false);
 }
 

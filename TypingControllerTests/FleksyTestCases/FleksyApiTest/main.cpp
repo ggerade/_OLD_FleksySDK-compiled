@@ -18,8 +18,8 @@ int runTests(char *executablePath) {
 
   try {
     tester.setup();
-    tester.runTests(false);
-    returnResult = 0;
+    bool testsPassed = tester.runTests(false);
+    returnResult = testsPassed ? 0 : 1;
   } catch (std::runtime_error er) {
     printf("Error while running tests: %s\n", er.what());
   } catch (std::exception ex) {

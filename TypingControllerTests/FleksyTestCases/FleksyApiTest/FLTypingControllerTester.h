@@ -34,7 +34,7 @@ public:
   FLTypingControllerTester(char *executableResourcesPath);
   ~FLTypingControllerTester();
   void setup();
-  void runTests(bool breakOnFail);
+  bool runTests(bool breakOnFail);
   void deleteTestInfos();
   void doBackSpace();
 private:
