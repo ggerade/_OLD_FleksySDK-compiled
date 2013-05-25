@@ -93,8 +93,8 @@ public:
   
   
   //New experimental stuff
-  
   virtual void onButtonUp(FLChar character){};
+  virtual void onButtonDown(FLChar character){};
   
   virtual ~FleksyListenerInterface(){};
 };

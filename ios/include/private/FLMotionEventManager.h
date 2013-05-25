@@ -22,12 +22,13 @@ public:
   FLMotionEventManager(FleksyListenerInterface &listener, SystemsIntegrator *sysIntegrator);
   
   void onTouchDown(float x, float y, int ID, long long time);
-  void onMove(float x, float y, int ID, long time);
-  void onTouchUp(float x, float y, int ID, long time);
+  void onMove(float x, float y, int ID, long long time);
+  void onTouchUp(float x, float y, int ID, long long time);
   
 private:
   FleksyListenerInterface &listener;
   SystemsIntegrator *sysIntegrator;
+  FLChar currButtonUp;
   
 };
 
