@@ -78,8 +78,8 @@ public:
 
 public:
   // n-gram combination members (jfm)
-  //unordered_map<word_id, probability> unigram_map;  // Kostas workaround
-  unordered_map<word_id, double> unigram_map;         // old way
+  unordered_map<word_id, probability> unigram_map;  // Kostas workaround
+  //unordered_map<word_id, double> unigram_map;         // old way
   list_pred unigram_candidates;  
 };
 
