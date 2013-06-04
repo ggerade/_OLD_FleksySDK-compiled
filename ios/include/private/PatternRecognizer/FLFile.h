@@ -66,7 +66,7 @@ public:
   FLFile(FLFilePtr &_parent);
 
   
-  void read(char* outBuffer, size_t length);
+  void read(void* outBuffer, size_t length);
   
   // offset is relative from begining of file
   void seek(off_t offset);

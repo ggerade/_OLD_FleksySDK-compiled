@@ -49,11 +49,11 @@ public:
   void setPlatformSuggestions(FLString prossedRequestID, FLString processedResults);
   void setCapitalizationMode(FLCapitalizationMode mode);
   void setVoiceFeedback(bool isOn);
-  void setIsTracking(bool isTracking);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
   void setDeleteMode(FLDeleteMode mode);
+  FLTrackEvents *getTracker();
   
   //Here for testing
   void sendCharacter(char c);//Testing sends character and this function coverts it into points and calls sendPoint()

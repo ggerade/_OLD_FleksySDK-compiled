@@ -16,11 +16,13 @@
 
 // standard C++ headers
 #include <iostream>
-//#include <map>
+#include <sstream>
+#include <map>
 #include <unordered_map>
 #include <list>
 // ANSI C Headers for C++
 #include <cassert>
+#include <stdexcept>
 
 // Fleksy headers
 #include <PatternRecognizer/CoreSettings.h>
@@ -28,8 +30,7 @@
 #include <PatternRecognizer/FLFile.h>
 
 #include "TimeFunctions.h"
-
-class triPrediction;
+#include "GolombCoder.h"
 
 #define MAX_WORD_DEPTH (2)  // was 2 (jfm)
 
@@ -57,6 +58,12 @@ typedef struct short_lut { map_probs data[FL_MAX_WORD_ID]; } short_lut;
 #define FL_ANY_TOKEN     -2
 #define FL_STOP_SIGNAL   -3
 
+
+#define CURVE_PACKED  1 << 0
+#define GOLOMB_PACKED 1 << 1
+#define OTHER_PACKED  1 << 2
+
+
 #define IS_TOKEN_VALID_FOR_SEARCH(_token_id_) ( \
  _token_id_ != FL_NO_TOKEN && \
  _token_id_ != FL_UNKNOWN_TOKEN && \
@@ -70,14 +77,9 @@ class token_ids {
 public:
   word_id data[MAX_WORD_DEPTH];
   
-  void reset(word_id defaultValue = FL_NO_TOKEN) {
-    for(int i = 0; i < MAX_WORD_DEPTH; i++) { data[i] = defaultValue; }
-  }
+  void reset(word_id defaultValue = FL_NO_TOKEN) { for(int i = 0; i < MAX_WORD_DEPTH; i++) { data[i] = defaultValue; } }
   
-  token_ids(word_id n = FL_NO_TOKEN) {
-    reset(n);
-  }
-
+  token_ids(word_id n = FL_NO_TOKEN) { reset(n); }
   
   bool isEqualToTokens(const token_ids& t) {
     for(int i = 0; i < MAX_WORD_DEPTH; i++) { if(data[i] != t.data[i]) return false; }
@@ -89,44 +91,23 @@ public:
   int activeTokens() {
     int result = 0;
     // Note: we are searching backwards, and will return as soon as we hit the first non-valid/non-active token
-    for (int i = 0; i < MAX_WORD_DEPTH; i++) {
-      if (data[i] == FL_NO_TOKEN || data[i] == FL_STOP_SIGNAL) {
-        return result;
-      } else {
-        result++;
-      }
+    for(int i = 0; i < MAX_WORD_DEPTH; i++) {
+      if((data[i] == FL_NO_TOKEN) || (data[i] == FL_STOP_SIGNAL)) { return result; }
+      else { result++; }
     }
     return result;
   }
 
-  // print method
-  void print()
-  {
-    // problem with thread safety in cout
-    //
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      LOGI("tokens_id.data[%d] %d\n", i, data[i]);
-    }
-    fflush(stdout);
-  }  // print
+  void print() { for(int i = 0; i < MAX_WORD_DEPTH; i++) { LOGI("tokens_id.data[%d] %d\n", i, data[i]); } }
 
-
-  char * c_str()
-  {
-    char szBuf[80];
-    char * result = new char[MAX_WORD_DEPTH*80];
-
-    for(int i = 0; i < MAX_WORD_DEPTH; i++)
-    {
-      snprintf(szBuf, sizeof(szBuf), "tokens_id.data[%d] %d\n", i, data[i]);
-      strncat(result, szBuf, MAX_WORD_DEPTH*80);
-    }    
-
-    return result;
-  } // c_str()
-
-};  // class token_ids
+  const char * c_str() {
+    char tmpBuffer[MAX_WORD_DEPTH * 80];
+    size_t atTmpBuffer = 0;
+    for(int i = 0; i < MAX_WORD_DEPTH; i++) { atTmpBuffer += snprintf(tmpBuffer + atTmpBuffer, sizeof(tmpBuffer) - atTmpBuffer, "tokens_id.data[%d] %d\n", i, data[i]); }
+    string result = string(tmpBuffer);
+    return result.c_str();
+  }
+};
 
 static token_ids STOP_SIGNAL = token_ids(FL_STOP_SIGNAL);
 
@@ -180,6 +161,25 @@ public:
   static probability minProbLog;
   static probability maxProbLog;
   
+  static void writeFloat(float f, ofstream& myfile);
+  static float readFloat(FLFilePtr &file);
+
+  static size_t writeGolombEncodedData(const GolombEncodingResult& data, unsigned char **buffer, unsigned char *bufferEnd);
+  static void readGolombEncodedData(GolombEncodingResult& result, FLFilePtr &file);
+
+  static void writeFloat(float f, unsigned char **buffer, unsigned char *bufferEnd);
+  static void writeProbability(probability p, unsigned char **buffer, unsigned char *bufferEnd);
+  static void writeWordID(word_id tokenID, unsigned char **buffer, unsigned char *bufferEnd);
+  static void writeResultList(list_pred &pPreds, bool writeProbabilities, unsigned char **buffer, unsigned char *bufferEnd);
+  static size_t writePredictionsToBuffer(list_pred &pPreds, unsigned char *predictionsBuffer, unsigned char *predictionsBufferEnd, bool useCurvePacking, bool useGolombPacking, map<word_id, word_id>& idMap);
+  static size_t maxSizeForPredictionList(list_pred &pPreds);
+
+  // accumulate tokenID counts on a map
+  static void addToTokenIDUsageMap(list_pred& preds, map<word_id, int>& results);
+  // convert IDs so that ID1 is the most frequenct one and all IDs go in occurence descending order
+  static map<word_id, word_id> convertToOptimalUsageMap(map<word_id, int> wordIDCounts);
+
+
   static void writeWordID(word_id tokenID, ofstream& myfile);
   static void writeProbability(probability p, ofstream& myfile);
   static void writeUnigramProbability(probability p, ofstream& myfile);
@@ -215,20 +215,15 @@ public:
   //ONLY USE ONE OF THESE TWO. read_temp_unigrams is temporary until unigram binary file is fixed
   static void read_temp_unigrams(unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
   static void read_uni_bin(FLFilePtr &unigram_fl_file, unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
-
-  // older read_uni_bin used by FLContextTester (JOHNM)
-  //
-  static void read_uni_bin_old(FLFilePtr &unigram_fl_file, unordered_map<word_id, double> &unigram_map, list_pred& unigram_candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
   
-  static size_t addPredictions(list_pred& result, FLFilePtr file, int count = 0);
+  static size_t addPredictions(list_pred& result, FLFilePtr file, bool curvePacked, bool golombPacked, int count = 0);
 
   static bool IsNumber(char * str) {
-    char * ptr = str;
+    char *ptr = str;
     while(*ptr) {
-      if( !isdigit(*ptr) )
-        return false;
+      if(!isdigit(*ptr)) { return false; }
       ptr++;
     }
     return true;
@@ -236,6 +231,9 @@ public:
 friend class FLContextProducer;
 
 };  // class FleksyContextCommon
+
+
+
 
 class Prediction
 {
@@ -245,12 +243,8 @@ public:
   probability weight;
   // constructors
   Prediction(word_id shortWordID, probability p, bool occurences = false) {
-    assert(p > 0);
-    if (occurences) {
-      assert(p >= 1);
-    } else {
-      assert(p <= 1);
-    }
+    if(p <= 0.0f) { throw std::invalid_argument("p <= 0.0"); }
+    if(occurences) { if(p < 1.0f) { throwInvalidArgument("p occurence < 1.0", p); } } else { if(p > 1.0f) { throwInvalidArgument("p occurence > 1.0", p); } }
     wordID = shortWordID;
     weight = p;
   };
@@ -259,28 +253,25 @@ public:
   bool operator<(Prediction& pred) const { return (this->weight < pred.weight); };
   bool operator>(Prediction& pred) const { return (this->weight > pred.weight); };
   
-  char * c_str() { 
-    char * ptr = new char[128];
-    snprintf(ptr, 128, "(%s, %f)", word.c_str(), weight);
-    return ptr;
+  const char * c_str() {
+    char tmpBuffer[128];
+    snprintf(tmpBuffer, sizeof(tmpBuffer), "(%s, %f)", word.c_str(), weight);
+    string result = string(tmpBuffer);
+    return result.c_str();
   }
-  friend ostream& operator<<(ostream& out, Prediction& pred) { 
-    out << "(" << pred.wordID << ", " << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
+
+  friend ostream& operator<<(ostream& out, Prediction& pred) { out << "(" << pred.wordID << ", " << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
     
   // want to find predictions by word
   bool operator==(const Prediction& pred) { return (this->word == pred.word); };  // const Prediction& is critical (error otherwise)
   bool operator!=(const Prediction& pred) { return (this->word != pred.word); };  // const Prediction& is critical (error otherwise)
 
-  bool operator==(const triPrediction& pred); //  { return ( string( (char *) this->word.c_str() ) == pred.word); };  // const Prediction& is critical (error otherwise)
-  bool operator!=(const triPrediction& pred); //  { return ( string( (char *) this->word.c_str() ) != pred.word); };  // const Prediction& is critical (error otherwise)
-
+  static void throwInvalidArgument(const char* message, probability value) { ostringstream msg(message); msg << " (" << value << ")"; throw std::invalid_argument(msg.str()); }
 };
     
 // function declarations
 void display_pred_table(Predictions& pred_table);
 Predictions* read_pred_table(string& fname);
-
-string where_am_i();  // string& can cause problems -- return by value
 
 class FLSmartTokenizer
 {

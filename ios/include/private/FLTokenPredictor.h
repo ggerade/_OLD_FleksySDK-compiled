@@ -10,6 +10,7 @@
 #define __FleksyX__FLTokenPredictor__
 // C++ headers
 #include <iostream>
+#include <stdexcept>
 // Fleksy headers
 #include "FLSingleLevelTokenPredictorAsync.h"
 
@@ -34,10 +35,7 @@ protected:
 public:
   
   // CONSTRUCTORS
-  FLTokenPredictor(FLFilePtr &unigram_fl_file,
-                   FLFilePtr &bigram_fl_file,
-                   FLFilePtr &trigram_fl_file,
-                   bool alsoLoadInMemory); 
+  FLTokenPredictor(FLFilePtr &unigram_fl_file, FLFilePtr &bigram_fl_file, FLFilePtr &trigram_fl_file, bool alsoLoadInMemory);
     
     // DESTRUCTOR
   ~FLTokenPredictor();

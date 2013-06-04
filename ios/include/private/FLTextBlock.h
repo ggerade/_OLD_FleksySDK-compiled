@@ -16,7 +16,6 @@ public:
 	void setResponse(FLSuggestionsContainer resp);
   FLSuggestionsContainer getResponse();
   void setCorrectedText(FLString text);
-  //FLString getCorrectedText();
   void setTextEntered(FLString text);
   FLString getTextEntered();
   void setLength(int length);
@@ -35,6 +34,7 @@ public:
 	FLRequestDataHolder getRequest();
   FLString getText();
   int getSuggestionIndex();
+  void setSuggestionIndex(int suggIndex);
 	bool getIsExactEntry();
   bool isCorrected();
   

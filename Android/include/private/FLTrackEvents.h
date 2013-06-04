@@ -32,6 +32,7 @@ public:
   
   //Other
   void setIsTracking(bool isTracking);
+  void setCurrentKeyboardLayout(std::string currentKeyboardLayout);
   
 private:
   FleksyListenerInterface &listener;
@@ -41,6 +42,7 @@ private:
   std::map<std::string, int> events;
   long lastEventTime;
   std::string lastEvent;
+  std::string currentKeyboardLayout;
   
   
   void sendEvent(FLString event);

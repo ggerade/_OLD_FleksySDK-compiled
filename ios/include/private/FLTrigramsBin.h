@@ -11,14 +11,11 @@ typedef unsigned int BYTE_OFFSET;
 class FLTrigramsBin
 {
  public:
-  FLTrigramsBin(FLFilePtr &); // constructor
+  FLTrigramsBin(FLFilePtr &trigramsBinFile); // constructor
   ~FLTrigramsBin();
-  static int nVerbosity;
+  int nVerbosity;
 
-  void getNextCandidatesList(list_pred& result, 
-                                    token_ids previousTokenIDs, 
-                                    int resultsLimit, 
-                                    probability pThreshold);
+  void getNextCandidatesList(list_pred &result, token_ids previousTokenIDs, int resultsLimit, probability pThreshold);
 
   // binary file read/write functions
   static unsigned int hash_trigram(word_id wid1, word_id wid2);
@@ -30,9 +27,17 @@ class FLTrigramsBin
  private:
   // offsets/sizes for header of binary file
   //
-  unsigned int hdr_offset;  // header offset in bytes (size of binary file header)
-  unsigned int col_table_size;  // size of the collision table (read from header)
+  unsigned int hdr_offset = 0;  // header offset in bytes (size of binary file header)
+  unsigned int col_table_size = 0;  // size of the collision table (read from header)
 
+  int _fileVersion = 0;
+  size_t _hashTableSlots = 0;
+  const uint32_t *_hashTable = NULL;
+  const unsigned char *_predictions = NULL;
+  const unsigned char *_fileContents = NULL;
+
+  void getNextCandidatesList100(list_pred &result, token_ids previousTokenIDs, int resultsLimit, probability pThreshold);
+  void getNextCandidatesList200(list_pred &result, token_ids previousTokenIDs, int resultsLimit, probability pThreshold);
 };  // FLTrigramsBin
 
 // hash functions for trigrams

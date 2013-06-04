@@ -23,7 +23,6 @@
 #include "FLTrigramsBin.h"
 
 class FLSingleLevelTokenPredictor {
-
   string _filename;
   string _filehash;
   
@@ -37,12 +36,18 @@ class FLSingleLevelTokenPredictor {
 
 private:
 
-  FLTrigramsBin * fl_trigrams_bin;
+  FLTrigramsBin * fl_trigrams_bin = NULL;
   static int nPredictors;
   FastBinaryFileHeader hdr;  // version of binary file (>= 100 for fast binary files with an index)
   bool active;
   bool hasInMemoryData = false;
   
+  int _bigramFileVersion = 0;
+  size_t _bigramCount = 0;
+  const uint32_t *_bigramOffsets = NULL;
+  const unsigned char *_bigramPredictions = NULL;
+  const unsigned char *_bigramFileContents = NULL;
+
   void fileSanityChecks();
   
   // this returns from table loaded in memory
@@ -50,6 +55,9 @@ private:
  
   // fast binary version
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
+  void getNextCandidatesFast100(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
+  void getNextCandidatesFast200(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
+
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
   void read_uni_bin(FLFilePtr &uni_fl_file);  // FLFile version
   void init(FLFilePtr &uni_file, FLFilePtr &infile, FLFilePtr &tri_file, bool alsoLoadInMemory);  // used by different signature constructors
