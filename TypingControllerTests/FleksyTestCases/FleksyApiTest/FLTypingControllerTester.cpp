@@ -64,7 +64,7 @@ void FLTypingControllerTester::deleteDataFromPreviousTest(FLTypingController &tc
   while(tc.getTextFromTextBlocks().length() > 0){
     tc.swipeLeft();
   }
-  tc.setActiveKeyboard(FLKeyboardID_QWERTY_UPPER);
+  tc.setActiveKeyboard(FLKeyboardID_QWERTY_UPPER, true);
   tc.setCapitalizationMode(FLCapitalizationMode_CAP_SENTENCES);
   LOGI("--FINISHED DELETING OLD DATA");
 }
