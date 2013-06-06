@@ -208,7 +208,7 @@ public class Converter {
 			if(key.symbol){
 				FleksyEngine.recreateSwipe("#T");
 				FleksyEngine.recreateSwipe("#S");
-				FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_SYMBOLS.ordinal());
+				FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_SYMBOLS.ordinal(), false);
 				Touch tap = new Touch(indx, key.x, key.y, time);
 				TestEngine.action = "Sending Tap " + tap.getDownX() + "," + tap.getDownY();
 				FleksyEngine.api.sendTap(tap.getDownX(), tap.getDownY(), tap.getTime());
@@ -226,7 +226,7 @@ public class Converter {
 				FleksyEngine.recreateTapEvent(tap.printPoints());
 				output.add(tap);
 			}
-			FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal());
+			FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal(), false);
 		}
 		
 		output = settingSuggestions(output, time, indx, false); //SWIPE RIGHT
