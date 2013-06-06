@@ -993,11 +993,11 @@ EUL (0,3)
 KB2
 >'
 EUL (0,4)
-ET "Don'"
+//ET "Don'"
 KB1
 >t
 EUL (0,5)
-ET "Don't"
+//ET "Don't"
 SR
 ET "Don't "
 EUL (0,5)
@@ -1025,16 +1025,16 @@ EUL (0,3)
 KB2
 >''''''
 EUL (0,9)
-ET "Don''''''"
+//ET "Don''''''"
 KB1
 >t
-EUL (0,10)
-ET "Don''''''t"
+//EUL (0,10)
+//ET "Don''''''t"
 SR(1)
 ET "Don't "
 EUL (0,5)
 SU(0)
-ET "Don''''''t "
+//ET "Don''''''t "
 EUL (0,10)
 EOT
 

@@ -165,7 +165,7 @@ public:
   static float readFloat(FLFilePtr &file);
 
   static size_t writeGolombEncodedData(const GolombEncodingResult& data, unsigned char **buffer, unsigned char *bufferEnd);
-  static void readGolombEncodedData(GolombEncodingResult& result, FLFilePtr &file);
+  static void readGolombEncodedData(FLFilePtr &file, IntVector& result);
 
   static void writeFloat(float f, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeProbability(probability p, unsigned char **buffer, unsigned char *bufferEnd);
@@ -215,6 +215,7 @@ public:
   //ONLY USE ONE OF THESE TWO. read_temp_unigrams is temporary until unigram binary file is fixed
   static void read_temp_unigrams(unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
   static void read_uni_bin(FLFilePtr &unigram_fl_file, unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
+  static bool read_unigrams_200(FLFilePtr &unigramFile, unordered_map<word_id, probability> &map, list_pred &candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
   

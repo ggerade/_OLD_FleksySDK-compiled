@@ -39,7 +39,7 @@ public:
 	void swipeDown();
   void enterSwipe();
   void shiftPressed(string who);
-  void setActiveKeyboard(FLKeyboardID id);
+  void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
   FLKeyboardID getActiveKeyboardID();
   void setCorrectionMode(FLCorrectionMode mode);
   void cursorSelectionChanged(int selectionStart, int selectionEnd);

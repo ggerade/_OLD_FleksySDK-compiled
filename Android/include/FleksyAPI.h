@@ -119,8 +119,9 @@ public:
   
   /*
    * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
+   * *NEW* buttonPress if switch was caused by hitting a button to switch the keyboard
    */
-  void setActiveKeyboard(FLKeyboardID keyboardID);
+  void setActiveKeyboard(FLKeyboardID keyboardID, bool buttonPress = false);
   
   /*
    * Returns active keyboard.
