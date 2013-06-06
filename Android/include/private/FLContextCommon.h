@@ -170,9 +170,9 @@ public:
   static void writeFloat(float f, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeProbability(probability p, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeWordID(word_id tokenID, unsigned char **buffer, unsigned char *bufferEnd);
-  static void writeResultList(list_pred &pPreds, bool writeProbabilities, unsigned char **buffer, unsigned char *bufferEnd);
-  static size_t writePredictionsToBuffer(list_pred &pPreds, unsigned char *predictionsBuffer, unsigned char *predictionsBufferEnd, bool useCurvePacking, bool useGolombPacking, map<word_id, word_id>& idMap);
-  static size_t maxSizeForPredictionList(list_pred &pPreds);
+  static void writeResultList(const list_pred &pPreds, bool writeIDs, bool writeProbabilities, unsigned char **buffer, unsigned char *bufferEnd);
+  static size_t writePredictionsToBuffer(const list_pred &pPreds, unsigned char *predictionsBuffer, unsigned char *predictionsBufferEnd, bool useCurvePacking, bool useGolombPacking, uint8_t& flagUsed, map<word_id, word_id>& idMap);
+  static size_t maxSizeForPredictionList(const list_pred &pPreds);
 
   // accumulate tokenID counts on a map
   static void addToTokenIDUsageMap(list_pred& preds, map<word_id, int>& results);

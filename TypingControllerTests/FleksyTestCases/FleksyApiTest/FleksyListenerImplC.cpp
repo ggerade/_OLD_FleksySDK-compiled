@@ -18,7 +18,7 @@ void FleksyListenerImplC::onSetComposingText(const FLString text){
   printf("Inserting at [%i, %i]\n", composingStart, composingEnd);
   state.text.insert(composingStart, text);
   
-  composingStart = composingEnd;
+  //composingStart = composingEnd;
   
   printf("SCREEN:<%s> \n", state.text.c_str());
 }
@@ -39,8 +39,8 @@ void FleksyListenerImplC::onSetComposingRegion(int start, int end){
 
 void FleksyListenerImplC::onChangeSelection(int selectionStart, int selectionEnd){
   printf("onChangeSelection: start: %i, end: %i\n", selectionStart, selectionEnd);
-  composingStart = selectionStart;
-  composingEnd = selectionEnd;
+  //composingStart = selectionStart;
+  //composingEnd = selectionEnd;
   state.selectionEnd = selectionEnd;
   state.selectionStart = selectionStart;
 }

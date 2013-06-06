@@ -2217,9 +2217,9 @@ KB2
 >1
 KB1
 ET "Hello 1"
-EUL (6,7)
+EUL (7,7)
 SR
-EUL (6,7)
+EUL (8,8)
 ET "Hello 1 "
 TBC (2,0)
 EOT
@@ -2496,4 +2496,123 @@ SEL (0,6)
 SR
 ET "California "
 EOT
+
+Test107
+>hekko
+SR
+MC -1
+TBC (0,5)
+KB2
+ET "Hello "
+>1
+//[Hello]-[1]-[|]+
+TBC (2,0)
+ET "Hello1 "
+SU
+ET "Hekko1 "
+EUL (0,5)
+EOT
+
+Test108
+KB2
+>123
+SR
+ET "123 "
+EUL (4,4)
+KB1
+>hello
+SR
+SL
+EUL (4,4)
+SL
+EUL (3,3)
+EOT
+
+Test109
+KB2
+>123
+SR
+BF
+EUL (3,3)
+BF
+EUL (2,2)
+EOT
+
+Test110
+KB2
+>123
+SR
+SL
+BF
+KB1
+>hello
+SR
+ET "12hello "
+EUL (2,7)
+EOT
+
+Test111
+>hekko
+KB2
+>1
+SU
+ET "Hekko1"
+EUL (0,5)
+MC 2
+SD
+ET "Hello1"
+SR
+ET "Hello 1"
+TBC (1,0)
+EOT
+
+Test112
+KB2
+>123
+MC 2
+EUL (2,2)
+EOT
+
+Test113
+KB2
+>123
+MC 2
+KB1
+>he
+SL
+SL
+EUL (2,2)
+EOT
+
+Test114
+KB2
+>123
+MC 2
+KB1
+>he
+BF
+BF
+EUL (2,2)
+EOT
+
+Test115
+KB2
+>123
+MC 2
+KB1
+>hello
+SR
+MC 2
+EUL (2,2)
+EOT
+
+Test116
+KB2
+>123
+SR
+MC -1
+MC +1
+EUL (4,4)
+EOT
+
 

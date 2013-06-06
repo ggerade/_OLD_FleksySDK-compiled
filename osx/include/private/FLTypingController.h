@@ -67,7 +67,7 @@ public:
   void setUserCursor(int userCursor, string caller);
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
-  void previousWordChanged(string from);
+  void previousWordChanged(string from, int textBlockInex = -1);
   void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1);
   //EOF crazyChecker functions
 
@@ -121,8 +121,8 @@ private:
   int deleteAnySelectedText(FLExternalEditorState &state);
   
   //TextBlock correction operations
-  FLString* getTwoPreviousTokens();
-  void getSuggestionsForTextBlock(FLTextBlock *tb);
+  FLString* getTwoPreviousTokens(int textBlockIndex);
+  void getSuggestionsForTextBlock(FLTextBlock *tb, int textBlockIndex = -1);
   void handleVerticalSwipe(bool isUp);
   void correctTextBlockOnSwipeRight(FLTextBlock *tb);
   void correctTextBlockOnVerticalSwipe();
