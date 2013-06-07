@@ -58,7 +58,7 @@ public:
   float getDistanceBetweenLetters(FLChar c1, FLChar c2);
 
   FLString lettersFromPoints(FLPoint* points, short nPoints);
-  FLPoint* pointsFromLetters(const FLString& letters);
+  FLPoint* pointsFromLetters(FLStringPtr &letters);
 
   FLChar toupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
   FLChar tolower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
@@ -66,12 +66,12 @@ public:
   bool isupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
   bool islower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
 
-  FLString onlyKeepAlphaFromString(const FLString& s);
+  FLStringPtr onlyKeepAlphaFromString(FLStringPtr &s);
 
   // This converts extended ascii based on the ISO-8859-1 (Latin1) character set into UTF8 multibyte characters (up to 2 multibytes)
   char* extendedAsciiToUtf8(const char* text);
 
-  void makeLowerCase(FLString* s);
+  void makeLowerCase(FLStringPtr &s);
 };
 
 typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;

@@ -51,7 +51,7 @@ public:
   void writeTablesIfNeeded(const string& filepath);
   void postload();
   
-  FLAddWordResult addUserWord(const FLString& word);
+  FLAddWordResult addUserWord(FLStringPtr &word);
   bool removeUserWord(const FLString& word);
   bool wordExists(const FLString& word, bool allowLowerCase);
   

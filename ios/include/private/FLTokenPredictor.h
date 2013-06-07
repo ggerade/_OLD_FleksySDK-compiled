@@ -48,8 +48,6 @@ public:
 
   // wrapper function of the above two step process
   void getNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
-  
-  string getDescription();
 };
 
 #endif /* defined(__FleksyX__FLTokenPredictor__) */

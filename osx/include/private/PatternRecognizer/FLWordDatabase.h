@@ -39,8 +39,8 @@ private:
   FLWordList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
 
   
-  map<FLString, FLWord*> wordsByLetters;
-  map<FLString, FLString> wordsBlacklistByLetters;
+  std::unordered_map<FLStringPtr, FLWord*, FLStringPtrHash, FLStringPtrEqual> wordsByLetters;
+  std::unordered_map<FLStringPtr, FLStringPtr, FLStringPtrHash, FLStringPtrEqual> wordsBlacklistByLetters;
 
   
   //returns point of word with index bi, OR fixed points BASEPOINT_CUSTOM1_ID or BASEPOINT_CUSTOM2_ID
@@ -73,27 +73,13 @@ private:
   
   static void printVoteParams(VoteParameters params);
 
-  struct FLStringPtrHash {
-    std::size_t operator()(const FLStringPtr& k) const {
-      const unsigned char *ptr = k->c_str();
-      std::size_t hash = 1402737925UL;
-      while((*ptr) != 0) { hash = ((((hash << 5) + hash) + ((*ptr) - 29)) ^ (hash >> 19)); ptr++; }
-      return(hash);
-    }
-  };
-
-  struct FLStringPtrEqual {
-    bool operator()(const FLStringPtr& lhs, const FLStringPtr& rhs) const { return((strcmp((const char *)lhs->c_str(), (const char *)rhs->c_str()) == 0) ? true : false); }
-  };
-
   std::unordered_map<FLTokenID, FLStringPtr> tokenIDToStringMap;
-  std::unordered_map<FLStringPtr, FLTokenID, FLStringPtrHash, FLStringPtrEqual> stringToTokenIDMap;
 
 public:
   FLWordDatabase();
   ~FLWordDatabase();
   
-  FLWordList* allWords;
+  size_t allWordsCount = 0;
 
   // FLWordDatabase (QueryingMethods)
   FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, FLString* rawText, bool needscore, bool printResults);
@@ -116,14 +102,14 @@ public:
 
   bool getTokenIDForFLString(FLStringPtr &string, FLTokenID *tokenIDRef);
   bool getFLStringForTokenID(FLTokenID tokenID, FLStringPtr &string);
-  void addWordToTokenDatabase(const FLString &wordString, BBValue uniqueID);
+  void addWordToTokenDatabase(FLStringPtr &wordString, BBValue uniqueID);
 
   //
-  FLWord* getWordFromDictionary(const FLString& key);
-  void setWordInDictionary(const FLString& key, FLWord* word);
+  FLWord* getWordFromDictionary(FLStringPtr &key);
+  void setWordInDictionary(FLStringPtr &key, FLWord* word);
   //
-  bool isWordInBlacklist(const FLString& printLetters);
-  void addWordToBlacklist(const FLString& word);
+  bool isWordInBlacklist(FLStringPtr &printLetters);
+  void addWordToBlacklist(FLStringPtr &word);
 
   // these should be between 0.0 and 1.0
   // Platform is platform suggestions

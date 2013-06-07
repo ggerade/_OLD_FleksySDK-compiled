@@ -20,14 +20,11 @@ private:
   
   BBValue uniqueID;
   
-  FLString* letters;
-  FLString* printLetters;
 
   //float frequency;
 //  int groupFrequencyRank;
 //  int frequencyRank;
   
-  int bytesAllocated;
   
   void initFromPoints(short nPoints, FLPoint* points, BBValue uniqueID);
   void* allocateMemoryForItems(size_t count, size_t itemSize);
@@ -37,6 +34,9 @@ private:
 
 public:
   short nPoints;
+
+  FLStringPtr lettersPtr;
+  FLStringPtr printLettersPtr;
 
   FLPoint* rawPoints;
   //LPCentroid* LPCentroids;
@@ -63,7 +63,6 @@ public:
   //float logScalePpcm;
   
   
-  float cachedTotalDistance;
   float cachedShapeDistance;
   float cachedTransformationDistance;
 
@@ -86,7 +85,6 @@ public:
   //float sumLogs2;
   //float sumNologs;
   
-  FLPoint absoluteCentroid;
 
   float contextFrequency;
   
@@ -95,7 +93,7 @@ public:
   ////////////////////
 
   FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
-  FLWord(const FLString* letters, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID, bool canBeRemoved);
+  FLWord(FLStringPtr &_letters, FLStringPtr &_printLetters, short _nPoints, FLPoint* pointsToUse, BBValue _uniqueID, bool canBeRemoved);
   ~FLWord();
   void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();
@@ -105,8 +103,8 @@ public:
 //- (float) calculateDataForInput1:(FLWord *) inputWord allowSwaps:(BOOL)allowSwaps calculatingAnchor:(BOOL) calculatingAnchor calculators:(Calculators) calculators;
 //- (void) calcTotalDistanceWithInput:(FLWord *) inputWord;
 
-  const FLString* getLetters();
-  const FLString* getPrintLetters();
+  FLStringPtr getLetters();
+  FLStringPtr getPrintLetters();
   
 //  void setFrequency(float f);
 //  float getFrequency();
@@ -120,11 +118,9 @@ public:
   int getBytesAllocated();
 
   static bool compareStringOnly(FLWord* thisWord, FLWord* word);
-  static bool compareNonExactVotesPass2(FLWord* thisWord, FLWord* word);
 //  static bool compareAngle(FLWord* thisWord, FLWord* word);
 //  static bool compareScale(FLWord* thisWord, FLWord* word);
 //  static bool compareTx(FLWord* thisWord, FLWord* word);
-  static bool compareCachedTotalDistance(FLWord* thisWord, FLWord* word);
   static bool compareShapeDistance(FLWord* thisWord, FLWord* word);
   static bool compareExactVotes(FLWord* thisWord, FLWord* word);
   static bool compareExtraVotes(FLWord* thisWord, FLWord* word);
