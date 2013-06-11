@@ -2615,4 +2615,36 @@ MC +1
 EUL (4,4)
 EOT
 
+Test117
+>hello
+SR
+>there
+SR
+ET "Hello there "
+BF
+BF
+BF
+BF
+BF
+BF
+ET "Hello "
+EUL (0,5)
+EC 6
+EOT
 
+Test118
+>hello
+SR
+>there
+SR
+ET "Hello there "
+MC -1
+BF
+BF
+BF
+BF
+BF
+ET "Hello "
+EUL (0,5)
+EC 6
+EOT
