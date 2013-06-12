@@ -49,8 +49,8 @@ xcodebuild -configuration Debug   -target FleksySample_OSX >/dev/null
 xcodebuild -configuration Release -target FleksySample_OSX >/dev/null
 rsync -a "${FLEKSYSDK_COMPILED_ROOT_DIR}/osx/lib/Release/FleksyLib.dylib" "build/Release/FleksyLib.dylib"
 
-xcodebuild -configuration Debug   -target FleksySample_iOS >/dev/null
-xcodebuild -configuration Release -target FleksySample_iOS >/dev/null
+xcodebuild -configuration Debug   -sdk iphonesimulator6.1 -target FleksySample_iOS >/dev/null
+xcodebuild -configuration Release -sdk iphonesimulator6.1 -target FleksySample_iOS >/dev/null
 
 cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"
 
