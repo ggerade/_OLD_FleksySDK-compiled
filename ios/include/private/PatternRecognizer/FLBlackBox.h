@@ -27,7 +27,7 @@
 #define BASEPOINT_CUSTOM2_ID (BASEPOINT_CUSTOM1_ID + 1)
 
 
-typedef uint64_t BBKey;
+typedef uint32_t BBKey;
 typedef uint16_t BBValue;
 
 #if 1

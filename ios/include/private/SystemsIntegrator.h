@@ -55,8 +55,7 @@ public:
   bool removeUserWord(const FLString& word);
   bool wordExists(const FLString& word, bool allowLowerCase);
   
-  // caller needs to free pointer when done
-  FLPoint* pointsFromLetters(const FLString& letters);
+  void pointsFromLetters(const FLString& letters, FLPoint points[]);
   FLPoint getPointForChar(FLChar c, FLKeyboardID keyboard);
   
   FLWord* getWordByString(const FLString& s, bool allowLowerCase);

@@ -12,6 +12,7 @@
 #include "PrivateStructures.h"
 #include "Structures.h"
 #include "FLBlackBox.h"
+#include "FLKeyboard.h"
 
 
 class FLWord {
@@ -26,19 +27,23 @@ private:
 //  int frequencyRank;
   
   
-  void initFromPoints(short nPoints, FLPoint* points, BBValue uniqueID);
+  void initFromPoints(short nPoints, FLPoint points[], BBValue uniqueID);
   void* allocateMemoryForItems(size_t count, size_t itemSize);
   float shapeScore(float angleDeviation, float scalePpcm, bool swapped);
   //void calculateLPCentroidsFromPoints(short nPoints, FLPoint* points);
   int getRawSize();
 
-public:
+  bool pointsFromLetters = false;
   short nPoints;
+  FLPoint* rawPoints = NULL;
+  FLKeyboardPtr keyboard;
+
+public:
 
   FLStringPtr lettersPtr;
   FLStringPtr printLettersPtr;
 
-  FLPoint* rawPoints;
+  FLPoint getPoint(size_t pointIdx);
   //LPCentroid* LPCentroids;
   
   float votes0and1;
@@ -92,10 +97,9 @@ public:
   
   ////////////////////
 
-  FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
-  FLWord(FLStringPtr &_letters, FLStringPtr &_printLetters, short _nPoints, FLPoint* pointsToUse, BBValue _uniqueID, bool canBeRemoved);
+  FLWord(short nPoints, FLPoint points[], BBValue uniqueID);
+  FLWord(FLStringPtr &_letters, FLStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, BBValue _uniqueID, bool canBeRemoved, FLKeyboardPtr &keyboardPtr);
   ~FLWord();
-  void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();
   float getTransformationDistance();
   float getTotalDistance();

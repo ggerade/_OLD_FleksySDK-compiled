@@ -58,7 +58,7 @@ public:
   float getDistanceBetweenLetters(FLChar c1, FLChar c2);
 
   FLString lettersFromPoints(FLPoint* points, short nPoints);
-  FLPoint* pointsFromLetters(FLStringPtr &letters);
+  void pointsFromLetters(FLStringPtr &letters, FLPoint points[]);
 
   FLChar toupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
   FLChar tolower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);

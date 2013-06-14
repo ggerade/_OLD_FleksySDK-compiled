@@ -51,6 +51,7 @@ public:
   int correctTextOnVSwipe();
   int nextSuggestion();
 	int prevSuggestion();
+  FLString getTextToCorrect();
   
   void printSelf(int tbNumber);
   
@@ -72,7 +73,7 @@ private:
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
   FLString toLowerCase(FLString string);
-  FLString getTextToCorrect();
+  
   void printTextBlock();
   void deleteSuggestions();
 };

@@ -193,8 +193,8 @@ public:
   
   static bool predictionCompare(Prediction p1, Prediction p2);
 
-  static list_pred map_to_list(map_probs& m);
-  static map_probs list_to_map(list_pred& l);
+  static void map_to_list(map_probs& m, list_pred& result);
+  static void list_to_map(list_pred& l, map_probs& result);
   static map_probs list_to_rank_map(list_pred& l);
   static void normalizePreds(list_pred& preds);
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
