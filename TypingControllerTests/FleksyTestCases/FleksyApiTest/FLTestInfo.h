@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 struct CheckType{
   std::string type;
@@ -33,5 +34,7 @@ private:
   
   std::vector<CheckType> testStages;
 };
+
+typedef std::shared_ptr<FLTestInfo> FLTestInfoPtr;
 
 #endif /* defined(__FleksyApiTest__TestInfo__) */

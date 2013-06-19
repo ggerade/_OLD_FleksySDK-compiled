@@ -2,6 +2,7 @@
 #define __FleksyApiTest__FLTypingControllerTestCase__
 
 #include <iostream>
+#include <memory>
 #include "FLTypingController.h"
 #include "FleksyPrivateAPI.h"
 #include "FleksyListenerImplC.h"
@@ -29,6 +30,8 @@ struct FLTypingControllerAction{
   bool autoCorrect;
 };
 
+typedef std::shared_ptr<FLTypingControllerAction> FLTypingControllerActionPtr;
+
 class FLTypingControllerTestCase{
   
 public:
@@ -41,11 +44,11 @@ public:
   FleksyListenerImplC &out;
   FleksyAPI *api;
   
-  FLTestInfo *testInfo;
+  FLTestInfoPtr testInfo;
   
-  std::vector<FLTypingControllerAction*> actions;
+  std::vector<FLTypingControllerActionPtr> actions;
   
-  void addAction(FLTypingControllerAction *action);
+  void addAction(FLTypingControllerActionPtr &action);
   
   std::string getLastActionInfo();
   
@@ -55,17 +58,19 @@ private:
   
   std::string lastActionInfo;
 
-  int performAction(FLTypingControllerAction *action);
-  int checkText(FLTypingController &tc, FLTypingControllerAction *action);
-  int checkCursorPosition(FLTypingController &tc, FLTypingControllerAction *action);
-  int checkTextBlockCursor(FLTextBlockCursor *TBcursor, FLTypingControllerAction *action);
-  int checkShiftState(FLTypingControllerAction *action);
-  int checkComposingRegion(FLTypingControllerAction *action);
-  int checkSuggestion(FLTypingControllerAction *action);
-  int checkCursorSelection(FLTypingControllerAction *action);
+  int performAction(FLTypingControllerActionPtr &action);
+  int checkText(FLTypingController &tc, FLTypingControllerActionPtr &action);
+  int checkCursorPosition(FLTypingController &tc, FLTypingControllerActionPtr &action);
+  int checkTextBlockCursor(FLTextBlockCursor *TBcursor, FLTypingControllerActionPtr &action);
+  int checkShiftState(FLTypingControllerActionPtr &action);
+  int checkComposingRegion(FLTypingControllerActionPtr &action);
+  int checkSuggestion(FLTypingControllerActionPtr &action);
+  int checkCursorSelection(FLTypingControllerActionPtr &action);
   
   
   std::string getStringForBoolean(bool b);
 };
+
+typedef std::shared_ptr<FLTypingControllerTestCase> FLTypingControllerTestCasePtr;
 
 #endif /* defined(__FleksyApiTest__FLTypingControllerTestCase__) */

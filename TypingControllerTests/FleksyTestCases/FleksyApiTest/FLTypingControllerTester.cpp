@@ -19,22 +19,21 @@ FLTypingControllerTester::FLTypingControllerTester(char *executableResourcesPath
 }
 
 FLTypingControllerTester::~FLTypingControllerTester(){
-  delete fleksyListener;
-  delete api;
+  if(fleksyListener != NULL) { delete fleksyListener; fleksyListener = NULL; }
+  if(api            != NULL) { delete api;            api            = NULL; }
   deleteTestInfos();
 }
 
 void FLTypingControllerTester::deleteTestInfos(){
-  for(FLTestInfo *tI : testInfos){
-    delete tI;
-  }
   testInfos.clear();
 }
 
-void FLTypingControllerTester::createAction(string line, FLTypingControllerAction *a){
-  FLTypingControllerAction *action = a;
+void FLTypingControllerTester::createAction(string line, FLTypingControllerActionPtr *a){
+  FLTypingControllerActionPtr action;
   if(a == NULL){
-   action = new FLTypingControllerAction();
+   action = FLTypingControllerActionPtr(new FLTypingControllerAction());
+  } else {
+    action = *a;
   }
   action->suggestionIndex = -1;
   if(string::npos != line.find_first_of("(")){
@@ -51,7 +50,7 @@ void FLTypingControllerTester::createAction(string line, FLTypingControllerActio
   getLastTestCase()->addAction(action);
 }
 
-FLTypingControllerTestCase * FLTypingControllerTester::getLastTestCase(){
+FLTypingControllerTestCasePtr FLTypingControllerTester::getLastTestCase(){
   return testCases[testCases.size() - 1];
 }
 
@@ -92,14 +91,14 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
     getline(fin, line);
     
     if(line.find("Test") == 0){//test
-      FLTypingControllerTestCase *testCase = new FLTypingControllerTestCase(*tc, *fleksyListener, api);
+      FLTypingControllerTestCasePtr testCase = FLTypingControllerTestCasePtr(new FLTypingControllerTestCase(*tc, *fleksyListener, api));
       testCases.push_back(testCase);
       getLastTestCase()->testInfo->testName = line;
     }
     else if(line[0] == '>'){ // text - send char
       string word = line.substr(1, line.length());
       for(int i = 0; i < word.length(); i++){
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "SC";
         char c = word[i];
         action->isUpperCase = isupper(c);
@@ -140,8 +139,8 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         createAction(line);
       }
       else if(first2Chars == "MC"){ //Move cursor
-        FLTypingControllerAction *action = new FLTypingControllerAction();
-        createAction(line, action);
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
+        createAction(line, &action);
         action->action = first2Chars;
         string cursorPos;
         if(string::npos != line.find_first_of("+")){
@@ -170,7 +169,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         }
       }
       else if(first2Chars == "ET"){ // check output text
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = first2Chars;
         string text = line.substr(4, line.length());
         text.erase(text.length() - 1, 1);
@@ -178,13 +177,13 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(first2Chars == "EC"){ // check cursor position
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = first2Chars;
         action->cursorPosition = atoi(line.substr(3, line.length()).c_str());
         getLastTestCase()->addAction(action);
       }
       else if(first2Chars == "ST"){ // Screen Text
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = first2Chars;
         string text = line.substr(4, line.length());
         text.erase(text.length() - 1, 1);
@@ -192,13 +191,13 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(first2Chars == "KB"){ // Sets keyboard number
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = first2Chars;
         action->keyboardNumber = atoi(line.substr(2, line.length()).c_str());
         getLastTestCase()->addAction(action);
       }
       else if(first2Chars == "SH"){ // set shiftState
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "SHC";
         int paren1Indx = (int)line.find_first_of("(") + 1;
         int paren2Indx = (int)line.find_first_of(")");
@@ -213,7 +212,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(first2Chars == "AC"){ // set AutoCorrect
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "AC";
         int paren1Indx = (int)line.find_first_of("(") + 1;
         int paren2Indx = (int)line.find_first_of(")");
@@ -227,7 +226,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 3) == "TBC"){ // check textblock cursor position
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "TBC";
         int commaIndx = (int)line.find_first_of(",");
         int numOfChars = commaIndx - 5;
@@ -238,7 +237,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 3) == "SEL"){ //select text
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "SEL";
         int commaIndx = (int)line.find_first_of(",");
         int numOfChars = commaIndx - 5;
@@ -249,7 +248,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 3) == "EUL"){ // check composing region (Expected Underline)
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "EUL";
         int commaIndx = (int)line.find_first_of(",");
         int numOfChars = commaIndx - 5;
@@ -260,7 +259,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 3) == "OUS"){ // send onUpdateSelection
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "OUS";
         int paren1indx = (int)line.find_first_of("(") + 1;
         int paren2indx = (int)line.find_first_of(")");
@@ -275,7 +274,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 4) == "CAPS"){ // send onUpdateSelection
-        FLTypingControllerAction *action = new FLTypingControllerAction();
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
         action->action = "CAPS";
         int paren1indx = (int)line.find_first_of("(") + 1;
         int paren2indx = (int)line.find_first_of(")");
@@ -301,13 +300,13 @@ int FLTypingControllerTester::getNumberFromSubstring(string substring){
 void FLTypingControllerTester::printTestCases(){
   printf("Number of test cases: %li\n", testCases.size());
   for(int i = 0; i < testCases.size(); i++){
-    FLTypingControllerTestCase *testCase = testCases[i];
+    FLTypingControllerTestCasePtr testCase = testCases[i];
     
     printf("TestName: %s \n", testCase->testInfo->testName.c_str());
     //printf("Comments: %s \n", testCase->comments.c_str());
     
     for(int k = 0; k < testCase->actions.size(); k++){
-      FLTypingControllerAction *action = testCase->actions[k];
+      FLTypingControllerActionPtr action = testCase->actions[k];
       
       printf("Action: %s\n", action->action.c_str());
       string character = action->character.c_str();
@@ -420,7 +419,7 @@ bool FLTypingControllerTester::runTests(bool breakOnFail){
   printf("\nTest Results:\n");
   int numFailed = 0;
   int numPassed = 0;
-  for(FLTestInfo *ti : testInfos){
+  for(FLTestInfoPtr &ti : testInfos){
     if(ti->passed){
       printf("%s: PASSED\n", ti->testName.c_str());
       numPassed++;

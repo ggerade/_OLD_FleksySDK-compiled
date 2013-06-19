@@ -41,16 +41,16 @@ private:
   
   string executableResourcesPathString;
 
-  FleksyAPI *api;
-  FleksyListenerImplC *fleksyListener;
-  FLTypingController *tc;
+  FleksyAPI *api = NULL;
+  FleksyListenerImplC *fleksyListener = NULL;
+  FLTypingController *tc = NULL;
   
-  std::vector<FLTypingControllerTestCase*> testCases;
-  std::vector<FLTestInfo*> testInfos;
+  std::vector<FLTypingControllerTestCasePtr> testCases;
+  std::vector<FLTestInfoPtr> testInfos;
   
   void createFLTypingControllerTestCases();
-  void createAction(std::string line, FLTypingControllerAction *a = NULL);
-  FLTypingControllerTestCase *getLastTestCase();
+  void createAction(std::string line, FLTypingControllerActionPtr *a = NULL);
+  FLTypingControllerTestCasePtr getLastTestCase();
   void deleteDataFromPreviousTest(FLTypingController &tc);
   void printTestCases();
   int getNumberFromSubstring(std::string substring);

@@ -4,17 +4,13 @@
 using namespace std;
 
 FLTypingControllerTestCase::FLTypingControllerTestCase(FLTypingController &typingController, FleksyListenerImplC &outImpl, FleksyAPI *api) : tc(typingController), out(outImpl){
-  testInfo = new FLTestInfo("");
+  testInfo = FLTestInfoPtr(new FLTestInfo(""));
   this->api = api;
 }
 
 FLTypingControllerTestCase::~FLTypingControllerTestCase(){
-  for(FLTypingControllerAction *a : actions){
-    delete a;
-  }
-  delete testInfo;
 }
-void FLTypingControllerTestCase::addAction(FLTypingControllerAction *action){
+void FLTypingControllerTestCase::addAction(FLTypingControllerActionPtr &action){
   actions.push_back(action);
 }
 int FLTypingControllerTestCase::run(){
@@ -29,7 +25,7 @@ int FLTypingControllerTestCase::run(){
   return result;
 }
 
-int FLTypingControllerTestCase::performAction(FLTypingControllerAction *action){
+int FLTypingControllerTestCase::performAction(FLTypingControllerActionPtr &action){
   string actionType = action->action;
   lastActionInfo = actionType;
   
@@ -162,7 +158,7 @@ string FLTypingControllerTestCase::getLastActionInfo(){
   return lastActionInfo;
 }
 
-int FLTypingControllerTestCase::checkText(FLTypingController &tc, FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkText(FLTypingController &tc, FLTypingControllerActionPtr &action){
   CheckType checkType;
   checkType.type = "ET";
   if(out.getTextOnScreen() == action->expectedOutput){
@@ -184,7 +180,7 @@ int FLTypingControllerTestCase::checkText(FLTypingController &tc, FLTypingContro
   return 1;
 }
 
-int FLTypingControllerTestCase::checkCursorPosition(FLTypingController &tc, FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkCursorPosition(FLTypingController &tc, FLTypingControllerActionPtr &action){
   CheckType checkType;
   checkType.type = "EC";
   if(action->cursorPosition == tc.getCursorPosition()){
@@ -209,7 +205,7 @@ int FLTypingControllerTestCase::checkCursorPosition(FLTypingController &tc, FLTy
   return 1;
 }
 
-int FLTypingControllerTestCase::checkTextBlockCursor(FLTextBlockCursor *tbCursor, FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkTextBlockCursor(FLTextBlockCursor *tbCursor, FLTypingControllerActionPtr &action){
   CheckType checkType;
   checkType.type = "TBC";
   if(action->blockIndex == tbCursor->getIndexOfCurrentTextBlockInVector() && action->indexInBlock == tbCursor->getIndexInTextBlock()){
@@ -240,7 +236,7 @@ string FLTypingControllerTestCase::getStringForBoolean(bool b){
   return (b)?"true":"false";
 }
 
-int FLTypingControllerTestCase::checkShiftState(FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkShiftState(FLTypingControllerActionPtr &action){
   CheckType checkType;
   checkType.type = "SH";
   if(action->expectedShiftState == tc.getShiftState()){
@@ -260,7 +256,7 @@ int FLTypingControllerTestCase::checkShiftState(FLTypingControllerAction *action
   return 1;
 }
 
-int FLTypingControllerTestCase::checkComposingRegion(FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkComposingRegion(FLTypingControllerActionPtr &action){
   int start = out.getComposingStart();
   int end = out.getComposingEnd();
   CheckType checkType;
@@ -289,7 +285,7 @@ int FLTypingControllerTestCase::checkComposingRegion(FLTypingControllerAction *a
   return 1;
 }
 
-int FLTypingControllerTestCase::checkCursorSelection(FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkCursorSelection(FLTypingControllerActionPtr &action){
   int start = out.getSelectionStart();
   int end = out.getSelectionEnd();
   CheckType checkType;
@@ -318,7 +314,7 @@ int FLTypingControllerTestCase::checkCursorSelection(FLTypingControllerAction *a
   return 1;
 }
 
-int FLTypingControllerTestCase::checkSuggestion(FLTypingControllerAction *action){
+int FLTypingControllerTestCase::checkSuggestion(FLTypingControllerActionPtr &action){
   if(action->suggestionIndex == -1){return 0;}
   CheckType checkType;
   checkType.type = "Suggestion Check";
