@@ -58,10 +58,12 @@ typedef struct short_lut { map_probs data[FL_MAX_WORD_ID]; } short_lut;
 #define FL_ANY_TOKEN     -2
 #define FL_STOP_SIGNAL   -3
 
+#define USE_IDS_PACKING 1
+#define USE_PROBS_PACKING 1
 
-#define CURVE_PACKED  1 << 0
-#define GOLOMB_PACKED 1 << 1
-#define OTHER_PACKED  1 << 2
+#define PROBS_PACKED  1 << 30
+#define IDS_PACKED    1 << 31
+#define OFFSET_BITS ((1 << 30) - 1)
 
 
 #define IS_TOKEN_VALID_FOR_SEARCH(_token_id_) ( \
@@ -144,16 +146,10 @@ class FLSingleLevelTokenPredictor;
 class Prediction;
 typedef vector<Prediction> list_pred;  // a vector of predictions
 
-// TODO: do we need both list_pred and map_probs?
-
-// data type for table of predictions
-typedef unordered_map<FLString, list_pred*> Predictions;
-
 class FleksyContextCommon {
   
 private:
   static word_id reconstructWordID(unsigned char byte1, unsigned char byte2);
-  static probability readProbability(unsigned char z);
 
 public:
   static pred_type prediction_type;  // whether unigrams, bigrams, or trigrams were used to make the prediction
@@ -164,14 +160,18 @@ public:
   static void writeFloat(float f, ofstream& myfile);
   static float readFloat(FLFilePtr &file);
 
+  static size_t writeGolombEncodedData(const GolombEncodingResult& data, ofstream& outfile);
   static size_t writeGolombEncodedData(const GolombEncodingResult& data, unsigned char **buffer, unsigned char *bufferEnd);
-  static void readGolombEncodedData(FLFilePtr &file, IntVector& result);
+  static void readGolombEncodedData(FLFilePtr &file, IntVector& result, size_t elementsToRead = 0);
 
+  static probability decodeProbability(unsigned char z);
+  static unsigned char encodeProbability(probability p);
+  
   static void writeFloat(float f, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeProbability(probability p, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeWordID(word_id tokenID, unsigned char **buffer, unsigned char *bufferEnd);
   static void writeResultList(const list_pred &pPreds, bool writeIDs, bool writeProbabilities, unsigned char **buffer, unsigned char *bufferEnd);
-  static size_t writePredictionsToBuffer(const list_pred &pPreds, unsigned char *predictionsBuffer, unsigned char *predictionsBufferEnd, bool useCurvePacking, bool useGolombPacking, uint8_t& flagUsed, map<word_id, word_id>& idMap);
+  static size_t writePredictionsToBuffer(const list_pred &pPreds, unsigned char *predictionsBuffer, unsigned char *predictionsBufferEnd, uint32_t& flagUsed, map<word_id, word_id>& idMap);
   static size_t maxSizeForPredictionList(const list_pred &pPreds);
 
   // accumulate tokenID counts on a map
@@ -182,15 +182,11 @@ public:
 
   static void writeWordID(word_id tokenID, ofstream& myfile);
   static void writeProbability(probability p, ofstream& myfile);
-  static void writeUnigramProbability(probability p, ofstream& myfile);
   static void writeTerminatingValue(ofstream& myfile);
 
   static word_id readWordID(char* data, long& pointer);
   static probability readProbability(char* data, long& pointer);
   
-  static probability readUnigramProbability(FLFilePtr &file);
-  static probability readUnigramProbability(unsigned char z);
-
   static word_id readWordID(FLFilePtr &file, bool invert = false);
 
   //TODO offset typedef. Signed or unsigned?
@@ -200,8 +196,8 @@ public:
   
   static bool predictionCompare(Prediction p1, Prediction p2);
 
-  static list_pred map_to_list(map_probs& m);
-  static map_probs list_to_map(list_pred& l);
+  static void map_to_list(map_probs& m, list_pred& result);
+  static void list_to_map(list_pred& l, map_probs& result);
   static map_probs list_to_rank_map(list_pred& l);
   static void normalizePreds(list_pred& preds);
   static void printPreds(list_pred& preds, token_ids previousTokens, char* (*tokenDescriptionFromID)(word_id), int tag, int limit = 500);
@@ -212,10 +208,9 @@ public:
   static int nVerbosity;  // verbosity level
   static void combinePreds(list_pred& candidates, list_pred& bi_candidates);
 
-  //ONLY USE ONE OF THESE TWO. read_temp_unigrams is temporary until unigram binary file is fixed
   static void read_temp_unigrams(unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
-  static void read_uni_bin(FLFilePtr &unigram_fl_file, unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
-  static bool read_unigrams_200(FLFilePtr &unigramFile, unordered_map<word_id, probability> &map, list_pred &candidates);
+
+  static bool read_unigrams(FLFilePtr &unigramFile, unordered_map<word_id, probability> &map, list_pred &candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
   
@@ -270,10 +265,6 @@ public:
   static void throwInvalidArgument(const char* message, probability value) { ostringstream msg(message); msg << " (" << value << ")"; throw std::invalid_argument(msg.str()); }
 };
     
-// function declarations
-void display_pred_table(Predictions& pred_table);
-Predictions* read_pred_table(string& fname);
-
 class FLSmartTokenizer
 {
   // class for smart tokenizing

@@ -117,6 +117,11 @@ public:
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
   
+  /* NEW
+   *
+   */
+  FLCapitalizationMode getCapitalizationMode();
+  
   /*
    * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
    * *NEW* buttonPress if switch was caused by hitting a button to switch the keyboard
@@ -142,6 +147,11 @@ public:
    * FLCorrectionMode_OFF will not make corrections and will only delete a single character at a time.
    */
   void setCorrectionMode(FLCorrectionMode mode);
+  
+  /* NEW
+   * 
+   */
+  FLCorrectionMode getCorrectionMode();
   
   /*
    * You can use this to send additional hints to Fleksy as to what rawText should be corrected to.

@@ -35,7 +35,8 @@ enum FLMessageType{
   FLMessageType_NO_PREVIOUS_SUGGESTION,
   FLMessageType_EXIT,
   FLMessageType_EVENT,
-  FLMessageType_ERROR
+  FLMessageType_ERROR,
+  FLMessageType_BACKSPACE
 };
 
 //passed in as a parameter in onDictionaryModified

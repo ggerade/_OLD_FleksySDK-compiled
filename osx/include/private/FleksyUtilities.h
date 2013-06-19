@@ -46,7 +46,7 @@ private:
   bool loadedPreprocessedFiles[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
   bool postLoaded;
   
-  FLAddWordResult _addWord(const FLString& wordLetters, const FLString& printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues, bool canBeRemoved);
+  FLAddWordResult _addWord(FLStringPtr &wordLetters, FLStringPtr &printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues, bool canBeRemoved);
   void _processWordlistLine1(FLString* wordString, kWordlistType type, const FLString& delimiter, bool calculateBlackboxValues);
   void processWordBlacklistLine(FLString* line, const FLString& delimiter2);
   void processWordlistLine(FLString* wordString, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues);
@@ -65,16 +65,16 @@ public:
   void writeTables(const string& filepath); //optional
   void postload();
   FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);
-  FLAddWordResult addWord(const FLString& word, bool canBeRemoved);
-  bool removeWord(const FLString& wordLetters);
+  FLAddWordResult addWord(FLStringPtr &word, bool canBeRemoved);
+  bool removeWord(FLStringPtr &wordLetters);
   ////////////////////
   
   FLKeyboardPtr keyboard;
   FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
   
   size_t loadedWordCount();
-  bool isWordInDictionary(const FLString& printLetters, bool allowLowerCase);
-  FLWord* getWordByString(const FLString& s, bool allowLowerCase = false);
+  bool isWordInDictionary(FLStringPtr &printLetters, bool allowLowerCase);
+  FLWord* getWordByString(FLStringPtr &s, bool allowLowerCase = false);
   //FLWord* getRandomWord(int length);
   
   

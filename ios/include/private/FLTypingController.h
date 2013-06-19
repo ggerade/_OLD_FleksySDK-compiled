@@ -42,12 +42,14 @@ public:
   void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
   FLKeyboardID getActiveKeyboardID();
   void setCorrectionMode(FLCorrectionMode mode);
+  FLCorrectionMode getCorrectionMode();
   void cursorSelectionChanged(int selectionStart, int selectionEnd);
   void startTypingSession(bool platformMovesCursor = false);
   void endTypingSession();
   void postLoadSetup();
   void setPlatformSuggestions(FLString prossedRequestID, FLString processedResults);
   void setCapitalizationMode(FLCapitalizationMode mode);
+  FLCapitalizationMode getCapitalizationMode();
   void setVoiceFeedback(bool isOn);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
@@ -88,7 +90,7 @@ private:
   bool isShiftPressed;
   bool simulateSystemCursorUpdates; //true = simulation of updates, false - updates come from the system
   bool isUserSelectedTB; //indicates if user selectedTB by moving the cursor
-  bool autoCorrect;
+  FLCorrectionMode correctionMode;
   
   //TODO:rename this 
   bool isFirstInputAfterParsing;
@@ -136,7 +138,7 @@ private:
   void createPunctuationSuggestions();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
-	void ignoredCursorUpdate(std::string from, int num_ignores);
+	void ignoredCursorUpdate(std::string from, int num_ignores, int expectedUserCursorPosition);
   bool isInPunctuation(char symbol);
   bool isEndSentenceSymbol(char symbol);
   bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false);
@@ -150,7 +152,6 @@ private:
   void onBeginBatchEdit();
   void onEndBatchEdit();
   void batchEditCheck(int newSelStart, int newSelEnd);
-  void setAutoCorrect(bool isOn);
   
   //User cursor operations
   void moveCursorToPosition(int position);

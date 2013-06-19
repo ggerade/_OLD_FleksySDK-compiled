@@ -12,6 +12,7 @@
 #include "PrivateStructures.h"
 #include "Structures.h"
 #include "FLBlackBox.h"
+#include "FLKeyboard.h"
 
 
 class FLWord {
@@ -20,25 +21,29 @@ private:
   
   BBValue uniqueID;
   
-  FLString* letters;
-  FLString* printLetters;
 
   //float frequency;
 //  int groupFrequencyRank;
 //  int frequencyRank;
   
-  int bytesAllocated;
   
-  void initFromPoints(short nPoints, FLPoint* points, BBValue uniqueID);
+  void initFromPoints(short nPoints, FLPoint points[], BBValue uniqueID);
   void* allocateMemoryForItems(size_t count, size_t itemSize);
   float shapeScore(float angleDeviation, float scalePpcm, bool swapped);
   //void calculateLPCentroidsFromPoints(short nPoints, FLPoint* points);
   int getRawSize();
 
-public:
+  bool pointsFromLetters = false;
   short nPoints;
+  FLPoint* rawPoints = NULL;
+  FLKeyboardPtr keyboard;
 
-  FLPoint* rawPoints;
+public:
+
+  FLStringPtr lettersPtr;
+  FLStringPtr printLettersPtr;
+
+  FLPoint getPoint(size_t pointIdx);
   //LPCentroid* LPCentroids;
   
   float votes0and1;
@@ -63,7 +68,6 @@ public:
   //float logScalePpcm;
   
   
-  float cachedTotalDistance;
   float cachedShapeDistance;
   float cachedTransformationDistance;
 
@@ -86,7 +90,6 @@ public:
   //float sumLogs2;
   //float sumNologs;
   
-  FLPoint absoluteCentroid;
 
   float contextFrequency;
   
@@ -94,10 +97,9 @@ public:
   
   ////////////////////
 
-  FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
-  FLWord(const FLString* letters, const FLString* printLetters, short nPoints, FLPoint* pointsToUse, BBValue uniqueID, bool canBeRemoved);
+  FLWord(short nPoints, FLPoint points[], BBValue uniqueID);
+  FLWord(FLStringPtr &_letters, FLStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, BBValue _uniqueID, bool canBeRemoved, FLKeyboardPtr &keyboardPtr);
   ~FLWord();
-  void swapRawPoints(int i1, int i2);
   float getTotalRunningLength();
   float getTransformationDistance();
   float getTotalDistance();
@@ -105,8 +107,8 @@ public:
 //- (float) calculateDataForInput1:(FLWord *) inputWord allowSwaps:(BOOL)allowSwaps calculatingAnchor:(BOOL) calculatingAnchor calculators:(Calculators) calculators;
 //- (void) calcTotalDistanceWithInput:(FLWord *) inputWord;
 
-  const FLString* getLetters();
-  const FLString* getPrintLetters();
+  FLStringPtr getLetters();
+  FLStringPtr getPrintLetters();
   
 //  void setFrequency(float f);
 //  float getFrequency();
@@ -120,11 +122,9 @@ public:
   int getBytesAllocated();
 
   static bool compareStringOnly(FLWord* thisWord, FLWord* word);
-  static bool compareNonExactVotesPass2(FLWord* thisWord, FLWord* word);
 //  static bool compareAngle(FLWord* thisWord, FLWord* word);
 //  static bool compareScale(FLWord* thisWord, FLWord* word);
 //  static bool compareTx(FLWord* thisWord, FLWord* word);
-  static bool compareCachedTotalDistance(FLWord* thisWord, FLWord* word);
   static bool compareShapeDistance(FLWord* thisWord, FLWord* word);
   static bool compareExactVotes(FLWord* thisWord, FLWord* word);
   static bool compareExtraVotes(FLWord* thisWord, FLWord* word);

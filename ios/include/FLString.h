@@ -9,6 +9,7 @@
 #define __FleksySDK_FLString_h__
 
 #include <memory>
+#include <string.h>
 
 #define FLEKSY_USE_WIDE_CHARS 0
 
@@ -48,5 +49,18 @@ typedef std::basic_string <FLChar> FLString;
 #define NSStringToString _NSStringToStringUTF8
 
 typedef std::shared_ptr<FLString> FLStringPtr;
+
+struct FLStringPtrHash {
+  std::size_t operator()(const FLStringPtr& k) const {
+    const unsigned char *ptr = k->c_str();
+    std::size_t hash = 0UL;
+    while((*ptr) != 0) { hash *= 0x811C9DC5; hash ^= (*ptr); ptr++; }
+    return(hash);
+  }
+};
+
+struct FLStringPtrEqual {
+  bool operator()(const FLStringPtr& lhs, const FLStringPtr& rhs) const { return((strcmp((const char *)lhs->c_str(), (const char *)rhs->c_str()) == 0) ? true : false); }
+};
 
 #endif /* defined(__FleksySDK_FLString_h__) */
