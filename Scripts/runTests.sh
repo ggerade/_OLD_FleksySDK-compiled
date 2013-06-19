@@ -84,7 +84,7 @@ echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Debug).
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
 echo ""
 
-TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
+#TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
 
 echo ""
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
@@ -92,7 +92,7 @@ echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Release
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
 echo ""
 
-TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
+#TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
 
 export MallocGuardEdges=YES
 export MallocScribble=YES
@@ -120,7 +120,7 @@ echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Debug) 
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
 echo ""
 
-TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
+#TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
 
 echo ""
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
@@ -128,4 +128,4 @@ echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Release
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
 echo ""
 
-TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
+#TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
