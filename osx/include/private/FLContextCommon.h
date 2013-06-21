@@ -61,9 +61,12 @@ typedef struct short_lut { map_probs data[FL_MAX_WORD_ID]; } short_lut;
 #define USE_IDS_PACKING 1
 #define USE_PROBS_PACKING 1
 
+#define PROBS_PACKED_RLE  1 << 29
 #define PROBS_PACKED  1 << 30
 #define IDS_PACKED    1 << 31
-#define OFFSET_BITS ((1 << 30) - 1)
+
+#define FLAG_BITS (PROBS_PACKED_RLE | PROBS_PACKED | IDS_PACKED)
+#define OFFSET_BITS ((1 << 29) - 1)
 
 
 #define IS_TOKEN_VALID_FOR_SEARCH(_token_id_) ( \
@@ -154,8 +157,10 @@ private:
 public:
   static pred_type prediction_type;  // whether unigrams, bigrams, or trigrams were used to make the prediction
 
+  static probability maxProb;
   static probability minProbLog;
   static probability maxProbLog;
+  static int probsHistogram[256];
   
   static void writeFloat(float f, ofstream& myfile);
   static float readFloat(FLFilePtr &file);
@@ -214,7 +219,7 @@ public:
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
   
-  static size_t addPredictions(list_pred& result, FLFilePtr file, bool curvePacked, bool golombPacked, int count = 0);
+  static size_t addPredictions(list_pred& result, FLFilePtr file, int flag, int count = 0);
 
   static bool IsNumber(char * str) {
     char *ptr = str;

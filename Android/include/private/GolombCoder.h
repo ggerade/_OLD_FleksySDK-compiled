@@ -18,14 +18,20 @@ using namespace std;
 typedef vector<bool> BitVector;
 typedef vector<uint16_t> IntVector;
 
-// log2(M) used, bits, number of elements encoded, bytes saved, includeCount
-typedef tuple<uint8_t, BitVector, int, int, bool> GolombEncodingResult;
+class GolombEncodingResult {
+public:
+  uint8_t log2M;
+  BitVector bits;
+  size_t elementsEncoded;
+  size_t bytesUsed;
+  bool includesCount;
+};
 
 class GolombCoder {
   
 public:
   
-  static ssize_t byteSavingsByEncoding(const IntVector& data, int M, bool includeCount, int dataBitsPerElement, BitVector &output);
+  static size_t bytesUsedByEncoding(const IntVector& data, int M, bool includeCount, BitVector& output);
   
   static bool encodeSingleNumber(uint16_t number, int M, BitVector &bits);
   static uint16_t  decodeSingleNumber(const BitVector& bits, int M);
@@ -35,7 +41,7 @@ public:
   
   // this will search through a few possible values for M and return a tuple
   // with results and some other useful info, see GolombEncodingResult
-  static GolombEncodingResult maxEncode(const IntVector& source, bool includeCount, int dataBitsPerElement, uint8_t minBits = 3, uint8_t maxBits = 15);
+  static GolombEncodingResult maxEncode(const IntVector& source, bool includeCount, uint8_t minBits = 2, uint8_t maxBits = 15);
 
   static void printGolombEncodingResult(const GolombEncodingResult& g);
   static void printBitVector(const BitVector& bits);
