@@ -20,7 +20,9 @@ public class FleksyInterface extends FleksyListenerInterface{
 
 	@Override
 	public void onSetComposingText(String text) { //CURRENT TEXT IN TEXTFIELD
-		FleksyEngine.setLatestText(text);
+		if(!text.trim().isEmpty()){
+			FleksyEngine.setLatestText(text);
+		}
 	}
 
 	@Override
@@ -63,8 +65,9 @@ public class FleksyInterface extends FleksyListenerInterface{
 
 	@Override
 	public void onReceiveSuggestions(String[] suggestions, int selectedIndex) {
-		// TODO Auto-generated method stub
-		
+		if(suggestions.length > selectedIndex){
+			FleksyEngine.setLatestText(suggestions[selectedIndex]);
+		}
 	}
 
 	@Override
