@@ -138,7 +138,7 @@ private:
   void createPunctuationSuggestions();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
-	void ignoredCursorUpdate(std::string from, int num_ignores, int expectedUserCursorPosition);
+	void ignoredCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);
   bool isEndSentenceSymbol(char symbol);
   bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false);

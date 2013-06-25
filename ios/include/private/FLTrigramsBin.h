@@ -11,6 +11,9 @@ typedef unsigned int BYTE_OFFSET;
 class FLTrigramsBin
 {
  public:
+  
+  static int collisions;
+  
   FLTrigramsBin(FLFilePtr &trigramsBinFile); // constructor
   ~FLTrigramsBin();
 

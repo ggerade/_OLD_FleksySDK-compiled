@@ -41,7 +41,7 @@ public:
   
   // this will search through a few possible values for M and return a tuple
   // with results and some other useful info, see GolombEncodingResult
-  static GolombEncodingResult maxEncode(const IntVector& source, bool includeCount, uint8_t minBits = 2, uint8_t maxBits = 15);
+  static GolombEncodingResult maxEncode(const IntVector& source, bool includeCount, uint8_t minBits = 1, uint8_t maxBits = 16);
 
   static void printGolombEncodingResult(const GolombEncodingResult& g);
   static void printBitVector(const BitVector& bits);
