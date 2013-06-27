@@ -697,32 +697,32 @@ ET "hello "
 EC 3
 EOT
 
-Test-72
-//Editing dictionary words with apostrophe
->guns
-SR(0)
-ET "Guns "
-SD(1)
-ET "Gun's "
-BF
-BF
-BF
-ET "Gun"
-SR(0)
-ET "Gun "
-SL
->lets
-SR(1)
-ET "Let's "
-BF
-BF
-ET "Let'"
-SR(1)
-ET "Let "
-SU(0)
-ET "Let' "
-EC end
-EOT
+//Test-72
+////Editing dictionary words with apostrophe
+//>guns
+//SR(0)
+//ET "Guns "
+//SD(1)
+//ET "Gun's "
+//BF
+//BF
+//BF
+//ET "Gun"
+//SR(0)
+//ET "Gun "
+//SL
+//>lets
+//SR(1)
+//ET "Let's "
+//BF
+//BF
+//ET "Let'"
+//SR(1)
+//ET "Let "
+//SU(0)
+//ET "Let' "
+//EC end
+//EOT
 
 Test-71
 //Adding words with apostrophes to the dictionary.
@@ -1187,17 +1187,17 @@ SD
 EC 12
 EOT
 
-Test11
->lets
-SR
-ET "Let's "
-EC 6
-TBC (1,0)
-SL
-TBC (0,0)
-ET ""
-EC 0
-EOT
+//Test11
+//>lets
+//SR
+//ET "Let's "
+//EC 6
+//TBC (1,0)
+//SL
+//TBC (0,0)
+//ET ""
+//EC 0
+//EOT
 
 Test12
 >hello
@@ -1956,19 +1956,19 @@ BF
 TBC (3,0)
 EOT
 
-Test59
->its
-SR
-ET "It's "
-EC 5
-BF
-SU
-ET "Its"
-EC 3
-SD
-ET "It's"
-EC 4
-EOT
+//Test59
+//>its
+//SR
+//ET "It's "
+//EC 5
+//BF
+//SU
+//ET "Its"
+//EC 3
+//SD
+//ET "It's"
+//EC 4
+//EOT
 
 Test60
 >hello
