@@ -12,8 +12,13 @@
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
 #include "FLTokenPredictor.h"
+#include "FLSpaceHelper.h"
 #include <string>
 #include <vector>
+
+#ifdef FL_JOHNE_DEBUG
+#include "FLKeyTapRecognizer.h"
+#endif
 
 using namespace std;
 
@@ -22,10 +27,8 @@ class SystemsIntegrator {
 private:
   
   word_id getTokenID(FLString* token);
-  token_ids convertToTokenIDs(FLString* token2, FLString* token1);
   float distanceBetweenLetters(FLChar c1, FLChar c2, FLKeyboardID keyboardID);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
-  FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   void ensureRawWordExists(FLInternalSuggestionsContainer* pwr, FLRequest* request);
   
 public:
@@ -34,7 +37,16 @@ public:
 
   FleksyUtilities* utils;
   FLTokenPredictor* ftp;
+  
+  FLSpaceHelper* spaceHelper;
+  
+  FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
+  token_ids convertToTokenIDs(FLString* token2, FLString* token1);
 
+#ifdef FL_JOHNE_DEBUG
+  FLKeyTapRecognizerPtr keyTapRecognizer;
+#endif
+  
   void prepareContextResults(FLString* token1, FLString* token2);
   FLResponse* getCandidatesForRequest(FLRequest* request);
   

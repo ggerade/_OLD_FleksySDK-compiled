@@ -97,7 +97,7 @@ public:
   
   ////////////////////
 
-  FLWord(short nPoints, FLPoint points[], BBValue uniqueID);
+  FLWord(short nPoints, FLPoint* points, BBValue uniqueID);
   FLWord(FLStringPtr &_letters, FLStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, BBValue _uniqueID, bool canBeRemoved, FLKeyboardPtr &keyboardPtr);
   ~FLWord();
   float getTotalRunningLength();

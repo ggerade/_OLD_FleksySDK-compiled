@@ -5,7 +5,7 @@
 // C++ headers
 #include <iostream>
 #include <queue>
-// POSIC headers
+// POSIX headers
 #include <pthread.h>
 
 #define MAXIMUM_REQUESTS_BEFORE_BLOCKING 2

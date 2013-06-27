@@ -64,7 +64,7 @@ public:
   void loadDictionary(FLFilePtr &f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
   void writeTables(const string& filepath); //optional
   void postload();
-  FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLString* rawText, FLWordList& hints);
+  FLInternalSuggestionsContainer* processWord(FLWord* inputWord, FLWordList& hints);
   FLAddWordResult addWord(FLStringPtr &word, bool canBeRemoved);
   bool removeWord(FLStringPtr &wordLetters);
   ////////////////////
