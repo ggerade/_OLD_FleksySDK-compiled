@@ -13,12 +13,14 @@
 #include "FLTokenPredictor.h"
 #include <pthread.h>
 
-#define ENABLE_SPACE_BREAKS 0
-
 typedef map<word_id, map_probs> IdMapProbs;
 typedef map<size_t, IdMapProbs> IndexIdMapProbs;
 
 class FLSpaceHelper {
+  
+  static FLPoint pointC;
+  static FLPoint pointV;
+  static FLPoint pointB;
   
   token_ids lastPreparedTokenIDs;
   void* systemsIntegrator;
@@ -54,6 +56,9 @@ public:
   void printData(IndexIdMapProbs& results);
   
   void setLastPreparedContextResults(token_ids tokenIDs);
+  static bool tapMayBeSpace(FLPoint tap);
+  
+  static bool ENABLE_SPACE_BREAKS;
 };
 
 

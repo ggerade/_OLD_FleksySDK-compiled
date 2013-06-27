@@ -75,6 +75,8 @@ public:
   FLKeyboardPtr& getKeyboard();
 
   // Settings
+  void setSpaceBreaksEnabled(bool value);
+  
   void setSettingTransformLayerWeight(float weight);
   void setSettingShapeLayerWeight(float weight);
   void setSettingContextLayerWeight(float weight);
