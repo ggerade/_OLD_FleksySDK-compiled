@@ -58,4 +58,11 @@ enum FLDeleteMode{
   FLDeleteMode_WHOLE_WORD
 };
 
+enum FLEventType{
+  FLEventType_SL,
+  FLEventType_SR,
+  FLEventType_SU,
+  FLEventType_SD
+};
+
 #endif /* defined(__FleksySDK_FLEnums_h__) */

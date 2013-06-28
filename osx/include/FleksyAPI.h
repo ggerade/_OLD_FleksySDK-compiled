@@ -174,6 +174,12 @@ public:
    */
   void toggleShift();
   
+  /*
+   * New
+   */
+  
+  void setSpaceBreaksEnabled(bool value);
+  
   std::string getVersion();
   
   //private:
