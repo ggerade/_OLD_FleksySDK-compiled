@@ -13,7 +13,6 @@
 #include "FleksyListenerInterface.h"
 #include "FLFile.h"
 #include "FLResourceArchive.h"
-#include "FLMotionEventManager.h"
 
 class FLTypingController;
 class SystemsIntegrator;
@@ -33,7 +32,6 @@ public:
   FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
   
-  FLMotionEventManager *motionManager = NULL;
   // set this to have preprocessed files generated. Do not add "/" in the end.
   string writableDirectory;
   bool isEngineLoaded;
@@ -59,6 +57,9 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
+  
+  void setIsCollectingData(bool isCollectingData);
+  void setDataCollectionFilePath(string path);
 };
 
 #endif

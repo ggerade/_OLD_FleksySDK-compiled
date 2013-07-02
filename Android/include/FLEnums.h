@@ -36,7 +36,8 @@ enum FLMessageType{
   FLMessageType_EXIT,
   FLMessageType_EVENT,
   FLMessageType_ERROR,
-  FLMessageType_BACKSPACE
+  FLMessageType_BACKSPACE,
+  FLMessageType_UPLOAD_DATA_FILE
 };
 
 //passed in as a parameter in onDictionaryModified
@@ -62,7 +63,22 @@ enum FLEventType{
   FLEventType_SL,
   FLEventType_SR,
   FLEventType_SU,
-  FLEventType_SD
+  FLEventType_SD,
+  FLEventType_RS,
+  FLEventType_P,
+  FLEventType_MC,
+  FLEventType_SH,
+  FLEventType_KB,
+  FLEventType_STS,
+  FLEventType_ETS,
+  FLEventType_LC,
+  FLEventType_CAPS,
+  FLEventType_AW,
+  FLEventType_RW,
+  FLEventType_AC,
+  FLEventType_MS,
+  FLEventType_NL,
+  FLEventType_KS
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

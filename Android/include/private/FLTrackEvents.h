@@ -22,7 +22,7 @@ public:
   //Threshold based events
   void backspaceButtonPress();
   void swipeLeft();
-  void swipeRight(bool buttonPress);
+  void swipeRight(float length);
   void swipeUp();
   void swipeDown();
   void switchedKeyboard(FLKeyboardID id);

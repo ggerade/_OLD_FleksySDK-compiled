@@ -64,32 +64,32 @@ public:
    * <word> -> <word >
    * <word > -> <word. >
    */
-  void space(bool buttonPress = false);
+  void space(float length = 0);
   
   /*
-   * If buttonPress = true, then backspace() will delete just a single character.
+   * If length = 0, then backspace() will delete just a single character.
    * Otherwise, what is deleted depends on the cursor position.
    * If the character before the cursor is a space after a word (i.e., <the word |>), then the space and the word will be deleted (i.e., <the |>).
    * If the cursor is in the middle of a word (i.e., <wor|d >), then only a single character will be deleted (i.e., <the wo|d >).
    */
-  void backspace(bool buttonPress = false);
+  void backspace(float length = 0);
   
   /*
    * Replaces the current word with the previous word on the suggestion list.
    * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the previous suggestion replacement word (i.e., <wor|d1 > -> <word0 |>).
    */
-  void previousSuggestion();
+  void previousSuggestion(float length = 0);
   
   /*
    * Replaces current word with the next word on the suggestion list.
    * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the next suggestion replacement word (i.e., <wor|d0 > -> <word1 |>).
    */
-  void nextSuggestion();
+  void nextSuggestion(float length = 0);
   
   /*
    * Will send '\n' as entered text.
    */
-  void enter();
+  void enter(float length = 0);
   
   /*
    * Set the cursor position. If cursorUpdates are not simulated this needs to be called with the new cursor position every time the cursor moves.

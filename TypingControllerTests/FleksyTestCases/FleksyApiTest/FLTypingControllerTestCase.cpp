@@ -34,19 +34,19 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerActionPtr &actio
     return checkSuggestion(action);
   }
   else if(actionType == "SR"){
-    api->space(false);
+    api->space(1);
     return checkSuggestion(action);
   }
   else if(actionType == "SL"){
-    api->backspace(false);
+    api->backspace(1);
     return checkSuggestion(action);
   }
   else if(actionType == "SD"){
-    api->nextSuggestion();
+    api->nextSuggestion(1);
     return checkSuggestion(action);
   }
   else if(actionType == "SU"){
-    api->previousSuggestion();
+    api->previousSuggestion(1);
     return checkSuggestion(action);
   }
   else if(actionType == "KB"){
@@ -117,7 +117,7 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerActionPtr &actio
     return 0;
   }
   else if(actionType == "BF"){
-    api->backspace(true);
+    api->backspace(0);
     return checkSuggestion(action);
   }
   else if(actionType == "SHC"){

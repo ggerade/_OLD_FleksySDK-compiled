@@ -15,6 +15,7 @@
 #include "FLConsistencyChecker.h"
 #include "FLPlatformSuggestions.h"
 #include "FLTrackEvents.h"
+#include "FLDataCollector.h"
 
 class FLConsistencyChecker;
 
@@ -32,13 +33,13 @@ public:
   
   //FleksyAPI calls
   void sendPoint(float x, float y, long long time);
-  void backAndForthSwipe();
-	void swipeRight(bool buttonPress);
-	void swipeLeft();
-	void swipeUp();
-	void swipeDown();
-  void enterSwipe();
-  void shiftPressed(string who);
+  void backAndForthSwipe(float length = 0);
+	void swipeRight(float length = 0);
+	void swipeLeft(float length = 0);
+	void swipeUp(float length = 0);
+	void swipeDown(float length = 0);
+  void enterSwipe(float length = 0);
+  void shiftPressed(string who, bool userPress = false);
   void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
   FLKeyboardID getActiveKeyboardID();
   void setCorrectionMode(FLCorrectionMode mode);
@@ -51,6 +52,9 @@ public:
   void setCapitalizationMode(FLCapitalizationMode mode);
   FLCapitalizationMode getCapitalizationMode();
   void setVoiceFeedback(bool isOn);
+  //PrivateAPI
+  void setIsCollectingData(bool isCollectingData);
+  void setDataCollectionFilePath(string path);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
@@ -72,6 +76,9 @@ public:
   void previousWordChanged(string from, int textBlockInex = -1);
   void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1);
   //EOF crazyChecker functions
+  
+  void setCurrentKeyboardLayout(string keyboardLayout);
+  FLDataCollector *getDataCollector();
 
 private:
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -108,12 +115,14 @@ private:
   FLConsistencyChecker *crazyCheck = NULL;
   FLPlatformSuggestions *platformSuggestions = NULL;
   FLTrackEvents *tracker = NULL;
+  FLDataCollector *dataCollector = NULL;
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
   
   //Debug stuff
   void printTextBlocks();
+  string getSlashSeparatedSuggestions(vector<FLString> suggestions);
   
   //Stuff that deletes
   void backspace();

@@ -16,6 +16,8 @@ FLTypingControllerTester::FLTypingControllerTester(char *executableResourcesPath
   fleksyListener = new FleksyListenerImplC();
   api = new FleksyAPI(*fleksyListener);
   tc = api->pImpl->tc;
+  tc->setIsCollectingData(true);
+  tc->setDataCollectionFilePath("/Users/vadim/Desktop");
 }
 
 FLTypingControllerTester::~FLTypingControllerTester(){
@@ -61,7 +63,7 @@ void FLTypingControllerTester::deleteDataFromPreviousTest(FLTypingController &tc
   tc.cursorSelectionChanged(newPos, newPos);
   
   while(tc.getTextFromTextBlocks().length() > 0){
-    tc.swipeLeft();
+    tc.swipeLeft(1);
   }
   tc.setActiveKeyboard(FLKeyboardID_QWERTY_UPPER, true);
   tc.setCapitalizationMode(FLCapitalizationMode_CAP_SENTENCES);
@@ -338,6 +340,7 @@ void FLTypingControllerTester::setup(){
   createFLTypingControllerTestCases();
   api->startTypingSession();
   api->setActiveKeyboard(FLKeyboardID_QWERTY_UPPER);
+  api->setPlatformKeyboardSize(320, 216);
   printf("Setup finished.\n");
   
 }
@@ -431,6 +434,7 @@ bool FLTypingControllerTester::runTests(bool breakOnFail){
     }
   }
   deleteTestInfos();
+  tc->endTypingSession();
   printf("FINISHED Running all tests. Fireworks! Party!!!\n");
   int totalTests = (int)testCases.size();
   float percentPass = ((float)numPassed / (float)totalTests) * 100;
