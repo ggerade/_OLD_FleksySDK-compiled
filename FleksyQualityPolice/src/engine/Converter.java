@@ -73,7 +73,7 @@ public class Converter {
 			indx = incrementIndex(output);
 		}
 		TestEngine.action = "Enter";
-		FleksyEngine.api.enter(); 	//ENTER SWIPE
+		FleksyEngine.api.enter(0); 	//ENTER SWIPE
 		FleksyEngine.stopTimer();
 		return output;
 	}
@@ -281,7 +281,7 @@ public class Converter {
 			swipeRight.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Space";
-		FleksyEngine.api.space(false);
+		FleksyEngine.api.space(0);
 		FleksyEngine.recreateSwipe("#R");
 		return swipeRight;
 	}
@@ -304,7 +304,7 @@ public class Converter {
 			swipeLeft.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Make Backspace";
-		FleksyEngine.api.backspace(false);
+		FleksyEngine.api.backspace(10);
 		FleksyEngine.recreateSwipe("#L");
 		return swipeLeft;
 	}
@@ -327,7 +327,7 @@ public class Converter {
 			swipeUp.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Previous Suggestion";
-		FleksyEngine.api.previousSuggestion();
+		FleksyEngine.api.previousSuggestion(0);
 		FleksyEngine.recreateSwipe("#U");
 		return swipeUp;
 	}
@@ -350,7 +350,7 @@ public class Converter {
 			swipeDown.addPoint(MOVE, x, y, time);
 		}
 		TestEngine.action = "Next Suggestion";
-		FleksyEngine.api.nextSuggestion();
+		FleksyEngine.api.nextSuggestion(0);
 		FleksyEngine.recreateSwipe("#D");
 		return swipeDown;
 	}
