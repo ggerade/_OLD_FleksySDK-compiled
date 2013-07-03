@@ -35,10 +35,10 @@ public:
   SystemsIntegrator();
   ~SystemsIntegrator();
 
-  FleksyUtilities* utils;
-  FLTokenPredictor* ftp;
+  FleksyUtilities* utils = NULL;
+  FLTokenPredictor* ftp = NULL;
   
-  FLSpaceHelper* spaceHelper;
+  FLSpaceHelper* spaceHelper = NULL;
   
   FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   token_ids convertToTokenIDs(FLString* token2, FLString* token1);
