@@ -16,8 +16,8 @@ FLTypingControllerTester::FLTypingControllerTester(char *executableResourcesPath
   fleksyListener = new FleksyListenerImplC();
   api = new FleksyAPI(*fleksyListener);
   tc = api->pImpl->tc;
-  tc->setIsCollectingData(true);
-  tc->setDataCollectionFilePath("/Users/vadim/Desktop");
+//  tc->setIsCollectingData(true);
+//  tc->setDataCollectionFilePath("/Users/vadim/Desktop");
 }
 
 FLTypingControllerTester::~FLTypingControllerTester(){
