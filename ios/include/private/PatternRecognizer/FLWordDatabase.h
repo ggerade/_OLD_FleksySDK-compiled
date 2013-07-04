@@ -44,9 +44,9 @@ private:
 
   
   //returns point of word with index bi, OR fixed points BASEPOINT_CUSTOM1_ID or BASEPOINT_CUSTOM2_ID
-  static FLPoint getBasePointOfWord(FLWord* word, int bi);
+  static FLPoint getBasePointOfWord(const FLWord* word, int bi);
   //returns point of word with index pi in a coordinate system where basepoints b1 and b2 are stretched and moved to become (0,0) and (1,0)
-  static FLPoint getBasisCoordsForWord(FLWord* word, int pi, FLPoint b1, FLPoint b2);
+  static FLPoint getBasisCoordsForWord(const FLWord* word, int pi, FLPoint b1, FLPoint b2);
   
   void createEmptyTables();
   
@@ -57,10 +57,10 @@ private:
   void _voteWithParams(VoteParameters params, VoteResult* result);
   void voteWithParams(VoteParameters params, VoteResult* result);
   void paramsToBucketsAndVote(VoteResult result);
-  void voteSingleBasisForInputWord(FLWord* inputWord, int i, int bi1, int bi2, VoteResult* result);
-  static float getBasisCoordDistanceForWord(FLWord* word1, FLWord* word2, int pi, int bi1, int bi2);
-  void vote(FLWord* word, int bi1, int bi2, VoteResult* result);
-  void vote(FLWord* word, VoteResult* result);
+  void voteSingleBasisForInputWord(const FLWord* inputWord, int i, int bi1, int bi2, VoteResult* result);
+  static float getBasisCoordDistanceForWord(const FLWord* word1, const FLWord* word2, int pi, int bi1, int bi2);
+  void vote(const FLWord* word, int bi1, int bi2, VoteResult* result);
+  void vote(const FLWord* word, VoteResult* result);
 
   // FLWordDatabase (LoadingMethods)
   void modifyBlackboxValuesFor(FLWord* word, int bi1, int bi2, bool addRemove);
@@ -82,8 +82,8 @@ public:
   size_t allWordsCount = 0;
 
   // FLWordDatabase (QueryingMethods)
-  FLInternalSuggestionsContainer* processWordInternal(FLWord* inputword, bool needPreciseScore, bool printResults);
-  static void calculatePreciseCandidateScore(FLWord* candidate, FLWord* inputWord);
+  FLInternalSuggestionsContainer* processWordInternal(const FLWord* inputword, bool needPreciseScore, bool printResults);
+  static void calculatePreciseCandidateScore(FLWord* candidate, const FLWord* inputWord, bool force = true);
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private

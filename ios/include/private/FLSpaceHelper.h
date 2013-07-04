@@ -18,9 +18,9 @@ typedef map<size_t, IdMapProbs> IndexIdMapProbs;
 
 class FLSpaceHelper {
   
-  static FLPoint pointC;
-  static FLPoint pointV;
-  static FLPoint pointB;
+  static float minX;
+  static float maxX;
+  static float minY;
   
   token_ids lastPreparedTokenIDs;
   void* systemsIntegrator;

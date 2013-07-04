@@ -240,7 +240,6 @@ class Prediction
 {
 public:
   word_id wordID;
-  FLString word;
   probability weight;
   // constructors
   Prediction(word_id shortWordID, probability p, bool occurences = false) {
@@ -254,18 +253,9 @@ public:
   bool operator<(Prediction& pred) const { return (this->weight < pred.weight); };
   bool operator>(Prediction& pred) const { return (this->weight > pred.weight); };
   
-  const char * c_str() {
-    char tmpBuffer[128];
-    snprintf(tmpBuffer, sizeof(tmpBuffer), "(%s, %f)", word.c_str(), weight);
-    string result = string(tmpBuffer);
-    return result.c_str();
-  }
-
-  friend ostream& operator<<(ostream& out, Prediction& pred) { out << "(" << pred.wordID << ", " << pred.word.c_str() << ", " << pred.weight << ")";  return out; };
-    
   // want to find predictions by word
-  bool operator==(const Prediction& pred) { return (this->word == pred.word); };  // const Prediction& is critical (error otherwise)
-  bool operator!=(const Prediction& pred) { return (this->word != pred.word); };  // const Prediction& is critical (error otherwise)
+  bool operator==(const Prediction& pred) { return (this->wordID == pred.wordID); };  // const Prediction& is critical (error otherwise)
+  bool operator!=(const Prediction& pred) { return (this->wordID != pred.wordID); };  // const Prediction& is critical (error otherwise)
 
   static void throwInvalidArgument(const char* message, probability value) { ostringstream msg(message); msg << " (" << value << ")"; throw std::invalid_argument(msg.str()); }
 };

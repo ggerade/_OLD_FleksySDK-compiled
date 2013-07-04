@@ -43,7 +43,7 @@ public:
   FLStringPtr lettersPtr;
   FLStringPtr printLettersPtr;
 
-  FLPoint getPoint(size_t pointIdx);
+  FLPoint getPoint(size_t pointIdx) const;
   //LPCentroid* LPCentroids;
   
   float votes0and1;
@@ -117,7 +117,7 @@ public:
 //  int getFrequencyRank();
 //  void setFrequencyRank(int rank);
   
-  short getNPoints();
+  short getNPoints() const;
   BBValue getUniqueID();
   int getBytesAllocated();
 

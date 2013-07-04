@@ -17,11 +17,11 @@ using namespace std;
 
 class FLInternalSuggestionsContainer {
 private:
-  FLWord* inputWord;
+  const FLWord* inputWord;
 
 public:
-  FLInternalSuggestionsContainer(FLWord* inputWord);
-  FLWord* getInputWord();
+  FLInternalSuggestionsContainer(const FLWord* inputWord);
+  const FLWord* getInputWord();
   FLWord* getFirstSuggestion();
   
   double processingTimes[5];
