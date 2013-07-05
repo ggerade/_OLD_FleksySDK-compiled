@@ -97,7 +97,7 @@ public:
     int result = 0;
     // Note: we are searching backwards, and will return as soon as we hit the first non-valid/non-active token
     for(int i = 0; i < MAX_WORD_DEPTH; i++) {
-      if((data[i] == FL_NO_TOKEN) || (data[i] == FL_STOP_SIGNAL)) { return result; }
+      if(!IS_TOKEN_VALID_FOR_SEARCH(data[i])) { return result; }
       else { result++; }
     }
     return result;
