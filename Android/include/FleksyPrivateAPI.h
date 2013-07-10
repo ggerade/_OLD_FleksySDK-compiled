@@ -57,9 +57,6 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
-  
-  void setIsCollectingData(bool isCollectingData);
-  void setDataCollectionFilePath(string path);
 };
 
 #endif

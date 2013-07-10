@@ -52,9 +52,6 @@ public:
   void setCapitalizationMode(FLCapitalizationMode mode);
   FLCapitalizationMode getCapitalizationMode();
   void setVoiceFeedback(bool isOn);
-  //PrivateAPI
-  void setIsCollectingData(bool isCollectingData);
-  void setDataCollectionFilePath(string path);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
