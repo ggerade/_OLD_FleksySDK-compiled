@@ -125,6 +125,7 @@ public:
   /*
    * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
    * *NEW* buttonPress if switch was caused by hitting a button to switch the keyboard
+   * *NEW* if buttonPress=true and cursor is at the end of the word that hasn't been corrected before, it will be corrected. Ex: <hekko|>-><hello|>
    */
   void setActiveKeyboard(FLKeyboardID keyboardID, bool buttonPress = false);
   
@@ -177,7 +178,6 @@ public:
   /*
    * New
    */
-  
   void setSpaceBreaksEnabled(bool value);
   
   std::string getVersion();

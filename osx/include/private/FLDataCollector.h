@@ -26,6 +26,7 @@ public:
   void setFileHeader(std::string fileHeader);
   
   void processEvent(FLEventType event, ...);
+  void processEvent(std::string event, std::string eventData);
   void writeEventsToFile();
   
   bool isDataCollectionEnabled();
@@ -41,7 +42,7 @@ private:
   std::string fileHeader;
   bool isFileReadyForUpload;
   
-  void recordEvent(std::string event, FLEventType type);
+  void recordEvent(std::string eventData, FLEventType type);
  
   std::string floatToString(float value);
   std::string longToString(long long value);
