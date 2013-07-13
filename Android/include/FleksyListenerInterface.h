@@ -84,6 +84,7 @@ public:
   virtual void onRequestAdditionalSuggestions(const FLString rawText){};
   /*
    * Send suggestion list to the platform to display(aka Candidates)
+   * Suggestions could be empty. When suggestions list is empty, that means that there are no available suggestions and UI should update to indicate that there are no suggestions
    */
   virtual void onReceiveSuggestions(std::vector<FLString> suggestions, int selectedIndex){};
   /*

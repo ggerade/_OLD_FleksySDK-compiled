@@ -22,15 +22,16 @@ public:
   ~FLDataCollector();
   
   void setIsCollectingData(bool isCollectingData);
+  bool isDataCollectionEnabled();
+  
   void setDataCollectionFilePath(std::string path);
   void setFileHeader(std::string fileHeader);
   
   void processEvent(FLEventType event, ...);
   void processEvent(std::string event, std::string eventData);
-  void writeEventsToFile();
   
-  bool isDataCollectionEnabled();
-  
+  void writeEventsToFile(bool writeAsync = false);
+
 private:
   FleksyListenerInterface &listener;
   std::vector<std::string>events;

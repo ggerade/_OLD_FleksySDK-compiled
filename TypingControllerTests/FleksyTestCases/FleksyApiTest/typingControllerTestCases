@@ -1,3 +1,149 @@
+//Test-114
+//>flekdy
+//KB2
+//>.
+//ET "Fleksy."
+//SD(2)
+//EUL (0,6)
+//EOT
+
+Test-113
+>flekdy
+KB2
+>'
+ET "Flekdy'"
+EUL (0,7)
+SR
+ET "Flekdy' "
+EOT
+
+Test-112
+>flekdy
+KB2
+>'
+ET "Flekdy'"
+EU (0,7)
+KB1
+>d
+ET "Flekdy'd"
+EU (0,8)
+SR
+ET "Flekdy'd "
+EOT
+
+Test-111
+AC (off)
+>hekko
+SR(0)
+SD(1)
+ET "Hello "
+EOT
+
+Test-110
+>hekko
+KB2
+>1
+ET "Hekko1"
+EOT
+
+Test-109
+>hekko
+KB2
+>!
+ET "Hello!"
+TBC (2,0)
+EUL (5,6)
+SR
+ET "Hello! "
+SL
+SL
+KB1
+>hekko
+KB2
+>:
+SR
+ET "Hello: "
+SL
+SL
+KB1
+>hekko
+KB2
+>(
+ET "Hello("
+EOT
+
+Test-108
+SH
+>vadim
+KB2
+>@
+KB1
+>syntellia
+KB2
+>.
+KB1
+>com
+ET "vadim@syntellia.com"
+TBC (0,19)
+SR
+TBC (1,0)
+EUL (0, 19)
+EOT
+
+Test-107
+SH
+>http
+KB2
+>:
+ET "http:"
+TBC (0,5)
+>//
+KB1
+>www
+KB2
+>.
+KB1
+>google
+KB2
+>.
+KB1
+>com
+SR
+ET "http://www.google.com "
+EUL (0,21)
+EOT
+
+Test-106
+SH
+>http
+KB2
+>:
+ET "http:"
+TBC (0,5)
+SR
+ET "http: "
+EUL (0,5)
+EOT
+
+Test-105
+>www
+KB2
+>.
+ET "Www."
+TBC (0,4)
+SR
+ET "Www. "
+EUL (0,4)
+EOT
+
+Test-104
+>abc
+KB2
+>123
+TBC (0,6)
+EUL (0,6)
+EOT
+
 Test-103
 >test
 SR
@@ -665,36 +811,11 @@ EOT
 //EOT
 
 Test-73
-//Expected behavior when attempting to add words to the dictionary when in password mode
 AC (off)
->hello
-SR
-SU
-SU
+>hekko
+SR(0)
 SD
-SD
-SD
-SD
-SU
-SD
-SL
-SR
-SU
-SL
-SU
-SD
-SD
-SD
-SU
-SU
-SR
-MC -3
-SU
-SD
-SD
-SU
-ET "hello "
-EC 3
+ET "Hello "
 EOT
 
 //Test-72
@@ -739,7 +860,6 @@ ET "Borrrat's "
 MC 3
 SR
 SU
-SU
 >borrrats
 SR
 ET "Borrrat's Borrrat's "
@@ -771,12 +891,12 @@ Test-69
 AC (off)
 >california
 SR
-ET "california "
+ET "California "
 SU
 AC (on)
->california
+>California
 SR(1)
-ET "california California "
+ET "California California "
 SD(2)
 EC end
 EOT
@@ -896,7 +1016,7 @@ ET "Fleksy's "
 EUL (6,8)
 MC(0) 3
 EUL (0,8)
-SR(1)
+SR(0)
 SU(0)
 ET "Fleksy's "
 EUL(0,8)
@@ -992,6 +1112,7 @@ Test-56
 EUL (0,3)
 KB2
 >'
+SU
 EUL (0,4)
 //ET "Don'"
 KB1
@@ -1025,16 +1146,16 @@ EUL (0,3)
 KB2
 >''''''
 EUL (0,9)
-//ET "Don''''''"
+ET "Don''''''"
 KB1
 >t
-//EUL (0,10)
-//ET "Don''''''t"
-SR(1)
-ET "Don't "
-EUL (0,5)
+EUL (0,10)
+ET "Don''''''t"
+SR(0)
+ET "Don''''''t "
+EUL (0,10)
 SU(0)
-//ET "Don''''''t "
+ET "Don''''''t "
 EUL (0,10)
 EOT
 
@@ -1828,7 +1949,7 @@ Test47
 KB2
 >12345
 ET "12345"
-TBC (5,0)
+TBC (0,5)
 EOT
 
 Test48
@@ -1836,7 +1957,7 @@ Test48
 KB2
 >1
 ET "Hello1"
-TBC (2,0)
+TBC (0,6)
 EOT
 
 Test49
@@ -1844,11 +1965,11 @@ Test49
 KB2
 >1
 ET "Hello1"
-TBC (2,0)
+TBC (0,6)
 KB1
 >hello
 SR
-TBC (3,0)
+TBC (1,0)
 ET "Hello1hello "
 EOT
 
@@ -1857,10 +1978,10 @@ Test50
 MC -2
 KB2
 >6
-TBC (2,0)
+TBC (0,4)
 ET "Hel6lo"
 MC end
-TBC (2,2)
+TBC (0,6)
 EOT
 
 Test51
@@ -2015,7 +2136,7 @@ Test63
 KB2
 >1
 ET "Hello1"
-TBC (2,0)
+TBC (0,6)
 EOT
 
 Test64
@@ -2060,24 +2181,24 @@ Test66
 AC (off)
 >hwllo
 SR
-ET "hwllo "
+ET "Hwllo "
 AC (on)
 >hwllo
 SR
-ET "hwllo hello "
+ET "Hwllo hello "
 MC 1
 SD
-ET "hello hello "
+ET "Hello hello "
 EOT
 
 Test67
 AC (off)
 >hello
 SR
-ET "hello "
+ET "Hello "
 MC 2
 SR
-ET "he llo "
+ET "He llo "
 TBC (1,0)
 EC 3
 EOT
@@ -2092,7 +2213,7 @@ SL
 TBC (0,1)
 >ouse
 SR
-ET "house "
+ET "House "
 EC 6
 EOT
 
@@ -2100,15 +2221,15 @@ Test69
 AC (off)
 >hello
 SR
-ET "hello "
+ET "Hello "
 TBC (1,0)
 MC 2
 TBC (0,2)
-SD
-EC 2
-TBC (0,2)
-AC (on)
 SD(1)
+EC 6
+TBC (1,0)
+AC (on)
+SD(2)
 TBC (1,0)
 EC 6
 EOT
@@ -2122,11 +2243,11 @@ MC 2
 KB2
 >0
 ET "He0llo "
-TBC (2,0)
+TBC (0,3)
 SR
-ET "He0 llo "
-TBC (2,0)
-EC 4
+ET "He0llo "
+TBC (1,0)
+EC 7
 EOT
 
 Test71
@@ -2217,9 +2338,9 @@ KB2
 >1
 KB1
 ET "Hello 1"
-EUL (7,7)
+EUL (6,7)
 SR
-EUL (8,8)
+EUL (6,7)
 ET "Hello 1 "
 TBC (2,0)
 EOT
@@ -2348,7 +2469,7 @@ AC (off)
 >h
 EUL (1,1)
 >ello
-ET "hello"
+ET "Hello"
 EUL (5,5)
 SR(0)
 EUL (5,5)
@@ -2369,11 +2490,11 @@ Test94
 AC (off)
 >hello
 SR
-ET "hello "
+ET "Hello "
 SL
 SL
 SL
-ET "hel"
+ET "Hel"
 EUL (3,3)
 TBC (0,3)
 EOT
@@ -2392,7 +2513,7 @@ KB2
 >123
 SR
 ET "123 "
-TBC (3,0)
+TBC (1,0)
 EOT
 
 Test97
@@ -2403,9 +2524,10 @@ EOT
 
 Test98
 AC (off)
+//this will turn off auto shift
 SH
 >h
-ET "H"
+ET "h"
 EOT
 
 Test99
@@ -2505,12 +2627,11 @@ TBC (0,5)
 KB2
 ET "Hello "
 >1
-//[Hello]-[1]-[|]+
-TBC (2,0)
+TBC (0,6)
 ET "Hello1 "
 SU
-ET "Hekko1 "
-EUL (0,5)
+ET "Hello1 "
+EUL (0,6)
 EOT
 
 Test108
@@ -2518,14 +2639,14 @@ KB2
 >123
 SR
 ET "123 "
-EUL (4,4)
+EUL (0,3)
 KB1
 >hello
 SR
 SL
-EUL (4,4)
+EUL (0,3)
 SL
-EUL (3,3)
+EUL (0,0)
 EOT
 
 Test109
@@ -2533,9 +2654,9 @@ KB2
 >123
 SR
 BF
-EUL (3,3)
+EUL (0,3)
 BF
-EUL (2,2)
+EUL (0,2)
 EOT
 
 Test110
@@ -2547,8 +2668,8 @@ BF
 KB1
 >hello
 SR
-ET "12hello "
-EUL (2,7)
+ET "Hello "
+EUL (0,5)
 EOT
 
 Test111
@@ -2557,12 +2678,10 @@ KB2
 >1
 SU
 ET "Hekko1"
-EUL (0,5)
+EUL (0,6)
 MC 2
-SD
-ET "Hello1"
+SD(1)
 SR
-ET "Hello 1"
 TBC (1,0)
 EOT
 
@@ -2570,7 +2689,7 @@ Test112
 KB2
 >123
 MC 2
-EUL (2,2)
+EUL (0,3)
 EOT
 
 Test113
@@ -2581,7 +2700,7 @@ KB1
 >he
 SL
 SL
-EUL (2,2)
+EUL (0,3)
 EOT
 
 Test114
@@ -2592,7 +2711,7 @@ KB1
 >he
 BF
 BF
-EUL (2,2)
+EUL (0,3)
 EOT
 
 Test115
@@ -2601,9 +2720,11 @@ KB2
 MC 2
 KB1
 >hello
+//12hello3
 SR
+ET "12hello3 "
 MC 2
-EUL (2,2)
+EUL (0,8)
 EOT
 
 Test116
@@ -2612,7 +2733,7 @@ KB2
 SR
 MC -1
 MC +1
-EUL (4,4)
+EUL (0,3)
 EOT
 
 Test117

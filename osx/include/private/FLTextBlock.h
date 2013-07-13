@@ -54,6 +54,11 @@ public:
   FLString getTextToCorrect();
   
   void printSelf(int tbNumber);
+  FLString toLowerCase(FLString string);
+  
+  bool containsNonAlphaCharacters();
+  bool containsApostrophe();
+  bool isSplitWithSpace();
   
 private:
   FleksyListenerInterface &out;
@@ -72,7 +77,7 @@ private:
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
-  FLString toLowerCase(FLString string);
+  //FLString toLowerCase(FLString string);
   
   void printTextBlock();
   void deleteSuggestions();

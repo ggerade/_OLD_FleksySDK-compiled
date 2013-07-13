@@ -82,6 +82,7 @@ private:
 
 	FleksyListenerInterface &out;
 	std::vector<FLString> punctuation;
+  std::vector<FLString> specialCases;
 	std::vector<FLTextBlock*> textBlocks;
   
   std::string versionNumber;
@@ -141,7 +142,7 @@ private:
   FLChar getNearestChar(FLPoint p);
   std::vector<FLPoint> getPointsForText(FLString word);
   void reset();
-  void createPunctuationSuggestions();
+  void populateSpecialVectors();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
 	void ignoredCursorUpdate(std::string from, int num_ignores);
@@ -158,6 +159,9 @@ private:
   void onBeginBatchEdit();
   void onEndBatchEdit();
   void batchEditCheck(int newSelStart, int newSelEnd);
+  bool canAddSymbolToTextBlock(FLChar character, FLString blockText);
+  FLString toLowerCase(FLString word);
+  bool isSymbolAllowedToCorrect(FLChar character);
   
   //User cursor operations
   void moveCursorToPosition(int position);
@@ -180,6 +184,7 @@ private:
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
   void mergeTextBlocksCheck();
+  void checkTextBlockForSplittage(int indexOfTB);
   
   //UI&User Feedback
   void setComposingRegionForTextBlock(FLTextBlock* tb, int userCursor, bool isSpaceIncluded);
