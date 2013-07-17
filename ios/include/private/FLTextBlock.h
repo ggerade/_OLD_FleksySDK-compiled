@@ -59,6 +59,8 @@ public:
   bool containsNonAlphaCharacters();
   bool containsApostrophe();
   bool isSplitWithSpace();
+  void setUserCapitalization(bool isUserSet);
+  bool userSetCapitalization();
   
 private:
   FleksyListenerInterface &out;
@@ -74,6 +76,8 @@ private:
   bool isNewLine;
   bool isSymbolTextBlock;
   bool addedWordToDictionary;
+  bool isUserSetCapitalization;
+  bool userEditedText;
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);

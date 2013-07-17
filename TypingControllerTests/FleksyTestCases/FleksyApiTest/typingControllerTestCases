@@ -1,11 +1,68 @@
-//Test-114
-//>flekdy
-//KB2
-//>.
-//ET "Fleksy."
-//SD(2)
-//EUL (0,6)
-//EOT
+Test-119
+>hello
+SR
+MC -3
+KB2
+>.
+ET "Hel.lo "
+TBC (0,4)
+EUL (0,6)
+EOT
+
+Test-118
+>hello
+SR
+KB2
+>.
+EUL (6,7)
+SR
+ET "Hello . "
+MC -1
+EUL (6,7)
+SD(2)
+EUL (6,7)
+EOT
+
+Test-117
+>hello
+SR
+SR
+MC -1
+TBC (2,0)
+EUL (0,5)
+EOT
+
+Test-116
+>hello
+KB2
+>.
+ET "Hello."
+EUL (0,5)
+SR
+EUL (5,6)
+ET "Hello. "
+SD(2)
+ET "Hello, "
+EOT
+
+Test-115
+KB2
+>.
+ET "."
+EUL (0,1)
+SR
+EUL (0,1)
+EOT
+
+Test-114
+>flekdy
+KB2
+>.
+EUL (0,6)
+ET "Fleksy."
+SD(2)
+EUL (0,6)
+EOT
 
 Test-113
 >flekdy
@@ -52,8 +109,9 @@ KB2
 >!
 ET "Hello!"
 TBC (2,0)
-EUL (5,6)
+EUL (0,5)
 SR
+EUL (5,6)
 ET "Hello! "
 SL
 SL
@@ -429,7 +487,7 @@ SL
 TBC (1,2)
 EC 8
 //ETB [hello] [wo|ld]
-SR(1)
+SR(0)
 //ET "Hello wild "
 EC 11
 EC end
@@ -591,21 +649,23 @@ ST "Hello. Fleksy "
 //ETB [hello]- [.] [Fleksy] [|]
 MC 6
 //ETB [hello]- [.]- [|]+ [Fleksy]
-SD(2)
-ET "Hello, Fleksy "
-//ETB [hello]- [,]- [|]+ [Fleksy]
+SD(1)
+EUL (0,5)
+SU(0)
+ET "Hello. Fleksy "
+//ETB [hello]- [.]- [|]+ [Fleksy]
 >test
-//ETB [hello]- [,]- [test|]+ [Fleksy]
-SD(3)
-//ETB [hello]- [?]- [test|] [Fleksy]
-ET "Hello?test Fleksy "
+//ETB [hello]- [.]- [test|]+ [Fleksy]
+SD(2)
+//ETB [hello]- [,]- [test|] [Fleksy]
+ET "Hello,test Fleksy "
 EUL (6,10)
 TBC (2,4)
 MC +1
 SD(1)
 SU(0)
-ET "Hello?test Fleksy "
-//ETB [hello]- [?]- [test] [|] [Fleksy]
+ET "Hello,test Fleksy "
+//ETB [hello]- [,]- [test] [|] [Fleksy]
 TBC (3,0)
 MC -5
 SU
@@ -687,7 +747,7 @@ EC 13
 TBC (2,0)
 MC -4
 >g
-SR(1)
+SR(0)
 EC 14
 TBC (2,0)
 EOT 
@@ -722,8 +782,8 @@ SR
 ET "I don't "
 MC 4
 >ggg
-SR(1)
-EC 10
+SR(0)
+EC 11
 TBC (2,0)
 EOT 
 
@@ -862,7 +922,7 @@ SR
 SU
 >borrrats
 SR
-ET "Borrrat's Borrrat's "
+ET "Borrrat's borrrat's "
 EC end
 EOT
 
@@ -982,9 +1042,9 @@ EUL (5,6)
 MC(0) 18
 EUL (15,21)
 MC(0) +4
-SD(3)
-SU(2)
-EUL (21,22)
+SD(1)
+SU(0)
+EUL (15,21)
 MC end
 EUL (59,60)
 EOT
@@ -1039,22 +1099,23 @@ SU(0)
 MC(0) +1
 TBC (2,1)
 EUL (6,16)
-ET "Hello California! Meet Fleksy "
+ET "Hello.California! Meet Fleksy "
 SR(0)
-SL(0)
+ET "Hello.California ! Meet Fleksy "
+SL(1)
 BF
 >california
-SD(1)
-ET "Hello.california! Meet Fleksy "
 SD(2)
+ET "Hello,california! Meet Fleksy "
 SD(3)
 SD(4)
 SD(5)
-ET "Hello'scalifornia! Meet Fleksy "
+SD(6)
+ET "Hello:california! Meet Fleksy "
 MC 2
-EUL (0,7)
+EUL (0,5)
 MC 8
-EUL (0,17)
+EUL (6,16)
 EOT
 
 Test-60
@@ -1297,7 +1358,7 @@ EC 0
 SR
 MC 4
 >bit
-SR(1)
+SR(0)
 SR(1)
 TBC (2,0)
 SD(2)
@@ -1421,7 +1482,7 @@ TBC (0,4)
 EC 4
 SL
 MC +1
-SR
+SR(1)
 EC 5
 ET "Help "
 EOT
@@ -1726,7 +1787,7 @@ ET "Hello "
 MC 2
 >yo
 SR
-ET "Tripoli "
+ET "Heyollo "
 EOT
 
 Test32
@@ -2433,7 +2494,7 @@ Test87
 SR(1)
 MC 5
 BF(0)
-SR(1)
+SR(0)
 EOT
 
 Test88
@@ -2505,7 +2566,7 @@ KB2
 >.
 ET "California."
 TBC (2,0)
-EUL (10,11)
+EUL (0,10)
 EOT
 
 Test96
@@ -2768,4 +2829,107 @@ BF
 ET "Hello "
 EUL (0,5)
 EC 6
+EOT
+
+Test119
+>Hello
+SR
+SH
+>vadim
+SR
+SU
+SU
+SL
+>vadim
+SR
+ET "Hello Vadim "
+EOT
+
+Test120
+>hello
+KB2
+>.
+KB1
+>test
+SR
+ET "Hello.test "
+MC -3
+SR(0)
+EOT
+
+Test121
+>swuprd
+SR
+ET "Swiped "
+BF
+BF
+>s
+ET "Swipes"
+SR
+ET "Swipes "
+EOT
+
+Test122
+>hello
+SR
+SR
+>there
+SR
+MC 6
+KB2
+>5
+ET "Hello.5 There "
+BF
+ET "Hello.There "
+EOT
+
+Test123
+>hello
+SR
+SR
+>there
+SR
+MC 6
+KB2
+>)
+ET "Hello.) There "
+SD
+ET "Hello,) There "
+EOT
+
+Test124
+>hello
+SR
+SR
+>there
+SR
+MC 6
+KB3
+>[
+ET "Hello.[ There "
+SD
+ET "Hello,[ There "
+EOT
+
+Test125
+>hello
+BF
+>i
+SR
+ET "Hello "
+EOT
+
+Test126
+>hekki
+SR
+ET "Hello "
+MC -3
+KB2
+>.
+SR
+ET "Hel.lo "
+SD
+ET "Hello "
+SU
+ET "Hel.lo "
 EOT

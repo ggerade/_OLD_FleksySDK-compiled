@@ -39,8 +39,8 @@ void FleksyListenerImplC::onSetComposingRegion(int start, int end){
 
 void FleksyListenerImplC::onChangeSelection(int selectionStart, int selectionEnd){
   printf("onChangeSelection: start: %i, end: %i\n", selectionStart, selectionEnd);
-  //composingStart = selectionStart;
-  //composingEnd = selectionEnd;
+//  composingStart = selectionStart;
+//  composingEnd = selectionEnd;
   state.selectionEnd = selectionEnd;
   state.selectionStart = selectionStart;
 }
@@ -107,7 +107,7 @@ FLString FleksyListenerImplC::getSuggestionForIndex(int index){
 }
 
 FLString FleksyListenerImplC::getTextAroundCursor(int numOfCharsAroundCursor){
-  int buffer = 10;//10 chars buffer
+  int buffer = 15;//15 chars buffer
   int start = composingEnd - (numOfCharsAroundCursor + buffer);
   if(start < 0){
     start = 0;

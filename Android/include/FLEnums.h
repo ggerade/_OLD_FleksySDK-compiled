@@ -24,6 +24,7 @@ enum FLKeyboardID{
 };
 
 enum FLCorrectionMode{
+  FLCorrectionMode_URL, //In this mode, when . is entered previous TB is not corrected
   FLCorrectionMode_ALWAYS,
   FLCorrectionMode_OFF
 };

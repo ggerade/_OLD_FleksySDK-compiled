@@ -83,7 +83,7 @@ public:
 
   // FLWordDatabase (QueryingMethods)
   FLInternalSuggestionsContainer* processWordInternal(const FLWord* inputword, bool needPreciseScore, bool printResults);
-  static void calculatePreciseCandidateScore(FLWord* candidate, const FLWord* inputWord, bool force = true);
+  static void calculatePreciseCandidateScore(FLWord* candidate, const FLWord* inputWord, bool force = true, float penalty = 1);
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private

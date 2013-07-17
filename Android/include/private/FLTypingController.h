@@ -100,6 +100,7 @@ private:
   //TODO:rename this 
   bool isFirstInputAfterParsing;
   //////
+  bool isUserShifting;
   bool isEngineLoaded;
   bool voiceFeedback;
   bool startedTypingSession;
@@ -123,7 +124,7 @@ private:
   string getSlashSeparatedSuggestions(vector<FLString> suggestions);
   
   //Stuff that deletes
-  void backspace();
+  void backspace(float length);
   void deleteTextBlock();
   void deleteCharacterAt(int indx);
   void deleteCurrentTextBlock();
@@ -178,7 +179,7 @@ private:
 	int addTextBlock(FLTextBlock *block);
   FLTextBlock* createTextBlockFromExistingText(FLString &blockText);
 	void addSymbolsTextBlock();
-  void insertTextBlockInTextBlock(FLTextBlock *TBtoSplit, FLString TBtoInsertText, int indexInTB, int indexInVector);
+//  void insertSymbolsTextBlockInTextBlock(FLTextBlock *TBtoSplit, FLString TBtoInsertText, int indexInTB, int indexInVector);
   void createTextBlockFromExistingTextAndUpdateTBCursor(FLString blockText);
   void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
@@ -189,9 +190,9 @@ private:
   //UI&User Feedback
   void setComposingRegionForTextBlock(FLTextBlock* tb, int userCursor, bool isSpaceIncluded);
   void updateShiftState(bool forcedUpdate = false);
-  void updateCandidatesView();
+  void updateCandidatesView(FLTextBlock *tbToUpdate = NULL);
   void clearCandidatesView();
-  void forceCandidateViewUpdate();
+  void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLString text, bool isDeleted);
   
   

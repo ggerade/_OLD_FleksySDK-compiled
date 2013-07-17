@@ -178,6 +178,11 @@ public:
    * New
    */
   void setSpaceBreaksEnabled(bool value);
+  /*
+   * New
+   */
+  void setDeleteMode(FLDeleteMode mode);
+  
   
   std::string getVersion();
   
