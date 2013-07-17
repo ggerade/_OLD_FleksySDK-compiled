@@ -220,6 +220,8 @@ public:
   static void printFastHdr(FastBinaryFileHeader& hdr);
   
   static size_t addPredictions(list_pred& result, FLFilePtr file, int flag, int count = 0);
+  
+  static IntVector convertToDeltas(const IntVector& data, bool increasing);
 
   static bool IsNumber(char * str) {
     char *ptr = str;

@@ -9,11 +9,15 @@
 #ifndef FLWORD_H
 #define FLWORD_H
 
+#include <memory>
+
 #include "PrivateStructures.h"
 #include "Structures.h"
 #include "FLBlackBox.h"
 #include "FLKeyboard.h"
 
+class FLWord;
+typedef std::shared_ptr<FLWord> FLWordPtr;
 
 class FLWord {
   
@@ -133,6 +137,7 @@ public:
 };
 
 typedef std::vector<FLWord*> FLWordList;
+typedef std::vector<FLWordPtr> FLWordPtrList;
 
 
 #endif

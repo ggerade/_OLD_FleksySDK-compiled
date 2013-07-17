@@ -31,15 +31,15 @@ private:
   
   bool FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA;
   
-  FLWord* wordsByID[FL_MAX_WORD_ID];
+  FLWordPtr wordsByID[FL_MAX_WORD_ID];
   FLBlackBox* blackboxesByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index
   BBValue maxWordID;
   FLVotesHolder* votesHolder;
 
-  FLWordList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
+  FLWordPtrList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
 
   
-  std::unordered_map<FLStringPtr, FLWord*, FLStringPtrHash, FLStringPtrEqual> wordsByLetters;
+  std::unordered_map<FLStringPtr, FLWordPtr, FLStringPtrHash, FLStringPtrEqual> wordsByLetters;
   std::unordered_map<FLStringPtr, FLStringPtr, FLStringPtrHash, FLStringPtrEqual> wordsBlacklistByLetters;
 
   
@@ -63,8 +63,8 @@ private:
   void vote(const FLWord* word, VoteResult* result);
 
   // FLWordDatabase (LoadingMethods)
-  void modifyBlackboxValuesFor(FLWord* word, int bi1, int bi2, bool addRemove);
-  void modifyBlackboxValuesFor(FLWord* word, bool addRemove);
+  void modifyBlackboxValuesFor(FLWordPtr &word, int bi1, int bi2, bool addRemove);
+  void modifyBlackboxValuesFor(FLWordPtr &word, bool addRemove);
 
   // FLWordDatabase (DebugMethods)
   static void _printResults(FLWordList* words, FLVotesHolder* votesHolder);
@@ -72,6 +72,8 @@ private:
   void displayStats();
   
   static void printVoteParams(VoteParameters params);
+  
+  static int getStartIndex(int length, int bi1);
 
   std::unordered_map<FLTokenID, FLStringPtr> tokenIDToStringMap;
 
@@ -87,8 +89,8 @@ public:
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private
-  void loadedWord(FLWord* word, bool calculateBlackboxValues);
-  bool removeWord(FLWord* word);
+  void loadedWord(FLWordPtr &word, bool calculateBlackboxValues);
+  bool removeWord(FLWordPtr &word);
   void calculateBlackboxValues();
   bool preprocessedFilesExist(const string filepathFormat);
   void loadTablesWithPathFormat(const string filepathFormat);
@@ -98,15 +100,15 @@ public:
   
   void clearValues();
   
-  FLWord* getWordByID(int wordID);
+  FLWordPtr getWordByID(int wordID);
 
   bool getTokenIDForFLString(FLStringPtr &string, FLTokenID *tokenIDRef);
   bool getFLStringForTokenID(FLTokenID tokenID, FLStringPtr &string);
   void addWordToTokenDatabase(FLStringPtr &wordString, BBValue uniqueID);
 
   //
-  FLWord* getWordFromDictionary(FLStringPtr &key);
-  void setWordInDictionary(FLStringPtr &key, FLWord* word);
+  FLWordPtr getWordFromDictionary(FLStringPtr &key);
+  void setWordInDictionary(FLStringPtr &key, FLWordPtr &word);
   //
   bool isWordInBlacklist(FLStringPtr &printLetters);
   void addWordToBlacklist(FLStringPtr &word);

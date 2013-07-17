@@ -70,7 +70,7 @@ public:
   void pointsFromLetters(const FLString& letters, FLPoint points[]);
   FLPoint getPointForChar(FLChar c, FLKeyboardID keyboard);
   
-  FLWord* getWordByString(const FLString& s, bool allowLowerCase);
+  FLWordPtr getWordByString(const FLString& s, bool allowLowerCase);
   
   FLKeyboardPtr& getKeyboard();
 

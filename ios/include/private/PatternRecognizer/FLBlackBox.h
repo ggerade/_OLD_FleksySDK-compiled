@@ -63,8 +63,9 @@ private:
   
 public:
   
+  int tag;
   
-  FLBlackBox();
+  FLBlackBox(int tag);
   ~FLBlackBox();
   size_t keyCount();
   int totalValuesCount();
