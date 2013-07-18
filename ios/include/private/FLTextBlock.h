@@ -81,7 +81,6 @@ private:
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
-  //FLString toLowerCase(FLString string);
   
   void printTextBlock();
   void deleteSuggestions();

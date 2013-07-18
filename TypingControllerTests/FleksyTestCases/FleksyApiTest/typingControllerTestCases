@@ -2933,3 +2933,12 @@ ET "Hello "
 SU
 ET "Hel.lo "
 EOT
+
+Test127
+>couldnt
+SR
+MC -1
+>h
+ET "Couldn'th "
+SR
+EOT

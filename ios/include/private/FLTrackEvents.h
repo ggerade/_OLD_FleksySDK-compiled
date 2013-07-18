@@ -32,6 +32,7 @@ public:
   
   //Other
   void setIsTracking(bool isTracking);
+  bool isTrackingEvents();
   void setCurrentKeyboardLayout(std::string currentKeyboardLayout);
   
 private:

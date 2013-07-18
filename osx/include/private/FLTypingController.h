@@ -56,7 +56,6 @@ public:
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
   void setDeleteMode(FLDeleteMode mode);
-  FLTrackEvents *getTracker();
   
   //Here for testing
   void sendCharacter(char c);//Testing sends character and this function coverts it into points and calls sendPoint()
@@ -113,7 +112,6 @@ private:
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
   FLPlatformSuggestions *platformSuggestions = NULL;
-  FLTrackEvents *tracker = NULL;
   FLDataCollector *dataCollector = NULL;
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
@@ -179,7 +177,6 @@ private:
 	int addTextBlock(FLTextBlock *block);
   FLTextBlock* createTextBlockFromExistingText(FLString &blockText);
 	void addSymbolsTextBlock();
-//  void insertSymbolsTextBlockInTextBlock(FLTextBlock *TBtoSplit, FLString TBtoInsertText, int indexInTB, int indexInVector);
   void createTextBlockFromExistingTextAndUpdateTBCursor(FLString blockText);
   void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);

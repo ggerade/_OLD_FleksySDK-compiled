@@ -15,14 +15,19 @@
 #include <pthread.h>
 #include "FLEnums.h"
 #include "FleksyListenerInterface.h"
+#include "FLTrackEvents.h"
 
 class FLDataCollector{
 public:
   FLDataCollector(FleksyListenerInterface &listener);
   ~FLDataCollector();
   
+  //For recording all events that get uploaded to the Amazon S3
   void setIsCollectingData(bool isCollectingData);
   bool isDataCollectionEnabled();
+  
+  //For events that go off to Bugsense or TestFlight or other places
+  void setIsTrackingEvents(bool isTracking);
   
   void setDataCollectionFilePath(std::string path);
   void setFileHeader(std::string fileHeader);
@@ -31,6 +36,8 @@ public:
   void processEvent(std::string event, std::string eventData);
   
   void writeEventsToFile(bool writeAsync = false);
+  
+ // FLTrackEvents *getTracker();
 
 private:
   FleksyListenerInterface &listener;
@@ -42,6 +49,8 @@ private:
   std::string encryZipFilePath;
   std::string fileHeader;
   bool isFileReadyForUpload;
+  
+  FLTrackEvents *tracker = NULL;
   
   void recordEvent(std::string eventData, FLEventType type);
  
