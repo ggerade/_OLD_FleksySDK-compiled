@@ -24,10 +24,9 @@ struct FLTypingControllerAction{
   int selectionStart;
   int selectionEnd;
   int suggestionIndex = -1;
-  
   bool expectedShiftState; //true = on, false = off
   int onUpdateSelectionVals[4] = {0, 0, 0, 0};
-  bool autoCorrect;
+  std::string mode; //CapitalizationMode, DeletionMode, CorrectionMode other modes...
 };
 
 typedef std::shared_ptr<FLTypingControllerAction> FLTypingControllerActionPtr;

@@ -75,6 +75,7 @@ public:
   size_t loadedWordCount();
   bool isWordInDictionary(FLStringPtr &printLetters, bool allowLowerCase);
   FLWordPtr getWordByString(FLStringPtr &s, bool allowLowerCase = false);
+  FLWordPtr getWordByID(int wordID);
   //FLWord* getRandomWord(int length);
   
   

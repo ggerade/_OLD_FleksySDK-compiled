@@ -219,12 +219,7 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         int paren1Indx = (int)line.find_first_of("(") + 1;
         int paren2Indx = (int)line.find_first_of(")");
         string acState = line.substr(paren1Indx, paren2Indx - paren1Indx);
-        if(acState == "on"){
-          action->autoCorrect = true;
-        }
-        else{
-          action->autoCorrect = false;
-        }
+        action->mode = acState;
         getLastTestCase()->addAction(action);
       }
       else if(line.substr(0, 3) == "TBC"){ // check textblock cursor position
@@ -275,19 +270,24 @@ void FLTypingControllerTester::createFLTypingControllerTestCases(){
         action->onUpdateSelectionVals[3] = flatoi(nums[3]);
         getLastTestCase()->addAction(action);
       }
-      else if(line.substr(0, 4) == "CAPS"){ // send onUpdateSelection
+      else if(line.substr(0, 4) == "CAPM"){ //Capitalization Mode
         FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
-        action->action = "CAPS";
+        action->action = "CAPM";
         int paren1indx = (int)line.find_first_of("(") + 1;
         int paren2indx = (int)line.find_first_of(")");
         
         string substr = line.substr(paren1indx, paren2indx - paren1indx);
-        if(substr == "on"){
-          action->isUpperCase = true;
-        }
-        else{
-          action->isUpperCase = false;
-        }
+        action->mode = substr;
+        getLastTestCase()->addAction(action);
+      }
+      else if(line.substr(0, 4) == "DELM"){ //Deletion Mode
+        FLTypingControllerActionPtr action = FLTypingControllerActionPtr(new FLTypingControllerAction());
+        action->action = "DELM";
+        int paren1indx = (int)line.find_first_of("(") + 1;
+        int paren2indx = (int)line.find_first_of(")");
+        
+        string substr = line.substr(paren1indx, paren2indx - paren1indx);
+        action->mode = substr;
         getLastTestCase()->addAction(action);
       }
     }

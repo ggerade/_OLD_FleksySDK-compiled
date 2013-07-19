@@ -55,7 +55,7 @@ public:
   void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
   // this may block until results for this tokenID are calculated
-  void peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
+  bool peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
 };
 
 

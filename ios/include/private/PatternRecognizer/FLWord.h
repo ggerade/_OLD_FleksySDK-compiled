@@ -96,6 +96,7 @@ public:
   
 
   float contextFrequency;
+  float unigramWeight = 0.0f;
   
   bool canBeRemovedByUser;
   

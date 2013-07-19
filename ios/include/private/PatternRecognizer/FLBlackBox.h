@@ -60,7 +60,10 @@ private:
   //perform tests to ensure >32-bit keys are ok, more tests to come (eg. performance)
   void testOperation();
   Mymap hashtable;
+  Mymap mallocedHashtable;
   
+  bool isValueMalloced(BBKey key);
+
 public:
   
   int tag;
@@ -68,9 +71,9 @@ public:
   FLBlackBox(int tag);
   ~FLBlackBox();
   size_t keyCount();
-  int totalValuesCount();
+  size_t totalValuesCount();
   
-  void setValue(BBKey key, const BBValue* newValue, bool realloced);
+  void setValue(BBKey key, const BBValue* newValue, bool freeWhenDone);
   const void* getValue(BBKey key);
 
   void appendItem(BBKey key, BBValue item);

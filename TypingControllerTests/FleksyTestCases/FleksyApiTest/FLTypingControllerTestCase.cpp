@@ -14,7 +14,10 @@ void FLTypingControllerTestCase::addAction(FLTypingControllerActionPtr &action){
   actions.push_back(action);
 }
 int FLTypingControllerTestCase::run(){
-  tc.setCorrectionMode(FLCorrectionMode_ALWAYS);
+  api->setCorrectionMode(FLCorrectionMode_ALWAYS);
+  api->setCapitalizationMode(FLCapitalizationMode_CAP_SENTENCES);
+  api->setDeleteMode(FLDeleteMode_VARIABLE);
+  api->setActiveKeyboard(FLKeyboardID_QWERTY_UPPER);
   int result = 0;
   for(int i = 0; i < actions.size(); i++){
     result = performAction(actions[i]);
@@ -56,13 +59,21 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerActionPtr &actio
   }
   else if(actionType == "AC"){
     FLCorrectionMode mode;
-    if(action->autoCorrect){
+    string setMode = action->mode;
+    if(setMode == "on"){
       mode = FLCorrectionMode_ALWAYS;
     }
-    else{
+    else if(setMode == "off"){
       mode = FLCorrectionMode_OFF;
     }
-    lastActionInfo.append(" FLCorrectionMode: " + to_string(mode));
+    else if(setMode == "url"){
+      mode = FLCorrectionMode_URL;
+    }
+    else{
+      printf("\n UNKNOWN CORRECTION MODE (AC)!!!\n");
+      mode = FLCorrectionMode_ALWAYS;
+    }
+    lastActionInfo.append(" FLCorrectionMode: " + setMode);
     api->setCorrectionMode(mode);
     return 0;
   }
@@ -136,16 +147,45 @@ int FLTypingControllerTestCase::performAction(FLTypingControllerActionPtr &actio
   else if(actionType == "EUL"){
     return checkComposingRegion(action);
   }
-  else if(actionType == "CAPS"){
+  else if(actionType == "CAPM"){
     FLCapitalizationMode mode;
-    if(action->isUpperCase){
+    string setMode = action->mode;
+    if(setMode == "all"){
       mode = FLCapitalizationMode_CAP_ALL;
     }
-    else{
+    else if(setMode == "sentences"){
       mode = FLCapitalizationMode_CAP_SENTENCES;
     }
-    lastActionInfo.append(" FLCapitalizationMode: " + to_string(mode));
+    else if(setMode == "words"){
+      mode = FLCapitalizationMode_CAP_WORDS;
+    }
+    else if(setMode == "off"){
+      mode = FLCapitalizationMode_CAP_OFF;
+    }
+    else{
+      printf("\n UNKNOWN CAPITALIZATION MODE!!!\n");
+      mode = FLCapitalizationMode_CAP_SENTENCES;
+    }
+    
+    lastActionInfo.append(" FLCapitalizationMode: " + setMode);
     api->setCapitalizationMode(mode);
+    return 0;
+  }
+  else if(actionType == "DELM"){
+    FLDeleteMode mode;
+    string setMode = action->mode;
+    if(setMode == "variable"){
+      mode = FLDeleteMode_VARIABLE;
+    }
+    else if(setMode == "words"){
+      mode = FLDeleteMode_WHOLE_WORD;
+    }
+    else{
+      printf("\n UNKNOWN DELETE MODE!!!\n");
+      mode = FLDeleteMode_VARIABLE;
+    }
+    lastActionInfo.append(" FLDeleteMode: " + setMode);
+    api->setDeleteMode(mode);
     return 0;
   }
   else{

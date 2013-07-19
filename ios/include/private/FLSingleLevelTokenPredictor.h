@@ -39,6 +39,15 @@ private:
   const unsigned char *_bigramFileContents = NULL;
   size_t _bigramPredictionsFileOffset = 0;
 
+  int _unigramFileVersion = 0;
+  size_t _unigramCount = 0;
+  const uint32_t *_unigramFrequencies = NULL;
+  const unsigned char *_unigramFileContents = NULL;
+  probability _unigramFrequencySum = 0.0f;
+
+  bool read_unigrams(void);
+  void addUnigramCandidates(list_pred &candidates);
+
   void getNextCandidatesFast(list_pred& candidates, word_id wordID, int resultsLimit = 0, probability pThreshold = 0 );
 
   void getNextCandidates3Gram(list_pred& candidates, token_ids previous_tokens, int resultsLimit, probability pThreshold );  // bigram/trigram combo
@@ -52,15 +61,14 @@ public:
   //void getNextCandidatesList(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
   void prepareNextCandidatesMemoryless(list_pred& result, token_ids previous_tokens, int resultsLimit = 0, probability pThreshold = 0);
   
+  size_t getUnigramCount();
+  probability unigramProbability(word_id unigramID);
+
   void setActive(bool b);
   bool isActive();
   
   friend class FleksyContextCommon;
   friend class FLContextTester;  
-
-public:
-  unordered_map<word_id, probability> unigram_map;
-  list_pred unigram_candidates;
 };
 
 #endif // compile guard

@@ -212,10 +212,6 @@ public:
 
   static int nVerbosity;  // verbosity level
   static void combinePreds(list_pred& candidates, list_pred& bi_candidates);
-
-  static void read_temp_unigrams(unordered_map<word_id, probability> &unigram_map, list_pred& unigram_candidates);
-
-  static bool read_unigrams(FLFilePtr &unigramFile, unordered_map<word_id, probability> &map, list_pred &candidates);
   
   static void printFastHdr(FastBinaryFileHeader& hdr);
   

@@ -51,6 +51,7 @@ public:
   bool fleksy;
   int pointsN;
   int lettersN;
+  bool hasSpace;
   //rather than a FLString or FLString*, so that contents are inline
   FLChar letters[];
   //////////////////////////////////////////

@@ -1119,18 +1119,18 @@ EUL (6,16)
 EOT
 
 Test-60
-//Introducing Caps Lock. Format: CAPS (on) Expects all characters in caps CAPS (off)
-CAPS (on)
+//Introducing CAPM Lock. Format: CAPM (on) Expects all characters in CAPM CAPM (off)
+CAPM (all)
 >hello
 ET "HELLO"
-CAPS (off)
+CAPM (sentences)
 SR
 ET "HELLO "
 EOT
 
 Test-59
-//Caps and Alt Keyboards.
-CAPS (on)
+//CAPM and Alt Keyboards.
+CAPM (all)
 >hi
 ET "HI"
 KB2
@@ -1141,17 +1141,17 @@ KB1
 >friend
 SR
 ET "HI! FRIEND "
-CAPS (off)
+CAPM (sentences)
 EOT
 
 Test-58
-//Caps and idle screens.
-CAPS (on)
+//CAPM and idle screens.
+CAPM (all)
 ST "California blue. "
 >hello
 SR
 ET "California blue. HELLO "
-CAPS (off)
+CAPM (sentences)
 EOT
 
 Test-57
@@ -2537,11 +2537,11 @@ EUL (5,5)
 EOT
 
 Test92
-CAPS (on)
+CAPM (all)
 >hello
 SR
 ET "HELLO "
-CAPS (off)
+CAPM (sentences)
 >california
 SR
 ET "HELLO California "
@@ -2693,6 +2693,7 @@ ET "Hello1 "
 SU
 ET "Hello1 "
 EUL (0,6)
+SU
 EOT
 
 Test108
@@ -2941,4 +2942,71 @@ MC -1
 >h
 ET "Couldn'th "
 SR
+EOT
+
+Test128
+DELM (words)
+>hello
+SR
+>there
+SR
+>california
+SR
+ET "Hello there California "
+MC 10
+SL
+ET "Hello California "
+TBC (1,0)
+EUL (0,5)
+EOT
+
+Test129
+DELM (words)
+>hello
+SL
+TBC (0,0)
+ET ""
+EC 0
+EOT
+
+Test130
+CAPM (words)
+>hello
+SR
+>there
+SR
+ET "Hello There "
+EOT
+
+Test131
+AC (url)
+>hekko
+KB2
+>.
+ET "Hekko."
+TBC (2,0)
+EUL (6,6)
+SD
+ET "Hello."
+EUL (6,6)
+EOT
+
+Test132
+AC (url)
+>hello
+SR
+>th
+ET "Hello th"
+SD
+EUL (8,8)
+EOT
+
+Test133
+KB2
+>(2
+KB1
+>m
+KB2
+>)
+ET "(2m)"
 EOT
