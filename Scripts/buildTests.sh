@@ -53,17 +53,3 @@ xcodebuild -configuration Debug   -sdk iphonesimulator6.1 -target FleksySample_i
 xcodebuild -configuration Release -sdk iphonesimulator6.1 -target FleksySample_iOS >/dev/null
 
 cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"
-
-####
-echo "Building 'TypingControllerTests'..."
-echo ""
-
-cd TypingControllerTests/FleksyTestCases
-
-rm -rf build
-
-xcodebuild -configuration Debug   -target FleksyApiTest >/dev/null
-xcodebuild -configuration Release -target FleksyApiTest >/dev/null
-rsync -a "${FLEKSYSDK_COMPILED_ROOT_DIR}/osx/lib/Release/FleksyLib.dylib" "build/Release/FleksyLib.dylib"
-
-cd "${FLEKSYSDK_COMPILED_ROOT_DIR}"

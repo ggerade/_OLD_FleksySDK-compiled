@@ -78,22 +78,6 @@ echo ""
 
 samples/FleksySample1/build/Release/FleksySample_OSX
 
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Debug)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Release)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
-
 export MallocGuardEdges=YES
 export MallocScribble=YES
 export MallocStackLoggingNoCompact=YES
@@ -113,19 +97,3 @@ echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------
 echo ""
 
 samples/FleksySample1/build/Release/FleksySample_OSX
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Debug) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-TypingControllerTests/FleksyTestCases/build/Debug/FleksyApiTest
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'TypingControllerTests' (Release) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-TypingControllerTests/FleksyTestCases/build/Release/FleksyApiTest
