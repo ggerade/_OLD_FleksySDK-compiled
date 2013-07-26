@@ -80,7 +80,10 @@ enum FLEventType{
   FLEventType_MS,
   FLEventType_NL,
   FLEventType_KS,
-  FLEventType_ME
+  FLEventType_ME,
+  FLEventType_DEL,
+  FLEventType_ST,
+  FLEventType_ET
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

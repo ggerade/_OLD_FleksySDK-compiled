@@ -66,6 +66,8 @@ private:
   void encryptAndCompressDataToFile(std::string data);
   std::string get_file_contents(const char *filename);
   void deleteFile(const char * filePath);
+  
+  bool isTrackerEvent(FLEventType event);
 };
 
 #endif /* defined(__FleksySDK__FLDataCollector__) */
