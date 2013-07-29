@@ -52,10 +52,12 @@ public:
   void setCapitalizationMode(FLCapitalizationMode mode);
   FLCapitalizationMode getCapitalizationMode();
   void setVoiceFeedback(bool isOn);
+  void setDeleteMode(FLDeleteMode mode);
+  void setFieldAction(FLFieldAction fieldAction);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
-  void setDeleteMode(FLDeleteMode mode);
+  
   
   //Here for testing
   void sendCharacter(char c);//Testing sends character and this function coverts it into points and calls sendPoint()
@@ -107,6 +109,7 @@ private:
   FLCapitalizationMode capitalizationMode;
   CursorChangeEvent cursorChangeEvent;
   FLDeleteMode deleteMode;
+  FLFieldAction fieldAction;
   
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;

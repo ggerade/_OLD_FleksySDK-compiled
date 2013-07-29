@@ -29,6 +29,14 @@ enum FLCorrectionMode{
   FLCorrectionMode_OFF
 };
 
+enum FLFieldAction{
+  FLFieldAction_SEARCH,
+  FLFieldAction_GO,
+  FLFieldAction_NEXT,
+  FLFieldAction_SEND,
+  FLFieldAction_NEW_LINE
+};
+
 enum FLMessageType{
   FLMessageType_DISPLAY_TO_USER,
   FLMessageType_DEBUG,
@@ -83,7 +91,8 @@ enum FLEventType{
   FLEventType_ME,
   FLEventType_DEL,
   FLEventType_ST,
-  FLEventType_ET
+  FLEventType_ET,
+  FLEventType_FA
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

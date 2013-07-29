@@ -180,8 +180,15 @@ public:
   void setSpaceBreaksEnabled(bool value);
   /*
    * New
+   * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [there |].
+   * FLDeleteMode_VARIABLE on backspace(length > 0)(swipe left) will delete single characters when cursor is inside the word and whole words when cursor is a space after the word: [hello |there] -> swipe left -> [there |], [hel|lo there] -> swipe left -> [he|lo there].
    */
   void setDeleteMode(FLDeleteMode mode);
+  /*
+   * New
+   * No correction will be perforemed on enter/new line in fields other than FLFieldAction_NEW_LINE
+   */
+  void setFieldAction(FLFieldAction fieldAction);
   
   
   std::string getVersion();
