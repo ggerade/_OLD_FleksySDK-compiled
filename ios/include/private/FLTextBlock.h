@@ -11,10 +11,10 @@
 class FLTextBlock{
 public:
 	FLTextBlock(FleksyListenerInterface &listener);
+  ~FLTextBlock();
   
   //Getters/Setters
-	void setResponse(FLSuggestionsContainer resp);
-  FLSuggestionsContainer getResponse();
+  FLSuggestionsContainer *getResponse();
   void setCorrectedText(FLString text);
   void setTextEntered(FLString text);
   FLString getTextEntered();
@@ -31,7 +31,7 @@ public:
   void setIsEndSentence(bool isEndSentence);
   bool isEndSentence();
   
-	FLRequestDataHolder getRequest();
+	FLRequestDataHolder *getRequest();
   FLString getText();
   int getSuggestionIndex();
   void setSuggestionIndex(int suggIndex);
@@ -64,8 +64,8 @@ public:
   
 private:
   FleksyListenerInterface &out;
-	FLSuggestionsContainer response;
-	FLRequestDataHolder request;
+	FLSuggestionsContainer *response;
+	FLRequestDataHolder *request;
 	int length;
 	int suggestionIndx;
 	FLString correctedText;

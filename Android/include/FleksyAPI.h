@@ -114,11 +114,12 @@ public:
    * FLCapitalizationMode_CAP_ALL            - capitalize all characters. (aka: Caps Lock)
    * FLCapitalizationMode_CAP_SENTENCES      - capitalize first character of every sentence
    * FLCapitalizationMode_CAP_OFF            - nothing will be capitalized automatically
+   * Default: FLCapitalizationMode_CAP_SENTENCES
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
   
   /* NEW
-   *
+   * Returns current capitalization mode
    */
   FLCapitalizationMode getCapitalizationMode();
   
@@ -130,7 +131,7 @@ public:
   
   /*
    * Returns active keyboard.
-   * FLKeyboardID_QWERTY_UPPER  (1)
+   * FLKeyboardID_QWERTY_UPPER (1)
    * FLKeyboardID_NUMBERS (2)
    * FLKeyboardID_SYMBOLS (3)
    */
@@ -143,13 +144,15 @@ public:
   
   /*
    * Sets the correction mode.
-   * FLCorrectionMode_ALWAYS = ON
-   * FLCorrectionMode_OFF will not make corrections and will only delete a single character at a time.
+   * FLCorrectionMode_ALWAYS  -Fleksy will auto correct everyting
+   * FLCorrectionMode_OFF     -Will not make corrections and will only delete a single character at a time.
+   * FLCorrectionMode_URL     -When . is enetered word is not corrected. User can swipe up or down to change to the next suggestion.
+   * Default: FLCorrectionMode_ALWAYS
    */
   void setCorrectionMode(FLCorrectionMode mode);
   
   /* NEW
-   * 
+   * Returns current correction mode
    */
   FLCorrectionMode getCorrectionMode();
   
@@ -176,17 +179,27 @@ public:
   
   /*
    * New
+   * If 'space breaks' is enabled, then if the user misses the spacebar and types C,V,B, instead, then Fleksy might decide when appropriate
+   * to split the word in two when correcting input. Example: [thisvis]->[this is]
    */
   void setSpaceBreaksEnabled(bool value);
   /*
    * New
-   * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [there |].
-   * FLDeleteMode_VARIABLE on backspace(length > 0)(swipe left) will delete single characters when cursor is inside the word and whole words when cursor is a space after the word: [hello |there] -> swipe left -> [there |], [hel|lo there] -> swipe left -> [he|lo there].
+   * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].
+   * FLDeleteMode_VARIABLE on backspace(length > 0)(swipe left) will delete single characters when cursor is inside the word and whole words when cursor is a space after the word: [hello |there] -> swipe left -> [|there], [hel|lo there] -> swipe left -> [he|lo there].
+   * Default: FLDeleteMode_VARIABLE
    */
   void setDeleteMode(FLDeleteMode mode);
   /*
    * New
    * No correction will be perforemed on enter/new line in fields other than FLFieldAction_NEW_LINE
+   * FLFieldAction_SEARCH     -Enter performs a "search" operation, taking the user to the results of searching for the text the have typed (in whatever context is appropriate)
+   * FLFieldAction_GO         -Enter performs a "go" operation to take the user to the target of the text they typed. Typically used, for example, when entering a URL
+   * FLFieldAction_NEXT       -Enter performs a "next" operation, taking the user to the next field that will accept text
+   * FLFieldAction_SEND       -Enter performs a "send" operation, delivering the text to its target
+   * FLFieldAction_NEW_LINE   -Enter performs a "new line" operation, taking the user cursor to the next line in the text field
+   *
+   * Default: FLFieldAction_NEW_LINE
    */
   void setFieldAction(FLFieldAction fieldAction);
   
