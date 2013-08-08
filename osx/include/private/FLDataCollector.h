@@ -25,6 +25,7 @@ public:
   //For recording all events that get uploaded to the Amazon S3
   void setIsCollectingData(bool isCollectingData);
   bool isDataCollectionEnabled();
+  void setIsGaming(bool isGaming);
   
   //For events that go off to Bugsense or TestFlight or other places
   void setIsTrackingEvents(bool isTracking);
@@ -36,17 +37,18 @@ public:
   void processEvent(std::string event, std::string eventData);
   
   void writeEventsToFile(bool writeAsync = false);
-  
- // FLTrackEvents *getTracker();
+  std::string writeGameEventsToFile();
 
 private:
   FleksyListenerInterface &listener;
   std::vector<std::string>events;
+  std::vector<std::string>gameEvents;
   std::string tempEvents;
   bool isCollectingData;
+  bool isGaming;
   std::string dataWritePath;
-  std::string eventFilePath;
-  std::string encryZipFilePath;
+  //std::string eventFilePath;
+  //std::string encryZipFilePath;
   std::string fileHeader;
   bool isFileReadyForUpload;
   
@@ -57,6 +59,8 @@ private:
   std::string floatToString(float value);
   std::string longToString(long long value);
   std::string doubleToString(double value);
+  std::string getEncryZipFilePath();
+  std::string getEventFilePath();
   
   bool file_exists(const char * filename);
   
@@ -68,6 +72,8 @@ private:
   void deleteFile(const char * filePath);
   
   bool isTrackerEvent(FLEventType event);
+  
+  std::string getDataWritePath();
 };
 
 #endif /* defined(__FleksySDK__FLDataCollector__) */
