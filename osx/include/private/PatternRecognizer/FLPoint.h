@@ -37,7 +37,7 @@ static inline bool FLPointEqualToPoint(FLPoint p1, FLPoint p2) {
 #endif
 
 #define FLPointZero FLPointMake(0, 0)
-#define FLPointInvalid FLPointMake(-1, -1)
+#define FLPointInvalid FLPointMake(-99, -99)
 #define FLPointFromCGPoint(__p__) FLPointMake(__p__.x, __p__.y)
 
 

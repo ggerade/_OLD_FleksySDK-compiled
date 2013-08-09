@@ -22,7 +22,13 @@
 
 using namespace std;
 
+#if SHAPE_TESTING
+#define MIN_BASE_LENGTH 0.001
+#else
 #define MIN_BASE_LENGTH 50
+#endif
+#define REGION_SEARCH_LIMIT 1
+#define USE_MIDPOINT 0
 
 typedef uint16_t FLTokenID;
 
@@ -46,7 +52,7 @@ private:
   //returns point of word with index bi, OR fixed points BASEPOINT_CUSTOM1_ID or BASEPOINT_CUSTOM2_ID
   static FLPoint getBasePointOfWord(const FLWord* word, int bi);
   //returns point of word with index pi in a coordinate system where basepoints b1 and b2 are stretched and moved to become (0,0) and (1,0)
-  static FLPoint getBasisCoordsForWord(const FLWord* word, int pi, FLPoint b1, FLPoint b2);
+  static FLPoint getBasisCoordsForWord(const FLWord* word, int pi, FLPoint b1, FLPoint b2, bool normalize = true);
   
   void createEmptyTables();
   
@@ -58,7 +64,7 @@ private:
   void voteWithParams(VoteParameters params, VoteResult* result);
   void paramsToBucketsAndVote(VoteResult result);
   void voteSingleBasisForInputWord(const FLWord* inputWord, int i, int bi1, int bi2, VoteResult* result);
-  static float getBasisCoordDistanceForWord(const FLWord* word1, const FLWord* word2, int pi, int bi1, int bi2);
+  static float getBasisCoordDistanceForWordForPreciseScore(const FLWord* inputWord, const FLWord* word2, int pi, int bi1, int bi2);
   void vote(const FLWord* word, int bi1, int bi2, VoteResult* result);
   void vote(const FLWord* word, VoteResult* result);
 
@@ -87,6 +93,8 @@ public:
   FLInternalSuggestionsContainer* processWordInternal(const FLWord* inputword, bool needPreciseScore, bool printResults);
   static void calculatePreciseCandidateScore(FLWord* candidate, const FLWord* inputWord, bool force = true, float penalty = 1);
   
+  static size_t firstPassResultsForLength(size_t length);
+  
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private
   void loadedWord(FLWordPtr &word, bool calculateBlackboxValues);
@@ -100,7 +108,8 @@ public:
   
   void clearValues();
   
-  FLWordPtr getWordByID(int wordID);
+  FLWord *getWordByID(int wordID);
+  FLWordPtr getWordPtrByID(int wordID);
 
   bool getTokenIDForFLString(FLStringPtr &string, FLTokenID *tokenIDRef);
   bool getFLStringForTokenID(FLTokenID tokenID, FLStringPtr &string);

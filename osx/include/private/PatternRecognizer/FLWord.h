@@ -38,11 +38,13 @@ private:
   int getRawSize();
 
   bool pointsFromLetters = false;
-  short nPoints;
   FLPoint* rawPoints = NULL;
   FLKeyboardPtr keyboard;
 
 public:
+
+  short nPoints; // Although this is "public", it should be treated as "private", use getNPoints() instead.
+                 // This was moved here because SystemsIntegrator::processContextResults() needed to call getNPoints() sufficiently often that profiling justified a direct access exception.
 
   FLStringPtr lettersPtr;
   FLStringPtr printLettersPtr;

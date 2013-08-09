@@ -9,12 +9,14 @@
 #define CORESETTINGS_H
 ///////////////////////////////////////////
 
+#define SHAPE_TESTING 0
+
 #define FL_MAX_WORD_ID 65000
 
 //#define FLEKSY_ANCHORS_N 0
 //should be same as number of cores for max efficiency
 #define FLEKSY_MULTICORE_BATCHES 1
-#define FLEKSY_MAX_WORD_SIZE 20
+#define FLEKSY_MAX_WORD_SIZE 21
 
 
 #endif

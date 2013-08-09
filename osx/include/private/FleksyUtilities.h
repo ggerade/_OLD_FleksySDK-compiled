@@ -38,6 +38,9 @@ typedef enum {
   kWordlistBlacklist
 } kWordlistType;
 
+#if SHAPE_TESTING
+class FLShapeTrie;
+#endif
 
 class FleksyUtilities {
 private:
@@ -57,6 +60,10 @@ public:
   FleksyUtilities();
   ~FleksyUtilities();
   
+#if SHAPE_TESTING
+  FLShapeTrie* shapeTrie;
+#endif
+
   ///////  API  ///////
   //void preloadWithPathFormat(const string& filepathFormat);
   void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
@@ -75,7 +82,7 @@ public:
   size_t loadedWordCount();
   bool isWordInDictionary(FLStringPtr &printLetters, bool allowLowerCase);
   FLWordPtr getWordByString(FLStringPtr &s, bool allowLowerCase = false);
-  FLWordPtr getWordByID(int wordID);
+  FLWordPtr getWordPtrByID(int wordID);
   //FLWord* getRandomWord(int length);
   
   
