@@ -15,7 +15,7 @@ import engine.TestEngine;
 public class FleksyInterface extends FleksyListenerInterface{
 	
 	public FleksyInterface(String library){
-		super(System.getProperty("user.dir") + "/" + library);
+		super(System.getProperty("user.dir") + "/" + library, true);
 	}
 
 	@Override
