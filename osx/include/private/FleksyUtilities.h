@@ -90,6 +90,7 @@ public:
   bool getLoadedPreprocessedFiles();
   bool getPostloaded();
   
+  kLanguage language = kLanguageUnknown;
 };
 
 #endif

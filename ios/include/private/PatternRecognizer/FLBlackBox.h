@@ -13,7 +13,7 @@
 #include <math.h>
 
 
-#define BLACKBOX_BUCKET_SIZE 0.3
+#define BLACKBOX_BUCKET_SIZE 0.3f
 
 // 30 degrees
 #define BLACKBOX_ANGLE_BUCKETS_N 12

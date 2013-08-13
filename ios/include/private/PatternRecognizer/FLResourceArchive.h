@@ -10,6 +10,7 @@
 #define __FleksyLib__FLResourceArchive__
 
 #include "FLResourceArchiveCommon.h"
+#include "FleksyDefines.h"
 
 #include <stdint.h>
 #include "FLFile.h"
@@ -29,6 +30,7 @@ public:
 
   FLFilePtr FLFileForFileName(const char *fileName);
   string getTag();
+  kLanguage getLanguage();
 
 private:
   FLFilePtr archiveFile;// = NULL;

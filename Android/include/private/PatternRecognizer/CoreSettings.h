@@ -10,6 +10,7 @@
 ///////////////////////////////////////////
 
 #define SHAPE_TESTING 0
+#define SHAPE_TESTING_ALL_TRIANGLES (1 && SHAPE_TESTING)
 
 #define FL_MAX_WORD_ID 65000
 
