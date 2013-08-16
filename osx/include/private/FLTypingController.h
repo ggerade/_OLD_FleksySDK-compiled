@@ -54,6 +54,7 @@ public:
   void setVoiceFeedback(bool isOn);
   void setDeleteMode(FLDeleteMode mode);
   void setFieldAction(FLFieldAction fieldAction);
+  void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
@@ -110,6 +111,7 @@ private:
   CursorChangeEvent cursorChangeEvent;
   FLDeleteMode deleteMode;
   FLFieldAction fieldAction;
+  FLPunctuationSpaceMode punctuationSpaceMode;
   
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
@@ -179,7 +181,7 @@ private:
   //TextBlock operations
 	int addTextBlock(FLTextBlock *block);
   FLTextBlock* createTextBlockFromExistingText(FLString &blockText);
-	void addSymbolsTextBlock();
+	void addSymbolsTextBlock(bool keepSpaceOnCurrTB);
   void createTextBlockFromExistingTextAndUpdateTBCursor(FLString blockText);
   void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);

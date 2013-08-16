@@ -203,6 +203,18 @@ public:
    */
   void setFieldAction(FLFieldAction fieldAction);
   
+  /*
+   * New
+   * Sets manual punctuation mode(punctuation added from non QWERTY keyboard)
+   * FLPunctuationSpaceMode_DEFAULT,                [hello]+ -> [hello]+[.]-[|] Default behaviour doesn't eat or add space
+   * FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE,   [hello]+ -> [hello]-[.]-[|] Eats space on previous word
+   * FLPunctuationSpaceMode_ADD_SPACE_AFTER,        [hello]+ -> [hello]+[.]+[|] Adds space after itself
+   * FLPunctuationSpaceMode_DEL_AND_ADD_SPACE       [hello]+ -> [hello]-[.]+[|] Eats space on previous word AND adds space after itself
+   *
+   * Default: FLPunctuationSpaceMode_DEFAULT
+   */
+  void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
+  
   
   std::string getVersion();
   

@@ -8,6 +8,8 @@
 #include "FleksyListenerInterface.h"
 #include "FLKeyboard.h"
 
+class SystemsIntegrator;
+
 class FLTextBlock{
 public:
 	FLTextBlock(FleksyListenerInterface &listener);
@@ -56,7 +58,7 @@ public:
   void printSelf(int tbNumber);
   FLString toLowerCase(FLString string);
   
-  bool containsNonAlphaCharacters();
+  bool containsNonAlphaCharacters(SystemsIntegrator* fleksy);
   bool containsApostrophe();
   bool isSplitWithSpace();
   void setUserCapitalization(bool isUserSet);

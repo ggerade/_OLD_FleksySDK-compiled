@@ -68,6 +68,14 @@ enum FLDeleteMode{
   FLDeleteMode_WHOLE_WORD
 };
 
+enum FLPunctuationSpaceMode{
+  //On manual punctuation
+  FLPunctuationSpaceMode_DEFAULT, //[hello]+ -> [hello]+[.]-[|]
+  FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE, //[hello]+ -> [hello]-[.]-[|]
+  FLPunctuationSpaceMode_ADD_SPACE_AFTER, //[hello]+ -> [hello]+[.]+[|]
+  FLPunctuationSpaceMode_DEL_AND_ADD_SPACE //[hello]+ -> [hello]-[.]+[|]
+};
+
 enum FLEventType{
   FLEventType_SL,
   FLEventType_SR,
