@@ -55,6 +55,7 @@ public:
   void setDeleteMode(FLDeleteMode mode);
   void setFieldAction(FLFieldAction fieldAction);
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
+  void setTextFieldType(FLTextFieldType type);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
@@ -112,6 +113,7 @@ private:
   FLDeleteMode deleteMode;
   FLFieldAction fieldAction;
   FLPunctuationSpaceMode punctuationSpaceMode;
+  FLTextFieldType textFieldType;
   
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
@@ -148,6 +150,9 @@ private:
   void reset();
   void populateSpecialVectors();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
+  bool canEatSpace(FLChar c);
+  bool canAddSpace(FLChar c);
+  bool canAddSpaceAfterEating(FLChar c);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
 	void ignoredCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);

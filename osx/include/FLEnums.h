@@ -34,7 +34,8 @@ enum FLFieldAction{
   FLFieldAction_GO,
   FLFieldAction_NEXT,
   FLFieldAction_SEND,
-  FLFieldAction_NEW_LINE
+  FLFieldAction_NEW_LINE,
+  FLFieldAction_DONE
 };
 
 enum FLMessageType{
@@ -76,6 +77,12 @@ enum FLPunctuationSpaceMode{
   FLPunctuationSpaceMode_DEL_AND_ADD_SPACE //[hello]+ -> [hello]-[.]+[|]
 };
 
+enum FLTextFieldType{
+  FLTextFieldType_REGULAR_TEXT,
+  FLTextFieldType_PASSWORD,
+  FLTextFieldType_URL
+};
+
 enum FLEventType{
   FLEventType_SL,
   FLEventType_SR,
@@ -100,7 +107,7 @@ enum FLEventType{
   FLEventType_DEL,
   FLEventType_ST,
   FLEventType_ET,
-  FLEventType_FA
+  FLEventType_FA,
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

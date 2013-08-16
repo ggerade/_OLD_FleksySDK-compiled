@@ -198,6 +198,7 @@ public:
    * FLFieldAction_NEXT       -Enter performs a "next" operation, taking the user to the next field that will accept text
    * FLFieldAction_SEND       -Enter performs a "send" operation, delivering the text to its target
    * FLFieldAction_NEW_LINE   -Enter performs a "new line" operation, taking the user cursor to the next line in the text field
+   * FLFieldAction_DONE       -Enter performs a "done" operation, finishing user's input and usually hiding the virtual keyboard
    *
    * Default: FLFieldAction_NEW_LINE
    */
@@ -214,6 +215,17 @@ public:
    * Default: FLPunctuationSpaceMode_DEFAULT
    */
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
+  
+  /*
+   * New
+   * FLTextFieldType_REGULAR_TEXT   -Nothing special, regular text field
+   * FLTextFieldType_PASSWORD       -Password field, Swipe up or down is disabled, suggestions are not displayed
+   * FLTextFieldType_URL            -URL or Email field
+   *
+   * Default: FLTextFieldType_REGULAR_TEXT
+   */
+  void setTextFieldType(FLTextFieldType type);
+  
   
   
   std::string getVersion();
