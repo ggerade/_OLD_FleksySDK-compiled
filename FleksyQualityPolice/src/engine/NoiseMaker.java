@@ -9,6 +9,7 @@ import utils.Touch;
 public class NoiseMaker { 
 	@SuppressWarnings("unused")
 	private final static String TAG = "NoiseMaker";
+	private final static boolean UNIFORM = true;
 	
 	@SuppressWarnings("unused")
 	private static int width, height;
@@ -83,7 +84,7 @@ public class NoiseMaker {
 	}
 	
 	private static double getRandomDouble(Random random, double noise, boolean uniform){
-		if(uniform){
+		if(uniform || UNIFORM){
 			return (random.nextDouble() * noise);
 		}else{
 			return (random.nextGaussian() * noise);
