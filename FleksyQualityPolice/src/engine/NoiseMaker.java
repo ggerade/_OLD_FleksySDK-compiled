@@ -9,7 +9,7 @@ import utils.Touch;
 public class NoiseMaker { 
 	@SuppressWarnings("unused")
 	private final static String TAG = "NoiseMaker";
-	private final static boolean UNIFORM = true;
+	private final static boolean UNIFORM = false;
 	
 	@SuppressWarnings("unused")
 	private static int width, height;
