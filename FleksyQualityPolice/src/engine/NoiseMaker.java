@@ -9,6 +9,7 @@ import utils.Touch;
 public class NoiseMaker { 
 	@SuppressWarnings("unused")
 	private final static String TAG = "NoiseMaker";
+	private final static boolean UNIFORM = false;
 	
 	@SuppressWarnings("unused")
 	private static int width, height;
@@ -43,8 +44,8 @@ public class NoiseMaker {
 		float x = key.x;
 		float y = key.y;
 		
-		double radius = getNoiseDouble(TAP_NOISE);
-		double angle = getNoiseDouble(Math.PI*2);
+		double radius = getRandomDouble(randomNse, TAP_NOISE, false);
+		double angle = getRandomDouble(randomNse, Math.PI*2, true);
 		
 		x += Math.cos(angle)*radius;
 		y += Math.sin(angle)*radius;
@@ -60,8 +61,8 @@ public class NoiseMaker {
 		if(SHIFT_LVL == 0){ return new Touch(indx, x, y, time); }
 		if(prepareShift){
 			prepareShift = false;
-			double radius = getShiftDouble(SHIFT_LVL);
-			double angle = getShiftDouble(Math.PI*2);
+			double radius = getRandomDouble(randomSft, SHIFT_LVL, false);
+			double angle = getRandomDouble(randomSft, Math.PI*2, true);
 			sX = (float) (Math.cos(angle)*radius);
 			sY = (float) (Math.sin(angle)*radius);
 		}
@@ -82,12 +83,12 @@ public class NoiseMaker {
 		return (int) ((Math.random() * MAX_TAP_TIME) + MIN_TAP_TIME);
 	}
 	
-	private static double getShiftDouble(double shift){
-		return (randomSft.nextDouble() * shift);
-	}
-	
-	private static double getNoiseDouble(double noise){
-		return (randomNse.nextDouble() * noise);
+	private static double getRandomDouble(Random random, double noise, boolean uniform){
+		if(uniform || UNIFORM){
+			return (random.nextDouble() * noise);
+		}else{
+			return (random.nextGaussian() * noise);
+		}		
 	}
 	
 	public static boolean errorMaker(String word){
