@@ -20,6 +20,7 @@ enum FLKeyboardID{
   FLKeyboardID_QWERTY_UPPER,
   FLKeyboardID_NUMBERS,
   FLKeyboardID_SYMBOLS,
+  FLKeyboardID_QWERTY_AC_OFF,
   FLKeyboardID_NUMBER_OF_KEYBOARDS
 };
 

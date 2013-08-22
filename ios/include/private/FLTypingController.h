@@ -115,6 +115,8 @@ private:
   FLPunctuationSpaceMode punctuationSpaceMode;
   FLTextFieldType textFieldType;
   
+  FLString lastDeletedWord;
+  
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
@@ -143,6 +145,7 @@ private:
   void correctTextBlockOnVerticalSwipe();
   int correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
+  void checkForRepeatedTyping(FLTextBlock *tb);
   
   //Various helper functioins
   FLChar getNearestChar(FLPoint p);
