@@ -143,6 +143,11 @@ public:
   std::map<FLChar, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
   
   /*
+   * Returns the character nearest to the target point for the specified keyboard layout
+   */
+  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID);
+  
+  /*
    * Sets the correction mode.
    * FLCorrectionMode_ALWAYS  -Fleksy will auto correct everyting
    * FLCorrectionMode_OFF     -Will not make corrections and will only delete a single character at a time.

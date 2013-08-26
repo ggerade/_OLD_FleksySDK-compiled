@@ -145,7 +145,7 @@ private:
   void correctTextBlockOnVerticalSwipe();
   int correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
-  void checkForRepeatedTyping(FLTextBlock *tb);
+  bool checkForRepeatedTypingAndLearn(FLTextBlock *tb);
   
   //Various helper functioins
   FLChar getNearestChar(FLPoint p);
@@ -174,6 +174,7 @@ private:
   bool canAddSymbolToTextBlock(FLChar character, FLString blockText);
   FLString toLowerCase(FLString word);
   bool isSymbolAllowedToCorrect(FLChar character);
+  void setLastDeletedWord(FLTextBlock *tb);
   
   //User cursor operations
   void moveCursorToPosition(int position);

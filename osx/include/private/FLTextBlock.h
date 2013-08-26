@@ -32,6 +32,7 @@ public:
   void setIsSymbolsTextBlock(bool symbol);
   void setIsEndSentence(bool isEndSentence);
   bool isEndSentence();
+  bool isUserEditedText();
   
 	FLRequestDataHolder *getRequest();
   FLString getText();
