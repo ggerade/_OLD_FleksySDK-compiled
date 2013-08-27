@@ -173,6 +173,11 @@ public class Definer {
 	}
 	
 	private static Word cleanWord(String unclean) {
+	    if(!hasAlpha(unclean)){
+			Log.d(unclean + " contains no letters!");
+			DataManager.ignored(unclean.replace("\\s", ""));
+			return null;
+	    }
 		if(unclean.matches(".*\\d.*")){
 			Log.d(unclean + " contains numbers!");
 			DataManager.ignored(unclean.replace("\\s", ""));
@@ -203,6 +208,16 @@ public class Definer {
 			}
 		}
 		return new Word(clean, hasPunct, false);
+	}
+	
+	private static boolean hasAlpha(String unclean){
+		char[] chars = unclean.toCharArray();
+	    boolean passed = false;
+	    for (char c : chars) {
+	    	passed = Character.isLetter(c);
+	        if(passed){ break; }
+	    }
+	    return passed;
 	}
 	
 	private static boolean shiftCheck(int l, int w, Key key, String letter){

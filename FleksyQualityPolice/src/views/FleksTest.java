@@ -54,7 +54,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 23;
 	protected static TestEngine mainEngine;
-	public final static float Version = 6.1f;
+	public final static float Version = 6.2f;
 	private static boolean debugging = false;
 	private final static String Alt = "6RAPES";
 	
