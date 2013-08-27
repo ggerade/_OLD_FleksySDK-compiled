@@ -55,6 +55,7 @@ public class FleksyEngine {
 	}
 	
 	public static void setLatestText(String text){
+		//System.out.println("LastestText: " + text);
 		latestText = text;
 	}
 	

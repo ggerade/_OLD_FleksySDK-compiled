@@ -175,6 +175,7 @@ private:
   FLString toLowerCase(FLString word);
   bool isSymbolAllowedToCorrect(FLChar character);
   void setLastDeletedWord(FLTextBlock *tb);
+  void closeComposingRegionAt(int position);
   
   //User cursor operations
   void moveCursorToPosition(int position);
