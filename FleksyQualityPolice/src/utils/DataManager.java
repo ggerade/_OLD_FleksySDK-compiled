@@ -109,6 +109,7 @@ public class DataManager {
 	
 	public static void addWord(String l, boolean p, boolean e, String lit, boolean caps){
 		boolean known = FleksyEngine.api.knowsWord(l);
+		Log.d("Clean/Dirty : " + l + " / " + lit +" : hasPunct " + p + " hasErrs " + e + " hasCaps " + caps);
 		if(learning && !known){
 			FleksyEngine.api.addWordToDictionary(l);
 		}
