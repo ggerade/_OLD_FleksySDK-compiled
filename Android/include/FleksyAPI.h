@@ -204,6 +204,7 @@ public:
    * FLFieldAction_SEND       -Enter performs a "send" operation, delivering the text to its target
    * FLFieldAction_NEW_LINE   -Enter performs a "new line" operation, taking the user cursor to the next line in the text field
    * FLFieldAction_DONE       -Enter performs a "done" operation, finishing user's input and usually hiding the virtual keyboard
+   * FLFieldAction_EMOTICON   -Enter inserts :-) into text field
    *
    * Default: FLFieldAction_NEW_LINE
    */
@@ -232,6 +233,12 @@ public:
   void setTextFieldType(FLTextFieldType type);
   
   
+  /*
+   * The exact character input of the user is respected more when blind mode is off. Eg. "in" will not be corrected to "on"
+   *
+   * Default: false
+   */
+  void setBlindMode(bool enabled);
   
   std::string getVersion();
   

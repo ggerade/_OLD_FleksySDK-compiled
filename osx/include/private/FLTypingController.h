@@ -86,6 +86,7 @@ private:
 	FleksyListenerInterface &out;
 	std::vector<FLString> punctuation;
   std::vector<FLString> specialCases;
+  std::vector<FLString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
   
   std::string versionNumber;
@@ -146,6 +147,7 @@ private:
   int correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
   bool checkForRepeatedTypingAndLearn(FLTextBlock *tb);
+  void createEmoticonTextBlock();
   
   //Various helper functioins
   FLChar getNearestChar(FLPoint p);

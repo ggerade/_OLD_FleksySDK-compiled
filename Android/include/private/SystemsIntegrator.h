@@ -26,6 +26,7 @@ class SystemsIntegrator {
   
 private:
   
+  bool blindMode = false;
   word_id getTokenID(FLString* token);
   float distanceBetweenLetters(FLChar c1, FLChar c2, FLKeyboardID keyboardID);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
@@ -37,6 +38,8 @@ public:
 
   FleksyUtilities* utils = NULL;
   FLTokenPredictor* ftp = NULL;
+  
+  vector<FLString*> noChangeWords;
   
   FLSpaceHelper* spaceHelper = NULL;
   
@@ -76,6 +79,7 @@ public:
 
   // Settings
   void setSpaceBreaksEnabled(bool value);
+  void setBlindMode(bool value);
   
   void setSettingTransformLayerWeight(float weight);
   void setSettingShapeLayerWeight(float weight);

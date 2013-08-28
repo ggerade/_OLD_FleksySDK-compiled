@@ -36,7 +36,8 @@ enum FLFieldAction{
   FLFieldAction_NEXT,
   FLFieldAction_SEND,
   FLFieldAction_NEW_LINE,
-  FLFieldAction_DONE
+  FLFieldAction_DONE,
+  FLFieldAction_EMOTICON
 };
 
 enum FLMessageType{
