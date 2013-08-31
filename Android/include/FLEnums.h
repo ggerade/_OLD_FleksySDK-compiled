@@ -82,7 +82,8 @@ enum FLPunctuationSpaceMode{
 enum FLTextFieldType{
   FLTextFieldType_REGULAR_TEXT,
   FLTextFieldType_PASSWORD,
-  FLTextFieldType_URL
+  FLTextFieldType_URL,
+  FLTextFieldType_NO_SUGGESTIONS
 };
 
 enum FLEventType{
