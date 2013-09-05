@@ -52,6 +52,8 @@ public:
   // Kind of an ugly hack, but it's here to save memory...
   size_t getUnigramCount();
   probability unigramProbability(word_id unigramID);
+  
+  FLFilePtr& getFilePtr(size_t i);
 };
 
 #endif /* defined(__FleksyX__FLTokenPredictor__) */

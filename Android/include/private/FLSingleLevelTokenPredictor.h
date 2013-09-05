@@ -67,6 +67,8 @@ public:
   void setActive(bool b);
   bool isActive();
   
+  FLFilePtr& getFilePtr(size_t i);
+  
   friend class FleksyContextCommon;
   friend class FLContextTester;  
 };

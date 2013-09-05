@@ -79,6 +79,7 @@ public:
 
   // Settings
   void setSpaceBreaksEnabled(bool value);
+  bool getSpaceBreaksEnabled();
   void setBlindMode(bool value);
   
   void setSettingTransformLayerWeight(float weight);

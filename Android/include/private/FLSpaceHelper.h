@@ -57,8 +57,6 @@ public:
   
   void setLastPreparedContextResults(token_ids tokenIDs);
   static bool tapMayBeSpace(FLPoint tap);
-  
-  static bool ENABLE_SPACE_BREAKS;
 };
 
 
