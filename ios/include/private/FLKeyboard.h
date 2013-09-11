@@ -15,6 +15,16 @@
 #include "FLFile.h"
 #include "FLKeyMap.h"
 #include "FLEnums.h"
+#include "FLString.h"
+#include "FLPoint.h"
+#include <map>
+#include <set>
+
+struct FLPointComp {
+  bool operator() (const FLPoint& lhs, const FLPoint& rhs) const
+  { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
+};
+typedef std::map<FLPoint, std::set<FLChar>, FLPointComp> FLPointToCharSetMap;
 
 #define USE_TABLES_BY_DEFAULT 1
 
@@ -37,6 +47,10 @@ private:
   FLString alphabetLower;
 
   bool ismember(FLChar item, FLString& vector, bool table = USE_TABLES_BY_DEFAULT);
+
+  FLPointToCharSetMap lowerPointKeyMap;
+  FLPointToCharSetMap upperPointKeyMap;
+  FLPointToCharSetMap lowerUpperPointKeyMap;
 
 public:
   FLKeyboard(FLFilePtr &keyboardFile, bool isEncrypted);
@@ -72,6 +86,10 @@ public:
   char* extendedAsciiToUtf8(const char* text);
 
   void makeLowerCase(FLStringPtr &s);
+  
+  FLPointToCharSetMap getLowerPointKeyMap();
+  FLPointToCharSetMap getUpperPointKeyMap();
+  FLPointToCharSetMap getLowerUpperPointKeyMap();
 };
 
 typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;

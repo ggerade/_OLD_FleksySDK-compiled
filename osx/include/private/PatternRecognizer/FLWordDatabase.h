@@ -22,7 +22,7 @@
 
 using namespace std;
 
-#if SHAPE_TESTING
+#if (defined(SHAPE_TESTING) && (SHAPE_TESTING == 1) && !defined(SHAPE_TESTING_USE_PRODUCTION_MATCHER))
 #define MIN_BASE_LENGTH 0.001
 #else
 #define MIN_BASE_LENGTH 50
@@ -42,9 +42,11 @@ private:
   BBValue maxWordID;
   FLVotesHolder* votesHolder;
 
-  FLWordPtrList wordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
+  FLWordPtrList systemWordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
+  FLWordPtrList userWordsByLength[FLEKSY_MAX_WORD_SIZE+1]; //1-based index. Length 0 holds special non-words like "." and ","
 
   
+  //std::unordered_map<FLStringPtr, FLWordPtr, FLStringPtrHash, FLStringPtrEqual> userWordsByLetters;
   std::unordered_map<FLStringPtr, FLWordPtr, FLStringPtrHash, FLStringPtrEqual> wordsByLetters;
   std::unordered_map<FLStringPtr, FLStringPtr, FLStringPtrHash, FLStringPtrEqual> wordsBlacklistByLetters;
 
@@ -97,7 +99,7 @@ public:
   
   // FLWordDatabase (LoadingMethods)
   //external only for now, will be private
-  void loadedWord(FLWordPtr &word, bool calculateBlackboxValues);
+  void loadedWord(FLWordPtr &word, bool calculateBlackboxValues, bool userWord);
   bool removeWord(FLWordPtr &word);
   void calculateBlackboxValues();
   bool preprocessedFilesExist(const string filepathFormat);
@@ -110,6 +112,8 @@ public:
   
   FLWord *getWordByID(int wordID);
   FLWordPtr getWordPtrByID(int wordID);
+  
+  FLWordPtrList getUserWordsForLength(size_t length);
 
   bool getTokenIDForFLString(FLStringPtr &string, FLTokenID *tokenIDRef);
   bool getFLStringForTokenID(FLTokenID tokenID, FLStringPtr &string);

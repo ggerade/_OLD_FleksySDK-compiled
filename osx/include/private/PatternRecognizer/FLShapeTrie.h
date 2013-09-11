@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
+#ifdef SHAPE_TESTING_ENABLE_TRIE
+
 #ifndef __FleksySDK__FLShapeTrie__
 #define __FleksySDK__FLShapeTrie__
 
@@ -15,6 +17,7 @@
 #include <iostream>
 #include "FLTrie.h"
 #include "FLKeyboard.h"
+#include <list>
 
 // The length/depth beyond which we will only keep and use half the shape data.
 // Theoretically lossy, practically lossless for values >= 8. Set to >= FLEKSY_MAX_WORD_SIZE to disable
@@ -22,16 +25,6 @@
 
 using namespace std;
 
-class FLShapeEngineResultEntry {
-private:
-  FLString* str;
-  float totalScore;
-public:
-  FLShapeEngineResultEntry(const FLChar* chars, size_t length, float totalScore) { assert(chars != NULL); assert(length > 0); assert(length < 20); this->str = new FLString(chars, length); this->totalScore = totalScore; }
-  ~FLShapeEngineResultEntry() { delete str; } ;
-  FLString* getStr() { assert(str != NULL); return str; }
-  float getTotalScore() { return totalScore; }
-};
 
 typedef METADATA_TYPE BasisData[FLEKSY_MAX_WORD_SIZE][FLEKSY_MAX_WORD_SIZE];
 
@@ -80,3 +73,5 @@ public:
 #endif
 
 #endif /* defined(__FleksySDK__FLShapeTrie__) */
+
+#endif

@@ -19,6 +19,12 @@
 #include "FleksyDefines.h"
 #include <map>
 
+#include "FLTokenPredictor.h"
+
+#ifdef FL_USE_DAWG_SVD_ENGINE
+#include "FLKeyTapRecognizer.h"
+#endif
+
 #define DEFAULT_USER_WORD_FREQUENCY 15000
 
 using namespace std;
@@ -59,9 +65,16 @@ private:
 public:
   FleksyUtilities();
   ~FleksyUtilities();
+
+#ifdef FL_USE_DAWG_SVD_ENGINE
+  FLKeyTapRecognizerPtr keyTapRecognizer;
+#endif
   
 #if SHAPE_TESTING
+  FLTokenPredictor *ftp = NULL; // Hack so that context info can be applied to candidate matches.
+#ifdef SHAPE_TESTING_ENABLE_TRIE
   FLShapeTrie* shapeTrie;
+#endif
 #endif
 
   ///////  API  ///////

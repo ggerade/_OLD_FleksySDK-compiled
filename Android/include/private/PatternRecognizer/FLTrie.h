@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
+#ifdef SHAPE_TESTING_ENABLE_TRIE
+
 #ifndef __FleksySDK__FLTrie__
 #define __FleksySDK__FLTrie__
 
@@ -87,3 +89,5 @@ public:
 #endif
 
 #endif /* defined(__FleksySDK__FLTrie__) */
+
+#endif

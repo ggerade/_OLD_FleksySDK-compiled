@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-#ifdef FL_JOHNE_DEBUG
+#ifdef FL_USE_DAWG_SVD_ENGINE
 #include "FLKeyTapRecognizer.h"
 #endif
 
@@ -46,7 +46,7 @@ public:
   FLWordList processContextResults(const list_pred& preds, int wordLength, int resultsLimit = 0);
   token_ids convertToTokenIDs(FLString* token2, FLString* token1);
 
-#ifdef FL_JOHNE_DEBUG
+#ifdef FL_USE_DAWG_SVD_ENGINE
   FLKeyTapRecognizerPtr keyTapRecognizer;
 #endif
   
@@ -78,7 +78,7 @@ public:
   FLKeyboardPtr& getKeyboard();
 
   // Settings
-  void setSpaceBreaksEnabled(bool value);
+  bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred
   bool getSpaceBreaksEnabled();
   void setBlindMode(bool value);
   

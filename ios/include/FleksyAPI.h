@@ -186,8 +186,9 @@ public:
    * New
    * If 'space breaks' is enabled, then if the user misses the spacebar and types C,V,B, instead, then Fleksy might decide when appropriate
    * to split the word in two when correcting input. Example: [thisvis]->[this is]
+   * Return value is new state. It it doesn't match the argument value, some error has occurred
    */
-  void setSpaceBreaksEnabled(bool value);
+  bool setSpaceBreaksEnabled(bool value);
   /*
    * New
    * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].
