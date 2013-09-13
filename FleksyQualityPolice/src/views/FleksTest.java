@@ -45,6 +45,7 @@ public class FleksTest {
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
 	private final static String LRN2 = "-ll";
+	private final static String EZCP = "-ez";
 	
 	private final static String STLW = "-tlw";
 	private final static String SSLW = "-slw";
@@ -52,9 +53,9 @@ public class FleksTest {
 	private final static String SPLW = "-plw";
 	
 	private static Scanner input;
-	private final static int FAIL = 23;
+	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 6.2f;
+	public final static float Version = 6.3f;
 	private static boolean debugging = false;
 	private final static String Alt = "6RAPES";
 	
@@ -133,6 +134,8 @@ public class FleksTest {
 			}else if(a.equals(XERR)){ 	errors = false;
 			
 			}else if(a.equals(XSFT)){ 	shift = false;
+			
+			}else if(a.equals(EZCP)){ 	DataManager.enableEasyCompare();;
 			
 			}else if(a.equals(ANDY)){ 	DataManager.androidMode = true;
 			

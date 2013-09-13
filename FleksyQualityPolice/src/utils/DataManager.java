@@ -29,6 +29,7 @@ public class DataManager {
 	private static boolean failed = false;
 	private static boolean aFound = false;
 	private static boolean noSugs = false;
+	private static boolean ezComp = false;
 	private static boolean learning = false;
 	private static String enteredText = "";
 	private static float[] andyGraph = new float[30];
@@ -92,6 +93,10 @@ public class DataManager {
 		ignored.append(" - " + i + "\n");
 	}
 	
+	public static void enableEasyCompare(){
+		ezComp = true;
+	}
+	
 	public static void enableLearning(){
 		learning = true;
 	}
@@ -108,6 +113,9 @@ public class DataManager {
 	}
 	
 	public static void addWord(String l, boolean p, boolean e, String lit, boolean caps){
+		if(ezComp){
+			lit = l;
+		}
 		boolean known = FleksyEngine.api.knowsWord(l);
 		Log.d("Clean/Dirty : " + l + " / " + lit +" : hasPunct " + p + " hasErrs " + e + " hasCaps " + caps);
 		if(learning && !known){
@@ -341,6 +349,12 @@ public class DataManager {
 		String out = FleksyEngine.getLatestText();
 		word = word.replaceAll("[-]", "").trim();
 		out = out.replaceAll("[-]", "").trim();
+		if(ezComp){
+			word = word.replaceAll("[']", "").trim();
+			out = out.replaceAll("[']", "").trim();
+			word = word.toLowerCase();
+			out = out.toLowerCase();
+		}
 		if(print){
 			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
 		}
