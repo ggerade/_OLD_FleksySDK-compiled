@@ -19,6 +19,8 @@
 #include <string>
 #include <unordered_map>
 #include <string.h>
+#include <pthread.h>
+#include "Platform.h"
 
 using namespace std;
 
@@ -85,9 +87,15 @@ private:
 
   std::unordered_map<FLTokenID, FLStringPtr> tokenIDToStringMap;
 
+  pthread_mutex_t _recursiveMutex = PTHREAD_MUTEX_INITIALIZER;
+
 public:
   FLWordDatabase();
   ~FLWordDatabase();
+  
+  void lock()    { pthread_mutex_lock(&_recursiveMutex); }
+  bool tryLock() { return((pthread_mutex_trylock(&_recursiveMutex) == 0) ? true : false); }
+  void unlock()  { pthread_mutex_unlock(&_recursiveMutex); }
   
   size_t allWordsCount = 0;
 

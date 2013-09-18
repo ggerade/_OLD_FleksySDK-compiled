@@ -95,6 +95,8 @@ private:
   int userSelectionEnd;
   
 	int ignoreNextCursorUpdateCount;//how may cursor updates to ignore(by how much cursor has moved)
+  double lastCursorUpdateMatched;
+  
   int maxNumberOfSuggestions;
   bool isShiftPressed;
   bool simulateSystemCursorUpdates; //true = simulation of updates, false - updates come from the system
@@ -159,7 +161,6 @@ private:
   bool canAddSpace(FLChar c);
   bool canAddSpaceAfterEating(FLChar c);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
-	void ignoredCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);
   bool isEndSentenceSymbol(char symbol);
   bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false);
@@ -178,6 +179,7 @@ private:
   bool isSymbolAllowedToCorrect(FLChar character);
   void setLastDeletedWord(FLTextBlock *tb);
   void closeComposingRegionAt(int position);
+  double getUpdateTimeDiff();
   
   //User cursor operations
   void moveCursorToPosition(int position);

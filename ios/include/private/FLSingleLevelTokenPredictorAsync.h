@@ -38,6 +38,7 @@ private:
   queue<token_ids> requestedTokenIDs; // FIFO requests  -- convert to queue<token_ids> requestedTokenIDs
   token_ids lastProcessedTokenIDs; // marked by producer for consumer to ensure desired results  -- convert to lastProcessedTokenIDs
   list_pred lastResults;
+  FLPredictionMapPtr lastResultsPredictionMapPtr;
   
   void log(const char* format, ...);
   
@@ -55,7 +56,7 @@ public:
   void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
   // this may block until results for this tokenID are calculated
-  bool peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
+  bool peekNextCandidatesList(list_pred *result, FLPredictionMapPtr *resultMap, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
 };
 
 

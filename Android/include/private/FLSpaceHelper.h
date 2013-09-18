@@ -30,6 +30,8 @@ class FLSpaceHelper {
   IndexIdMapProbs data;
   
   bool producer_thread_created = false;
+  bool producer_thread_joined = false;
+  volatile bool _producerThreadShouldStop = false; // Protected by request_mutex
   pthread_t producer_thread; // background thread to perform the heavy task in producerThread()
   
   pthread_mutex_t request_mutex    = PTHREAD_MUTEX_INITIALIZER;
@@ -47,6 +49,8 @@ class FLSpaceHelper {
 public:
   FLSpaceHelper(FLFilePtr &file1, FLFilePtr &file2, FLFilePtr &file3, void* systemsIntegrator);
   ~FLSpaceHelper();
+  
+  void stopBackgroundThread();
   
   void pushTap(FLPoint tap);
   bool popTap();

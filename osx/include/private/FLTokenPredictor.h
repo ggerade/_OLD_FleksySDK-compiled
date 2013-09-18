@@ -44,10 +44,10 @@ public:
   void prepareNextCandidatesListAsync(token_ids previousTokenIDs);
   
   // this may block until results for this tokenID are calculated
-  bool peekNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
+  bool peekNextCandidatesList(list_pred *result, FLPredictionMapPtr *resultMap, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
 
   // wrapper function of the above two step process
-  void getNextCandidatesList(list_pred& result, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
+  void getNextCandidatesList(list_pred *result, FLPredictionMapPtr *resultMap, token_ids previousTokenIDs, int resultsLimit = 0, probability pThreshold = 0);
 
   // Kind of an ugly hack, but it's here to save memory...
   size_t getUnigramCount();

@@ -31,17 +31,17 @@ class GolombCoder {
   
 public:
   
-  static size_t bytesUsedByEncoding(const IntVector& data, int M, bool includeCount, BitVector& output);
+  static size_t bytesUsedByEncoding(const uint16_t data[], size_t dataSize, int M, bool includeCount, BitVector& output);
   
   static bool encodeSingleNumber(uint16_t number, int M, BitVector &bits);
   static uint16_t  decodeSingleNumber(const BitVector& bits, int M);
   
-  static bool encode(const IntVector& source, int M, bool includeCount, BitVector &bits, size_t maxBits);
+  static bool encode(const uint16_t source[], size_t sourceSize, int M, bool includeCount, BitVector &bits, size_t maxBits);
   static IntVector decode(const BitVector& bits, int M, bool includesCount);
   
   // this will search through a few possible values for M and return a tuple
   // with results and some other useful info, see GolombEncodingResult
-  static GolombEncodingResult maxEncode(const IntVector& source, bool includeCount, uint8_t minBits = 1, uint8_t maxBits = 16);
+  static GolombEncodingResult maxEncode(const uint16_t source[], size_t sourceSize, bool includeCount, uint8_t minBits = 1, uint8_t maxBits = 16);
 
   static void printGolombEncodingResult(const GolombEncodingResult& g);
   static void printBitVector(const BitVector& bits);

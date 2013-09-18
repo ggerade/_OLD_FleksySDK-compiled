@@ -23,6 +23,7 @@
 // ANSI C Headers for C++
 #include <cassert>
 #include <stdexcept>
+#include <memory>
 
 // Fleksy headers
 #include <PatternRecognizer/CoreSettings.h>
@@ -148,6 +149,8 @@ typedef list<FLString> list_string;
 class FLSingleLevelTokenPredictor;
 class Prediction;
 typedef vector<Prediction> list_pred;  // a vector of predictions
+typedef std::unordered_map<word_id, Prediction> FLPredictionMap;
+typedef std::shared_ptr<FLPredictionMap> FLPredictionMapPtr;
 
 class FleksyContextCommon {
   

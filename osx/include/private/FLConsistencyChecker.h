@@ -26,13 +26,14 @@ public:
   /**checks if old text is still valid. if not reparses everything*/
   bool isTextStillValid(FLString text, int cursorPosition);
   void checkCursorPositionVSnumOfTextBlocks(int userCursorPosition, vector<FLTextBlock*> &textBlocks);
+  void sendErrorReport(string message);
   
 private:
   FleksyListenerInterface &out;
   FLTypingController *tc;
   
   void updateTextBlockCursor(int userCursorPosition = -1);
-  void sendErrorReport(string message);
+  
   
   
 };
