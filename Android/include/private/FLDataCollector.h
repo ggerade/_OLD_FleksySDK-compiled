@@ -24,6 +24,7 @@ public:
   
   //For recording all events that get uploaded to the Amazon S3
   void setIsCollectingData(bool isCollectingData);
+  
   bool isDataCollectionEnabled();
   void setIsGaming(bool isGaming);
   
@@ -47,8 +48,6 @@ private:
   bool isCollectingData;
   bool isGaming;
   std::string dataWritePath;
-  //std::string eventFilePath;
-  //std::string encryZipFilePath;
   std::string fileHeader;
   bool isFileReadyForUpload;
   
