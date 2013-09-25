@@ -29,6 +29,7 @@
 #include <PatternRecognizer/CoreSettings.h>
 #include <PatternRecognizer/Platform.h>
 #include <PatternRecognizer/FLFile.h>
+#include "FLException.h"
 
 #include "TimeFunctions.h"
 #include "GolombCoder.h"
@@ -244,8 +245,8 @@ public:
   probability weight;
   // constructors
   Prediction(word_id shortWordID, probability p, bool occurences = false) {
-    if(p <= 0.0f) { throw std::invalid_argument("p <= 0.0"); }
-    if(occurences) { if(p < 1.0f) { throwInvalidArgument("p occurence < 1.0", p); } } else { if(p > 1.0f) { throwInvalidArgument("p occurence > 1.0", p); } }
+    if(p <= 0.0f) { throw FLException("p <= 0.0"); }
+    if(occurences) { if(p < 1.0f) { throw FLException("p occurence < 1.0", p); } } else { if(p > 1.0f) { throw FLException("p occurence > 1.0", p); } }
     wordID = shortWordID;
     weight = p;
   };
@@ -257,8 +258,6 @@ public:
   // want to find predictions by word
   bool operator==(const Prediction& pred) { return (this->wordID == pred.wordID); };  // const Prediction& is critical (error otherwise)
   bool operator!=(const Prediction& pred) { return (this->wordID != pred.wordID); };  // const Prediction& is critical (error otherwise)
-
-  static void throwInvalidArgument(const char* message, probability value) { ostringstream msg(message); msg << " (" << value << ")"; throw std::invalid_argument(msg.str()); }
 };
     
 class FLSmartTokenizer
