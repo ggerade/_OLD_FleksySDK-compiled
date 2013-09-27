@@ -120,6 +120,8 @@ private:
   
   FLString lastDeletedWord;
   
+  FLString gameText;
+  
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
@@ -132,6 +134,10 @@ private:
   //Debug stuff
   void printTextBlocks();
   string getSlashSeparatedSuggestions(vector<FLString> suggestions);
+  
+  //Game key charging
+  void biasPointForChar(FLPoint& p1, FLChar c);
+  FLChar getIntendedCharacter();
   
   //Stuff that deletes
   void backspace(float length);

@@ -27,6 +27,7 @@ public:
   
   bool isDataCollectionEnabled();
   void setIsGaming(bool isGaming);
+  bool getIsGaming();
   
   //For events that go off to Bugsense or TestFlight or other places
   void setIsTrackingEvents(bool isTracking);
