@@ -25,7 +25,7 @@ public:
   bool isPunctuationInside();
 	void setIsPunctuationInside(bool isPunctuation);
   bool isSpaceEnabled();
-  void setIsSpaceEnabledBoolOnly(bool isSpaceEnabled);
+  void setIsSpaceEnabled(bool isSpaceEnabled);
   bool isNewLineTextBlock();
   void setIsNewLineTextBlock(bool isNewLine);
   bool isSymbolsTextBlock();

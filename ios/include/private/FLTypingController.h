@@ -79,6 +79,8 @@ public:
   
   void setCurrentKeyboardLayout(string keyboardLayout);
   FLDataCollector *getDataCollector();
+  
+  void biasPointForChar(FLPoint& p1);
 
 private:
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -121,6 +123,7 @@ private:
   FLString lastDeletedWord;
   
   FLString gameText;
+  double lastTapTime;
   
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
@@ -136,7 +139,6 @@ private:
   string getSlashSeparatedSuggestions(vector<FLString> suggestions);
   
   //Game key charging
-  void biasPointForChar(FLPoint& p1, FLChar c);
   FLChar getIntendedCharacter();
   
   //Stuff that deletes
