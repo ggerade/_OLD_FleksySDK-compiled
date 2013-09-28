@@ -57,7 +57,7 @@ public:
    * |setPlatformKeyboardSize|. This will result in a call to your FleksyListenerInterface onSetComposingText() with the character
    * that is closest to the x,y coordinates.
    */
-  void sendTap(float x, float y, long long time = 0);
+  void sendTap(float x, float y, long long time = 0, int offset = 0);
   
   /*
    * Adds space or <.>
@@ -145,7 +145,7 @@ public:
   /*
    * Returns the character nearest to the target point for the specified keyboard layout
    */
-  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID);
+  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID, int offset = 0);
   
   /*
    * Sets the correction mode.

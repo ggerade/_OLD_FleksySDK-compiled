@@ -32,7 +32,7 @@ public:
   ~FLTypingController();
   
   //FleksyAPI calls
-  void sendPoint(float x, float y, long long time);
+  void sendPoint(float x, float y, long long time, int offset);
   void backAndForthSwipe(float length = 0);
 	void swipeRight(float length = 0);
 	void swipeLeft(float length = 0);
@@ -80,7 +80,7 @@ public:
   void setCurrentKeyboardLayout(string keyboardLayout);
   FLDataCollector *getDataCollector();
   
-  void biasPointForChar(FLPoint& p1);
+  void biasPointForChar(FLPoint& p1, int offset);
 
 private:
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -90,6 +90,7 @@ private:
   std::vector<FLString> specialCases;
   std::vector<FLString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
+  std::vector<std::string> last3events;
   
   std::string versionNumber;
 	int expectedUserCursor;//loaction of the cursor
@@ -139,7 +140,7 @@ private:
   string getSlashSeparatedSuggestions(vector<FLString> suggestions);
   
   //Game key charging
-  FLChar getIntendedCharacter();
+  FLChar getIntendedCharacter(int offset);
   
   //Stuff that deletes
   void backspace(float length);
@@ -188,6 +189,7 @@ private:
   void setLastDeletedWord(FLTextBlock *tb);
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
+  void recordLastEvent(string event);
   
   //User cursor operations
   void moveCursorToPosition(int position);
