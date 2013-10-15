@@ -97,6 +97,8 @@ private:
   int userSelectionStart;
   int userSelectionEnd;
   
+  int gameKeyChargingOffset;
+  
 	int ignoreNextCursorUpdateCount;//how may cursor updates to ignore(by how much cursor has moved)
   double lastCursorUpdateMatched;
   
@@ -147,7 +149,7 @@ private:
   void deleteTextBlock();
   void deleteCharacterAt(int indx);
   void deleteCurrentTextBlock();
-  int deleteAnySelectedText(FLExternalEditorState &state);
+  int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
   //TextBlock correction operations
   FLString* getTwoPreviousTokens(int textBlockIndex);
@@ -172,7 +174,7 @@ private:
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);
   bool isEndSentenceSymbol(char symbol);
-  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false);
+  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false, bool isDeleting = false);
   void addRemoveFromDictionary(FLTextBlock *tb);
   void GCtextBlocks();
   int calculateEndOfTextBlock(FLTextBlock *tb);
@@ -190,6 +192,7 @@ private:
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
   void recordLastEvent(string event);
+  FLChar getGameCharacter(int index);
   
   //User cursor operations
   void moveCursorToPosition(int position);

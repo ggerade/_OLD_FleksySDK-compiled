@@ -21,7 +21,9 @@ public:
   void setTextEntered(FLString text);
   FLString getTextEntered();
   void setLength(int length);
+  void setUTF16Length(const unsigned char *utf8String);
   int getLength();
+  size_t getUTF16Length();
   bool isPunctuationInside();
 	void setIsPunctuationInside(bool isPunctuation);
   bool isSpaceEnabled();
@@ -70,6 +72,7 @@ private:
 	FLSuggestionsContainer *response;
 	FLRequestDataHolder *request;
 	int length;
+  size_t utf16Length;
 	int suggestionIndx;
 	FLString correctedText;
 	bool isPunctuation;
