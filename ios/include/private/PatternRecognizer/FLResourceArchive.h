@@ -30,7 +30,10 @@ public:
 
   FLFilePtr FLFileForFileName(const char *fileName);
   string getTag();
+
   kLanguage getLanguage();
+  uint16_t getLanguageMajor();
+  uint16_t getLanguageMinor();
 
 private:
   FLFilePtr archiveFile;// = NULL;

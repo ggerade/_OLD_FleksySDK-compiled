@@ -47,6 +47,8 @@ public:
   FLFilePtr FLFileForFileName(const char *filename);
   void initialize(FLFilePtr &preloaded, FLFilePtr &wordlist, FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);
   
+  string getLanguagePackVersion(const char *resourceFilePath);
+  
   // Settings
   void setSettingTransformLayerWeight(float weight);
   void setSettingShapeLayerWeight(float weight);
