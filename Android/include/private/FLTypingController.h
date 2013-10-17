@@ -74,7 +74,7 @@ public:
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
   void previousWordChanged(string from, int textBlockInex = -1);
-  void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1);
+  void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1, bool replacingSelText = false);
   //EOF crazyChecker functions
   
   void setCurrentKeyboardLayout(string keyboardLayout);
