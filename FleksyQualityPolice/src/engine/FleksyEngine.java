@@ -139,7 +139,7 @@ public class FleksyEngine {
 //	        File file = new File(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English")); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 //	        RandomAccessFile stream = new RandomAccessFile(file, "rw"); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 //	        FLFileDescriptor descriptor = new FLFileDescriptor(stream.getFD(), stream.getFilePointer(), file.length()); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
-	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English"), api, true);
+	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/encrypted/" + FileUtils.getJetResourceFileName("English"), api, true);
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
 		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal(), false);
