@@ -223,6 +223,7 @@ private:
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLString text, bool isDeleted);
+  void speak(FLTextBlock *tb, bool isDeleted);
   
   
   

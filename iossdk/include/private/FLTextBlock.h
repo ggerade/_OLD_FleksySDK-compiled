@@ -66,6 +66,7 @@ public:
   bool isSplitWithSpace();
   void setUserCapitalization(bool isUserSet);
   bool userSetCapitalization();
+  bool replacedSuggestion();
   
 private:
   FleksyListenerInterface &out;
@@ -84,6 +85,7 @@ private:
   bool addedWordToDictionary;
   bool isUserSetCapitalization;
   bool userEditedText;
+  bool changedToNextSuggestion;
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
