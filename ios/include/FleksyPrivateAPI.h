@@ -59,6 +59,14 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
+  
+  //Data Collection
+  void setDataCollectionDirectory(string path); // folder/folder/dataFolder (no / at the end)
+  void setIsCollectingData(bool isCollectingData);
+  void setDataFileHeader(string header);
+  void processEventData(string eventData);
+  void writeDataToFile();
+  
 };
 
 #endif
