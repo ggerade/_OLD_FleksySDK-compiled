@@ -65,9 +65,9 @@ public class FleksyInterface extends FleksyListenerInterface{
 
 	@Override
 	public void onReceiveSuggestions(String[] suggestions, int selectedIndex) {
-		if(suggestions.length > selectedIndex){
-			FleksyEngine.setLatestText(suggestions[selectedIndex]);
-		}
+//		if(suggestions.length > selectedIndex){
+//			FleksyEngine.setLatestText(suggestions[selectedIndex]);
+//		}
 	}
 
 	@Override
