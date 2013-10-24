@@ -193,6 +193,7 @@ private:
   double getUpdateTimeDiff();
   void recordLastEvent(string event);
   FLChar getGameCharacter(int index);
+  vector<FLPoint> getSubVector(vector<FLPoint> original, int start, int end);
   
   //User cursor operations
   void moveCursorToPosition(int position);
@@ -223,7 +224,7 @@ private:
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLString text, bool isDeleted);
-  void speak(FLTextBlock *tb, bool isDeleted);
+  void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   
   
   
