@@ -169,7 +169,7 @@ private:
   void populateSpecialVectors();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
   bool canEatSpace(FLChar c);
-  bool canAddSpace(FLChar c);
+  bool canAddSpace(FLChar c, FLTextBlock *prevTB);
   bool canAddSpaceAfterEating(FLChar c);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);
