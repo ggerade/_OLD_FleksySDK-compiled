@@ -48,6 +48,7 @@ public:
   void initialize(FLFilePtr &preloaded, FLFilePtr &wordlist, FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);
   
   string getLanguagePackVersion(const char *resourceFilePath);
+  bool isValidLanguagePack(const char *resourceFilePath);
   
   // Settings
   void setSettingTransformLayerWeight(float weight);
