@@ -60,9 +60,16 @@ public:
   void sendTap(float x, float y, long long time = 0, int offset = 0);
   
   /*
-   * Adds space or <.>
-   * <word> -> <word >
-   * <word > -> <word. >
+   * When length = 0, it means that the space bar was pressed, else it's considered as a Swipe Right
+   * If the cursor is in the middle of the word and space bar is pressed then the word is split with the space
+   * Ex: <te|st> ->space bar-> <te |st>
+   * If the cursor is at the end of the word, word is corrected and/or cursor is moved to the end
+   * Ex: <test|> ->space bar-><test |>
+   * On swipe right word is corrected and/or cursor is moved to the end:
+   * Ex: <tes|t> ->swipe right -> <test |>
+   * On repeated presses, adds punctuation:
+   * <word|> -> space -> <word |>
+   * <word |> -> space -> <word. |>
    */
   void space(float length = 0);
   

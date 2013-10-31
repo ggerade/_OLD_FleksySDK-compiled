@@ -36,7 +36,7 @@ public:
   void setFileHeader(std::string fileHeader);
   
   void processEvent(FLEventType event, ...);
-  void processEvent(std::string event, std::string eventData);
+  void processEvent(std::string eventData);
   
   void writeEventsToFile(bool writeAsync = false);
   std::string writeGameEventsToFile();

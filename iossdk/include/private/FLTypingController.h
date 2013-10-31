@@ -74,7 +74,7 @@ public:
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
   void previousWordChanged(string from, int textBlockInex = -1);
-  void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1);
+  void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1, bool deletedSelectedText = false);
   //EOF crazyChecker functions
   
   void setCurrentKeyboardLayout(string keyboardLayout);
@@ -96,6 +96,8 @@ private:
 	int expectedUserCursor;//loaction of the cursor
   int userSelectionStart;
   int userSelectionEnd;
+  
+  int gameKeyChargingOffset;
   
 	int ignoreNextCursorUpdateCount;//how may cursor updates to ignore(by how much cursor has moved)
   double lastCursorUpdateMatched;
@@ -147,7 +149,7 @@ private:
   void deleteTextBlock();
   void deleteCharacterAt(int indx);
   void deleteCurrentTextBlock();
-  int deleteAnySelectedText(FLExternalEditorState &state);
+  int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
   //TextBlock correction operations
   FLString* getTwoPreviousTokens(int textBlockIndex);
@@ -167,12 +169,12 @@ private:
   void populateSpecialVectors();
   void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
   bool canEatSpace(FLChar c);
-  bool canAddSpace(FLChar c);
+  bool canAddSpace(FLChar c, FLTextBlock *prevTB);
   bool canAddSpaceAfterEating(FLChar c);
   void ignoreNextCursorUpdate(std::string from, int num_ignores);
   bool isInPunctuation(char symbol);
   bool isEndSentenceSymbol(char symbol);
-  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false);
+  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false, bool isDeleting = false);
   void addRemoveFromDictionary(FLTextBlock *tb);
   void GCtextBlocks();
   int calculateEndOfTextBlock(FLTextBlock *tb);
@@ -190,6 +192,8 @@ private:
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
   void recordLastEvent(string event);
+  FLChar getGameCharacter(int index);
+  vector<FLPoint> getSubVector(vector<FLPoint> original, int start, int end);
   
   //User cursor operations
   void moveCursorToPosition(int position);
@@ -220,6 +224,7 @@ private:
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLString text, bool isDeleted);
+  void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   
   
   

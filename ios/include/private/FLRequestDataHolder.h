@@ -22,6 +22,7 @@ public:
 	void setPoints(std::vector<FLPoint>);
   void resetRequest();
   void clearPoints();
+  void printPoints();
   
 private:
   std::vector<FLPoint> points;

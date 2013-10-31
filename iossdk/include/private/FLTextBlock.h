@@ -21,7 +21,9 @@ public:
   void setTextEntered(FLString text);
   FLString getTextEntered();
   void setLength(int length);
+  void setUTF16Length(const unsigned char *utf8String);
   int getLength();
+  size_t getUTF16Length();
   bool isPunctuationInside();
 	void setIsPunctuationInside(bool isPunctuation);
   bool isSpaceEnabled();
@@ -64,12 +66,14 @@ public:
   bool isSplitWithSpace();
   void setUserCapitalization(bool isUserSet);
   bool userSetCapitalization();
+  bool replacedSuggestion();
   
 private:
   FleksyListenerInterface &out;
 	FLSuggestionsContainer *response;
 	FLRequestDataHolder *request;
 	int length;
+  size_t utf16Length;
 	int suggestionIndx;
 	FLString correctedText;
 	bool isPunctuation;
@@ -81,6 +85,7 @@ private:
   bool addedWordToDictionary;
   bool isUserSetCapitalization;
   bool userEditedText;
+  bool changedToNextSuggestion;
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
