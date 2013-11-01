@@ -49,7 +49,8 @@ enum FLMessageType{
   FLMessageType_EVENT,
   FLMessageType_ERROR,
   FLMessageType_BACKSPACE,
-  FLMessageType_UPLOAD_DATA_FILE
+  FLMessageType_UPLOAD_DATA_FILE,
+  FLMessageType_LAST_CHARACTER_DELETED
 };
 
 //passed in as a parameter in onDictionaryModified
@@ -84,6 +85,11 @@ enum FLTextFieldType{
   FLTextFieldType_PASSWORD,
   FLTextFieldType_URL,
   FLTextFieldType_NO_SUGGESTIONS
+};
+
+enum FLLongPressType{
+  FLLongPressType_NONE,
+  FLLongPressType_LONG_PRESS
 };
 
 enum FLEventType{

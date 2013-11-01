@@ -56,6 +56,7 @@ public:
   void setFieldAction(FLFieldAction fieldAction);
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
   void setTextFieldType(FLTextFieldType type);
+  void longPress(FLLongPressType type, float x, float y);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   std::string getVersionNumber(); //Version number of TC
@@ -116,12 +117,14 @@ private:
   bool voiceFeedback;
   bool startedTypingSession;
   bool inBatchEdit;
-  FLCapitalizationMode capitalizationMode;
   CursorChangeEvent cursorChangeEvent;
+  
+  FLCapitalizationMode capitalizationMode;
   FLDeleteMode deleteMode;
   FLFieldAction fieldAction;
   FLPunctuationSpaceMode punctuationSpaceMode;
   FLTextFieldType textFieldType;
+  FLLongPressType longPressType;
   
   FLString lastDeletedWord;
   
@@ -194,6 +197,7 @@ private:
   void recordLastEvent(string event);
   FLChar getGameCharacter(int index);
   vector<FLPoint> getSubVector(vector<FLPoint> original, int start, int end);
+  void resetLongPressType();
   
   //User cursor operations
   void moveCursorToPosition(int position);

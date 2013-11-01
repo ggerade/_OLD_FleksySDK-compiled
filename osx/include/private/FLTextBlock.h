@@ -35,6 +35,8 @@ public:
   void setIsEndSentence(bool isEndSentence);
   bool isEndSentence();
   bool isUserEditedText();
+  void setIsAccuratelyTyped(bool isAccuratelyTyped);
+  bool getIsAccuratelyTyped();
   
 	FLRequestDataHolder *getRequest();
   FLString getText();
@@ -86,9 +88,11 @@ private:
   bool isUserSetCapitalization;
   bool userEditedText;
   bool changedToNextSuggestion;
+  bool isAccuratelyTyped;
   
   int changeSuggestion(int offset);
   FLString capitalize(FLString word);
+  void prepareTextBlockToRecieveOrRemoveCharacters();
   
   void printTextBlock();
   void deleteSuggestions();
