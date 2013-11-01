@@ -41,16 +41,13 @@ enum FLFieldAction{
 };
 
 enum FLMessageType{
-  FLMessageType_DISPLAY_TO_USER,
   FLMessageType_DEBUG,
   FLMessageType_NO_NEXT_SUGGESTION,
   FLMessageType_NO_PREVIOUS_SUGGESTION,
-  FLMessageType_EXIT,
   FLMessageType_EVENT,
   FLMessageType_ERROR,
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
-  FLMessageType_LAST_CHARACTER_DELETED
 };
 
 //passed in as a parameter in onDictionaryModified
@@ -117,6 +114,7 @@ enum FLEventType{
   FLEventType_ST,
   FLEventType_ET,
   FLEventType_FA,
+  FLEventType_LP,
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */
