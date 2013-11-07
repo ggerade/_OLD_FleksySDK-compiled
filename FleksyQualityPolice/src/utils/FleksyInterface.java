@@ -101,11 +101,6 @@ public class FleksyInterface extends FleksyListenerInterface{
 //	};
 
 	@Override
-	public void onRequestAdditionalSuggestions(String rawText) { //BEFORE SWIPING, SEND TO SERVER FOR SUGGESTIONS
-		FleksyEngine.rawTxt = rawText;
-	}
-
-	@Override
 	public void onDictionaryModified(int event, String word) {
 		try {
 			throw new Exception("Dictionary Modified! Event: " + event + " Word: " + word + "\n");
