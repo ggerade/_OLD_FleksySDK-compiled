@@ -5,19 +5,22 @@
 #include <vector>
 #include "PatternRecognizer/Platform.h"
 #include "FLSocketsCommon.h"
+#include "FLUnicodeString.h"
 
 class FLSuggestionsContainer{
   
 public:
 	FLSuggestionsContainer();
-	void setSuggestions(std::vector<FLString> suggs);
-	std::vector<FLString>& getSuggestions();
+	void setSuggestions(const std::vector<FLUnicodeString> &suggs);
+	std::vector<FLUnicodeString> getSuggestions();
   void clearSuggestions();
-  void insertSuggestion(int index, FLString suggestion);
+  void insertSuggestion(int index, const FLUnicodeString &suggestion);
   int getSuggestionCount();
   
 private:
-	std::vector<FLString> suggestions;
+	std::vector<FLUnicodeString> suggestions;
 };
+
+#undef FLUnicodeString
 
 #endif

@@ -12,7 +12,7 @@
 #include "FleksyListenerInterface.h"
 #include "FLPoint.h"
 #include "FLEnums.h"
-#include "FLString.h"
+#include "FLUnicodeString.h"
 
 class FleksyAPIpImpl;
 
@@ -37,12 +37,12 @@ public:
   /*
    * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_EXISTS if the word was already in the dictionary.
    */
-  FLDictionaryChangeResult addWordToDictionary(FLString word);
+  FLDictionaryChangeResult addWordToDictionary(FLUnicodeString word);
   
   /*
    * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_NOT_FOUND if the word was not in the dictionary.
    */
-  FLDictionaryChangeResult removeWordFromDictionary(FLString word);
+  FLDictionaryChangeResult removeWordFromDictionary(FLUnicodeString word);
   
   /*
    * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
@@ -60,9 +60,16 @@ public:
   void sendTap(float x, float y, long long time = 0, int offset = 0);
   
   /*
-   * Adds space or <.>
-   * <word> -> <word >
-   * <word > -> <word. >
+   * When length = 0, it means that the space bar was pressed, else it's considered as a Swipe Right
+   * If the cursor is in the middle of the word and space bar is pressed then the word is split with the space
+   * Ex: <te|st> ->space bar-> <te |st>
+   * If the cursor is at the end of the word, word is corrected and/or cursor is moved to the end
+   * Ex: <test|> ->space bar-><test |>
+   * On swipe right word is corrected and/or cursor is moved to the end:
+   * Ex: <tes|t> ->swipe right -> <test |>
+   * On repeated presses, adds punctuation:
+   * <word|> -> space -> <word |>
+   * <word |> -> space -> <word. |>
    */
   void space(float length = 0);
   
@@ -140,12 +147,12 @@ public:
   /*
    * Returns a keymap for KeyboardID containing the keyboards characters and their locations on the screen.
    */
-  std::map<FLChar, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
+  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
   
   /*
    * Returns the character nearest to the target point for the specified keyboard layout
    */
-  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID, int offset = 0);
+  FLUnicodeString getNearestChar(FLPoint target, FLKeyboardID keyboardID, int offset = 0);
   
   /*
    * Sets the correction mode.
@@ -162,15 +169,9 @@ public:
   FLCorrectionMode getCorrectionMode();
   
   /*
-   * You can use this to send additional hints to Fleksy as to what rawText should be corrected to.
-   * These suggestions will be considered in the response.
-   */
-  void setAdditionalSuggestions(FLString rawText, FLString suggestionList);
-  
-  /*
    * Returns a boolean value that indicates whether or not Fleksy knows a word.
    */
-  bool knowsWord(FLString word);
+  bool knowsWord(FLUnicodeString word);
   
   /*
    * Sets whether voice feedback is enabled.
@@ -214,10 +215,10 @@ public:
   /*
    * New
    * Sets manual punctuation mode(punctuation added from non QWERTY keyboard)
-   * FLPunctuationSpaceMode_DEFAULT,                [hello]+ -> [hello]+[.]-[|] Default behaviour doesn't eat or add space
-   * FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE,   [hello]+ -> [hello]-[.]-[|] Eats space on previous word
-   * FLPunctuationSpaceMode_ADD_SPACE_AFTER,        [hello]+ -> [hello]+[.]+[|] Adds space after itself
-   * FLPunctuationSpaceMode_DEL_AND_ADD_SPACE       [hello]+ -> [hello]-[.]+[|] Eats space on previous word AND adds space after itself
+   * FLPunctuationSpaceMode_DEFAULT                [hello]+ -> [hello]+[.]-[|] Default behaviour doesn't eat or add space
+   * FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE   [hello]+ -> [hello]-[.]-[|] Eats space on previous word
+   * FLPunctuationSpaceMode_ADD_SPACE_AFTER        [hello]+ -> [hello]+[.]+[|] Adds space after itself
+   * FLPunctuationSpaceMode_DEL_AND_ADD_SPACE      [hello]+ -> [hello]-[.]+[|] Eats space on previous word AND adds space after itself
    *
    * Default: FLPunctuationSpaceMode_DEFAULT
    */
@@ -233,6 +234,15 @@ public:
    */
   void setTextFieldType(FLTextFieldType type);
   
+  /*
+   * When platform detects long press, it can let engine know about it...
+   *
+   * FLLongPressType_NONE         -No longpress, can be used to reset the engine state
+   * FLLongPressType_LONG_PRESS   -Long press. Next sendTap() will be treated as accurate typing. If x,y is valid, then sendTap() will return an accented character
+   *
+   * Optional: x,y - point where the long press was released
+   */
+  void longPress(FLLongPressType type, float x = -1, float y = -1); //TODO: -1,-1 someone can release in -x or -y ?
   
   /*
    * The exact character input of the user is respected more when blind mode is off. Eg. "in" will not be corrected to "on"
@@ -241,11 +251,10 @@ public:
    */
   void setBlindMode(bool enabled);
   
-  std::string getVersion();
+  FLUnicodeString getVersion();
   
   //private:
   FleksyAPIpImpl *pImpl;
 };
-
 
 #endif /* defined(__FleksySDK_FleksyAPI_h__) */

@@ -16,6 +16,7 @@
 #include "FLEnums.h"
 #include "FleksyListenerInterface.h"
 #include "FLTrackEvents.h"
+#include "FLUnicodeString.h"
 
 class FLDataCollector{
 public:
@@ -36,16 +37,16 @@ public:
   void setFileHeader(std::string fileHeader);
   
   void processEvent(FLEventType event, ...);
-  void processEvent(std::string eventData);
+  void processEvent(const FLUnicodeString &eventData);
   
   void writeEventsToFile(bool writeAsync = false);
   std::string writeGameEventsToFile();
 
 private:
   FleksyListenerInterface &listener;
-  std::vector<std::string>events;
-  std::vector<std::string>gameEvents;
-  std::string tempEvents;
+  std::vector<FLUnicodeString>events;
+  std::vector<FLUnicodeString>gameEvents;
+  FLUnicodeString tempEvents;
   bool isCollectingData;
   bool isGaming;
   std::string dataWritePath;
@@ -54,11 +55,11 @@ private:
   
   FLTrackEvents *tracker = NULL;
   
-  void recordEvent(std::string eventData, FLEventType type);
+  void recordEvent(const FLUnicodeString &eventData, FLEventType type);
  
-  std::string floatToString(float value);
-  std::string longToString(long long value);
-  std::string doubleToString(double value);
+  FLUnicodeString floatToString(float value);
+  FLUnicodeString longToString(long long value);
+  FLUnicodeString doubleToString(double value);
   std::string getEncryZipFilePath();
   std::string getEventFilePath();
   
@@ -67,7 +68,7 @@ private:
   void writeToFile();
   static void* writeToFileWrapper(void *arg);
   
-  void encryptAndCompressDataToFile(std::string data);
+  void encryptAndCompressDataToFile(const FLUnicodeString &data);
   std::string get_file_contents(const char *filename);
   void deleteFile(const char * filePath);
   

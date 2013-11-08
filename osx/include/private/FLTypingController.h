@@ -9,13 +9,12 @@
 #include "FLRequestDataHolder.h"
 #include "PatternRecognizer/Platform.h"
 #include "FleksyListenerInterface.h"
-#include "FLKeyMap.h"
 #include "FLTextBlockCursor.h"
 #include "SystemsIntegrator.h"
 #include "FLConsistencyChecker.h"
-#include "FLPlatformSuggestions.h"
 #include "FLTrackEvents.h"
 #include "FLDataCollector.h"
+#include "FLUnicodeString.h"
 
 class FLConsistencyChecker;
 
@@ -39,7 +38,7 @@ public:
 	void swipeUp(float length = 0);
 	void swipeDown(float length = 0);
   void enterSwipe(float length = 0);
-  void shiftPressed(string who, bool userPress = false);
+  void shiftPressed(const std::string &who, bool userPress = false);
   void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
   FLKeyboardID getActiveKeyboardID();
   void setCorrectionMode(FLCorrectionMode mode);
@@ -48,7 +47,6 @@ public:
   void startTypingSession(bool platformMovesCursor = false);
   void endTypingSession();
   void postLoadSetup();
-  void setPlatformSuggestions(FLString prossedRequestID, FLString processedResults);
   void setCapitalizationMode(FLCapitalizationMode mode);
   FLCapitalizationMode getCapitalizationMode();
   void setVoiceFeedback(bool isOn);
@@ -56,28 +54,29 @@ public:
   void setFieldAction(FLFieldAction fieldAction);
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
   void setTextFieldType(FLTextFieldType type);
+  void longPress(FLLongPressType type, float x, float y);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
-  std::string getVersionNumber(); //Version number of TC
+  FLUnicodeString getVersionNumber(); //Version number of TC
   
   
   //Here for testing
-  void sendCharacter(char c);//Testing sends character and this function coverts it into points and calls sendPoint()
+  void sendCharacter(const FLUnicodeString &c);//Testing sends character and this function coverts it into points and calls sendPoint()
   int getCursorPosition();//only used by TC tester
-  FLString getTextFromTextBlocks();// in public for debugging
+  FLUnicodeString getTextFromTextBlocks();// in public for debugging
   bool getShiftState();//only used by TC tester
   //EOF testing functions
 
   //Crazy Cheker uses these
   FLTextBlockCursor * getTextBlockCursor();
-  void setUserCursor(int userCursor, string caller);
+  void setUserCursor(int userCursor, const std::string &caller);
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
-  void previousWordChanged(string from, int textBlockInex = -1);
-  void parseExistingText(FLString existingText = FLStringMake(""), int cursorPosition = -1, bool deletedSelectedText = false);
+  void previousWordChanged(std::string from, int textBlockInex = -1);
+  void parseExistingText(const FLUnicodeString &existingText = FLUnicodeString((const unsigned char *)""), int cursorPosition = -1, bool deletedSelectedText = false);
   //EOF crazyChecker functions
   
-  void setCurrentKeyboardLayout(string keyboardLayout);
+  void setCurrentKeyboardLayout(const std::string &keyboardLayout);
   FLDataCollector *getDataCollector();
   
   void biasPointForChar(FLPoint& p1, int offset);
@@ -86,13 +85,13 @@ private:
   std::string lastBatchEditBeginFunction; // Debugging?
 
 	FleksyListenerInterface &out;
-	std::vector<FLString> punctuation;
-  std::vector<FLString> specialCases;
-  std::vector<FLString> emoticons;
+	std::vector<FLUnicodeString> punctuation;
+  std::vector<FLUnicodeString> specialCases;
+  std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
-  std::vector<std::string> last3events;
+  std::vector<FLUnicodeString> last3events;
   
-  std::string versionNumber;
+  FLUnicodeString versionNumber;
 	int expectedUserCursor;//loaction of the cursor
   int userSelectionStart;
   int userSelectionEnd;
@@ -116,22 +115,23 @@ private:
   bool voiceFeedback;
   bool startedTypingSession;
   bool inBatchEdit;
-  FLCapitalizationMode capitalizationMode;
   CursorChangeEvent cursorChangeEvent;
+  
+  FLCapitalizationMode capitalizationMode;
   FLDeleteMode deleteMode;
   FLFieldAction fieldAction;
   FLPunctuationSpaceMode punctuationSpaceMode;
   FLTextFieldType textFieldType;
+  FLLongPressType longPressType;
   
-  FLString lastDeletedWord;
+  FLUnicodeString lastDeletedWord;
   
-  FLString gameText;
+  FLUnicodeString gameText;
   double lastTapTime;
   
   //Created in TC, so TC needs to destroy these
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
-  FLPlatformSuggestions *platformSuggestions = NULL;
   FLDataCollector *dataCollector = NULL;
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
@@ -139,10 +139,10 @@ private:
   
   //Debug stuff
   void printTextBlocks();
-  string getSlashSeparatedSuggestions(vector<FLString> suggestions);
+  FLUnicodeString getSlashSeparatedSuggestions(const std::vector<FLUnicodeString> &suggestions);
   
   //Game key charging
-  FLChar getIntendedCharacter(int offset);
+  FLUnicodeString getIntendedCharacter(int offset);
   
   //Stuff that deletes
   void backspace(float length);
@@ -152,7 +152,7 @@ private:
   int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
   //TextBlock correction operations
-  FLString* getTwoPreviousTokens(int textBlockIndex);
+  std::vector<FLUnicodeString> getTwoPreviousTokens(int textBlockIndex);
   void getSuggestionsForTextBlock(FLTextBlock *tb, int textBlockIndex = -1);
   void handleVerticalSwipe(bool isUp);
   void correctTextBlockOnSwipeRight(FLTextBlock *tb);
@@ -163,54 +163,67 @@ private:
   void createEmoticonTextBlock();
   
   //Various helper functioins
-  FLChar getNearestChar(FLPoint p);
-  std::vector<FLPoint> getPointsForText(FLString word);
+  FLUnicodeString getNearestChar(FLPoint p);
+  std::vector<FLPoint> getPointsForText(const FLUnicodeString &word);
   void reset();
-  void populateSpecialVectors();
-  void handleNonQWERTYCharacter(FLChar Character, FLPoint p);
-  bool canEatSpace(FLChar c);
-  bool canAddSpace(FLChar c, FLTextBlock *prevTB);
-  bool canAddSpaceAfterEating(FLChar c);
-  void ignoreNextCursorUpdate(std::string from, int num_ignores);
-  bool isInPunctuation(char symbol);
-  bool isEndSentenceSymbol(char symbol);
-  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false, bool isDeleting = false);
-  void addRemoveFromDictionary(FLTextBlock *tb);
   void GCtextBlocks();
-  int calculateEndOfTextBlock(FLTextBlock *tb);
-  void expectCursorUpdates(string from, int numOfUpdates);
-  void apostropheSmergeCheck();
-  void updateTBCursorAfterParsing(FLString blockText, FLExternalEditorState state);
-  void getReadyForInput();
+
+  void populateSpecialVectors();
+
+  void ignoreNextCursorUpdate(const std::string &from, int num_ignores);
+  void expectCursorUpdates(const std::string &from, int numOfUpdates);
+
   void onBeginBatchEdit();
   void onEndBatchEdit();
   void batchEditCheck(int newSelStart, int newSelEnd);
-  bool canAddSymbolToTextBlock(FLChar character, FLString blockText);
-  FLString toLowerCase(FLString word);
-  bool isSymbolAllowedToCorrect(FLChar character);
-  void setLastDeletedWord(FLTextBlock *tb);
+
+  void handleNonQWERTYCharacter(const FLUnicodeString &Character, FLPoint p);
+  FLUnicodeString toLowerCase(const FLUnicodeString &word);
+
+  bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false, bool isDeleting = false);
+  void addRemoveFromDictionary(FLTextBlock *tb);
+  void updateTBCursorAfterParsing(FLUnicodeString &blockText, FLExternalEditorState state);
+  void getReadyForInput();
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
-  void recordLastEvent(string event);
-  FLChar getGameCharacter(int index);
-  vector<FLPoint> getSubVector(vector<FLPoint> original, int start, int end);
+  void recordLastEvent(const FLUnicodeString &event);
+  FLUnicodeString getGameCharacter(int index);
+  std::vector<FLPoint> getSubVector(const std::vector<FLPoint> &original, int start, int end);
+  void resetLongPressType();
+  int getNumberOfQuotes();
+  
+  void apostropheSmergeCheck();
+
+  bool canEatSpace(const FLUnicodeString &c);
+  bool canAddSpace(const FLUnicodeString &c, FLTextBlock *prevTB);
+  bool canAddSpaceAfterEating(const FLUnicodeString &c);
+  bool canAddSymbolToTextBlock(const FLUnicodeString &character, const FLUnicodeString &blockText);
+
+  bool isSymbolAllowedToCorrect(const FLUnicodeString &character);
+
+  bool isInPunctuation(const FLUnicodeString &symbol);
+  bool isEndSentenceSymbol(const FLUnicodeString &symbol);
+
+  int calculateEndOfTextBlock(FLTextBlock *tb);
+  void setLastDeletedWord(FLTextBlock *tb);
+
   
   //User cursor operations
   void moveCursorToPosition(int position);
   int setSpaceFlagOnTextBlock(FLTextBlock * tb, bool isSpaceEnabled);
   void accountForLenghthDiffWhenCorrectingWords(int lengthDiff);
-  void changeUserCursor(int byNumber, string caller);
-  void incrementUserCursorBy(int number, string caller);
-  void decrementUserCursorBy(int number, string caller);
+  void changeUserCursor(int byNumber, const std::string &caller);
+  void incrementUserCursorBy(int number, const std::string &caller);
+  void decrementUserCursorBy(int number, const std::string &caller);
   int getUserCursorPos();
   void setUserSelection(int selectionStart, int selectionEnd);
   void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd);
   
   //TextBlock operations
 	int addTextBlock(FLTextBlock *block);
-  FLTextBlock* createTextBlockFromExistingText(FLString &blockText);
+  FLTextBlock* createTextBlockFromExistingText(FLUnicodeString &blockText);
 	void addSymbolsTextBlock(bool keepSpaceOnCurrTB);
-  void createTextBlockFromExistingTextAndUpdateTBCursor(FLString blockText);
+  void createTextBlockFromExistingTextAndUpdateTBCursor(FLUnicodeString &blockText);
   void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
@@ -223,10 +236,8 @@ private:
   void updateCandidatesView(FLTextBlock *tbToUpdate = NULL);
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
-  void speak(FLString text, bool isDeleted);
+  void speak(FLUnicodeString text, bool isDeleted);
   void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
-  
-  
-  
 };
+
 #endif

@@ -15,8 +15,11 @@ public:
   
   FLTextBlock *getCurrentTextBlock();
   
-  void decrementIndexInTextBlock();
-  void incrementIndexInTextBlock(std::string who);
+  void decrementIndexInTextBlock(int amount);
+  void incrementIndexInTextBlock(int amount, const std::string &who);
+  void decrementIndexInTextBlock() { decrementIndexInTextBlock(1); }
+  void incrementIndexInTextBlock(const std::string &who) { incrementIndexInTextBlock(1, who); }
+
   void dectementVectorIndex();
   void incrementVectorIndex();
   
@@ -39,7 +42,6 @@ private:
   int indexInTextBlock;
   std::vector<FLTextBlock*> &textBlocks;
   FleksyListenerInterface &out;
-  
   
   void setIndexOfCurrentTextBlockInVector(int indx);
   

@@ -11,7 +11,7 @@
 #include "FleksyAPI.h"
 #include "FleksyListenerInterface.h"
 #include "FLPoint.h"
-#include "FLString.h"
+#include "FLUnicodeString.h"
 #include "FLEnums.h"
 
 #endif /* defined(__FleksySDK_Fleksy_h__) */

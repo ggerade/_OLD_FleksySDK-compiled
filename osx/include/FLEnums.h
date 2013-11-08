@@ -41,15 +41,13 @@ enum FLFieldAction{
 };
 
 enum FLMessageType{
-  FLMessageType_DISPLAY_TO_USER,
   FLMessageType_DEBUG,
   FLMessageType_NO_NEXT_SUGGESTION,
   FLMessageType_NO_PREVIOUS_SUGGESTION,
-  FLMessageType_EXIT,
   FLMessageType_EVENT,
   FLMessageType_ERROR,
   FLMessageType_BACKSPACE,
-  FLMessageType_UPLOAD_DATA_FILE
+  FLMessageType_UPLOAD_DATA_FILE,
 };
 
 //passed in as a parameter in onDictionaryModified
@@ -86,6 +84,11 @@ enum FLTextFieldType{
   FLTextFieldType_NO_SUGGESTIONS
 };
 
+enum FLLongPressType{
+  FLLongPressType_NONE,
+  FLLongPressType_LONG_PRESS
+};
+
 enum FLEventType{
   FLEventType_SL,
   FLEventType_SR,
@@ -111,6 +114,7 @@ enum FLEventType{
   FLEventType_ST,
   FLEventType_ET,
   FLEventType_FA,
+  FLEventType_LP,
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

@@ -74,7 +74,6 @@ public class FleksyEngine {
 				String suggestions = client.getSuggestionsFor(rawInput);
 				TestEngine.action = "Initializing Suggestions for " + rawInput + " which returned " + suggestions;
 				if(android){ DataManager.parseSuggestions(suggestions); }
-				if(useSuggestions){ api.setAdditionalSuggestions(rawInput, suggestions); }
 			}catch (Exception e){
 				Log.e(TAG, "Failed to Initialize Suggestions: " + e.getLocalizedMessage());
 			}
