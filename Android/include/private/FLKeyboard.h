@@ -11,22 +11,31 @@
 
 #include <iostream>
 #include <memory>
-
-#include "FLFile.h"
-#include "FLKeyMap.h"
-#include "FLEnums.h"
-#include "FLString.h"
-#include "FLPoint.h"
+#include <unordered_map>
 #include <map>
 #include <set>
 
-struct FLPointComp {
-  bool operator() (const FLPoint& lhs, const FLPoint& rhs) const
-  { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
-};
-typedef std::map<FLPoint, std::set<FLChar>, FLPointComp> FLPointToCharSetMap;
+#include "FLFile.h"
+#include "FLEnums.h"
+#include "FLUnicodeString.h"
+#include "FLPoint.h"
 
-#define USE_TABLES_BY_DEFAULT 1
+class FLKeyMap{
+public:
+  void set(const FLUnicodeString &c, FLPoint point);
+  FLPoint get(const FLUnicodeString &c);
+  FLUnicodeString getNearestChar(FLPoint point);
+  std::map<FLUnicodeString, FLPoint> getKeyMap();
+  
+private:
+  FLUnicodeStringToPointMap keys;
+};
+
+struct FLPointComp {
+  bool operator() (const FLPoint& lhs, const FLPoint& rhs) const { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
+};
+typedef std::map<FLPoint, std::vector<FLUnicodeString>, FLPointComp> FLPointToCharVectorMap;
+
 
 class FLKeyboard {
 
@@ -35,61 +44,45 @@ private:
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
   
-  void loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
-  FLChar getNearestLetterForPoint(FLPoint& target);
+  void loadKeyboardData(const FLFilePtr &keyboardFile, bool isEncrypted);
+  FLUnicodeString getNearestLetterForPoint(FLPoint target);
+  std::vector<FLPointToCharVectorMap> pointKeyMap;
+  
+  FLUnicodeStringToPointMap allKeysToPointMap;
+  std::vector<FLUnicodeStringToPointMap> keysToPointMap;
 
-  FLChar toupper_table[256];
-  FLChar tolower_table[256];
-  bool ismember_table[3][256];
-
-  FLString alphabetFull;
-  FLString alphabetUpper;
-  FLString alphabetLower;
-
-  bool ismember(FLChar item, FLString& vector, bool table = USE_TABLES_BY_DEFAULT);
-
-  FLPointToCharSetMap lowerPointKeyMap;
-  FLPointToCharSetMap upperPointKeyMap;
-  FLPointToCharSetMap lowerUpperPointKeyMap;
+  FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
 
 public:
-  FLKeyboard(FLFilePtr &keyboardFile, bool isEncrypted);
+  FLKeyboard(const FLFilePtr &keyboardFile, bool isEncrypted);
   ~FLKeyboard();
   
+  bool dawgGetPointForAlphaChar(const FLUnicodeString &c, FLPoint &p) const {
+    const FLUnicodeStringToPointMap::const_iterator &it = dawgAlphaKeyToPointMap.find(c);
+    if(it == dawgAlphaKeyToPointMap.end()) { return(false); } else { p = it->second; return(true); }
+  }
+
+  std::vector<FLUnicodeString> getNearestKeysForPoint(FLPoint point, FLKeyboardID keyboardID);
+  FLUnicodeString getNearestPrimaryKeyForPoint(FLPoint point, FLKeyboardID keyboardID);
+
   FLPoint getKeyboardSize();
 
-  void setPointForChar(FLPoint point, FLChar c, FLKeyboardID keyboardID);
+  void setPointForChar(FLPoint point, const FLUnicodeString &c, FLKeyboardID keyboardID);
   
-  FLPoint getPointForChar(FLChar c, FLKeyboardID keyboardID);
-  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID);
+  FLPoint getPointForChar(const FLUnicodeString &c, FLKeyboardID keyboardID);
 
   FLKeyboardID getCurrentKeyboardID();
   void setCurrentKeyboardID(FLKeyboardID keyboardID);
   
-  FLChar getNearestChar(FLPoint target);
-  FLPoint getPointForChar(FLChar c);
+  FLUnicodeString getNearestChar(FLPoint target);
+  FLPoint getPointForChar(const FLUnicodeString &c);
 
-  float getDistanceBetweenLetters(FLChar c1, FLChar c2);
+  float getDistanceBetweenLetters(const FLUnicodeString &c1, const FLUnicodeString &c2);
 
-  FLString lettersFromPoints(FLPoint* points, short nPoints);
-  void pointsFromLetters(const FLStringPtr &letters, FLPoint points[]);
+  FLUnicodeString lettersFromPoints(const FLPoint points[], size_t nPoints);
+  void pointsFromLetters(const FLUnicodeStringPtr &letters, FLPoint points[]);
 
-  FLChar toupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-  FLChar tolower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-  bool isalpha(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-  bool isupper(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-  bool islower(FLChar c, bool table = USE_TABLES_BY_DEFAULT);
-
-  FLStringPtr onlyKeepAlphaFromString(FLStringPtr &s);
-
-  // This converts extended ascii based on the ISO-8859-1 (Latin1) character set into UTF8 multibyte characters (up to 2 multibytes)
-  char* extendedAsciiToUtf8(const char* text);
-
-  void makeLowerCase(FLStringPtr &s);
-  
-  FLPointToCharSetMap getLowerPointKeyMap();
-  FLPointToCharSetMap getUpperPointKeyMap();
-  FLPointToCharSetMap getLowerUpperPointKeyMap();
+  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
 };
 
 typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;

@@ -6,6 +6,7 @@
 #include "FLTouchPoint.h"
 #include "PatternRecognizer/Platform.h"
 #include "FLSocketsCommon.h"
+#include "FLUnicodeString.h"
 
 class FLRequestDataHolder{
   
@@ -14,19 +15,19 @@ public:
 	void addPoint(FLPoint p, int indx);
 	void removePointAt(int indx);
 	void removeLastPoint();
-	void addCharacter(FLChar c, int indx);
-	FLChar deleteCharacterAt(int indx);
-	FLString getTextEntered();
-	void setTextEntered(FLString text);
+	void addCharacter(const FLUnicodeString &c, int indx);
+	FLUnicodeString deleteCharacterAt(int indx);
+	FLUnicodeString getTextEntered();
+	void setTextEntered(const FLUnicodeString &text);
 	std::vector<FLPoint> getPoints(bool skipInvalid);
-	void setPoints(std::vector<FLPoint>);
+	void setPoints(const std::vector<FLPoint> &points);
   void resetRequest();
   void clearPoints();
   void printPoints();
   
 private:
   std::vector<FLPoint> points;
-  FLString textEntered;
+  FLUnicodeString textEntered;
 };
 
 #endif

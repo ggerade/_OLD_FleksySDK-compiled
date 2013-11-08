@@ -13,6 +13,7 @@
 #include <map>
 #include "FleksyListenerInterface.h"
 #include "TimeFunctions.h"
+#include "FLUnicodeString.h"
 
 class FLTrackEvents{
   
@@ -33,24 +34,24 @@ public:
   //Other
   void setIsTracking(bool isTracking);
   bool isTrackingEvents();
-  void setCurrentKeyboardLayout(std::string currentKeyboardLayout);
+  void setCurrentKeyboardLayout(const FLUnicodeString &currentKeyboardLayout);
   
 private:
   FleksyListenerInterface &listener;
   int threshold;
   bool isTracking;
   //Event,number of events
-  std::map<std::string, int> events;
+  std::map<FLUnicodeString, int> events;
   long lastEventTime;
-  std::string lastEvent;
-  std::string currentKeyboardLayout;
+  FLUnicodeString lastEvent;
+  FLUnicodeString currentKeyboardLayout;
   
   
-  void sendEvent(FLString event);
-  std::map<std::string, int>::iterator findEvent(std::string event);
+  void sendEvent(const FLUnicodeString &event);
+  std::map<FLUnicodeString, int>::iterator findEvent(const FLUnicodeString &event);
   bool hasReachedThreshold(int numOfEvents);
-  void processEvent(std::string event);
-  std::string intToString(int integer);
+  void processEvent(const FLUnicodeString &event);
+  FLUnicodeString intToString(int integer);
   void swipeRight();
   void spaceBarPress();
 };

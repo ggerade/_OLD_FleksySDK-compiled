@@ -12,7 +12,7 @@
 #include "FleksyListenerInterface.h"
 #include "FLPoint.h"
 #include "FLEnums.h"
-#include "FLString.h"
+#include "FLUnicodeString.h"
 
 class FleksyAPIpImpl;
 
@@ -37,12 +37,12 @@ public:
   /*
    * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_EXISTS if the word was already in the dictionary.
    */
-  FLDictionaryChangeResult addWordToDictionary(FLString word);
+  FLDictionaryChangeResult addWordToDictionary(FLUnicodeString word);
   
   /*
    * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_NOT_FOUND if the word was not in the dictionary.
    */
-  FLDictionaryChangeResult removeWordFromDictionary(FLString word);
+  FLDictionaryChangeResult removeWordFromDictionary(FLUnicodeString word);
   
   /*
    * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
@@ -147,12 +147,12 @@ public:
   /*
    * Returns a keymap for KeyboardID containing the keyboards characters and their locations on the screen.
    */
-  std::map<FLChar, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
+  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
   
   /*
    * Returns the character nearest to the target point for the specified keyboard layout
    */
-  FLChar getNearestChar(FLPoint target, FLKeyboardID keyboardID, int offset = 0);
+  FLUnicodeString getNearestChar(FLPoint target, FLKeyboardID keyboardID, int offset = 0);
   
   /*
    * Sets the correction mode.
@@ -169,15 +169,9 @@ public:
   FLCorrectionMode getCorrectionMode();
   
   /*
-   * You can use this to send additional hints to Fleksy as to what rawText should be corrected to.
-   * These suggestions will be considered in the response.
-   */
-  void setAdditionalSuggestions(FLString rawText, FLString suggestionList);
-  
-  /*
    * Returns a boolean value that indicates whether or not Fleksy knows a word.
    */
-  bool knowsWord(FLString word);
+  bool knowsWord(FLUnicodeString word);
   
   /*
    * Sets whether voice feedback is enabled.
@@ -257,11 +251,10 @@ public:
    */
   void setBlindMode(bool enabled);
   
-  std::string getVersion();
+  FLUnicodeString getVersion();
   
   //private:
   FleksyAPIpImpl *pImpl;
 };
-
 
 #endif /* defined(__FleksySDK_FleksyAPI_h__) */

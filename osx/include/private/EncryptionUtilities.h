@@ -8,6 +8,9 @@
 
 #include <stdio.h>
 
+// default decryption key
+#define DEFAULT_M_VALUE "fleksy/CONTENTS_PATH_FOLDER/PATH"
+
 #define USE_APPLE_CRYPTO 0
 
 //using namespace std;

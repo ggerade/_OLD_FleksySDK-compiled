@@ -8,26 +8,13 @@
 #ifndef FLEKSY_UTILITIES_H
 #define FLEKSY_UTILITIES_H
 
-//#include <PatternRecognizer/PatternRecognizer.h>
-
-#include <PatternRecognizer/FLInternalSuggestionsContainer.h>
-#include <PatternRecognizer/FLBlackBox.h>
+#include <map>
 #include <PatternRecognizer/FLWordDatabase.h>
-#include <PatternRecognizer/FLVotesHolder.h>
 #include <PatternRecognizer/FLFile.h>
 #include "FLKeyboard.h"
 #include "FleksyDefines.h"
-#include <map>
-
-#include "FLTokenPredictor.h"
-
-#ifdef FL_USE_DAWG_SVD_ENGINE
-#include "FLKeyTapRecognizer.h"
-#endif
-
-#define DEFAULT_USER_WORD_FREQUENCY 15000
-
-using namespace std;
+#include "FLTapsToWords.h"
+#include "FLUnicodeString.h"
 
 typedef enum {
   FLAddWordResultAdded,
@@ -44,63 +31,40 @@ typedef enum {
   kWordlistBlacklist
 } kWordlistType;
 
-#if SHAPE_TESTING
-class FLShapeTrie;
-#endif
-
 class FleksyUtilities {
 private:
   FLWordDatabase* wordDatabase;
   
-  bool loadedPreprocessedFiles[FLEKSY_MAX_WORD_SIZE+1]; //1-based index TODO switch to 0
   bool postLoaded;
   
-  FLAddWordResult _addWord(FLStringPtr &wordLetters, FLStringPtr &printLetters, BBValue uniqueID, bool ignoreBlacklist, bool calculateBlackboxValues, bool canBeRemoved);
-  void _processWordlistLine1(FLString* wordString, kWordlistType type, const FLString& delimiter, bool calculateBlackboxValues);
-  void processWordBlacklistLine(FLString* line, const FLString& delimiter2);
-  void processWordlistLine(FLString* wordString, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues);
-  void loadDictionary(const string& filename, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool calculateBlackboxValues, bool isEncrypted);
+  FLAddWordResult _addWord(FLUnicodeStringPtr &wordLetters, FLUnicodeStringPtr &printLetters, bool ignoreBlacklist, bool canBeRemoved);
+  void _processWordlistLine1(FLUnicodeString* wordString, kWordlistType type, const FLUnicodeString& delimiter);
+  void processWordBlacklistLine(FLUnicodeString* line, const FLUnicodeString& delimiter2);
+  void processWordlistLine(FLUnicodeString* wordString, const FLUnicodeString& delimiter, kWordlistType type);
 
-   
 public:
   FleksyUtilities();
   ~FleksyUtilities();
 
-#ifdef FL_USE_DAWG_SVD_ENGINE
-  FLKeyTapRecognizerPtr keyTapRecognizer;
-#endif
+  FLTapsToWordsPtr tapsToWords;
   
-#if SHAPE_TESTING
-  FLTokenPredictor *ftp = NULL; // Hack so that context info can be applied to candidate matches.
-#ifdef SHAPE_TESTING_ENABLE_TRIE
-  FLShapeTrie* shapeTrie;
-#endif
-#endif
-
   ///////  API  ///////
-  //void preloadWithPathFormat(const string& filepathFormat);
-  void preloadWithContents(int wordLength, const void* contents, size_t contentLength);
-  void loadDictionary(const string& tag, void* data, size_t dataLength, const FLString& delimiter, kWordlistType type, bool isEncrypted);
-  void loadDictionary(FLFilePtr &f, const FLString& delimiter, kWordlistType type, bool isEncrypted);
-  void writeTables(const string& filepath); //optional
+  void loadDictionary(const std::string& tag, void* data, size_t dataLength, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
+  void loadDictionary(FLFilePtr &f, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   void postload();
-  FLInternalSuggestionsContainer* processWord(const FLWord* inputWord, FLWordList& hints);
-  FLAddWordResult addWord(FLStringPtr &word, bool canBeRemoved);
-  bool removeWord(FLStringPtr &wordLetters);
+  FLAddWordResult addWord(FLUnicodeStringPtr &word, bool canBeRemoved);
+  bool removeWord(FLUnicodeStringPtr &wordLetters);
   ////////////////////
   
   FLKeyboardPtr keyboard;
   FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
   
   size_t loadedWordCount();
-  bool isWordInDictionary(FLStringPtr &printLetters, bool allowLowerCase);
-  FLWordPtr getWordByString(FLStringPtr &s, bool allowLowerCase = false);
+  bool isWordInDictionary(FLUnicodeStringPtr &printLetters, bool allowLowerCase);
+  FLWordPtr getWordByString(FLUnicodeStringPtr &s, bool allowLowerCase = false);
   FLWordPtr getWordPtrByID(int wordID);
-  //FLWord* getRandomWord(int length);
-  
   
   FLWordDatabase* getWordDatabase();
-  bool getLoadedPreprocessedFiles();
   bool getPostloaded();
   
   kLanguage language = kLanguageUnknown;

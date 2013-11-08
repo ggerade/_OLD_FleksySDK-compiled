@@ -11,10 +11,10 @@
 #include <string>
 #include <vector>
 #include "FLEnums.h"
-#include "FLString.h"
+#include "FLUnicodeString.h"
 
 struct FLExternalEditorState{
-  FLString text;
+  FLUnicodeString text;
   int selectionStart = 0;
   int selectionEnd = 0;
 };
@@ -22,11 +22,20 @@ struct FLExternalEditorState{
 class FleksyListenerInterface{
   
 public:
+  
+  virtual FLUnicodeCategory unicodeCategoryForCodePoint(FLUnicodeCodePoint codePoint) const = 0;
+  virtual int lengthOfNextGraphemeAt(const FLUnicodeString &string, int index) const = 0;
+  virtual int lengthOfPreviousGraphemeAt(const FLUnicodeString &string, int index) const = 0;
+  virtual FLUnicodeString normalizedStringFromString(const FLUnicodeString &string) const = 0;
+  virtual FLUnicodeString toLowerCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
+  virtual FLUnicodeString toUpperCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
+  virtual FLUnicodeString toTitleCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
+
   /*********Required*******************/
   /*
    * Commit text to the text editor and set the new cursor position to be after the inserted text
    */
-  virtual void onSetComposingText(const FLString text) = 0;
+  virtual void onSetComposingText(FLUnicodeString text) = 0;
   /*
    * Mark a certain region of text as composing text
    */
@@ -46,7 +55,7 @@ public:
   /*
    * Speaks the string using TTS.
    */
-  virtual void onSpeak(const FLString text){};
+  virtual void onSpeak(FLUnicodeString text){};
   /*
    * Lets text editor know that there will be edits to the text after this call
    * editor should not send any updates until endBatchEdit() is called
@@ -72,21 +81,21 @@ public:
    * FLMessageType_NO_NEXT_SUGGESTION     - reached end of the suggestion list
    * FLMessageType_NO_PREVIOUS_SUGGESTION - reached beginning of the suggestion list
    */
-  virtual void onMessageReceived(FLMessageType type, FLString message){};
+  virtual void onMessageReceived(FLMessageType type, FLUnicodeString message){};
   /*
    * FLDictionaryChangeEvent_ADDED   - word was added to the dictionary
    * FLDictionaryChangeEvent_REMOVED - word was removed from the dictionary
    */
-  virtual void onDictionaryModified(FLDictionaryChangeEvent event, FLString word){};
+  virtual void onDictionaryModified(FLDictionaryChangeEvent event, FLUnicodeString word){};
   /*
    * Ask platform for suggestions
    */
-  virtual void onRequestAdditionalSuggestions(const FLString rawText){};
+  virtual void onRequestAdditionalSuggestions(FLUnicodeString rawText){};
   /*
    * Send suggestion list to the platform to display(aka Candidates)
    * Suggestions could be empty. When suggestions list is empty, that means that there are no available suggestions and UI should update to indicate that there are no suggestions
    */
-  virtual void onReceiveSuggestions(std::vector<FLString> suggestions, int selectedIndex){};
+  virtual void onReceiveSuggestions(std::vector<FLUnicodeString> suggestions, int selectedIndex){};
   /*
    * Send an index of suggestion platform should display as current suggestion
    */

@@ -7,6 +7,7 @@
 #include "PatternRecognizer/Platform.h"
 #include "FleksyListenerInterface.h"
 #include "FLKeyboard.h"
+#include "FLUnicodeString.h"
 
 class SystemsIntegrator;
 
@@ -17,13 +18,11 @@ public:
   
   //Getters/Setters
   FLSuggestionsContainer *getResponse();
-  void setCorrectedText(FLString text);
-  void setTextEntered(FLString text);
-  FLString getTextEntered();
-  void setLength(int length);
-  void setUTF16Length(const unsigned char *utf8String);
+  void setCorrectedText(const FLUnicodeString &text);
+  void setTextEntered(const FLUnicodeString &text);
+  FLUnicodeString getTextEntered();
+  void setLength(int length, const std::string &who);
   int getLength();
-  size_t getUTF16Length();
   bool isPunctuationInside();
 	void setIsPunctuationInside(bool isPunctuation);
   bool isSpaceEnabled();
@@ -39,18 +38,18 @@ public:
   bool getIsAccuratelyTyped();
   
 	FLRequestDataHolder *getRequest();
-  FLString getText();
+  FLUnicodeString getText();
   int getSuggestionIndex();
   void setSuggestionIndex(int suggIndex);
 	bool getIsExactEntry();
   bool isCorrected();
   
-  void addCharacter(FLPoint p, FLChar c, int index, FLKeyboardPtr &keyboard);
-  void setSuggestions(std::vector<FLString>& suggestions);
-  void setRequestPoints(std::vector<FLPoint> points);
+  void addCharacter(FLPoint p, const FLUnicodeString &c, int index, FLKeyboardPtr &keyboard);
+  void setSuggestions(const std::vector<FLUnicodeString>& suggestions);
+  void setRequestPoints(const std::vector<FLPoint> &points);
 	
 	void deleteText();
-	FLChar deleteCharacter(int indx);
+  FLUnicodeString deleteCharacter(int indx);
   void createNewLineCharacter();
   void cleanTextBlock();
   void resetSuggestionIndex();
@@ -58,10 +57,10 @@ public:
   int correctTextOnVSwipe();
   int nextSuggestion();
 	int prevSuggestion();
-  FLString getTextToCorrect();
+  FLUnicodeString getTextToCorrect();
   
   void printSelf(int tbNumber);
-  FLString toLowerCase(FLString string);
+  FLUnicodeString toLowerCase(const FLUnicodeString &string);
   
   bool containsNonAlphaCharacters(SystemsIntegrator* fleksy);
   bool containsApostrophe();
@@ -75,9 +74,8 @@ private:
 	FLSuggestionsContainer *response;
 	FLRequestDataHolder *request;
 	int length;
-  size_t utf16Length;
 	int suggestionIndx;
-	FLString correctedText;
+	FLUnicodeString correctedText;
 	bool isPunctuation;
   bool isEndSentencePunc;
   bool isSpaceAfterTextBlock;
@@ -91,13 +89,11 @@ private:
   bool isAccuratelyTyped;
   
   int changeSuggestion(int offset);
-  FLString capitalize(FLString word);
+  FLUnicodeString capitalize(const FLUnicodeString &word);
   void prepareTextBlockToRecieveOrRemoveCharacters();
   
   void printTextBlock();
   void deleteSuggestions();
 };
-
-
 
 #endif

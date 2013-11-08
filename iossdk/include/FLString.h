@@ -8,7 +8,9 @@
 #ifndef __FleksySDK_FLString_h__
 #define __FleksySDK_FLString_h__
 
+
 #include <memory>
+#include <vector>
 #include <string.h>
 
 #define FLEKSY_USE_WIDE_CHARS 0
@@ -31,7 +33,16 @@ typedef wchar_t FLChar;
 #else
 #include <string>
 typedef unsigned char FLChar;
-typedef std::basic_string <FLChar> FLString;
+//typedef std::basic_string <FLChar> FLString;
+class FLUnicodeString;
+class FLString : public std::basic_string<FLChar> {
+public:
+  FLString() {}
+  FLString(const FLChar *string) { this->assign(string); }
+  FLString(const FLChar *string, size_t len) { this->assign(string, len); }
+  FLString &operator= (const FLUnicodeString & __rhs);
+};
+
 #define NSStringToFLString _NSStringToString
 #define FLStringToNSString _StringToNSString
 #define flcout std::cout
@@ -48,6 +59,7 @@ typedef std::basic_string <FLChar> FLString;
 
 #define NSStringToString _NSStringToStringUTF8
 
+
 typedef std::shared_ptr<FLString> FLStringPtr;
 
 struct FLStringPtrHash {
@@ -62,5 +74,7 @@ struct FLStringPtrHash {
 struct FLStringPtrEqual {
   bool operator()(const FLStringPtr& lhs, const FLStringPtr& rhs) const { return((strcmp((const char *)lhs->c_str(), (const char *)rhs->c_str()) == 0) ? true : false); }
 };
+
+std::vector<FLString> split(const FLString &s, const FLString& delims);
 
 #endif /* defined(__FleksySDK_FLString_h__) */

@@ -8,6 +8,11 @@
 #ifndef __FleksySDK_FLPoint_h__
 #define __FleksySDK_FLPoint_h__
 
+#include <math.h>
+
+// This value is used as a limit to what "zero" is for us. We need this since we dont currently use fixed point arithmetic
+#define FLEKSY_SMALL_VALUE 0.0001f
+
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #endif
@@ -40,5 +45,11 @@ static inline bool FLPointEqualToPoint(FLPoint p1, FLPoint p2) {
 #define FLPointInvalid FLPointMake(-99, -99)
 #define FLPointFromCGPoint(__p__) FLPointMake(__p__.x, __p__.y)
 
+static inline float FLDistanceBetweenPoints(FLPoint p1, FLPoint p2) {
+  float dx = p1.x - p2.x;
+  float dy = p1.y - p2.y;
+  float result = hypotf(dx, dy);
+  return((fabsf(result) < FLEKSY_SMALL_VALUE) ? 0.0f : result);
+}
 
 #endif /* defined(__FleksySDK_FLPoint_h__) */

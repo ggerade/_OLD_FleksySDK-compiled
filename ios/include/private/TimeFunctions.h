@@ -12,18 +12,14 @@
 #define FleksyContext_TimeFunctions_h
 
 
-#include <PatternRecognizer/Structures.h>
+//#include <PatternRecognizer/Structures.h>
 #include <string>
 #include <vector>
 #include <unistd.h>
 #include <algorithm>
 
-using namespace std;
-
 struct timespec fl_get_timespec();
 double fl_get_time();
-
-vector<FLString> split(const FLString &s, const FLString& delims);
 
 
 

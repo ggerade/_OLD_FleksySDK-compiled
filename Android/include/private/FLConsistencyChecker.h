@@ -12,6 +12,8 @@
 #include <iostream>
 #include "FleksyListenerInterface.h"
 #include "FLTypingController.h"
+#include "FLUnicodeString.h"
+
 
 class FLTypingController;
 
@@ -20,22 +22,19 @@ class FLConsistencyChecker{
 public:
   FLConsistencyChecker(FleksyListenerInterface &listener, FLTypingController *tc);
   
-  void checkTextForConsistencyAndUpdate(std::string caller);
+  void checkTextForConsistencyAndUpdate(const std::string &caller);
   bool areSelectionPositionsValid(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd);
-  bool isTextBlockTextEqualsToScreenText(FLString screenText, std::string caller);
+  bool isTextBlockTextEqualsToScreenText(const FLUnicodeString &screenText, const std::string &caller);
   /**checks if old text is still valid. if not reparses everything*/
-  bool isTextStillValid(FLString text, int cursorPosition);
-  void checkCursorPositionVSnumOfTextBlocks(int userCursorPosition, vector<FLTextBlock*> &textBlocks);
-  void sendErrorReport(string message);
+  bool isTextStillValid(const FLUnicodeString &text, int cursorPosition);
+  void checkCursorPositionVSnumOfTextBlocks(int userCursorPosition, const std::vector<FLTextBlock*> &textBlocks);
+  void sendErrorReport(const FLUnicodeString &message);
   
 private:
   FleksyListenerInterface &out;
   FLTypingController *tc;
   
   void updateTextBlockCursor(int userCursorPosition = -1);
-  
-  
-  
 };
 
 #endif
