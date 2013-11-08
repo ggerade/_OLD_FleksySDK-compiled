@@ -31,6 +31,7 @@ public class FleksTest {
 	private final static String S = "s";
 	private final static String G = "g";
 	
+	private final static String LANG = "locale:";
 	private final static String GOAL = "-g";
 	private final static String DBUG = "-d";
 	private final static String IBUG = "-b";
@@ -51,6 +52,8 @@ public class FleksTest {
 	private final static String SSLW = "-slw";
 	private final static String SCLW = "-clw";
 	private final static String SPLW = "-plw";
+	
+	private static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
@@ -157,9 +160,20 @@ public class FleksTest {
 				
 			}else if(containsVal(a,S)){ s = getUserVal(a); shift = false;
 				
+			}else if(arg.contains(LANG)){ 
+				String split[] = arg.split(":");
+				if(split.length == 2){
+					languageCode = split[1];
+					System.out.println("Got languageCode: " + languageCode);
+				}
+				else{
+					System.err.println("Bad Language! " + arg + " " + split.length);
+				}
+				
 			}else if(containsVal(a,G)){ DataManager.setDesiredGoal(getUserVal(a));
 			
 			}else if(a.equals(TAPS)){ 	FleksyEngine.sendingTaps = true; }
+			
 			
 		}
 		awaitIPnum(args[0]);
@@ -175,7 +189,7 @@ public class FleksTest {
 	
 	private static void buildEngine(){
 		try{
-			FleksyEngine.createEngine(debug);
+			FleksyEngine.createEngine(debug, languageCode);
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.err("Loading Engine Failed! Testing Failed! Exiting Environment! Good Day Sir!\n");
@@ -183,8 +197,8 @@ public class FleksTest {
 		}
 		
 		handlePostLoadArguments();
-		
-		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), (learn || tapper));
+		System.out.println("Running tests for languageCode: " + languageCode);
+		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), (learn || tapper), languageCode);
 		FleksyEngine.closeClient();
 	}
 	

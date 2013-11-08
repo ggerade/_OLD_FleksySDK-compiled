@@ -1,5 +1,6 @@
 package engine;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.syntellia.fleksy.api.EngineLoader;
@@ -35,13 +36,13 @@ public class FleksyEngine {
 	private static boolean initialized = false;
 	public static boolean externalDebug = false;
 	
-	public static void createEngine(boolean d) {
+	public static void createEngine(boolean d, String languageCode) {
 		if(!initialized){
 			if(d){
 				externalDebug = true;	
-				loadEngine("Debug");
+				loadEngine("Debug", languageCode);
 			}else{
-				loadEngine("Release");
+				loadEngine("Release", languageCode);
 			}
 			initialized = true;
 		}
@@ -128,17 +129,26 @@ public class FleksyEngine {
 		time = mins + breaker + secs;
 	}
 	
-	private static void loadEngine(String version) {
+	private static void loadEngine(String version, String languageCode) {
 		final String basePath = "../Android";
 		try{
 	    	api = new FleksyAPI();
 		    cOutput = new FleksyInterface("../osx/lib/" + version + "/Fleksylib.dylib");
 	        engineLoader = new EngineLoader();
 	        
+	        String resourceArchiveFile = "resourceArchive-" + languageCode + ".jet";
+	        
+	        String jetFilePath = basePath + "/FleksySDKResources/encrypted/" + resourceArchiveFile;
+	        
+	        if(!new File(jetFilePath).exists()) { 
+	        	System.err.println("Can't find jet file for: "  + languageCode + " jetFilePath: " + jetFilePath);
+	        	throw new Exception("Didn't find jet file");
+	        }
+	        
 //	        File file = new File(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English")); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 //	        RandomAccessFile stream = new RandomAccessFile(file, "rw"); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 //	        FLFileDescriptor descriptor = new FLFileDescriptor(stream.getFD(), stream.getFilePointer(), file.length()); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
-	        engineLoader.loadEngineAsync(basePath + "/FleksySDKResources/encrypted/" + FileUtils.getJetResourceFileName("English"), api, true);
+	        engineLoader.loadEngineAsync(jetFilePath, api, true);
 //			engineLoader.loadEngineAsync(descriptor, api, userWordList, true); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
 			
 		    api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal(), false);

@@ -38,6 +38,7 @@ n#	: Sets noise to # on execution
 e#	: Sets error to # on execution
 s#	: Sets shift to # on execution
 g#	: Sets accuracy goal to # on execution
+locale:  : Sets language to run (default English en-US)
 
 Private APIs
 -tlw	:	setSettingTransformLayerWeight
