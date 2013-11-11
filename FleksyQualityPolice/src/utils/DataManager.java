@@ -1,5 +1,6 @@
 package utils;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,7 @@ public class DataManager {
 	private static boolean noSugs = false;
 	private static boolean ezComp = false;
 	private static boolean learning = false;
+	private static boolean accentless = false;
 	private static String enteredText = "";
 	private static float[] andyGraph = new float[30];
 	private static float[] indexGraph = new float[30];
@@ -95,6 +97,10 @@ public class DataManager {
 	
 	public static void enableEasyCompare(){
 		ezComp = true;
+	}
+	
+	public static void noAccentsOnSecondCompare(){
+		accentless = true;
 	}
 	
 	public static void enableLearning(){
@@ -335,7 +341,7 @@ public class DataManager {
 		}
 	}
 	
-	public static boolean isCurrentSuggestionCorrect(boolean print){
+	public static boolean isCurrentSuggestionCorrect(boolean secondCheck){
 		if(checkIndexRange(wordIndex)){
 			failed = true;
 			return false;
@@ -355,7 +361,14 @@ public class DataManager {
 			word = word.toLowerCase();
 			out = out.toLowerCase();
 		}
-		if(print){
+		if(secondCheck){
+			if(accentless){
+				Log.d("Accents Removed! Normalized characters");
+				word = Normalizer.normalize(word, Normalizer.Form.NFD);
+				word = word.replaceAll("[^\\p{ASCII}]", "");
+				out = Normalizer.normalize(out, Normalizer.Form.NFD);
+				out = out.replaceAll("[^\\p{ASCII}]", "");
+			}
 			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
 		}
 		lastComparison = "INPUT: " + out + " EXPECTED " + word;

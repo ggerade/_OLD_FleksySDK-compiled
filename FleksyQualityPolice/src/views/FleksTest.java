@@ -42,6 +42,7 @@ public class FleksTest {
 	private final static String XOUT = "-o";
 	private final static String LERN = "-l";
 	private final static String TAPS = "-t";
+	private final static String ACNT = "-a";
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -53,12 +54,12 @@ public class FleksTest {
 	private final static String SCLW = "-clw";
 	private final static String SPLW = "-plw";
 	
-	private static String languageCode = "en-US";
+	private static String languageCode = "es-ES";//"en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 6.4f;
+	public final static float Version = 6.6f;
 	private static boolean debugging = false;
 	private final static String Alt = "6RAPES";
 	
@@ -138,7 +139,9 @@ public class FleksTest {
 			
 			}else if(a.equals(XSFT)){ 	shift = false;
 			
-			}else if(a.equals(EZCP)){ 	DataManager.enableEasyCompare();;
+			}else if(a.equals(ACNT)){	DataManager.noAccentsOnSecondCompare();
+			
+			}else if(a.equals(EZCP)){ 	DataManager.enableEasyCompare();
 			
 			}else if(a.equals(ANDY)){ 	DataManager.androidMode = true;
 			

@@ -1,8 +1,7 @@
 package engine;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.syntellia.fleksy.api.FLEnums;
 import com.syntellia.fleksy.api.FLKey;
@@ -17,9 +16,9 @@ public class Definer {
 	
 	private static boolean caps = false;
 	private static ArrayList<Key> keyboard;
-	private final static String[] cappers = new String[]{".","!","?"};
-	private final static String[] punctuation = new String[]{".",",","?","!",":",";"};
-	private static final Pattern cleanPattern = Pattern.compile("[a-zA-Z]+-[a-zA-Z'.,?!:;]+|[a-zA-z'.,?!:;]+");
+	private final static String cappers = ".!?";//new char[]{'.','!','?'};
+	private final static String punctuation = ".,?!:;";//new char[]{'.',',','?','!',':',';'};
+//	private static final Pattern cleanPattern = Pattern.compile("[a-zA-Z]+-[a-zA-Z'.,?!:;]+|[a-zA-z'.,?!:;]+");
 	
 	private static Key swipeR;
 	private static Key shift;
@@ -51,9 +50,9 @@ public class Definer {
 	
 	private void createPunctuation(){
 		for(Key key : keyboard){
-			for(int p = 0; p < punctuation.length;p++){
-				String label = punctuation[p];
-				if(label.equals(key.label)){
+			for(int p = 0; p < punctuation.length();p++){
+				char label = punctuation.charAt(p);
+				if(label == key.label.charAt(0)){
 					Log.d("Punctuation: " + label);
 					key.setPunctuation();
 				}
@@ -113,30 +112,53 @@ public class Definer {
 	}
 	
 	private static ArrayList<Key> createKeys(ArrayList<Key> currentKeys, String currentWord, int w){
-		boolean punk = false;
+		boolean punct = false;
 		for(int l = 0; l < currentWord.length(); l++){
 			String letter = String.valueOf(currentWord.charAt(l));
+			boolean found = false;
 			for(Key key : keyboard){
 				if(key.label.equals(letter.toUpperCase())){
 					Log.d(key.label+caps);
+					found = true;
 					if(shiftCheck(l,w,key,letter) && !key.symbol){
 						Log.d(key.label);
 						currentKeys.add(shift);
 					}
 					caps = key.caps;
-					punk = key.punctuation;
+					punct = key.punctuation;
 					currentKeys.add(key);
 					break;
 				}
 			}
+			if(!found){
+				letter = Normalizer.normalize(letter, Normalizer.Form.NFD);
+				letter = letter.replaceAll("[^\\p{ASCII}]", "");
+				if(!letter.isEmpty()){
+					for(Key key : keyboard){
+						if(key.label.equals(letter.toUpperCase())){
+							Log.d(key.label+caps);
+							found = true;
+							if(shiftCheck(l,w,key,letter) && !key.symbol){
+								Log.d(key.label);
+								currentKeys.add(shift);
+							}
+							caps = key.caps;
+							punct = key.punctuation;
+							currentKeys.add(key);
+							break;
+						}
+					}
+				}
+			}
 		}
-		if(!accurate && !punk && !caps){ currentKeys.add(swipeR); }
+		if(!accurate && !punct && !caps){ currentKeys.add(swipeR); }
 		return currentKeys;
 	}
 	
 	private static boolean containsCappers(String word){
-		for(String caps : cappers){
-			if(word.contains(caps)){
+		for(int c = 0; c < cappers.length(); c++){
+			char caps = cappers.charAt(c);
+			if(word.indexOf(caps) >= 0){
 				return true;
 			}
 		}
@@ -172,53 +194,89 @@ public class Definer {
 		return dirty;
 	}
 	
-	private static Word cleanWord(String unclean) {
-	    if(!hasAlpha(unclean)){
-			Log.d(unclean + " contains no letters!");
-			DataManager.ignored(unclean.replace("\\s", ""));
-			return null;
-	    }
-		if(unclean.matches(".*\\d.*")){
-			Log.d(unclean + " contains numbers!");
-			DataManager.ignored(unclean.replace("\\s", ""));
-			return null;
-		}
-		Matcher m = cleanPattern.matcher(unclean);
-		String clean = null;
+	private static Word cleanWord(String word){
+		
+		char[] chars = word.toCharArray();
+		
+		boolean dash = false;
+		boolean hasAlpha = false;
 		boolean hasPunct = false;
-		if ( m.find() ) {
-		    clean = unclean.substring(m.start(), m.end());
-		    if( m.find() ){
-		    	DataManager.ignored(clean.replace("\\s", ""));
-		    	return null;
-		    }
-		}
-		if(clean == null){
-			return null;
-		}
-		for(int i = 0; i < punctuation.length; i++){
-			if(clean.contains(punctuation[i])){
-				if(!clean.endsWith(punctuation[i]) ||
-					clean.indexOf(punctuation[i]) != clean.length()-1){
-					Log.d("Bad Punctuation Location : Index " + clean.indexOf(punctuation[i]) + " Ln " + clean.length());
-					DataManager.ignored(clean.replace("\\s", ""));
-					return null;
+		boolean apostrophe = false;
+		
+		
+		for(int i = 0; i < chars.length; i++){
+			if(hasPunct){ //Double Punctuation
+				Log.d(word + " : Double Punctuation");
+				DataManager.ignored(word);
+				return null; 
+			}
+			char c = chars[i];
+			if(Character.isDigit(c)){ //Contains Digit
+				Log.d(word + " : Contains Digit");
+				DataManager.ignored(word);
+				return null; 
+			}
+			if(Character.isLetter(c)){ 
+				hasAlpha = true;
+			}else{
+				switch(c){
+				case '\'':
+					if(apostrophe){ //Multiple Apostrophes
+						Log.d(word + " : Multiple Apostrophes");
+						DataManager.ignored(word);
+						return null; 
+					}
+					apostrophe = true; 
+					break;
+				case '-':
+					if(dash || apostrophe){ //Unconventional Dash location
+						Log.d(word + " : Unconventional Dash location");
+						DataManager.ignored(word);
+						return null; 
+					}
+					dash = true; 
+					break;
+				default:
+					if(i == chars.length-1 && punctuation.indexOf(c) >= 0){
+						hasPunct = true;
+					}else{ //Unknown Punctuation
+						Log.d(word + " : Unknown Punctuation");
+						DataManager.ignored(word);
+						return null; 
+					}
+					break;
 				}
-				hasPunct = true;
 			}
 		}
-		return new Word(clean, hasPunct, false);
+		
+		if(!hasAlpha){ //No Letters Found
+			Log.d(word + " : No Letters Found");
+			DataManager.ignored(word);
+			return null; 
+		}
+		
+		return new Word(word, hasPunct, false);
 	}
 	
-	private static boolean hasAlpha(String unclean){
-		char[] chars = unclean.toCharArray();
-	    boolean passed = false;
-	    for (char c : chars) {
-	    	passed = Character.isLetter(c);
-	        if(passed){ break; }
-	    }
-	    return passed;
-	}
+//	private static boolean hasAlpha(String unclean){
+//		char[] chars = unclean.toCharArray();
+//	    boolean hasAlpha = false;
+//	    for (char c : chars) {
+//	    	hasAlpha = Character.isLetter(c);
+//	        if(hasAlpha){ break; }
+//	    }
+//	    return hasAlpha;
+//	}
+//	
+//	private static boolean hasDigits(String unclean){
+//		char[] chars = unclean.toCharArray();
+//	    boolean hasDigits = false;
+//	    for (char c : chars) {
+//	    	hasDigits = Character.isDigit(c);
+//	        if(hasDigits){ break; }
+//	    }
+//	    return hasDigits;
+//	}
 	
 	private static boolean shiftCheck(int l, int w, Key key, String letter){
 		if(autoLower){
