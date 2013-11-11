@@ -54,7 +54,7 @@ public class FleksTest {
 	private final static String SCLW = "-clw";
 	private final static String SPLW = "-plw";
 	
-	private static String languageCode = "es-ES";//"en-US";
+	private static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
