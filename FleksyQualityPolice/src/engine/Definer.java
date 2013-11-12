@@ -31,6 +31,7 @@ public class Definer {
 			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal())){
 				float x = key.x;
 				float y = key.y;
+				Log.d("key " + key.label);
 				keyboard.add(new Key(key.label,x,y));
 			}
 			Log.d("Symbols");
@@ -113,9 +114,9 @@ public class Definer {
 	
 	private static ArrayList<Key> createKeys(ArrayList<Key> currentKeys, String currentWord, int w){
 		boolean punct = false;
+		boolean found = false;
 		for(int l = 0; l < currentWord.length(); l++){
 			String letter = String.valueOf(currentWord.charAt(l));
-			boolean found = false;
 			for(Key key : keyboard){
 				if(key.label.equals(letter.toUpperCase())){
 					Log.d(key.label+caps);
@@ -151,7 +152,7 @@ public class Definer {
 				}
 			}
 		}
-		if(!accurate && !punct && !caps){ currentKeys.add(swipeR); }
+		if(!accurate && !punct && !caps && found){ currentKeys.add(swipeR); }
 		return currentKeys;
 	}
 	
