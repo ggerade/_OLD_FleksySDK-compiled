@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.syntellia.fleksy.api.EngineLoader;
 import com.syntellia.fleksy.api.FLEnums;
-import com.syntellia.fleksy.api.FileUtils;
 import com.syntellia.fleksy.api.FleksyAPI;
 
 import utils.Client;
