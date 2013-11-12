@@ -11,8 +11,6 @@ public:
   FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FleksyListenerInterface &listener, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock);
   ~FLTextBlockCursor();
   
-  void assignNewTextBlock();
-  
   FLTextBlock *getCurrentTextBlock();
   
   void decrementIndexInTextBlock(int amount);
@@ -44,6 +42,7 @@ private:
   FleksyListenerInterface &out;
   
   void setIndexOfCurrentTextBlockInVector(int indx);
+  void assignNewTextBlock();
   
   void deleteFromVectorLocation(int index);
   bool checkIfSafeAndDeleteFromCurrentLocation();
