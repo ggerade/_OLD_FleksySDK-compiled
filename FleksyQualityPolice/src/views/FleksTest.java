@@ -59,7 +59,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 6.7f;
+	public final static float Version = 6.8f;
 	private static boolean debugging = false;
 	private final static String Alt = "6RAPES";
 	
@@ -167,10 +167,9 @@ public class FleksTest {
 				String split[] = arg.split(":");
 				if(split.length == 2){
 					languageCode = split[1];
-					System.out.println("Got languageCode: " + languageCode);
 				}
 				else{
-					System.err.println("Bad Language! " + arg + " " + split.length);
+					Log.err("Bad Language! " + arg + " " + split.length);
 				}
 				
 			}else if(containsVal(a,G)){ DataManager.setDesiredGoal(getUserVal(a));
@@ -200,7 +199,7 @@ public class FleksTest {
 		}
 		
 		handlePostLoadArguments();
-		System.out.println("Running tests for languageCode: " + languageCode);
+		Log.out("Running LanguageCode: " + languageCode + "\n");
 		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), (learn || tapper), languageCode);
 		FleksyEngine.closeClient();
 	}

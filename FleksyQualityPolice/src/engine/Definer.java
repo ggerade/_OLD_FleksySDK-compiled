@@ -73,7 +73,7 @@ public class Definer {
 		autoLower = lowerFirst;
 		return defineText(text);
 	}
-	
+
 	public static ArrayList<Key> defineText(String text){
 		ArrayList<Key> keys = new ArrayList<Key>();
 		TestEngine.action = "Defining text '" + text + "'\n Accurate?: " + accurate;
@@ -194,55 +194,55 @@ public class Definer {
 		return dirty;
 	}
 	
-	private static Word cleanWord(String word){
+	private static Word cleanWord(String unclean){
 		
-		char[] chars = word.toCharArray();
+		StringBuilder clean = new StringBuilder();
+		char[] chars = unclean.toCharArray();
 		
 		boolean dash = false;
 		boolean hasAlpha = false;
 		boolean hasPunct = false;
 		boolean apostrophe = false;
 		
-		
 		for(int i = 0; i < chars.length; i++){
 			if(hasPunct){ //Double Punctuation
-				Log.d(word + " : Double Punctuation");
-				DataManager.ignored(word);
+				Log.d(unclean + " : Double Punctuation");
+				DataManager.ignored(unclean);
 				return null; 
 			}
 			char c = chars[i];
 			if(Character.isDigit(c)){ //Contains Digit
-				Log.d(word + " : Contains Digit");
-				DataManager.ignored(word);
+				Log.d(unclean + " : Contains Digit");
+				DataManager.ignored(unclean);
 				return null; 
 			}
 			if(Character.isLetter(c)){ 
 				hasAlpha = true;
+				clean.append(c);
 			}else{
 				switch(c){
 				case '\'':
 					if(apostrophe){ //Multiple Apostrophes
-						Log.d(word + " : Multiple Apostrophes");
-						DataManager.ignored(word);
+						Log.d(unclean + " : Multiple Apostrophes");
+						DataManager.ignored(unclean);
 						return null; 
 					}
 					apostrophe = true; 
+					clean.append(c);
 					break;
 				case '-':
 					if(dash || apostrophe){ //Unconventional Dash location
-						Log.d(word + " : Unconventional Dash location");
-						DataManager.ignored(word);
+						Log.d(unclean + " : Unconventional Dash location");
+						DataManager.ignored(unclean);
 						return null; 
 					}
-					dash = true; 
+					dash = true;
+					clean.append(c);
 					break;
 				default:
 					if(i == chars.length-1 && punctuation.indexOf(c) >= 0){
 						hasPunct = true;
-					}else{ //Unknown Punctuation
-						Log.d(word + " : Unknown Punctuation");
-						DataManager.ignored(word);
-						return null; 
+						clean.append(c);
 					}
 					break;
 				}
@@ -250,12 +250,12 @@ public class Definer {
 		}
 		
 		if(!hasAlpha){ //No Letters Found
-			Log.d(word + " : No Letters Found");
-			DataManager.ignored(word);
+			Log.d(unclean + " : No Letters Found");
+			DataManager.ignored(unclean);
 			return null; 
 		}
 		
-		return new Word(word, hasPunct, false);
+		return new Word(clean.toString(), hasPunct, false);
 	}
 	
 //	private static boolean hasAlpha(String unclean){
