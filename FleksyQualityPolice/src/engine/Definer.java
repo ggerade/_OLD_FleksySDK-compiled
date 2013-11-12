@@ -153,6 +153,11 @@ public class Definer {
 			}
 		}
 		if(!accurate && !punct && !caps && found){ currentKeys.add(swipeR); }
+		if(!found){ 
+			Log.err(currentWord + " : Not Possible");
+			DataManager.ignored(currentWord);
+			DataManager.removeWord(); 
+		}
 		return currentKeys;
 	}
 	

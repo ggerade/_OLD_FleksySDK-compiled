@@ -59,9 +59,9 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 6.9f;
+	public final static float Version = 7.0f;
 	private static boolean debugging = false;
-	private final static String Alt = "6RAPES";
+	private final static String Alt = "7OMATO";
 	
 	private static FleksyPrivateAPI privateAPI;
 	private static String [] myArgs;

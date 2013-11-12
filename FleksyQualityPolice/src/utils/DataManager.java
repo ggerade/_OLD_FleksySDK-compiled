@@ -131,6 +131,8 @@ public class DataManager {
 		words.add(word);
 	}
 	
+	public static void removeWord(){ words.remove(words.size()-1); }
+	
 	public static void displayWordCount(){
 		Log.out("Total # of Words: " + words.size() + "\n");
 	}
