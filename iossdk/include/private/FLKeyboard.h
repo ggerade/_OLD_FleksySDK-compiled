@@ -20,22 +20,10 @@
 #include "FLUnicodeString.h"
 #include "FLPoint.h"
 
-class FLKeyMap{
-public:
-  void set(const FLUnicodeString &c, FLPoint point);
-  FLPoint get(const FLUnicodeString &c);
-  FLUnicodeString getNearestChar(FLPoint point);
-  std::map<FLUnicodeString, FLPoint> getKeyMap();
-  
-private:
-  FLUnicodeStringToPointMap keys;
-};
-
 struct FLPointComp {
   bool operator() (const FLPoint& lhs, const FLPoint& rhs) const { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
 };
 typedef std::map<FLPoint, std::vector<FLUnicodeString>, FLPointComp> FLPointToCharVectorMap;
-
 
 class FLKeyboard {
 
@@ -51,7 +39,6 @@ private:
   
   FLUTF16Point utf16ToPoints[FLUTF16ToPointsSize];
   
-  FLKeyMap keymaps[FLKeyboardID_NUMBER_OF_KEYBOARDS];
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
   
