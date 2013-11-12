@@ -115,6 +115,7 @@ public class Definer {
 		boolean punct = false;
 		boolean found = false;
 		ArrayList<Key> addKeys = new ArrayList<Key>();
+		boolean oldCap = caps;
 		for(int l = 0; l < currentWord.length(); l++){
 			String letter = String.valueOf(currentWord.charAt(l));
 			found = false;
@@ -135,6 +136,7 @@ public class Definer {
 			}
 			if(!found){
 				Log.d(currentWord + " : Not Possible");
+				caps = oldCap;
 				DataManager.ignored(currentWord);
 				DataManager.removeWord(); 
 				return currentKeys;

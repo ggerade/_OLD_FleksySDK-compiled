@@ -59,7 +59,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.1f;
+	public final static float Version = 7.2f;
 	private static boolean debugging = false;
 	private final static String Alt = "7OMATO";
 	
