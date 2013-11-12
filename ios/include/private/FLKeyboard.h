@@ -103,7 +103,7 @@ public:
   FLUnicodeString lettersFromPoints(const FLPoint points[], size_t nPoints);
   void pointsFromLetters(const FLUnicodeStringPtr &letters, FLPoint points[]);
 
-  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
+  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
 };
 
 typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;

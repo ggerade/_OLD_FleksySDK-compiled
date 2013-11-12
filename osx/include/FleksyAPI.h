@@ -147,7 +147,7 @@ public:
   /*
    * Returns a keymap for KeyboardID containing the keyboards characters and their locations on the screen.
    */
-  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID);
+  std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
   
   /*
    * Returns the character nearest to the target point for the specified keyboard layout
