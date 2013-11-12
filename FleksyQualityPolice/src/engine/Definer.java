@@ -1,6 +1,5 @@
 package engine;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 
 import com.syntellia.fleksy.api.FLEnums;
@@ -115,49 +114,34 @@ public class Definer {
 	private static ArrayList<Key> createKeys(ArrayList<Key> currentKeys, String currentWord, int w){
 		boolean punct = false;
 		boolean found = false;
+		ArrayList<Key> addKeys = new ArrayList<Key>();
 		for(int l = 0; l < currentWord.length(); l++){
 			String letter = String.valueOf(currentWord.charAt(l));
+			found = false;
 			for(Key key : keyboard){
 				if(key.label.equals(letter.toUpperCase())){
+					found = true;
 					Log.d(key.label+caps);
 					found = true;
 					if(shiftCheck(l,w,key,letter) && !key.symbol){
 						Log.d(key.label);
-						currentKeys.add(shift);
+						addKeys.add(shift);
 					}
 					caps = key.caps;
 					punct = key.punctuation;
-					currentKeys.add(key);
+					addKeys.add(key);
 					break;
 				}
 			}
 			if(!found){
-				letter = Normalizer.normalize(letter, Normalizer.Form.NFD);
-				letter = letter.replaceAll("[^\\p{ASCII}]", "");
-				if(!letter.isEmpty()){
-					for(Key key : keyboard){
-						if(key.label.equals(letter.toUpperCase())){
-							Log.d(key.label+caps);
-							found = true;
-							if(shiftCheck(l,w,key,letter) && !key.symbol){
-								Log.d(key.label);
-								currentKeys.add(shift);
-							}
-							caps = key.caps;
-							punct = key.punctuation;
-							currentKeys.add(key);
-							break;
-						}
-					}
-				}
+				Log.d(currentWord + " : Not Possible");
+				DataManager.ignored(currentWord);
+				DataManager.removeWord(); 
+				return currentKeys;
 			}
 		}
-		if(!accurate && !punct && !caps && found){ currentKeys.add(swipeR); }
-		if(!found){ 
-			Log.err(currentWord + " : Not Possible");
-			DataManager.ignored(currentWord);
-			DataManager.removeWord(); 
-		}
+		if(!accurate && !punct && !caps){ addKeys.add(swipeR); }
+		for(Key add : addKeys){ currentKeys.add(add); }
 		return currentKeys;
 	}
 	

@@ -133,7 +133,8 @@ public class TestEngine {
     			+ "n" + NoiseMaker.TAP_NOISE 
     			+ "e" + NoiseMaker.ERROR_LVL
     			+ "s" + NoiseMaker.SHIFT_LVL
-    			+ "g" + DataManager.getTargetGoal());
+    			+ "g" + DataManager.getTargetGoal()
+    			+ FleksTest.languageCode);
     	Log.out("Creating Output File...\n");
 		try{
 			PrintStream out = new PrintStream(new File("Output/" + fileName.toString() + ".txt"));

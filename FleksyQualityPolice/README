@@ -15,7 +15,7 @@
 
 .:HOW TO RUN:.
 
-	java -jar FleksyTester.jar [ip_address] [-n -e -s -g -a -d -b -t -o -l -ps -ip -ll -tt n# e# s# g#]
+	java -jar FleksyTester.jar [#] [x# -x]
 
 -n	: Run without noise
 -e	: Run without erroneous taps
@@ -30,16 +30,18 @@
 -l	: Run with unknown words added to the dictionary
 
 -ps	: Disables the use of platform suggestions *
--ip : Run Offline
+-ip : Run Offline/Run without a server connection
 -ll	: Run once, then again with unknown words included in dictionary
 -tt	: Run once, then again with real-time tapping enabled **
 -ez : Enables easy comparison, ignores ' and letter case
 
+-loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
+
+#	: IP address of server to use
 n#	: Sets noise to # on execution
 e#	: Sets error to # on execution
 s#	: Sets shift to # on execution
 g#	: Sets accuracy goal to # on execution
-locale:  : Sets language to run (default English en-US)
 
 Private APIs
 -tlw	:	setSettingTransformLayerWeight
@@ -48,7 +50,7 @@ Private APIs
 -plw	:	setSettingPlatformLayerWeight
 
 * 	requires working Android server connection
-**	buggy
+**	unstable
 
 .:HOW IT WORKS:.
 

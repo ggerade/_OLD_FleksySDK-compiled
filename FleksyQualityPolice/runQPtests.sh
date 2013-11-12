@@ -19,8 +19,8 @@ if [[ -d "$dir" && ! -L "$dir" ]]; then
       if [ -f $file ];
       then
           SUBDIR="$(basename $dir)"
-          echo  $SUBDIR
-          java -Xmx2048M -jar FleksyTester.jar -ip -e -a s10 n20 locale:$SUBDIR
+#echo  $SUBDIR
+          java -Xmx2048M -jar FleksyTester.jar -ip -e -a s10 n20 -loc:$SUBDIR
       fi
     done
 fi

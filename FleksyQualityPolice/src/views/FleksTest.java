@@ -31,7 +31,6 @@ public class FleksTest {
 	private final static String S = "s";
 	private final static String G = "g";
 	
-	private final static String LANG = "locale:";
 	private final static String GOAL = "-g";
 	private final static String DBUG = "-d";
 	private final static String IBUG = "-b";
@@ -53,13 +52,14 @@ public class FleksTest {
 	private final static String SSLW = "-slw";
 	private final static String SCLW = "-clw";
 	private final static String SPLW = "-plw";
+	private final static String LANG = "-loc:";
 	
-	private static String languageCode = "en-US";
+	public static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.0f;
+	public final static float Version = 7.1f;
 	private static boolean debugging = false;
 	private final static String Alt = "7OMATO";
 	
@@ -164,12 +164,12 @@ public class FleksTest {
 			}else if(containsVal(a,S)){ s = getUserVal(a); shift = false;
 				
 			}else if(arg.contains(LANG)){ 
-				String split[] = arg.split(":");
-				if(split.length == 2){
-					languageCode = split[1];
+				String lang = arg.replace(LANG, "");
+				if(lang != null && !lang.isEmpty()){
+					languageCode = lang;
 				}
 				else{
-					Log.err("Bad Language! " + arg + " " + split.length);
+					Log.err("Bad Language! " + arg + " " + lang);
 				}
 				
 			}else if(containsVal(a,G)){ DataManager.setDesiredGoal(getUserVal(a));
@@ -179,6 +179,7 @@ public class FleksTest {
 			
 		}
 		awaitIPnum(args[0]);
+		
 	}
 	
 	private static boolean containsVal(String input, String command){
