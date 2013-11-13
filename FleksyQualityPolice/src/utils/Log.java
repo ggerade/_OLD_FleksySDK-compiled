@@ -15,27 +15,26 @@ public class Log {
 	}
 	
 	public static void out(String message) {
-            try {
-                PrintStream out = new PrintStream(System.err, true, "UTF-8");
-                out.print(message);
-            } catch (UnsupportedEncodingException x) { }
-
+		try {
+			new PrintStream(System.err, true, "UTF-8").print(message);
+		} catch (UnsupportedEncodingException x) {
+		}
 	}
 	
 	public static void err(String message){
-                try {
-                    PrintStream out = new PrintStream(System.err, true, "UTF-8");
-                    out.print(message);
-                } catch (UnsupportedEncodingException x) {}
+		try {
+			new PrintStream(System.err, true, "UTF-8").print(message);
+		} catch (UnsupportedEncodingException x) {
+		}
 	}
 	
 	public static void d(String message){
-            if(print()) {
-                try {
-                    PrintStream out = new PrintStream(System.err, true, "UTF-8");
-                    out.print(message);
-                } catch (UnsupportedEncodingException x) {}
-            }
+		if (print()) {
+			try {
+				new PrintStream(System.err, true, "UTF-8").print(message);
+			} catch (UnsupportedEncodingException x) {
+			}
+		}
 	}
 	
 	public static void e(String TAG, String message){

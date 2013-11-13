@@ -14,22 +14,16 @@ if [[ -d "$dir" && ! -L "$dir" ]]; then
 #echo "Directory: $dir"
   FILES=$(find $dir -type f)
 
-  for file in $FILES;
-    do
-      if [ -f $file ];
-      then
-          SUBDIR="$(basename $dir)"
+  SUBDIR="$(basename $dir)"
 #echo  "Running tests on files from: $SUBDIR"
-          if [[ $# -gt 1 ]];
-          then
-            java -Xmx2048M -jar FleksyTester.jar -ip -e -a "$@" -loc:$SUBDIR
-          else
-            java -Xmx2048M -jar FleksyTester.jar -ip -e -a s10 n20 -loc:$SUBDIR
-          fi
-          
-      fi
-    done
+  if [[ $# -gt 1 ]];
+  then
+    java -Xmx2048M -jar FleksyTester.jar -ip -e -a "$@" -loc:$SUBDIR
+  else
+    java -Xmx2048M -jar FleksyTester.jar -ip -e -a s10 n20 -loc:$SUBDIR
+ fi
+  echo ""
 fi
 done
-
+echo ""
 echo "Ding! Finished running all tests!"

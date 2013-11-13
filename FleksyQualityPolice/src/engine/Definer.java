@@ -75,7 +75,7 @@ public class Definer {
 		autoLower = lowerFirst;
 		return defineText(text);
 	}
-
+	
 	public static ArrayList<Key> defineText(String text){
 		ArrayList<Key> keys = new ArrayList<Key>();
 		TestEngine.action = "Defining text '" + text + "'\n Accurate?: " + accurate;
@@ -247,7 +247,7 @@ public class Definer {
 		if(autoLower){
 			Log.d("AutoLower");
 			autoLower = false;
-			return false;
+			return letter.equals(letter.toLowerCase());
 		}
 		if(accurate){
 			return (letter.equals(letter.toUpperCase()));
