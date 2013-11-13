@@ -10,7 +10,7 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V7.0::..                                                
+..::THE FLEKSY TESTER V7.5::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
@@ -42,6 +42,7 @@ n#	: Sets noise to # on execution
 e#	: Sets error to # on execution
 s#	: Sets shift to # on execution
 g#	: Sets accuracy goal to # on execution
+w#	: Sets the maximum number of words to process
 
 Private APIs
 -tlw	:	setSettingTransformLayerWeight

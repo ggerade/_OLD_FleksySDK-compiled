@@ -36,12 +36,12 @@ public class TestEngine {
 	private final static String TestPath = "Assets/";
 	private static ArrayList<TxtFile> tests = new ArrayList<TxtFile>();
 	
-	public TestEngine(int noise, int error, int shift, boolean encore, String languageCode){
+	public TestEngine(int noise, int error, int shift, int max, boolean encore, String languageCode){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
 			loadTests(TestPath + languageCode + "/");
 			if(failed){ return; }
 			reader = new Reader();
-			definer = new Definer();
+			definer = new Definer(max);
 			converter = new Converter(320, 216, noise, error, shift);
 			runEngine();
 			if(encore){

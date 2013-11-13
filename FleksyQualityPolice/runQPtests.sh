@@ -11,7 +11,7 @@ fi
 for dir in $1/* ; do
 if [[ -d "$dir" && ! -L "$dir" ]]; then
 
-#echo "Directory: $dir"
+echo "Directory: $dir"
   FILES=$(find $dir -type f)
 
   for file in $FILES;
@@ -20,7 +20,7 @@ if [[ -d "$dir" && ! -L "$dir" ]]; then
       then
           SUBDIR="$(basename $dir)"
           echo  "Running tests on files from: $SUBDIR"
-          java -Xmx2048M -jar FleksyTester.jar -ip -e -a s10 n20 -loc:$SUBDIR
+          java -Xmx2048M -jar FleksyTester.jar -ip -e -a -s -n w10000 -loc:$SUBDIR
       fi
     done
 fi

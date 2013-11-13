@@ -16,15 +16,17 @@ public class Definer {
 	
 	private static boolean caps = false;
 	private static HashMap<String, Key> keyboard;
-	private final static String cappers = ".!?";//new char[]{'.','!','?'};
-	private final static String punctuation = ".,?!:;";//new char[]{'.',',','?','!',':',';'};
-//	private static final Pattern cleanPattern = Pattern.compile("[a-zA-Z]+-[a-zA-Z'.,?!:;]+|[a-zA-z'.,?!:;]+");
+	private final static String cappers = ".!?";
+	private final static String punctuation = ".,?!:;";
 	
 	private static Key swipeR;
 	private static Key shift;
 	
-	public Definer(){
-		TestEngine.action = "Creating Definer";
+	private static int wordLimit = 0;
+	
+	public Definer(int maxWords){
+		wordLimit = maxWords-1;
+		TestEngine.action = "Creating Definer " + wordLimit;
 		keyboard = new HashMap<String, Key>();
 		try{
 			Log.d("QWERTY");
@@ -79,6 +81,7 @@ public class Definer {
 		TestEngine.action = "Defining text '" + text + "'\n Accurate?: " + accurate;
 		try{
 			String lines[] = text.split(System.getProperty("line.separator"));
+			mainloop:
 			for(String line : lines){
 				String words[] = line.split("[\\s]|[/]");
 				int index = -1;
@@ -89,6 +92,7 @@ public class Definer {
 					    continue;
 					}else if(!accurate){
 						index ++;
+						if(wordLimit > 0 && index > wordLimit){ break mainloop; }
 						word.setLabel(removeBadApostrophes(word.label));
 						Log.d("Compare New: " + word.label + " Old: " + words[w]);
 						word.setErr(NoiseMaker.errorMaker(word.label.replace("-", "")));

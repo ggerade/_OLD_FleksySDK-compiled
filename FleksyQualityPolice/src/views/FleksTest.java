@@ -16,6 +16,7 @@ public class FleksTest {
 	private static int n = 0;
 	private static int e = 0;
 	private static int s = 0;
+	private static int w = 0;
 	
 	public static boolean print = true;
 	private static boolean noisy = true;
@@ -30,6 +31,7 @@ public class FleksTest {
 	private final static String E = "e";
 	private final static String S = "s";
 	private final static String G = "g";
+	private final static String W = "w";
 	
 	private final static String GOAL = "-g";
 	private final static String DBUG = "-d";
@@ -59,7 +61,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.4f;
+	public final static float Version = 7.5f;
 	private static boolean debugging = false;
 	private final static String Alt = "7OMATO";
 	
@@ -157,6 +159,8 @@ public class FleksTest {
 			
 			}else if(a.equals(TAP2)){ 	tapper = true;
 			
+			}else if(containsVal(a,W)){ w = getUserVal(a);
+			
 			}else if(containsVal(a,N)){ n = getUserVal(a); noisy = false;
 				
 			}else if(containsVal(a,E)){ e = getUserVal(a); errors = false;
@@ -201,7 +205,7 @@ public class FleksTest {
 		
 		handlePostLoadArguments();
 		Log.out("Running LanguageCode: " + languageCode + "\n");
-		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), (learn || tapper), languageCode);
+		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), languageCode);
 		FleksyEngine.closeClient();
 	}
 	
