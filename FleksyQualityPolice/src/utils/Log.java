@@ -1,6 +1,8 @@
 package utils;
 
 import java.util.ArrayList;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import engine.FleksyEngine;
 
@@ -12,16 +14,28 @@ public class Log {
 		return (FleksyEngine.externalDebug || Debugger.internalDebug);
 	}
 	
-	public static void out(String message){
-		System.err.print(message);
+	public static void out(String message) {
+            try {
+                PrintStream out = new PrintStream(System.err, true, "UTF-8");
+                out.print(message);
+            } catch (UnsupportedEncodingException x) { }
+
 	}
 	
 	public static void err(String message){
-		System.err.print("ERR :: " + message);
+                try {
+                    PrintStream out = new PrintStream(System.err, true, "UTF-8");
+                    out.print(message);
+                } catch (UnsupportedEncodingException x) {}
 	}
 	
 	public static void d(String message){
-		if(print()){ System.out.println(message); }
+            if(print()) {
+                try {
+                    PrintStream out = new PrintStream(System.err, true, "UTF-8");
+                    out.print(message);
+                } catch (UnsupportedEncodingException x) {}
+            }
 	}
 	
 	public static void e(String TAG, String message){
