@@ -89,7 +89,7 @@ private:
   bool isAccuratelyTyped;
   
   int changeSuggestion(int offset);
-  FLUnicodeString capitalize(const FLUnicodeString &word);
+  FLUnicodeString matchCase(const FLUnicodeString &word);
   void prepareTextBlockToRecieveOrRemoveCharacters();
   
   void printTextBlock();
