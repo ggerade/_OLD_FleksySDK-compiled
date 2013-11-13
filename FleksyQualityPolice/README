@@ -10,7 +10,7 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V7.5::..                                                
+..::THE FLEKSY TESTER V7.6::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
@@ -33,7 +33,7 @@
 -ip : Run Offline/Run without a server connection
 -ll	: Run once, then again with unknown words included in dictionary
 -tt	: Run once, then again with real-time tapping enabled **
--ez : Enables easy comparison, ignores ' and letter case
+-ez : Enables easy comparison, ignores ' and case sensitivity
 
 -loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
 
@@ -99,7 +99,7 @@ The Noise Level given will change all
 tap points X and Y coordinates randomly based
 on said Noise.
 
-EXAMPLE:
+**EXAMPLE**
 
 Let's say the NOISE Level is 10. 
 The NoiseMaker will then generate a random value between
@@ -124,8 +124,6 @@ words with 5 letter or more, having either
 extra or missing characters.
 For Reference:
 
-:ERROR LEVEL RUBRICK:
-
 	LVL		DENOMINATOR		CHANCE
 	1			90			1/90
 	2			'			1/45
@@ -142,7 +140,7 @@ THE FORMULA: (LVL/DENOMINATOR)*(TOTAL_CHARACTERS_IN_WORD - MIN_NUM_OF_CHARACTERS
 
 MIN_NUM_OF_CHARACTERS = 5
 
-EXAMPLE:
+**EXAMPLE**
 
 Let's say the ERROR LVL is 2, so words
 with 5 letters in them automatically have
@@ -151,3 +149,11 @@ extra character, while words with 6 letters
 have 2/45 chance, words with 7 letters have
 a 3/45 (1/15) chance, words with 8 letter have
 a 4/45 chance, etc.
+
+.:THE SHIFT LEVEL:.
+
+The Shift Level will will choose a random distance
+and direction to move every single tap of a given
+word. Like Noise Level, except the same random value
+is used accross the entire word's taps, thus 'shifting'
+the word being typed by a random distance/direction.
