@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.syntellia.fleksy.api.FLEnums;
 import com.syntellia.fleksy.api.FLKey;
@@ -14,7 +15,7 @@ public class Definer {
 	private final static String TAG = "Definer";
 	
 	private static boolean caps = false;
-	private static ArrayList<Key> keyboard;
+	private static HashMap<String, Key> keyboard;
 	private final static String cappers = ".!?";//new char[]{'.','!','?'};
 	private final static String punctuation = ".,?!:;";//new char[]{'.',',','?','!',':',';'};
 //	private static final Pattern cleanPattern = Pattern.compile("[a-zA-Z]+-[a-zA-Z'.,?!:;]+|[a-zA-z'.,?!:;]+");
@@ -24,14 +25,14 @@ public class Definer {
 	
 	public Definer(){
 		TestEngine.action = "Creating Definer";
-		keyboard = new ArrayList<Key>();
+		keyboard = new HashMap<String, Key>();
 		try{
 			Log.d("QWERTY");
 			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal(), true)){
 				float x = key.x;
 				float y = key.y;
 				Log.d("key " + key.label);
-				keyboard.add(new Key(key.label,x,y));
+				keyboard.put(key.label, new Key(key.label,x,y));
 			}
 			Log.d("Symbols");
 			for(FLKey key : FleksyEngine.api.getKeymapForKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_SYMBOLS.ordinal(), false)){
@@ -39,7 +40,7 @@ public class Definer {
 				float y = key.y;
 				Key k = new Key(key.label,x,y);
 				k.setSymbol();
-				keyboard.add(k);
+				keyboard.put(k.label,k);
 			}
 			createPunctuation();
 		}catch(Exception e){
@@ -49,13 +50,12 @@ public class Definer {
 	}
 	
 	private void createPunctuation(){
-		for(Key key : keyboard){
-			for(int p = 0; p < punctuation.length();p++){
-				char label = punctuation.charAt(p);
-				if(label == key.label.charAt(0)){
-					Log.d("Punctuation: " + label);
-					key.setPunctuation();
-				}
+		for (int p = 0; p < punctuation.length(); p++) {
+			String label = String.valueOf(punctuation.charAt(p));
+			Key key = keyboard.get(label);
+			if (key != null) {
+				Log.d("Punctuation: " + label);
+				key.setPunctuation();
 			}
 		}
 		Log.d("Custom");
@@ -83,7 +83,7 @@ public class Definer {
 				String words[] = line.split("[\\s]|[/]");
 				int index = -1;
 				for(int w = 0; w < words.length; w++){
-					Word word = cleanWord(words[w]);
+					Word word = checkWordQuality(words[w]);
 					if(word == null){
 					    Log.d("Skipping " + words[w]);
 					    continue;
@@ -113,34 +113,18 @@ public class Definer {
 	
 	private static ArrayList<Key> createKeys(ArrayList<Key> currentKeys, String currentWord, int w){
 		boolean punct = false;
-		boolean found = false;
 		ArrayList<Key> addKeys = new ArrayList<Key>();
-		boolean oldCap = caps;
 		for(int l = 0; l < currentWord.length(); l++){
 			String letter = String.valueOf(currentWord.charAt(l));
-			found = false;
-			for(Key key : keyboard){
-				if(key.label.equals(letter.toUpperCase())){
-					found = true;
-					Log.d(key.label+caps);
-					found = true;
-					if(shiftCheck(l,w,key,letter) && !key.symbol){
-						Log.d(key.label);
-						addKeys.add(shift);
-					}
-					caps = key.caps;
-					punct = key.punctuation;
-					addKeys.add(key);
-					break;
-				}
+			Key key = keyboard.get(letter.toUpperCase());
+			Log.d(key.label+caps);
+			if(shiftCheck(l,w,key,letter) && !key.symbol){
+				Log.d(key.label);
+				addKeys.add(shift);
 			}
-			if(!found){
-				Log.d(currentWord + " : Not Possible");
-				caps = oldCap;
-				DataManager.ignored(currentWord);
-				DataManager.removeWord(); 
-				return currentKeys;
-			}
+			caps = key.caps;
+			punct = key.punctuation;
+			addKeys.add(key);
 		}
 		if(!accurate && !punct && !caps){ addKeys.add(swipeR); }
 		for(Key add : addKeys){ currentKeys.add(add); }
@@ -186,7 +170,7 @@ public class Definer {
 		return dirty;
 	}
 	
-	private static Word cleanWord(String unclean){
+	private static Word checkWordQuality(String unclean){
 		
 		StringBuilder clean = new StringBuilder();
 		char[] chars = unclean.toCharArray();
@@ -209,6 +193,11 @@ public class Definer {
 				return null; 
 			}
 			if(Character.isLetter(c)){ 
+				if(keyboard.get(String.valueOf(c).toUpperCase()) == null){ //Non-Existant Character
+					Log.d(unclean + " : Non-existant Character : " + c);
+					DataManager.ignored(unclean);
+					return null; 
+				}
 				hasAlpha = true;
 				clean.append(c);
 			}else{
@@ -249,26 +238,6 @@ public class Definer {
 		
 		return new Word(clean.toString(), hasPunct, false);
 	}
-	
-//	private static boolean hasAlpha(String unclean){
-//		char[] chars = unclean.toCharArray();
-//	    boolean hasAlpha = false;
-//	    for (char c : chars) {
-//	    	hasAlpha = Character.isLetter(c);
-//	        if(hasAlpha){ break; }
-//	    }
-//	    return hasAlpha;
-//	}
-//	
-//	private static boolean hasDigits(String unclean){
-//		char[] chars = unclean.toCharArray();
-//	    boolean hasDigits = false;
-//	    for (char c : chars) {
-//	    	hasDigits = Character.isDigit(c);
-//	        if(hasDigits){ break; }
-//	    }
-//	    return hasDigits;
-//	}
 	
 	private static boolean shiftCheck(int l, int w, Key key, String letter){
 		if(autoLower){
