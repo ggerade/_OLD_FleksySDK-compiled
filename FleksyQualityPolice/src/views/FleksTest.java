@@ -63,14 +63,14 @@ public class FleksTest {
 	private final static String FILE = "-fil:"; //Enter file name
 	private final static String LANG = "-loc:"; //Enter lang name
 	
-	public static String languageCode = "en-US";
 	private static String fileName = "";
 	private static String folderName = "";
+	public static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.1f;
+	public final static float Version = 8.2f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -147,6 +147,8 @@ public class FleksTest {
 			String a = arg.toLowerCase();
 			
 			if(a.equals(DBUG)){ 		debug = true;
+			
+			}else if(a.equals(XADD)){	DataManager.staticDictionary();
 			
 			}else if(a.equals(IBUG)){ 	FleksyEngine.externalDebug = true;
 			

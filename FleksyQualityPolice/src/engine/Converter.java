@@ -190,17 +190,14 @@ public class Converter {
 	private ArrayList<Touch> failedWord(ArrayList<Touch> output, long time, int indx) {
 		output.add(makeSwipeLeft(time, indx)); //SWIPE LEFT
 		indx++; time += SWIPE_AIR;
+		DataManager.addWordToDictionary(); //ADDS UNKNOWN WORD TO DICTIONARY
 		output = retypeAccurately(output, time, indx); //RETYPE WORD ACCURATELY THEN SWIPE RIGHT
 		indx = incrementIndex(output); 
 		time = incrementTime(output, SWIPE_AIR);
 		if(!DataManager.isCurrentSuggestionCorrect(true)){ //CHECK IF FOUND 2ND TIME THROUGH
-			output.add(makeSwipeUp(time, indx)); //SWIPE UP
-			if(FleksyEngine.endOfSuggestions){
-				Log.quick("\n" + DataManager.getComparisonMade() + "\n");
-				Log.err("EndofSuggestions TRUE on SwipeUP : " + DataManager.getComparisonMade() 
-						+ " Index: " + DataManager.getWordIndex() + " Resetting to FALSE\n");
-				FleksyEngine.endOfSuggestions = false;
-			}
+			Log.quick("\n" + DataManager.getComparisonMade() + "\n");
+			Log.err("Dictionary Failed : " + DataManager.getComparisonMade() + "\n");
+			FleksyEngine.endOfSuggestions = false;
 		}
 		return output;
 	}

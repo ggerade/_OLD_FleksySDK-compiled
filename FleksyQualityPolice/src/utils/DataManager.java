@@ -34,6 +34,7 @@ public class DataManager {
 	private static boolean ezComp = false;
 	private static boolean learning = false;
 	private static boolean accentless = false;
+	private static boolean dontAdd = false;
 	private static String enteredText = "";
 	private static float[] andyGraph = new float[30];
 	private static float[] indexGraph = new float[30];
@@ -101,6 +102,10 @@ public class DataManager {
 		if(clean.toString().isEmpty()){return;}
 		ignore++;
 		ignored.append(" - " + clean.toString() + " " + reason + "\n");
+	}
+	
+	public static void staticDictionary(){
+		dontAdd = true;
 	}
 	
 	public static void enableEasyCompare(){
@@ -351,6 +356,12 @@ public class DataManager {
 		}
 	}
 	
+	public static void addWordToDictionary(){
+		if(!dontAdd){
+			FleksyEngine.api.addWordToDictionary(words.get(wordIndex).label);
+		}
+	}
+	
 	public static boolean isCurrentSuggestionCorrect(boolean secondCheck){
 		if(checkIndexRange(wordIndex)){
 			failed = true;
@@ -379,7 +390,7 @@ public class DataManager {
 			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
 		}
 		lastComparison = "INPUT: " + out + " EXPECTED " + word;
-		return word.equals(out);
+		return word.equals(out) || (secondCheck && dontAdd);
 	}
 	
 	private static String normalizeWord(String normalize){
