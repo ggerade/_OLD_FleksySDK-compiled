@@ -46,6 +46,7 @@ public class FleksTest {
 	private final static String TAPS = "-t"; //Send taps to server
 	private final static String ACNT = "-a"; //Ignore accents on failed check
 	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
+	private final static String XADD = "-x"; //Words are not added to Dictionary
 	
 	private final static String ANDY = "-aa"; //Compare to Android
 	private final static String TAP2 = "-tt";

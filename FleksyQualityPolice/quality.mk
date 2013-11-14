@@ -8,7 +8,7 @@ ASSETS_LANGUAGES = bg-BG cs-CZ da-DK de-DE el-GR en-US es-ES et-EE fi-FI fr-FR h
 all: $(ASSETS_LANGUAGES)
 
 $(ASSETS_LANGUAGES): FleksyTester.jar
-	@/usr/bin/perl -C -e '$$FQP=`java -Xmx2048M -jar FleksyTester.jar $(FQP_ARGS) -loc:$@ 2>&1`; print("vvvvv $@ vvvvv\n" . $$FQP . "^^^^^ $@ ^^^^^^\n");'
+	@/usr/bin/perl -C -e '$$FQP=`java -Xmx2048M -jar FleksyTester.jar $(FQP_ARGS) -loc:$@ 2>&1`; print("vvvvv $@ vvvvv\n" . $$FQP . "^^^^^ $@ ^^^^^^\n\n");'
 
 JAVA_SRCS = src/engine/Converter.java src/engine/Definer.java src/engine/FleksyEngine.java src/engine/NoiseMaker.java src/engine/Reader.java src/engine/TestEngine.java src/utils/Client.java src/utils/DataManager.java src/utils/Debugger.java src/utils/FleksyInterface.java src/utils/Key.java src/utils/Log.java src/utils/Point.java src/utils/Touch.java src/utils/Word.java src/views/FleksTest.java
 
