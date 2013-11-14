@@ -36,9 +36,11 @@ public class TestEngine {
 	private final static String TestPath = "Assets/";
 	private static ArrayList<TxtFile> tests = new ArrayList<TxtFile>();
 	
-	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String languageCode){
+	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String languageCode, String fileName){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
-			loadTests(TestPath + languageCode + "/");
+			if(!oneFile(TestPath + languageCode + "/" + fileName)){
+				loadTests(TestPath + languageCode + "/");
+			}
 			if(failed){ return; }
 			reader = new Reader();
 			definer = new Definer(max,skipUnknown);
@@ -152,6 +154,16 @@ public class TestEngine {
 		}catch(Exception e){
 			Log.e(TAG, "Creating Output file Failed! " + e.getLocalizedMessage());
 			e.printStackTrace();
+		}
+	}
+	
+	private boolean oneFile(String path){
+		File file = new File(path);
+		if(file.isFile()){
+			tests.add(new TxtFile(path, file.getName()));
+			return true;
+		}else{
+			return false;
 		}
 	}
 	

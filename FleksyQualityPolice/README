@@ -10,7 +10,7 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V7.9::..                                                
+..::THE FLEKSY TESTER V8.0::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
@@ -38,6 +38,7 @@
 -tt	: Run once, then again with real-time tapping enabled **
 -ez : Enables easy comparison, ignores ' and case sensitivity
 
+-f:XXX.txt	: Enter a specific file name to use (REQUIRES -loc:xxXX)
 -loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
 
 #	: IP address of server to use

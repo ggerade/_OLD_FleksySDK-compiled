@@ -48,6 +48,7 @@ public class FleksTest {
 	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
 	
 	private final static String ANDY = "--a"; //Compare to Android
+	private final static String FILE = "-f:"; //Enter file name
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -61,13 +62,14 @@ public class FleksTest {
 	private final static String LANG = "-loc:";
 	
 	public static String languageCode = "en-US";
+	private static String fileName = "";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.9f;
+	public final static float Version = 8.0f;
 	private static boolean debugging = false;
-	private final static String Alt = "7OMATO";
+	private final static String Alt = "8LUEBERRY";
 	
 	private static FleksyPrivateAPI privateAPI;
 	private static String [] myArgs;
@@ -181,6 +183,15 @@ public class FleksTest {
 				
 			}else if(containsVal(a,S)){ s = getUserVal(a); shift = false;
 				
+			}else if(arg.contains(FILE)){
+				String file = arg.replace(FILE, "");
+				if(file != null && !file.isEmpty()){
+					fileName = file;
+				}
+				else{
+					Log.err("Bad File! " + arg + " " + file);
+				}
+			
 			}else if(arg.contains(LANG)){ 
 				String lang = arg.replace(LANG, "");
 				if(lang != null && !lang.isEmpty()){
@@ -220,7 +231,7 @@ public class FleksTest {
 		
 		handlePostLoadArguments();
 		Log.out("Running LanguageCode: " + languageCode + "\n");
-		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), unknown, languageCode);
+		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), unknown, languageCode, fileName);
 		FleksyEngine.closeClient();
 	}
 	
