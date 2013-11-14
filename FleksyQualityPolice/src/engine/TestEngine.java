@@ -33,13 +33,12 @@ public class TestEngine {
 	public static Definer definer;
 	public static Converter converter;
 	public static boolean failed = false;
-	private final static String TestPath = "Assets/";
 	private static ArrayList<TxtFile> tests = new ArrayList<TxtFile>();
 	
-	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String languageCode, String fileName){
+	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String folderName, String languageCode, String fileName){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
-			if(!oneFile(TestPath + languageCode + "/", fileName)){
-				loadTests(TestPath + languageCode + "/");
+			if(!oneFile(folderName + "/" + languageCode + "/", fileName)){
+				loadTests(folderName + "/" + languageCode + "/");
 			}
 			if(failed){ return; }
 			reader = new Reader();
@@ -173,7 +172,7 @@ public class TestEngine {
 
 		if(listOfFiles == null){
 			failed = true;
-			Log.e(TAG, "No Files Detected! Closing Tester.");
+			Log.e(TAG, path + " No Files Detected! Closing Tester.");
 			return;
 		}
 	    for (File file : listOfFiles) {

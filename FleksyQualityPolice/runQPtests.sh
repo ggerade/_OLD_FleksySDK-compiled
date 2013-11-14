@@ -21,9 +21,9 @@ if [[ -d "$dir" && ! -L "$dir" ]]; then
           #echo "LangCode: $LANG_CODE, File: $FILE"
           if [[ $# -gt 1 ]];
           then
-            java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q "$@" -loc:$LANG_CODE -f:$FILE
+java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q -fol:"$@" -loc:$LANG_CODE -fil:$FILE
           else
-            java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q s10 n20 -loc:$LANG_CODE -f:$FILE
+java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q s10 n20 -fol:Assets -loc:$LANG_CODE -fil:$FILE
           fi
       fi
     done

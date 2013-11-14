@@ -31,15 +31,16 @@
 -u	: Run with only words found in the dictionary
 
 
---a	: Enables Android comparison *
+-aa	: Enables Android comparison *
 -ps	: Disables the use of platform suggestions *
 -ip : Run Offline/Run without a server connection
 -ll	: Run once, then again with unknown words included in dictionary
 -tt	: Run once, then again with real-time tapping enabled **
 -ez : Enables easy comparison, ignores ' and case sensitivity
 
--f:XXX.txt	: Enter a specific file name to use (REQUIRES -loc:xxXX)
+-fol:XXXXX	: Enter a specific folder name ***
 -loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
+-fil:X.txt	: Enter a specific file name to use (REQUIRES -loc:xx-XX)
 
 #	: IP address of server to use
 n#	: Sets noise to # on execution
@@ -56,6 +57,7 @@ Private APIs
 
 * 	requires working Android server connection
 **	unstable
+*** REQUIRED
 
 .:HOW IT WORKS:.
 

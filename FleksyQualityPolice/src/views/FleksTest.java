@@ -47,8 +47,7 @@ public class FleksTest {
 	private final static String ACNT = "-a"; //Ignore accents on failed check
 	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
 	
-	private final static String ANDY = "--a"; //Compare to Android
-	private final static String FILE = "-f:"; //Enter file name
+	private final static String ANDY = "-aa"; //Compare to Android
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -59,15 +58,18 @@ public class FleksTest {
 	private final static String SSLW = "-slw";
 	private final static String SCLW = "-clw";
 	private final static String SPLW = "-plw";
-	private final static String LANG = "-loc:";
+	private final static String FOLD = "-fol:"; //Enter folder name
+	private final static String FILE = "-fil:"; //Enter file name
+	private final static String LANG = "-loc:"; //Enter lang name
 	
 	public static String languageCode = "en-US";
 	private static String fileName = "";
+	private static String folderName = "";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.0f;
+	public final static float Version = 8.1f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -183,13 +185,13 @@ public class FleksTest {
 				
 			}else if(containsVal(a,S)){ s = getUserVal(a); shift = false;
 				
-			}else if(arg.contains(FILE)){
-				String file = arg.replace(FILE, "");
-				if(file != null && !file.isEmpty()){
-					fileName = file;
+			}else if(arg.contains(FOLD)){
+				String fold = arg.replace(FOLD, "");
+				if(fold != null && !fold.isEmpty()){
+					folderName = fold;
 				}
 				else{
-					Log.err("Bad File! " + arg + " " + file);
+					Log.err("Bad Folder! " + arg + " " + fold);
 				}
 			
 			}else if(arg.contains(LANG)){ 
@@ -201,6 +203,15 @@ public class FleksTest {
 					Log.err("Bad Language! " + arg + " " + lang);
 				}
 				
+			}else if(arg.contains(FILE)){
+				String file = arg.replace(FILE, "");
+				if(file != null && !file.isEmpty()){
+					fileName = file;
+				}
+				else{
+					Log.err("Bad File! " + arg + " " + file);
+				}
+			
 			}else if(containsVal(a,G)){ DataManager.setDesiredGoal(getUserVal(a));
 			
 			}else if(a.equals(TAPS)){ 	FleksyEngine.sendingTaps = true; }
@@ -231,7 +242,8 @@ public class FleksTest {
 		
 		handlePostLoadArguments();
 		Log.out("Running LanguageCode: " + languageCode + "\n");
-		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), unknown, languageCode, fileName);
+		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), unknown, 
+				folderName, languageCode, fileName);
 		FleksyEngine.closeClient();
 	}
 	

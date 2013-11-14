@@ -21,6 +21,7 @@ public class DataManager {
 	private static int andex = 0;
 	private static int marker = 0;
 	private static int ignore = 0;
+	private static int unknown = 0;
 	private static int wordIndex = 0;
 	private static float totalIndex = 0;
 	@SuppressWarnings("unused")
@@ -61,6 +62,7 @@ public class DataManager {
 		andex = 0;
 		marker = 0;
 		ignore = 0;
+		unknown = 0;
 		wordIndex = 0;
 		totalIndex = 0;
 	}
@@ -89,10 +91,16 @@ public class DataManager {
 		accuGraph.setLength(0);
 	}
 	
-	public static void ignored(String word, String reason){
-		if(word.isEmpty()){return;}
+	public static void ignored(String unclean, String reason){
+		final StringBuilder clean = new StringBuilder();
+		for(char c : unclean.toCharArray()){
+			if(Character.isLetter(c)){	
+				clean.append(c);
+			}
+		}
+		if(clean.toString().isEmpty()){return;}
 		ignore++;
-		ignored.append(" - " + word + "\n");
+		ignored.append(" - " + clean.toString() + " " + reason + "\n");
 	}
 	
 	public static void enableEasyCompare(){
@@ -182,6 +190,7 @@ public class DataManager {
 				if(words.get(wordIndex).known){
 					knownMiss.append(tab + words.get(wordIndex).label + "\n"); 
 				}else{
+					unknown++;
 					unKnoMiss.append(tab + words.get(wordIndex).label + "\n"); 
 				}
 			}
@@ -281,12 +290,13 @@ public class DataManager {
 	
 	private static void createHeader(){
 		float bestPercent = (indexGraph[0]/words.size())*100;
-		Log.quick(" " + bestPercent + "% ] " + ignore + " ignored, ");
+		Log.quick(" " + bestPercent + "% ] " + ignore + " ignored, " + unknown + " unknown, ");
 		String header = "[AvgIndex: " + (words.size()/totalIndex) + 
 				" ]\n[Index-0: " + bestPercent +
 				"% ]\n[Index-1: " + (indexGraph[1]/words.size())*100 +
 				"% ]\n[Index-2: " + (indexGraph[2]/words.size())*100 +
 				"% ]\n[Ignored Words: " + ignore +  
+				" ]\n[Unknown Words: " + unknown +  
 				" ]\n[Processed Words: " + words.size() +
 				" ]\n[Noise LVL: " + NoiseMaker.TAP_NOISE + 
 				" ]\n[Error LVL: " + NoiseMaker.ERROR_LVL + 
@@ -308,11 +318,11 @@ public class DataManager {
 						"\n--==[ FAILED WORDS ]==--\n" +
 						"\n.:::KNOWN WORDS:::.\n" +
 						knownMiss.toString() +
-						"\n.::UNKNOWN WORDS::.\n" +
+						"\n.::" + unknown + " UNKNOWN WORDS::.\n" +
 						unKnoMiss.toString() +
 						"\n--==[ DATA ]==--\n" +
 						data.toString() + 
-						"\n--==[ IGNORED WORDS ]==--\n" +
+						"\n--==[ " + ignore + " IGNORED WORDS ]==--\n" +
 						ignored.toString() + 
 						"\n--==[ COMPARED WORDS ]==--\n" +
 						comparisons.toString());

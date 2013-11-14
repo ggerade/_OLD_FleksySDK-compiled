@@ -176,13 +176,13 @@ public class Definer {
 		return dirty;
 	}
 	
-	private final static String DBL_PUNCT = "DP";
-	private final static String HAS_DIGIT = "HD";
-	private final static String NON_CHRCT = "NC";
-	private final static String MLT_APOST = "MA";
-	private final static String BAD_DASHS = "BD";
-	private final static String NON_LETTR = "NL";
-	private final static String NON_EXIST = "NX";
+	private final static String DBL_PUNCT = "DBL_PUNCT";
+	private final static String HAS_DIGIT = "HAD_DIGIT";
+	private final static String NON_CHRCT = "UNKNOWN_";
+	private final static String MLT_APOST = "MLT_APOST";
+	private final static String BAD_DASHS = "BAD_DASHS";
+	private final static String NON_LETTR = "NON_LETTR";
+	private final static String NON_EXIST = "NOT_FOUND";
 	
 	private static Word checkWordQuality(String unclean){
 		
@@ -209,7 +209,7 @@ public class Definer {
 			if(Character.isLetter(c)){ 
 				if(keyboard.get(String.valueOf(c).toUpperCase()) == null){ //Non-Existant Character
 					Log.d(unclean + " : Non-existant Character : " + c);
-					DataManager.ignored(unclean,c + NON_CHRCT);
+					DataManager.ignored(unclean,NON_CHRCT+c);
 					return null; 
 				}
 				hasAlpha = true;
