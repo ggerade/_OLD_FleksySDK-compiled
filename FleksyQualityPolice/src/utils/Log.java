@@ -8,13 +8,24 @@ import engine.FleksyEngine;
 
 public class Log {
 	
+	public static boolean quickmode = false;
 	private final static String border = " :: ";
 	
 	private static boolean print(){
 		return (FleksyEngine.externalDebug || Debugger.internalDebug);
 	}
 	
+	public static void quick(String message) {
+		if(quickmode){
+			try {
+				new PrintStream(System.err, true, "UTF-8").print(message);
+			} catch (UnsupportedEncodingException x) {
+			}
+		}
+	}
+	
 	public static void out(String message) {
+		if(quickmode){ return; }
 		try {
 			new PrintStream(System.err, true, "UTF-8").print(message);
 		} catch (UnsupportedEncodingException x) {
@@ -22,6 +33,10 @@ public class Log {
 	}
 	
 	public static void err(String message){
+		if(quickmode){ 
+			quick("!"); 
+			return;
+		}
 		try {
 			new PrintStream(System.err, true, "UTF-8").print(message);
 		} catch (UnsupportedEncodingException x) {
@@ -29,6 +44,7 @@ public class Log {
 	}
 	
 	public static void d(String message){
+		if(quickmode){ return; }
 		if (print()) {
 			try {
 				new PrintStream(System.err, true, "UTF-8").print(message);

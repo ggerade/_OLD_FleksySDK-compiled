@@ -36,12 +36,13 @@ public class TestEngine {
 	private final static String TestPath = "Assets/";
 	private static ArrayList<TxtFile> tests = new ArrayList<TxtFile>();
 	
-	public TestEngine(int noise, int error, int shift, int max, boolean encore, String languageCode){
+	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String languageCode){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
+			Log.quick("[ " + languageCode + " ");
 			loadTests(TestPath + languageCode + "/");
 			if(failed){ return; }
 			reader = new Reader();
-			definer = new Definer(max);
+			definer = new Definer(max,skipUnknown);
 			converter = new Converter(320, 216, noise, error, shift);
 			runEngine();
 			if(encore){
@@ -126,15 +127,15 @@ public class TestEngine {
 	
 	public static void printOutText(){
     	StringBuilder fileName = new StringBuilder();
-    	fileName.append(System.currentTimeMillis()
+    	fileName.append(FleksTest.languageCode
+    			+ System.currentTimeMillis()
     			+ "v" + (int)(FleksTest.Version*10)
     			+ "o" + (FleksyEngine.online ? 1 : 0)
     			+ "d" + (FleksyEngine.externalDebug ? 1 : 0)
     			+ "n" + NoiseMaker.TAP_NOISE 
     			+ "e" + NoiseMaker.ERROR_LVL
     			+ "s" + NoiseMaker.SHIFT_LVL
-    			+ "g" + DataManager.getTargetGoal()
-    			+ FleksTest.languageCode);
+    			+ "g" + DataManager.getTargetGoal());
     	Log.out("Creating Output File...\n");
 		try{
 			PrintStream out = new PrintStream(new File("Output/" + fileName.toString() + ".txt"));

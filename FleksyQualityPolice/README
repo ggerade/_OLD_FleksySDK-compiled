@@ -10,7 +10,7 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V7.6::..                                                
+..::THE FLEKSY TESTER V7.7::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
@@ -28,6 +28,8 @@
 -o	: Disables printing output files
 -a	: Remove accents on final check before adding to dictionary
 -l	: Run with unknown words added to the dictionary
+-u	: Run with only words found in the dictionary
+-q	: Only a single line of will be shown in the terminal
 
 -ps	: Disables the use of platform suggestions *
 -ip : Run Offline/Run without a server connection

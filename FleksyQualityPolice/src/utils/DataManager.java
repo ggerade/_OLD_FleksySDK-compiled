@@ -89,10 +89,10 @@ public class DataManager {
 		accuGraph.setLength(0);
 	}
 	
-	public static void ignored(String i){
-		if(i.isEmpty()){return;}
+	public static void ignored(String word, String reason){
+		if(word.isEmpty()){return;}
 		ignore++;
-		ignored.append(" - " + i + "\n");
+		ignored.append(" - " + word + "\n");
 	}
 	
 	public static void enableEasyCompare(){
@@ -221,6 +221,7 @@ public class DataManager {
 		if(percent > min && words.size() > 100){
 			min ++;
 			if(percent > marker){
+				Log.quick("|");
 				Log.out("\n" + marker + "% Processed\n");
 				marker += 10;
 			}else{
@@ -279,8 +280,10 @@ public class DataManager {
 	}
 	
 	private static void createHeader(){
+		float bestPercent = (indexGraph[0]/words.size())*100;
+		Log.quick(" " + bestPercent + "% ]\n");
 		String header = "[AvgIndex: " + (words.size()/totalIndex) + 
-				" ]\n[Index-0: " + (indexGraph[0]/words.size())*100 +
+				" ]\n[Index-0: " + bestPercent +
 				"% ]\n[Index-1: " + (indexGraph[1]/words.size())*100 +
 				"% ]\n[Index-2: " + (indexGraph[2]/words.size())*100 +
 				"% ]\n[Ignored Words: " + ignore +  
@@ -360,16 +363,21 @@ public class DataManager {
 		}
 		if(secondCheck){
 			if(accentless){
-				Log.d("Accents Removed! Normalized characters");
-				word = Normalizer.normalize(word, Normalizer.Form.NFD);
-				word = word.replaceAll("[^\\p{ASCII}]", "");
-				out = Normalizer.normalize(out, Normalizer.Form.NFD);
-				out = out.replaceAll("[^\\p{ASCII}]", "");
+				word = normalizeWord(word);
+				out = normalizeWord(out);
 			}
 			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
 		}
 		lastComparison = "INPUT: " + out + " EXPECTED " + word;
 		return word.equals(out);
+	}
+	
+	private static String normalizeWord(String normalize){
+		normalize = Normalizer.normalize(normalize, Normalizer.Form.NFD);
+		normalize = normalize.replaceAll("\u0142", "l");	//Polish	ł	
+		normalize = normalize.replaceAll("\u0131", "i");	//Turkish	ı
+		normalize = normalize.replaceAll("[^\\p{ASCII}]", "");
+		return normalize;
 	}
 	
 	public static void incrementSuggestionIndex(){

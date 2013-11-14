@@ -23,9 +23,11 @@ public class Definer {
 	private static Key shift;
 	
 	private static int wordLimit = 0;
+	private static boolean unknown = false;
 	
-	public Definer(int maxWords){
+	public Definer(int maxWords,boolean skipUnknown){
 		wordLimit = maxWords-1;
+		unknown = skipUnknown;
 		TestEngine.action = "Creating Definer " + wordLimit;
 		keyboard = new HashMap<String, Key>();
 		try{
@@ -174,6 +176,14 @@ public class Definer {
 		return dirty;
 	}
 	
+	private final static String DBL_PUNCT = "DP";
+	private final static String HAS_DIGIT = "HD";
+	private final static String NON_CHRCT = "NC";
+	private final static String MLT_APOST = "MA";
+	private final static String BAD_DASHS = "BD";
+	private final static String NON_LETTR = "NL";
+	private final static String NON_EXIST = "NX";
+	
 	private static Word checkWordQuality(String unclean){
 		
 		StringBuilder clean = new StringBuilder();
@@ -187,19 +197,19 @@ public class Definer {
 		for(int i = 0; i < chars.length; i++){
 			if(hasPunct){ //Double Punctuation
 				Log.d(unclean + " : Double Punctuation");
-				DataManager.ignored(unclean);
+				DataManager.ignored(unclean,DBL_PUNCT);
 				return null; 
 			}
 			char c = chars[i];
 			if(Character.isDigit(c)){ //Contains Digit
 				Log.d(unclean + " : Contains Digit");
-				DataManager.ignored(unclean);
+				DataManager.ignored(unclean,HAS_DIGIT);
 				return null; 
 			}
 			if(Character.isLetter(c)){ 
 				if(keyboard.get(String.valueOf(c).toUpperCase()) == null){ //Non-Existant Character
 					Log.d(unclean + " : Non-existant Character : " + c);
-					DataManager.ignored(unclean);
+					DataManager.ignored(unclean,c + NON_CHRCT);
 					return null; 
 				}
 				hasAlpha = true;
@@ -209,7 +219,7 @@ public class Definer {
 				case '\'':
 					if(apostrophe){ //Multiple Apostrophes
 						Log.d(unclean + " : Multiple Apostrophes");
-						DataManager.ignored(unclean);
+						DataManager.ignored(unclean,MLT_APOST);
 						return null; 
 					}
 					apostrophe = true; 
@@ -218,7 +228,7 @@ public class Definer {
 				case '-':
 					if(dash || apostrophe){ //Unconventional Dash location
 						Log.d(unclean + " : Unconventional Dash location");
-						DataManager.ignored(unclean);
+						DataManager.ignored(unclean,BAD_DASHS);
 						return null; 
 					}
 					dash = true;
@@ -236,7 +246,12 @@ public class Definer {
 		
 		if(!hasAlpha){ //No Letters Found
 			Log.d(unclean + " : No Letters Found");
-			DataManager.ignored(unclean);
+			DataManager.ignored(unclean,NON_LETTR);
+			return null; 
+		}
+		if(unknown && !FleksyEngine.api.knowsWord(clean.toString())){ //Word Not Found
+			Log.d(unclean + " : Unknown Word");
+			DataManager.ignored(unclean,NON_EXIST);
 			return null; 
 		}
 		

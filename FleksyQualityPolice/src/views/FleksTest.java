@@ -19,13 +19,14 @@ public class FleksTest {
 	private static int w = 0;
 	
 	public static boolean print = true;
+	public static boolean learn = false;
 	private static boolean noisy = true;
 	private static boolean shift = true;
-	private static boolean errors = true;
 	private static boolean debug = false;
+	private static boolean errors = true;
 	private static boolean client = true;
-	public static boolean learn = false;
 	public static boolean tapper = false;
+	private static boolean unknown = false;
 	
 	private final static String N = "n";
 	private final static String E = "e";
@@ -33,17 +34,20 @@ public class FleksTest {
 	private final static String G = "g";
 	private final static String W = "w";
 	
-	private final static String GOAL = "-g";
-	private final static String DBUG = "-d";
-	private final static String IBUG = "-b";
-	private final static String XNOS = "-n";
-	private final static String XERR = "-e";
-	private final static String XSFT = "-s";
-	private final static String ANDY = "-a";
-	private final static String XOUT = "-o";
-	private final static String LERN = "-l";
-	private final static String TAPS = "-t";
-	private final static String ACNT = "-a";
+	private final static String GOAL = "-g"; //Set Goal
+	private final static String DBUG = "-d"; //Fleksy Debug
+	private final static String IBUG = "-b"; //Fleksy/QP Debug
+	private final static String XNOS = "-n"; //No Noise
+	private final static String XERR = "-e"; //No Erroneous taps
+	private final static String XSFT = "-s"; //No Shift
+	private final static String UNKN = "-u"; //Skip Unknown words
+	private final static String ANDY = "-a"; //Compare to Android
+	private final static String XOUT = "-o"; //Disable output file printing
+	private final static String LERN = "-l"; //Learn Unknown words beforehand
+	private final static String TAPS = "-t"; //Send taps to server
+	private final static String ACNT = "-a"; //Ignore accents on failed check
+	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
+	
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -61,7 +65,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.6f;
+	public final static float Version = 7.7f;
 	private static boolean debugging = false;
 	private final static String Alt = "7OMATO";
 	
@@ -70,12 +74,19 @@ public class FleksTest {
 	
 	public static void main(String[] args){
 		myArgs = args;
+		enableQuickMode();
 		initialOperations();
 		if(Debugger.proceeding(Debugger.Level.INITIALIZE)){
 			handleArguments(args);
 			buildEngine();
 		}
 		System.exit(TestEngine.acurracyPass ? 0 : FAIL);
+	}
+	
+	private static void enableQuickMode(){
+		for(String arg : myArgs){
+			if(arg.equals(QUIK)){ Log.quickmode = true; }
+		}
 	}
 	
 	private static void initialOperations(){
@@ -134,6 +145,8 @@ public class FleksTest {
 			}else if(a.equals(IBUG)){ 	FleksyEngine.externalDebug = true;
 			
 			}else if(a.equals(X_IP)){ 	client = false;
+			
+			}else if(a.equals(UNKN)){ 	unknown = false;
 			
 			}else if(a.equals(XNOS)){ 	noisy = false;
 			
@@ -205,7 +218,7 @@ public class FleksTest {
 		
 		handlePostLoadArguments();
 		Log.out("Running LanguageCode: " + languageCode + "\n");
-		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), languageCode);
+		mainEngine = new TestEngine(awaitNoise(), awaitError(), awaitShift(), w, (learn || tapper), unknown, languageCode);
 		FleksyEngine.closeClient();
 	}
 	
