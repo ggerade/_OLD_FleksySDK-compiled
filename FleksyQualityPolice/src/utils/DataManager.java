@@ -281,7 +281,7 @@ public class DataManager {
 	
 	private static void createHeader(){
 		float bestPercent = (indexGraph[0]/words.size())*100;
-		Log.quick(" " + bestPercent + "% ]\n");
+		Log.quick(" " + bestPercent + "% ] " + ignore + " ignored, ");
 		String header = "[AvgIndex: " + (words.size()/totalIndex) + 
 				" ]\n[Index-0: " + bestPercent +
 				"% ]\n[Index-1: " + (indexGraph[1]/words.size())*100 +
@@ -387,6 +387,7 @@ public class DataManager {
 	private static boolean checkIndexRange(int check){
 		if(check >= words.size()){
 			Log.err("Word Index Out Of Range: INDX: " + wordIndex + " MAX: " + words.size() + "\n");
+			Log.quick(" I ");
 			return true;
 		}
 		return false;
@@ -435,6 +436,7 @@ public class DataManager {
 		}catch(Exception e){
 			e.getLocalizedMessage();
 			Log.err(" Printing what we can.");
+			Log.quick("\nPRINT FAIL\n");
 		}
 		return (output.toString());
 	}
@@ -462,6 +464,7 @@ public class DataManager {
 			return (FleksyEngine.getLatestPunctuation().startsWith(prevWord.substring(prevWord.length()-1)));
 		}else{
 			Log.err("Unnecessary Punctuation Check! What are you doing Grey? At: " + words.get(wordIndex-1).literal + "\n");
+			Log.quick("\nPUNCT FAIL\n");
 			return false;
 		}
 	}
@@ -475,6 +478,7 @@ public class DataManager {
 			return prevWord.substring(prevWord.length()-1);
 		}else{
 			Log.err("Unnecessary Punctuation Get! Way to go Grey. At: " + words.get(wordIndex-1).literal + "\n");
+			Log.quick("\nEPIC PUNCT FAIL\n");
 			return null;
 		}
 	}

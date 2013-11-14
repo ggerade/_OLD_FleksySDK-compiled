@@ -38,17 +38,16 @@ public class TestEngine {
 	
 	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String languageCode){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
-			Log.quick("[ " + languageCode + " ");
 			loadTests(TestPath + languageCode + "/");
 			if(failed){ return; }
 			reader = new Reader();
 			definer = new Definer(max,skipUnknown);
 			converter = new Converter(320, 216, noise, error, shift);
-			runEngine();
+			runEngine(languageCode);
 			if(encore){
 				if(FleksTest.learn){ DataManager.enableLearning(); }
 				if(FleksTest.tapper){ FleksyEngine.sendingTaps = true; }
-				runEngine();
+				runEngine(languageCode);
 			}
 		}
 	}
@@ -83,19 +82,21 @@ public class TestEngine {
 		
 	}
 	
-	public static void runEngine() {
+	public static void runEngine(String lang) {
 		if(Debugger.proceeding(Debugger.Level.TESTING)){
 			if(tests.size() < 1){
 				Log.err("There are no tests to run!");
+				Log.quick("NO TESTS\n");
 				return;
 			}
-			runTests();
+			runTests(lang);
 		}
 		if(!failed){ success = true; }
 	}
 	
-	private static void runTests(){
+	private static void runTests(String language){
 		for(TxtFile test : tests){
+			Log.quick("[ " + language + " ");
 			currentFile = test.fileName;
 			Log.out("Running Test: " + currentFile + "\n");
 			Log.out("N:" + NoiseMaker.TAP_NOISE +  " E:" + NoiseMaker.ERROR_LVL + " S:" + NoiseMaker.SHIFT_LVL);
@@ -115,6 +116,7 @@ public class TestEngine {
 			if(Debugger.proceeding(Debugger.Level.PRINTING) && FleksTest.print){
 				printOutText();
 			}
+			Log.quick(test.fileName + "\n");
 			DataManager.refresh();
 		}
 	}
@@ -122,6 +124,7 @@ public class TestEngine {
 	public static void displayFailedMessage(){
 		Log.err("Testing failed in the " + state + " State while performing: " + action 
 				+ "\nConverter Details: " + DataManager.getFailedDetails() + "\n");
+		Log.quick("\nTEST FAILED\n");
 		failed = true;
 	}
 	

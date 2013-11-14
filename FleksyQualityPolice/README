@@ -10,27 +10,28 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V7.7::..                                                
+..::THE FLEKSY TESTER V7.9::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
 
 	java -jar FleksyTester.jar [#] [x# -x]
 
--n	: Run without noise
--e	: Run without erroneous taps
--s	: Run without shifting
--g	: Allows setting the desired accuracy goal
--a	: Enables Android comparison *
--d	: Enables debug mode
--b	: Enables the testing environment's internal debug mode
--t	: Enables real-time taps to be sent to the server **
--o	: Disables printing output files
 -a	: Remove accents on final check before adding to dictionary
+-b	: Enables the testing environment's internal debug mode
+-d	: Enables debug mode
+-e	: Run without erroneous taps
+-g	: Allows setting the desired accuracy goal
 -l	: Run with unknown words added to the dictionary
--u	: Run with only words found in the dictionary
+-n	: Run without noise
+-o	: Disables printing output files
 -q	: Only a single line of will be shown in the terminal
+-s	: Run without shifting
+-t	: Enables real-time taps to be sent to the server **
+-u	: Run with only words found in the dictionary
 
+
+--a	: Enables Android comparison *
 -ps	: Disables the use of platform suggestions *
 -ip : Run Offline/Run without a server connection
 -ll	: Run once, then again with unknown words included in dictionary

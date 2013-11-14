@@ -41,13 +41,13 @@ public class FleksTest {
 	private final static String XERR = "-e"; //No Erroneous taps
 	private final static String XSFT = "-s"; //No Shift
 	private final static String UNKN = "-u"; //Skip Unknown words
-	private final static String ANDY = "-a"; //Compare to Android
 	private final static String XOUT = "-o"; //Disable output file printing
 	private final static String LERN = "-l"; //Learn Unknown words beforehand
 	private final static String TAPS = "-t"; //Send taps to server
 	private final static String ACNT = "-a"; //Ignore accents on failed check
 	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
 	
+	private final static String ANDY = "--a"; //Compare to Android
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -65,7 +65,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 7.7f;
+	public final static float Version = 7.9f;
 	private static boolean debugging = false;
 	private final static String Alt = "7OMATO";
 	
@@ -97,6 +97,7 @@ public class FleksTest {
 			public void run(){
 				if(!TestEngine.success){
 					Log.err("NO SUCCESS HERE : FAILED\n");
+					Log.quick("EPIC FAIL\n");
 					TestEngine.displayFailedMessage();
 				}
 			}
@@ -213,6 +214,7 @@ public class FleksTest {
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.err("Loading Engine Failed! Testing Failed! Exiting Environment! Good Day Sir!\n");
+			Log.quick("LOAD ENGINE FAIL\n");
 			return;
 		}
 		

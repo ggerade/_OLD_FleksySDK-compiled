@@ -33,10 +33,7 @@ public class Log {
 	}
 	
 	public static void err(String message){
-		if(quickmode){ 
-			quick("!"); 
-			return;
-		}
+		if(quickmode){ return; }
 		try {
 			new PrintStream(System.err, true, "UTF-8").print(message);
 		} catch (UnsupportedEncodingException x) {

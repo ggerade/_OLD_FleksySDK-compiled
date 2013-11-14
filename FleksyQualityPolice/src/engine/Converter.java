@@ -113,6 +113,7 @@ public class Converter {
 		} catch (BooleanException e) {
 			Log.err("EndofSuggestions TRUE before : " + DataManager.getComparisonMade() 
 					+ " Index: " + DataManager.getWordIndex() + "  Local: " + e.getLocalizedMessage() + "\n");
+			Log.quick("\n" + DataManager.getComparisonMade() + "\n");
 			FleksyEngine.endOfSuggestions = false;
 			DataManager.incrementSuggestionIndex();
 		} finally {
@@ -195,6 +196,7 @@ public class Converter {
 		if(!DataManager.isCurrentSuggestionCorrect(true)){ //CHECK IF FOUND 2ND TIME THROUGH
 			output.add(makeSwipeUp(time, indx)); //SWIPE UP
 			if(FleksyEngine.endOfSuggestions){
+				Log.quick("\n" + DataManager.getComparisonMade() + "\n");
 				Log.err("EndofSuggestions TRUE on SwipeUP : " + DataManager.getComparisonMade() 
 						+ " Index: " + DataManager.getWordIndex() + " Resetting to FALSE\n");
 				FleksyEngine.endOfSuggestions = false;
