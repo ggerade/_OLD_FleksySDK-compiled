@@ -2,28 +2,32 @@
 
 
 if [[ $# -lt 1 ]]; then
-#echo "Usage: $0 PATH_TO_ASSETS"
-echo ""
+echo "Usage: $0 PATH_TO_ASSETS"
 exit 1
 fi
-
 
 for dir in $1/* ; do
 if [[ -d "$dir" && ! -L "$dir" ]]; then
 
-#echo "Directory: $dir"
+  LANG_CODE="$(basename $dir)"
+
   FILES=$(find $dir -type f)
 
-  SUBDIR="$(basename $dir)"
-#echo  "Running tests on files from: $SUBDIR"
-  if [[ $# -gt 1 ]];
-  then
-    java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q "$@" -loc:$SUBDIR
-  else
-    java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q s10 n20 -loc:$SUBDIR
- fi
-#echo ""
+  for file in $FILES;
+    do
+      if [ -f $file ];
+      then
+        FILE="$(basename $file)" 
+          #echo "LangCode: $LANG_CODE, File: $FILE"
+          if [[ $# -gt 1 ]];
+          then
+            java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q "$@" -loc:$LANG_CODE -f:$FILE
+          else
+            java -Xmx2048M -jar FleksyTester.jar -ip -e -a -q s10 n20 -loc:$LANG_CODE -f:$FILE
+          fi
+      fi
+    done
  fi
  done
-#echo ""
+
 echo "Ding! Finished running all tests!"

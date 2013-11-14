@@ -140,8 +140,8 @@ public class FleksyEngine {
 	        String jetFilePath = basePath + "/FleksySDKResources/encrypted/" + resourceArchiveFile;
 	        
 	        if(!new File(jetFilePath).exists()) { 
-	        	System.err.println("Can't find jet file for: "  + languageCode + " jetFilePath: " + jetFilePath);
-	        	throw new Exception("Didn't find jet file");
+	        	//Log.err("Can't find jet file for: "  + languageCode + " jetFilePath: " + jetFilePath);
+	        	throw new Error("Didn't find jet file for "  + languageCode);
 	        }
 	        
 //	        File file = new File(basePath + "/FleksySDKResources/" + FileUtils.getResourceFileName("English")); //NON-FUNCTIONING CODE, NEEDS TO BE REBUILT
