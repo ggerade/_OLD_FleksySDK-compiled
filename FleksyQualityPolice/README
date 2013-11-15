@@ -10,7 +10,7 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V8.3::..                                                
+..::THE FLEKSY TESTER V8.4::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
@@ -39,7 +39,7 @@
 
 -fol:XXXXX	: Enter a specific folder name ***
 -loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
--fil:X.txt	: Enter a specific file name to use (REQUIRES -loc:xx-XX)
+-fil:X.txt	: Enter a specific file name path
 
 #	: IP address of server to use
 n#	: Sets noise to # on execution

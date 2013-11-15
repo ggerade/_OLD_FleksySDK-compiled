@@ -37,7 +37,7 @@ public class TestEngine {
 	
 	public TestEngine(int noise, int error, int shift, int max, boolean encore, boolean skipUnknown, String folderName, String languageCode, String fileName){
 		if(Debugger.proceeding(Debugger.Level.LOADING)){
-			if(!oneFile(folderName + "/" + languageCode + "/", fileName)){
+			if(!oneFile(fileName)){
 				loadTests(folderName + "/" + languageCode + "/");
 			}
 			if(failed){ return; }
@@ -156,10 +156,11 @@ public class TestEngine {
 		}
 	}
 	
-	private boolean oneFile(String path, String fileName){
-		File file = new File(path + fileName);
+	private boolean oneFile(String path){
+		File file = new File(path);
 		if(file.isFile()){
-			tests.add(new TxtFile(path, fileName));
+			path = path.replaceAll(file.getName(), "");
+			tests.add(new TxtFile(path, file.getName()));
 			return true;
 		}else{
 			return false;

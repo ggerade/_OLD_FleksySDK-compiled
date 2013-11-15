@@ -62,14 +62,14 @@ public class FleksTest {
 	private final static String FILE = "-fil:"; //Enter file name
 	private final static String LANG = "-loc:"; //Enter lang name
 	
-	private static String fileName = "";
-	private static String folderName = "";
+	private static String fileName = null;
+	private static String folderName = null;
 	public static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.3f;
+	public final static float Version = 8.4f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
