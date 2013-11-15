@@ -6,6 +6,7 @@ else
     export FQP_ARGS=" -e -q -fol:AssetsWiki s10 n20 w2000"
 fi
 
-make -j`sysctl -n hw.ncpu` -e -f quality.mk all
+make -j`sysctl -n hw.ncpu` -e -k -f quality.mk all
 
+echo ""
 echo "Ding! Finished running all tests!"
