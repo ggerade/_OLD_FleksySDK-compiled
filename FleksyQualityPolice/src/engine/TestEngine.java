@@ -87,7 +87,6 @@ public class TestEngine {
 		if(Debugger.proceeding(Debugger.Level.TESTING)){
 			if(tests.size() < 1){
 				Log.err("There are no tests to run!");
-				Log.quick("NO TESTS\n");
 				return;
 			}
 			runTests(lang);
@@ -173,7 +172,7 @@ public class TestEngine {
 		if(listOfFiles == null){
 			failed = true;
 			Log.e(TAG, path + " No Files Detected! Closing Tester.");
-			Log.quick("FAILED TO FIND FILES\n");
+			Log.quick("FAILED TO FIND FILES " + FleksTest.languageCode + "\n");
 			return;
 		}
 	    for (File file : listOfFiles) {
