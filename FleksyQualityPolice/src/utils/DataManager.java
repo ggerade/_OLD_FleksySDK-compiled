@@ -1,6 +1,5 @@
 package utils;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +32,6 @@ public class DataManager {
 	private static boolean noSugs = false;
 	private static boolean ezComp = false;
 	private static boolean learning = false;
-	private static boolean accentless = false;
 	private static boolean dontAdd = false;
 	private static String enteredText = "";
 	private static float[] andyGraph = new float[30];
@@ -110,10 +108,6 @@ public class DataManager {
 	
 	public static void enableEasyCompare(){
 		ezComp = true;
-	}
-	
-	public static void noAccentsOnSecondCompare(){
-		accentless = true;
 	}
 	
 	public static void enableLearning(){
@@ -382,23 +376,9 @@ public class DataManager {
 			word = word.toLowerCase();
 			out = out.toLowerCase();
 		}
-		if(secondCheck){
-			if(accentless){
-				word = normalizeWord(word);
-				out = normalizeWord(out);
-			}
-			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
-		}
-		lastComparison = "INPUT: " + out + " EXPECTED " + word;
+		if(secondCheck){ Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err); }
+		lastComparison = "INPUT: " + out + " XPECT: " + word;
 		return word.equals(out) || (secondCheck && dontAdd);
-	}
-	
-	private static String normalizeWord(String normalize){
-		normalize = Normalizer.normalize(normalize, Normalizer.Form.NFD);
-		normalize = normalize.replaceAll("\u0142", "l");	//Polish	ł	
-		normalize = normalize.replaceAll("\u0131", "i");	//Turkish	ı
-		normalize = normalize.replaceAll("[^\\p{ASCII}]", "");
-		return normalize;
 	}
 	
 	public static void incrementSuggestionIndex(){

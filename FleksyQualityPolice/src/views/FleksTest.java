@@ -34,6 +34,7 @@ public class FleksTest {
 	private final static String G = "g";
 	private final static String W = "w";
 	
+	private final static String ANDY = "-a"; //Compare to Android
 	private final static String GOAL = "-g"; //Set Goal
 	private final static String DBUG = "-d"; //Fleksy Debug
 	private final static String IBUG = "-b"; //Fleksy/QP Debug
@@ -44,11 +45,9 @@ public class FleksTest {
 	private final static String XOUT = "-o"; //Disable output file printing
 	private final static String LERN = "-l"; //Learn Unknown words beforehand
 	private final static String TAPS = "-t"; //Send taps to server
-	private final static String ACNT = "-a"; //Ignore accents on failed check
 	private final static String QUIK = "-q"; //Quick Print/Reduce print outs
 	private final static String XADD = "-x"; //Words are not added to Dictionary
 	
-	private final static String ANDY = "-aa"; //Compare to Android
 	private final static String TAP2 = "-tt";
 	private final static String XSUG = "-ps";
 	private final static String X_IP = "-ip";
@@ -70,7 +69,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.2f;
+	public final static float Version = 8.3f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -161,8 +160,6 @@ public class FleksTest {
 			}else if(a.equals(XERR)){ 	errors = false;
 			
 			}else if(a.equals(XSFT)){ 	shift = false;
-			
-			}else if(a.equals(ACNT)){	DataManager.noAccentsOnSecondCompare();
 			
 			}else if(a.equals(EZCP)){ 	DataManager.enableEasyCompare();
 			

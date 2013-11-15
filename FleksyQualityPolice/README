@@ -10,14 +10,14 @@
                                                               /__ //
                                                               |__|/
 
-..::THE FLEKSY TESTER V8.2::..                                                
+..::THE FLEKSY TESTER V8.3::..                                                
 	...Runs On Java 1.6...
 
 .:HOW TO RUN:.
 
-	java -jar FleksyTester.jar [#] [x# -x]
+	java -jar FleksyTester.jar [#] [x# -x -x:foobar]
 
--a	: Remove accents on final check before adding to dictionary
+-a	: Enables Android comparison *
 -b	: Enables the testing environment's internal debug mode
 -d	: Enables debug mode
 -e	: Run without erroneous taps
@@ -31,8 +31,6 @@
 -u	: Run with only words found in the dictionary
 -x	: Will not add words to dictionary
 
-
--aa	: Enables Android comparison *
 -ps	: Disables the use of platform suggestions *
 -ip : Run Offline/Run without a server connection
 -ll	: Run once, then again with unknown words included in dictionary
