@@ -24,7 +24,7 @@ public class FleksTest {
 	private static boolean shift = true;
 	private static boolean debug = false;
 	private static boolean errors = true;
-	private static boolean client = true;
+	private static boolean client = false;
 	public static boolean tapper = false;
 	private static boolean unknown = false;
 	
@@ -62,14 +62,14 @@ public class FleksTest {
 	private final static String FILE = "-fil:"; //Enter file name
 	private final static String LANG = "-loc:"; //Enter lang name
 	
-	private static String fileName = null;
-	private static String folderName = null;
+	private static String fileName = "";
+	private static String folderName = "";
 	public static String languageCode = "en-US";
 	
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.4f;
+	public final static float Version = 8.5f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -137,10 +137,7 @@ public class FleksTest {
 	}
 	
 	private static void handleArguments(String[] args){
-		if(args.length < 1){ 
-			awaitIPnum(null);
-			return; 
-		}
+
 		for(String arg : args){
 			
 			String a = arg.toLowerCase();
@@ -151,7 +148,7 @@ public class FleksTest {
 			
 			}else if(a.equals(IBUG)){ 	FleksyEngine.externalDebug = true;
 			
-			}else if(a.equals(X_IP)){ 	client = false;
+			}else if(a.equals(X_IP)){ 	client = true;
 			
 			}else if(a.equals(UNKN)){ 	unknown = false;
 			
