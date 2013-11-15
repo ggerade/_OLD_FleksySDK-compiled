@@ -32,6 +32,8 @@ public:
   FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
   
+  bool areSwipesInverted;
+  
   // set this to have preprocessed files generated. Do not add "/" in the end.
   bool isEngineLoaded;
   void setExternalKeyboardSize(FLPoint xy);

@@ -251,6 +251,11 @@ public:
    */
   void setBlindMode(bool enabled);
   
+  /*
+   * SU becomes SD and SD becomes SU.
+   */
+  void setInvertSwipeUpAndDown(bool isInverted);
+  
   FLUnicodeString getVersion();
   
   //private:

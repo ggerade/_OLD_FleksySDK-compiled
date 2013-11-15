@@ -115,6 +115,7 @@ private:
   bool voiceFeedback;
   bool startedTypingSession;
   bool inBatchEdit;
+
   CursorChangeEvent cursorChangeEvent;
   
   FLCapitalizationMode capitalizationMode;
