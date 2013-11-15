@@ -125,7 +125,6 @@ public class TestEngine {
 	public static void displayFailedMessage(){
 		Log.err("Testing failed in the " + state + " State while performing: " + action 
 				+ "\nConverter Details: " + DataManager.getFailedDetails() + "\n");
-		Log.quick("\nTEST FAILED\n");
 		failed = true;
 	}
 	
@@ -174,6 +173,7 @@ public class TestEngine {
 		if(listOfFiles == null){
 			failed = true;
 			Log.e(TAG, path + " No Files Detected! Closing Tester.");
+			Log.quick("FAILED TO FIND FILES\n");
 			return;
 		}
 	    for (File file : listOfFiles) {

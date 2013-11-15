@@ -24,8 +24,8 @@ public class FleksTest {
 	private static boolean shift = true;
 	private static boolean debug = false;
 	private static boolean errors = true;
-	private static boolean client = false;
 	public static boolean tapper = false;
+	private static boolean client = false;
 	private static boolean unknown = false;
 	
 	private final static String N = "n";
@@ -69,7 +69,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.5f;
+	public final static float Version = 8.6f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -101,7 +101,6 @@ public class FleksTest {
 			public void run(){
 				if(!TestEngine.success){
 					Log.err("NO SUCCESS HERE : FAILED\n");
-					Log.quick("EPIC FAIL\n");
 					TestEngine.displayFailedMessage();
 				}
 			}
