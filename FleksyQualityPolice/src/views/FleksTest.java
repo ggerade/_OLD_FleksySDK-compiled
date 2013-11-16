@@ -69,7 +69,7 @@ public class FleksTest {
 	private static Scanner input;
 	private final static int FAIL = 404;
 	protected static TestEngine mainEngine;
-	public final static float Version = 8.6f;
+	public final static float Version = 8.7f;
 	private static boolean debugging = false;
 	private final static String Alt = "8LUEBERRY";
 	
@@ -86,7 +86,7 @@ public class FleksTest {
 		}
 		System.exit(TestEngine.acurracyPass ? 0 : FAIL);
 	}
-	
+
 	private static void enableQuickMode(){
 		for(String arg : myArgs){
 			if(arg.equals(QUIK)){ Log.quickmode = true; }

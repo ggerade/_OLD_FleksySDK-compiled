@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.syntellia.fleksy.api.FLEnums;
+
 import engine.FleksyEngine;
 import engine.NoiseMaker;
 import engine.TestEngine;
@@ -352,7 +354,10 @@ public class DataManager {
 	
 	public static void addWordToDictionary(){
 		if(!dontAdd){
-			FleksyEngine.api.addWordToDictionary(words.get(wordIndex).label);
+			String addMe = words.get(wordIndex).label;
+			Log.d("Added to dictionary " + addMe + " Success? " 
+			+ (FleksyEngine.api.addWordToDictionary(addMe) == 
+			FLEnums.FLDictionaryChangeResult.FLDictionaryChangeResult_SUCCESS.ordinal()) + "\n");
 		}
 	}
 	
