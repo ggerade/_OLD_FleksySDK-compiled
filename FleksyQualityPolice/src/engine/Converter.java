@@ -203,7 +203,7 @@ public class Converter {
 	}
 	
 	private ArrayList<Touch> retypeAccurately(ArrayList<Touch> output, long time, int indx){
-		for(Key key : Definer.redefineText(DataManager.getCleanedCurrentWord(), true, DataManager.dontShiftFirstLetter())){ //RETYPE WORD ACCURATELY
+		for(Key key : Definer.redefineText(DataManager.getCleanedCurrentWord(), true, DataManager.isPreviousCapper())){ //RETYPE WORD ACCURATELY
 			if(key.symbol){
 				FleksyEngine.recreateSwipe("#T");
 				FleksyEngine.recreateSwipe("#S");

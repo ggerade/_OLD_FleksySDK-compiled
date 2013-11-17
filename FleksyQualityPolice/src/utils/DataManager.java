@@ -354,7 +354,13 @@ public class DataManager {
 	
 	public static void addWordToDictionary(){
 		if(!dontAdd){
+			boolean lowerCase = isPreviousCapper();
 			String addMe = words.get(wordIndex).label;
+			if (lowerCase) {
+				char c[] = addMe.toCharArray();
+				c[0] = Character.toLowerCase(c[0]);
+				addMe = new String(c);
+			}
 			Log.d("Added to dictionary " + addMe + " Success? " 
 			+ (FleksyEngine.api.addWordToDictionary(addMe) == 
 			FLEnums.FLDictionaryChangeResult.FLDictionaryChangeResult_SUCCESS.ordinal()) + "\n");
@@ -453,7 +459,7 @@ public class DataManager {
 		}
 	}
 
-	public static boolean dontShiftFirstLetter() {
+	public static boolean isPreviousCapper() {
 		if( wordIndex == 0 || checkIndexRange(wordIndex-1)){
 			return false;
 		}
