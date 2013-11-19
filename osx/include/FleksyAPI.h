@@ -183,6 +183,8 @@ public:
    */
   void toggleShift();
   
+  bool isShifted();
+  
   /*
    * New
    * If 'space breaks' is enabled, then if the user misses the spacebar and types C,V,B, instead, then Fleksy might decide when appropriate
@@ -211,6 +213,8 @@ public:
    * Default: FLFieldAction_NEW_LINE
    */
   void setFieldAction(FLFieldAction fieldAction);
+  
+  FLFieldAction getFieldAction();
   
   /*
    * New

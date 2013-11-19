@@ -55,6 +55,8 @@ public:
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
   void setTextFieldType(FLTextFieldType type);
   void longPress(FLLongPressType type, float x, float y);
+  bool isShifted();
+  FLFieldAction getCurrentFieldAction();
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   FLUnicodeString getVersionNumber(); //Version number of TC
