@@ -31,7 +31,7 @@ public:
   ~FLTypingController();
   
   //FleksyAPI calls
-  void sendPoint(float x, float y, long long time, int offset);
+  void sendPoint(float x, float y, long long time, int offset, FLUnicodeString character);
   void backAndForthSwipe(float length = 0);
 	void swipeRight(float length = 0);
 	void swipeLeft(float length = 0);

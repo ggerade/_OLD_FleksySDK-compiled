@@ -56,8 +56,10 @@ public:
    * Takes x,y coordinates of the tap and optionally the time when tap occurred. Coordinates should be within the range set by
    * |setPlatformKeyboardSize|. This will result in a call to your FleksyListenerInterface onSetComposingText() with the character
    * that is closest to the x,y coordinates.
+   *
+   * TODO:Add comments for character
    */
-  void sendTap(float x, float y, long long time = 0, int offset = 0);
+  void sendTap(float x, float y, long long time = 0, int offset = 0, FLUnicodeString character = "");
   
   /*
    * When length = 0, it means that the space bar was pressed, else it's considered as a Swipe Right
