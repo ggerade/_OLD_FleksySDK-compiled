@@ -31,6 +31,7 @@ private:
   float distanceBetweenLetters(FLChar c1, FLChar c2, FLKeyboardID keyboardID);
   float OptimalStringAlignmentDistance(const FLString* _str1, const FLString* _str2);
   void ensureRawWordExists(FLInternalSuggestionsContainer* pwr, FLRequest* request, const FLWord* inputWord);
+  void adjustPointsForBlind(FLRequest* request);
   
 public:
   SystemsIntegrator();
