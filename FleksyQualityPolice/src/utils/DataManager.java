@@ -2,10 +2,10 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
 import com.syntellia.fleksy.api.FLEnums;
-
 import engine.FleksyEngine;
 import engine.NoiseMaker;
 import engine.TestEngine;
@@ -50,6 +50,7 @@ public class DataManager {
 	private static StringBuilder comparisons = new StringBuilder();
 	private static List<String> suggestions = new ArrayList<String>();
 	private static List<String> androidSugs = new ArrayList<String>();
+	private static HashMap<String, Pair> badWords = new HashMap<String, Pair>();
 	
 	public static void refresh(){
 		refreshObjects();
@@ -78,6 +79,7 @@ public class DataManager {
 		unKnoMiss.setLength(0);
 		knownMiss.setLength(0);
 		comparisons.setLength(0);
+		badWords.clear();
 	}
 	
 	private static void refreshGraphs(){
@@ -178,6 +180,7 @@ public class DataManager {
 	}
 	
 	public static void prepareNextWord(){
+		String currword = "";
 		if(index > 0 && wordIndex < words.size()){
 			String old = "";
 			String prev = "";
@@ -196,7 +199,8 @@ public class DataManager {
 				}
 			}
 			if(failed && suggestions.size() < 2){data.append("############################EPIC#FAIL###############################\n");}
-			data.append("Current Word '" + words.get(wordIndex).label + "' ----------: WORD# " + (wordIndex+1) + " :-----------\n");
+			currword = words.get(wordIndex).label;
+			data.append("Current Word '" + currword + "' ----------: WORD# " + (wordIndex+1) + " :-----------\n");
 			data.append("Context: '" + old + " " + prev + " " + words.get(wordIndex).literal + "'\n");
 			data.append("Entered Text: '" + enteredText + "' \nErroneous Taps: " + words.get(wordIndex).error + "\n.:Suggestions:.\n");
 			if(androidMode){
@@ -223,7 +227,7 @@ public class DataManager {
 		checkIndexRange(wordIndex);
 		wordIndex++;
 		printLoading();
-		incrementAverageIndex();
+		incrementAverageIndex(currword);
 	}
 	
 	private static void printLoading(){
@@ -240,7 +244,7 @@ public class DataManager {
 		}
 	}
 	
-	private static void incrementAverageIndex(){
+	private static void incrementAverageIndex(String currword){
 		float increment = 0;
 		if(!failed){
 			if(index < LIMIT){
@@ -259,6 +263,13 @@ public class DataManager {
 					data.append("ANDROID_INDEX: MAXED OUT\n");
 				}
 			}
+			if(badWords.containsKey(currword)){
+				Pair update = badWords.remove(currword);
+				update.increment();
+				badWords.put(currword, update);
+			}else{ 
+				badWords.put(currword, new Pair(1,currword));
+			}
 			if(failed){
 				indexGraph[indexGraph.length-1]++;
 				data.append("FLEKSY_INDEX: MAXED OUT\n");
@@ -273,6 +284,27 @@ public class DataManager {
 		aFound = false;
 		failed = false;
 		suggestions.clear();
+	}
+	
+	private static class Pair implements Comparable<Pair>{
+		
+		private int count;
+		private String word;
+		
+		public Pair(int c, String w){
+			count = c;
+			word = w;
+		}
+
+		public void increment(){
+			count++;
+		}
+
+		@Override
+		public int compareTo(Pair o) {
+			return count < o.count ? 1 : count > o.count ? -1 : 0;
+		}
+
 	}
 	
 	private static String makeBar(String index, float amount){
@@ -326,7 +358,22 @@ public class DataManager {
 						"\n--==[ " + ignore + " IGNORED WORDS ]==--\n" +
 						ignored.toString() + 
 						"\n--==[ COMPARED WORDS ]==--\n" +
-						comparisons.toString());
+						comparisons.toString() +
+						"\n--==[ MISSED COUNT ]==--\n" +
+						printBadWords().toString());
+	}
+	
+	private static String printBadWords(){
+		StringBuilder builder = new StringBuilder();
+		List<Pair> words = new ArrayList<Pair>();
+		for(Pair pair : badWords.values()){
+			words.add(pair);
+		}
+		Collections.sort(words);
+		for(Pair word : words){
+			builder.append(word.word + " : " + word.count + "\n");
+		}
+		return builder.toString();
 	}
 	
 	private static void makeGraphs(){
