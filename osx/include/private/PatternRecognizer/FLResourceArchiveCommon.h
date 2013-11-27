@@ -17,6 +17,8 @@
 #define FL_SDKA_MAGIC_BYTE_2 (0x73u)
 #define FL_SDKA_MAGIC_BYTE_3 (0x61u)
 
+#define FL_SDKA_MAJOR_VERSION 2
+
 /*
  Header: 16 bytes
  

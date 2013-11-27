@@ -74,7 +74,6 @@ public:
   void setUserCursor(int userCursor, const std::string &caller);
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
-  void previousWordChanged(std::string from, int textBlockInex = -1);
   void parseExistingText(const FLUnicodeString &existingText = FLUnicodeString((const unsigned char *)""), int cursorPosition = -1, bool deletedSelectedText = false);
   //EOF crazyChecker functions
   
@@ -127,7 +126,8 @@ private:
   FLTextFieldType textFieldType;
   FLLongPressType longPressType;
   
-  FLUnicodeString lastDeletedWord;
+  FLUnicodeString lastDeletedRawText;
+  FLUnicodeString lastDeletedCorrectedWord;
   
   FLUnicodeString gameText;
   double lastTapTime;
