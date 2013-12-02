@@ -266,10 +266,14 @@ public class DataManager {
 			if(badWords.containsKey(currword)){
 				Pair update = badWords.remove(currword);
 				update.increment();
+				update.addConflict(currConflict);
 				badWords.put(currword, update);
-			}else{ 
-				badWords.put(currword, new Pair(1,currword));
+			}else{
+				Pair baddie = new Pair(1,currword);
+				baddie.addConflict(currConflict);
+				badWords.put(currword,baddie);
 			}
+			currConflict = null;
 			if(failed){
 				indexGraph[indexGraph.length-1]++;
 				data.append("FLEKSY_INDEX: MAXED OUT\n");
@@ -290,12 +294,40 @@ public class DataManager {
 		
 		private int count;
 		private String word;
+		private HashMap<String, Pair> conflicts;
 		
 		public Pair(int c, String w){
 			count = c;
 			word = w;
+			conflicts = new HashMap<String, Pair>();
 		}
 
+		public void addConflict(String con){
+			if (conflicts.containsKey(con)) {
+				Pair update = conflicts.remove(con);
+				update.increment();
+				conflicts.put(con, update);
+			} else {
+				conflicts.put(con, new Pair(1, con));
+			}
+		}
+		
+		public String sortConflicts(){
+			StringBuilder build = new StringBuilder();
+			ArrayList<Pair> sorted = new ArrayList<Pair>();
+			for(Pair con : conflicts.values()){
+				sorted.add(con);
+			}
+			Collections.sort(sorted);
+			build.append(" < ");
+			for(int i = 0; i < sorted.size() && i < 5; i++){
+				Pair p = sorted.get(i);
+				build.append(p.word + ":" + p.count + " ");
+			}
+			build.append(">");
+			return build.toString();
+		}
+		
 		public void increment(){
 			count++;
 		}
@@ -371,7 +403,7 @@ public class DataManager {
 		}
 		Collections.sort(words);
 		for(Pair word : words){
-			builder.append(word.word + " : " + word.count + "\n");
+			builder.append(word.word + " : " + word.count + word.sortConflicts() + "\n");
 		}
 		return builder.toString();
 	}
@@ -414,14 +446,12 @@ public class DataManager {
 		}
 	}
 	
-	public static boolean isCurrentSuggestionCorrect(boolean secondCheck){
-		if(checkIndexRange(wordIndex)){
+	private static String currConflict;
+	
+	public static boolean isCurrentSuggestionCorrect(boolean firstSuggestion, boolean secondCheck){
+		if(checkIndexRange(wordIndex) || FleksyEngine.endOfSuggestions){
 			failed = true;
 			return false;
-		}
-		if(FleksyEngine.endOfSuggestions){ 
-			failed = true;
-			return false; 
 		}
 		String word = words.get(wordIndex).label;
 		boolean err = words.get(wordIndex).error;
@@ -434,14 +464,15 @@ public class DataManager {
 			word = word.toLowerCase();
 			out = out.toLowerCase();
 		}
+		if(firstSuggestion && !word.equals(out)){
+			currConflict = out;
+		}
 		if(secondCheck){ Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err); }
 		lastComparison = "INPUT: " + out + " XPECT: " + word;
 		return word.equals(out) || (secondCheck && dontAdd);
 	}
 	
-	public static void incrementSuggestionIndex(){
-		index++;
-	}
+	public static void incrementSuggestionIndex(){ index++; }
 	
 	private static boolean checkIndexRange(int check){
 		if(check >= words.size()){

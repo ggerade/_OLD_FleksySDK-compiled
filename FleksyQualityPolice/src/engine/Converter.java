@@ -165,7 +165,9 @@ public class Converter {
 		if(FleksyEngine.endOfSuggestions){ throw new BooleanException("true when should be false"); }
 		DataManager.setEnteredText();
 		output = settingSuggestions(output, time, indx, true); //SWIPE RIGHT
-		while(!DataManager.isCurrentSuggestionCorrect(false)){ //SWIPE DOWN UNTIL CORRECT
+		boolean once = true;
+		while(!DataManager.isCurrentSuggestionCorrect(once, false)){ //SWIPE DOWN UNTIL CORRECT
+			once = false;
 			indx++; time += SWIPE_AIR;
 			if(FleksyEngine.endOfSuggestions){
 				FleksyEngine.endOfSuggestions = false;	
@@ -194,7 +196,7 @@ public class Converter {
 		output = retypeAccurately(output, time, indx); //RETYPE WORD ACCURATELY THEN SWIPE RIGHT
 		indx = incrementIndex(output); 
 		time = incrementTime(output, SWIPE_AIR);
-		if(!DataManager.isCurrentSuggestionCorrect(true)){ //CHECK IF FOUND 2ND TIME THROUGH
+		if(!DataManager.isCurrentSuggestionCorrect(false, true)){ //CHECK IF FOUND 2ND TIME THROUGH
 			Log.quick("\n" + DataManager.getComparisonMade() + "\n");
 			Log.err("Dictionary Failed : " + DataManager.getComparisonMade() + "\n");
 			FleksyEngine.endOfSuggestions = false;
