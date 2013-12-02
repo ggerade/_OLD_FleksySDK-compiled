@@ -197,8 +197,14 @@ public class Converter {
 		indx = incrementIndex(output); 
 		time = incrementTime(output, SWIPE_AIR);
 		if(!DataManager.isCurrentSuggestionCorrect(false, true)){ //CHECK IF FOUND 2ND TIME THROUGH
-			Log.quick("\n" + DataManager.getComparisonMade() + "\n");
-			Log.err("Dictionary Failed : " + DataManager.getComparisonMade() + "\n");
+			String end = "\n";
+			if(FleksyEngine.currSugIndex > 0){
+				output.add(makeSwipeUp(time, indx));
+			}else{ 
+				end = "*\n"; 
+			}
+			Log.quick("\n" + DataManager.getComparisonMade() + end);
+			Log.err("Dictionary Failed : " + DataManager.getComparisonMade() + end);
 			FleksyEngine.endOfSuggestions = false;
 		}
 		return output;

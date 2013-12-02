@@ -17,6 +17,7 @@ public class FleksyEngine {
 
 	private final static String TAG = "FleksyEngine";
 
+	public static int currSugIndex;
 	public static FleksyAPI api;
 	private static EngineLoader engineLoader;
 	public static FleksyInterface cOutput;

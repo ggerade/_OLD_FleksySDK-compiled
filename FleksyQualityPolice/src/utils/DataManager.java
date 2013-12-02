@@ -290,7 +290,7 @@ public class DataManager {
 		suggestions.clear();
 	}
 	
-	private static class Pair implements Comparable<Pair>{
+	private static class Pair implements Comparable<Pair> {
 		
 		private int count;
 		private String word;

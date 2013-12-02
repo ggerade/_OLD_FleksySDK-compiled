@@ -26,14 +26,10 @@ public class FleksyInterface extends FleksyListenerInterface{
 	}
 
 	@Override
-	public void onSetComposingRegion(int start, int end) {
-		// TODO Auto-generated method stub
-	}
+	public void onSetComposingRegion(int start, int end) {}
 
 	@Override
-	public void onChangeSelection(int selectionStart, int selectionEnd) {
-		// TODO Auto-generated method stub
-	}
+	public void onChangeSelection(int selectionStart, int selectionEnd) {}
 
 	@Override
 	public FLEditorState onRequestEditorState() { //SOME HACK VADIM MADE
@@ -41,22 +37,13 @@ public class FleksyInterface extends FleksyListenerInterface{
 	}
 
 	@Override
-	public void onSpeak(String text) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onSpeak(String text) {}
 
 	@Override
-	public void onBeginBatchEdit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onBeginBatchEdit() {}
 
 	@Override
-	public void onEndBatchEdit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onEndBatchEdit() {}
 
 	@Override
 	public void onCaseChanged(boolean upperCase) {
@@ -65,24 +52,18 @@ public class FleksyInterface extends FleksyListenerInterface{
 
 	@Override
 	public void onReceiveSuggestions(String[] suggestions, int selectedIndex) {
-//		if(suggestions.length > selectedIndex){
-//			FleksyEngine.setLatestText(suggestions[selectedIndex]);
-//		}
+		FleksyEngine.currSugIndex = selectedIndex;
 	}
 
 	@Override
-	public void onSelectedSuggestionChanged(int selectedIndex) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onSelectedSuggestionChanged(int selectedIndex) {}
 
 	@Override
 	public void onMessageReceived(int type, String message) {
 		
 		if (type == FLEnums.FLMessageType.FLMessageType_NO_NEXT_SUGGESTION.ordinal()) { //DOWN
 			FleksyEngine.endOfSuggestions = true;
-		} 
-		else{ 
+		}else{ 
 			Log.out("onMessageReceived: Type: " + type + " Message: " + message + "\n");
 			if (type == FLEnums.FLMessageType.FLMessageType_NO_PREVIOUS_SUGGESTION.ordinal()) { //UP
 				FleksyEngine.endOfSuggestions = true;
@@ -92,13 +73,6 @@ public class FleksyInterface extends FleksyListenerInterface{
 		}
 		
 	}
-	
-//	static Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
-//	    public void uncaughtException(Thread th, Throwable ex) {
-//	        System.out.println("Uncaught exception: " + ex);
-//	        ex.printStackTrace();
-//	    }
-//	};
 
 	@Override
 	public void onDictionaryModified(int event, String word) {
