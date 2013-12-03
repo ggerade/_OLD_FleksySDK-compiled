@@ -91,7 +91,7 @@ public class Converter {
 		output = makeCorrectingSwipeRight(output, time, indx, correcting);
 		time = incrementTime(output, SWIPE_AIR);
 		indx = incrementIndex(output);
-		output.add(makeSwipeRight(time, indx)); //SWIPE RIGHT
+		output.add(makeSwipeRight("", time, indx)); //SWIPE RIGHT
 		
 		while(!DataManager.isCurrentPunctuationCorrect()){
 			if(FleksyEngine.endOfSuggestions){
@@ -185,7 +185,7 @@ public class Converter {
 	
 	private ArrayList<Touch> settingSuggestions(ArrayList<Touch> output, long time, int indx, boolean android){
 		FleksyEngine.initializeSuggestions(android);
-		output.add(makeSwipeRight(time, indx)); //SWIPE RIGHT
+		output.add(makeSwipeRight(DataManager.getCleanedCurrentWord(),time, indx)); //SWIPE RIGHT
 		return output;
 	}
 	
@@ -243,7 +243,7 @@ public class Converter {
 	
 	@SuppressWarnings("unused")
 	private void makeSpace(ArrayList<Touch> output, long time, int indx){
-		output.add(makeSwipeRight(time, indx)); //SWIPE RIGHT
+		output.add(makeSwipeRight("",time, indx)); //SWIPE RIGHT
 		indx++; time += SWIPE_AIR;
 		output.add(makeSwipeUp(time, indx)); //SWIPE UP
 	}
@@ -270,8 +270,8 @@ public class Converter {
 		FleksyEngine.recreateSwipe("#S");
 		return shift;
 	}
-	
-	private Touch makeSwipeRight(long time, int indx){
+
+	private Touch makeSwipeRight(String wanted, long time, int indx){
 		float length = random.nextInt(width/5-width/11) + width/11;
 		int pointCount = random.nextInt(pointH-pointL) + pointL;
 		float x = (width-length)/2;
@@ -288,6 +288,7 @@ public class Converter {
 			y += plusY;
 			swipeRight.addPoint(MOVE, x, y, time);
 		}
+		Log.err(wanted);
 		TestEngine.action = "Space";
 		FleksyEngine.api.space(0);
 		FleksyEngine.recreateSwipe("#R");
