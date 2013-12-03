@@ -81,7 +81,8 @@ enum FLTextFieldType{
   FLTextFieldType_REGULAR_TEXT,
   FLTextFieldType_PASSWORD,
   FLTextFieldType_URL,
-  FLTextFieldType_NO_SUGGESTIONS
+  FLTextFieldType_NO_SUGGESTIONS,
+  FLTextFieldType_USER_AC_OFF
 };
 
 enum FLLongPressType{
