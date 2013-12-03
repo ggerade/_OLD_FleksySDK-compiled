@@ -227,7 +227,7 @@ public class DataManager {
 		checkIndexRange(wordIndex);
 		wordIndex++;
 		printLoading();
-		incrementAverageIndex(currword);
+		incrementAverageIndex(currword.toLowerCase());
 	}
 	
 	private static void printLoading(){
@@ -266,14 +266,28 @@ public class DataManager {
 			if(badWords.containsKey(currword)){
 				Pair update = badWords.remove(currword);
 				update.increment();
-				update.addConflict(currConflict);
+				if(doubleFail){
+					update.increment();
+				}
+				update.addFail(badCorrections);
+				for(String conflict : conflicts){
+					update.addConflict(conflict);
+				}
 				badWords.put(currword, update);
 			}else{
-				Pair baddie = new Pair(1,currword);
-				baddie.addConflict(currConflict);
+				Pair baddie = new Pair(currword);
+				if(doubleFail){
+					baddie.increment();
+				}
+				baddie.addFail(badCorrections);
+				for(String conflict : conflicts){
+					baddie.addConflict(conflict);
+				}
 				badWords.put(currword,baddie);
 			}
-			currConflict = null;
+			doubleFail = false;
+			badCorrections = 0;
+			conflicts.clear();
 			if(failed){
 				indexGraph[indexGraph.length-1]++;
 				data.append("FLEKSY_INDEX: MAXED OUT\n");
@@ -290,14 +304,17 @@ public class DataManager {
 		suggestions.clear();
 	}
 	
+	public static boolean doubleFail = false;
+	
 	private static class Pair implements Comparable<Pair> {
 		
 		private int count;
+		private int failed;
 		private String word;
 		private HashMap<String, Pair> conflicts;
 		
-		public Pair(int c, String w){
-			count = c;
+		public Pair(String w){
+			count = 1;
 			word = w;
 			conflicts = new HashMap<String, Pair>();
 		}
@@ -308,7 +325,7 @@ public class DataManager {
 				update.increment();
 				conflicts.put(con, update);
 			} else {
-				conflicts.put(con, new Pair(1, con));
+				conflicts.put(con, new Pair(con));
 			}
 		}
 		
@@ -330,6 +347,10 @@ public class DataManager {
 		
 		public void increment(){
 			count++;
+		}
+		
+		public void addFail(int add){
+			failed += add;
 		}
 
 		@Override
@@ -403,7 +424,7 @@ public class DataManager {
 		}
 		Collections.sort(words);
 		for(Pair word : words){
-			builder.append(word.word + " : " + word.count + word.sortConflicts() + "\n");
+			builder.append(word.word + " : " + word.count + " (" + word.failed + ")" + word.sortConflicts() + "\n");
 		}
 		return builder.toString();
 	}
@@ -446,7 +467,8 @@ public class DataManager {
 		}
 	}
 	
-	private static String currConflict;
+	private static ArrayList<String> conflicts = new ArrayList<String>();
+	private static int badCorrections = 0;
 	
 	public static boolean isCurrentSuggestionCorrect(boolean firstSuggestion, boolean secondCheck){
 		if(checkIndexRange(wordIndex) || FleksyEngine.endOfSuggestions){
@@ -459,15 +481,21 @@ public class DataManager {
 		word = word.replaceAll("[-]", "").trim();
 		out = out.replaceAll("[-]", "").trim();
 		if(ezComp){
-			word = word.replaceAll("[']", "").trim();
-			out = out.replaceAll("[']", "").trim();
-			word = word.toLowerCase();
-			out = out.toLowerCase();
+			word = word.replaceAll("[']", "").trim().toLowerCase();
+			out = out.replaceAll("[']", "").trim().toLowerCase();
 		}
-		if(firstSuggestion && !word.equals(out)){
-			currConflict = out;
+
+		if (firstSuggestion && !word.equals(out)) {
+			conflicts.add(out.toLowerCase());
+			if (enteredText.toLowerCase().equals(word.toLowerCase())) {
+				badCorrections++;
+			}
 		}
-		if(secondCheck){ Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err); }
+
+		if (secondCheck) {
+			Log.d("Accurate Comparison: FLEKSY: " + out + " WORD: " + word + " ERR: " + err);
+		}
+		
 		lastComparison = "INPUT: " + out + " XPECT: " + word;
 		return word.equals(out) || (secondCheck && dontAdd);
 	}

@@ -196,8 +196,9 @@ public class Converter {
 		output = retypeAccurately(output, time, indx); //RETYPE WORD ACCURATELY THEN SWIPE RIGHT
 		indx = incrementIndex(output); 
 		time = incrementTime(output, SWIPE_AIR);
-		if(!DataManager.isCurrentSuggestionCorrect(false, true)){ //CHECK IF FOUND 2ND TIME THROUGH
+		if(!DataManager.isCurrentSuggestionCorrect(true, true)){ //CHECK IF FOUND 2ND TIME THROUGH
 			String end = "\n";
+			DataManager.doubleFail = true;
 			if(FleksyEngine.currSugIndex > 0){
 				output.add(makeSwipeUp(time, indx));
 			}else{ 
@@ -235,7 +236,7 @@ public class Converter {
 			}
 			FleksyEngine.api.setActiveKeyboard(FLEnums.FLKeyboardID.FLKeyboardID_QWERTY_UPPER.ordinal(), false);
 		}
-		
+		DataManager.setEnteredText();
 		output = settingSuggestions(output, time, indx, false); //SWIPE RIGHT
 		return output;
 	}
