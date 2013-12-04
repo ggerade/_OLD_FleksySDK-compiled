@@ -199,6 +199,7 @@ private:
   vector<FLPoint> getSubVector(vector<FLPoint> original, int start, int end);
   void resetLongPressType();
   int getNumberOfQuotes();
+  void changeLastCharacterCapitalizatoin(bool isUp);
   
   //User cursor operations
   void moveCursorToPosition(int position);
