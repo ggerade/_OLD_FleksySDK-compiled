@@ -229,7 +229,7 @@ public class Converter {
 			}else{
 				Touch tap = new Touch(indx, key.x, key.y, time);
 				TestEngine.action = "Sending Tap " + tap.getDownX() + "," + tap.getDownY();
-				FleksyEngine.api.sendTap(tap.getDownX(), tap.getDownY(), tap.getTime(), 0, "");
+				FleksyEngine.api.sendTap(tap.getDownX(), tap.getDownY(), tap.getTime(), 0, key.label.toLowerCase());
 				indx++; time += TAP_AIR;
 				FleksyEngine.recreateTapEvent(tap.printPoints());
 				output.add(tap);

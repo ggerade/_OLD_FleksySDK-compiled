@@ -401,19 +401,20 @@ public class DataManager {
 						indxGraph.toString() + 
 						"\n--==[ ACCUMULATIVE GRAPH ]==--\n" +
 						accuGraph.toString() + 
-						"\n--==[ FAILED WORDS ]==--\n" +
-						"\n.:::KNOWN WORDS:::.\n" +
-						knownMiss.toString() +
-						"\n.::" + unknown + " UNKNOWN WORDS::.\n" +
-						unKnoMiss.toString() +
+						"\n--==[ MISSED COUNT ]==--\n" +
+						printBadWords().toString() +
+//						"\n--==[ FAILED WORDS ]==--\n" +
+//						"\n.:::KNOWN WORDS:::.\n" +
+//						knownMiss.toString() +
+//						"\n.::" + unknown + " UNKNOWN WORDS::.\n" +
+//						unKnoMiss.toString() +
 						"\n--==[ DATA ]==--\n" +
 						data.toString() + 
 						"\n--==[ " + ignore + " IGNORED WORDS ]==--\n" +
-						ignored.toString() + 
-						"\n--==[ COMPARED WORDS ]==--\n" +
-						comparisons.toString() +
-						"\n--==[ MISSED COUNT ]==--\n" +
-						printBadWords().toString());
+						ignored.toString()); 
+//						"\n--==[ COMPARED WORDS ]==--\n" +
+//						comparisons.toString() +
+
 	}
 	
 	private static String printBadWords(){
