@@ -229,7 +229,7 @@ private:
   void updateCandidatesView(FLTextBlock *tbToUpdate = NULL);
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
-  void speak(FLString text, bool isDeleted);
+  void speak(FLString text, bool isDeleted = false);
   void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   
   
