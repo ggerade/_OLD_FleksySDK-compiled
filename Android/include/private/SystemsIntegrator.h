@@ -82,6 +82,7 @@ public:
   bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred
   bool getSpaceBreaksEnabled();
   void setBlindMode(bool value);
+  bool isBlindMode();
   
   void setSettingTransformLayerWeight(float weight);
   void setSettingShapeLayerWeight(float weight);
