@@ -18,6 +18,7 @@
 
 class FLRequest {
 public:
+  FLUnicodeString hint;
   FLUnicodeString previousToken1;
   FLUnicodeString previousToken2;
   std::vector<FLUnicodeString> platformSuggestions;
@@ -27,7 +28,7 @@ public:
   //////////////////////////////////////////
   //~FLRequest();
   
-  FLRequest(const std::vector<FLPoint> &_points, const FLUnicodeString &previousToken1, const FLUnicodeString &previousToken2, bool debug = false);
+  FLRequest(const std::vector<FLPoint> &_points, const FLUnicodeString &previousToken1, const FLUnicodeString &previousToken2, const FLUnicodeString hint, bool debug = false);
 };
 
 class SystemsIntegrator {

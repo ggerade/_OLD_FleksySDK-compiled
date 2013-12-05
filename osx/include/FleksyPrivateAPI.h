@@ -67,6 +67,8 @@ public:
   void setDataFileHeader(const std::string &header);
   void processEventData(const FLUnicodeString &eventData);
   void writeDataToFile();
+  
+  void spaceWithHint(const FLUnicodeString& hint, float length);
 };
 
 #endif

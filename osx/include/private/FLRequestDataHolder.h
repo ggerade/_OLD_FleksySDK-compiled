@@ -11,6 +11,7 @@
 class FLRequestDataHolder{
   
 public:
+  FLUnicodeString hint;
 	FLRequestDataHolder();
 	void addPoint(FLPoint p, int indx);
 	void removePointAt(int indx);

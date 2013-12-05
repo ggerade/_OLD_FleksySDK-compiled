@@ -20,29 +20,26 @@ public:
   FLSuggestionsContainer *getResponse();
   void setCorrectedText(const FLUnicodeString &text);
   void setTextEntered(const FLUnicodeString &text);
-  FLUnicodeString getTextEntered();
-  void setLength(int length, const std::string &who);
-  int getLength();
-  bool isPunctuationInside();
+  FLUnicodeString getTextEntered() const;
+  int getLength() const;
+  bool isPunctuationInside() const;
 	void setIsPunctuationInside(bool isPunctuation);
-  bool isSpaceEnabled();
+  bool isSpaceEnabled() const;
   void setIsSpaceEnabled(bool isSpaceEnabled);
-  bool isNewLineTextBlock();
-  void setIsNewLineTextBlock(bool isNewLine);
-  bool isSymbolsTextBlock();
+  bool isNewLineTextBlock() const;
+  bool isSymbolsTextBlock() const;
   void setIsSymbolsTextBlock(bool symbol);
-  void setIsEndSentence(bool isEndSentence);
-  bool isEndSentence();
-  bool isUserEditedText();
+  bool isEndSentence() const;
+  bool isUserEditedText() const;
   void setIsAccuratelyTyped(bool isAccuratelyTyped);
-  bool getIsAccuratelyTyped();
+  bool getIsAccuratelyTyped() const;
   
 	FLRequestDataHolder *getRequest();
-  FLUnicodeString getText();
-  int getSuggestionIndex();
+  FLUnicodeString getText() const;
+  int getSuggestionIndex() const;
   void setSuggestionIndex(int suggIndex);
-	bool getIsExactEntry();
-  bool isCorrected();
+	bool getIsExactEntry() const;
+  bool isCorrected() const;
   
   void addCharacter(FLPoint p, const FLUnicodeString &c, int index, FLKeyboardPtr &keyboard);
   void setSuggestions(const std::vector<FLUnicodeString>& suggestions);
@@ -53,34 +50,33 @@ public:
   void createNewLineCharacter();
   void cleanTextBlock();
   void resetSuggestionIndex();
-  int correctEnteredText(bool isSpaceAfter);
-  int correctTextOnVSwipe();
-  int nextSuggestion();
-	int prevSuggestion();
+  void correctEnteredText(bool isSpaceAfter);
+  void correctTextOnVSwipe();
+  void nextSuggestion();
+	void prevSuggestion();
   FLUnicodeString getTextToCorrect();
   
-  void printSelf(int tbNumber);
+  void printSelf(int tbNumber) const;
   FLUnicodeString toLowerCase(const FLUnicodeString &string);
   
-  bool containsNonAlphaCharacters(SystemsIntegrator* fleksy);
-  bool containsApostrophe();
-  bool isSplitWithSpace();
+  bool containsNonAlphaCharacters(SystemsIntegrator* fleksy) const;
+  bool containsApostrophe() const;
+  bool isSplitWithSpace() const;
   void setUserCapitalization(bool isUserSet);
-  bool userSetCapitalization();
-  bool replacedSuggestion();
+  bool userSetCapitalization() const;
+  bool replacedSuggestion() const;
   
+  int getLengthBeforePreviousUpdate() const;
+  int getLengthDiff() const;
 private:
   FleksyListenerInterface &out;
 	FLSuggestionsContainer *response;
 	FLRequestDataHolder *request;
-	int length;
 	int suggestionIndx;
 	FLUnicodeString correctedText;
 	bool isPunctuation;
-  bool isEndSentencePunc;
   bool isSpaceAfterTextBlock;
   bool isExactEntry; // if typed the word accuratly
-  bool isNewLine;
   bool isSymbolTextBlock;
   bool addedWordToDictionary;
   bool isUserSetCapitalization;
@@ -88,12 +84,14 @@ private:
   bool changedToNextSuggestion;
   bool isAccuratelyTyped;
   
-  int changeSuggestion(int offset);
+  void changeSuggestion(int offset);
   FLUnicodeString matchCase(const FLUnicodeString &word);
   void prepareTextBlockToRecieveOrRemoveCharacters();
   
-  void printTextBlock();
+  void printTextBlock() const;
   void deleteSuggestions();
+  
+  int lengthBeforePreviousUpdate = 0;
 };
 
 #endif

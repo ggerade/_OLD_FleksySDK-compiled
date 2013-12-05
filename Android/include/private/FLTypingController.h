@@ -33,7 +33,7 @@ public:
   //FleksyAPI calls
   void sendPoint(float x, float y, long long time, int offset, FLUnicodeString character);
   void backAndForthSwipe(float length = 0);
-	void swipeRight(float length = 0);
+	void swipeRight(const FLUnicodeString& hint, float length = 0);
 	void swipeLeft(float length = 0);
 	void swipeUp(float length = 0);
 	void swipeDown(float length = 0);
@@ -160,7 +160,7 @@ private:
   void handleVerticalSwipe(bool isUp);
   void correctTextBlockOnSwipeRight(FLTextBlock *tb);
   void correctTextBlockOnVerticalSwipe();
-  int correctToNextSuggestion(FLTextBlock *tb, bool isUp);
+  void correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
   bool checkForRepeatedTypingAndLearn(FLTextBlock *tb);
   void createEmoticonTextBlock();
@@ -205,7 +205,6 @@ private:
   bool isSymbolAllowedToCorrect(const FLUnicodeString &character);
 
   bool isInPunctuation(const FLUnicodeString &symbol);
-  bool isEndSentenceSymbol(const FLUnicodeString &symbol);
 
   int calculateEndOfTextBlock(FLTextBlock *tb);
   void setLastDeletedWord(FLTextBlock *tb);
