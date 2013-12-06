@@ -21,6 +21,4 @@ private:
 	std::vector<FLUnicodeString> suggestions;
 };
 
-#undef FLUnicodeString
-
 #endif

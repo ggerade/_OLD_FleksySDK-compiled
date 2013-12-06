@@ -14,7 +14,9 @@
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
 #include "FLSpaceHelper.h"
-#include "FLTapsToWords.h"
+
+class FLTapsToWords;
+typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
 
 class FLRequest {
 public:

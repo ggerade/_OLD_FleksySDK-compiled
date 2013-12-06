@@ -12,7 +12,6 @@
 #include <memory>
 #include <unordered_map>
 
-#include "PrivateStructures.h"
 #include "FLKeyboard.h"
 #include "Platform.h"
 

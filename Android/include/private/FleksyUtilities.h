@@ -13,8 +13,10 @@
 #include <PatternRecognizer/FLFile.h>
 #include "FLKeyboard.h"
 #include "FleksyDefines.h"
-#include "FLTapsToWords.h"
 #include "FLUnicodeString.h"
+
+class FLTapsToWords;
+typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
 
 typedef enum {
   FLAddWordResultAdded,
