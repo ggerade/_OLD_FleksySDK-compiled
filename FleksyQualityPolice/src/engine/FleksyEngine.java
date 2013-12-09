@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.syntellia.fleksy.api.EngineLoader;
 import com.syntellia.fleksy.api.FLEnums;
 import com.syntellia.fleksy.api.FleksyAPI;
+import com.syntellia.fleksy.internal.api.FleksyPrivateAPI;
 
 import utils.Client;
 import utils.DataManager;
@@ -19,6 +20,7 @@ public class FleksyEngine {
 
 	public static int currSugIndex;
 	public static FleksyAPI api;
+	public static FleksyPrivateAPI privateApi;
 	private static EngineLoader engineLoader;
 	public static FleksyInterface cOutput;
 	
@@ -133,6 +135,7 @@ public class FleksyEngine {
 		final String basePath = "../Android";
 		try{
 	    	api = new FleksyAPI();
+        privateApi = new FleksyPrivateAPI();
 		    cOutput = new FleksyInterface("../osx/lib/" + version + "/Fleksylib.dylib");
 	        engineLoader = new EngineLoader();
 	        

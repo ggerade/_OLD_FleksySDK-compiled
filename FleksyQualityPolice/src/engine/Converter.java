@@ -290,7 +290,8 @@ public class Converter {
 		}
 		Log.err(wanted);
 		TestEngine.action = "Space";
-		FleksyEngine.api.space(0);
+		//FleksyEngine.api.space(0);
+		FleksyEngine.privateApi.spaceWithHint(wanted, 0);
 		FleksyEngine.recreateSwipe("#R");
 		return swipeRight;
 	}
