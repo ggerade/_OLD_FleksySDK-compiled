@@ -41,42 +41,42 @@ I'll meet you there man.
 Nice to see you the other day. 
 Wanna hang out later? 
 Let's meet up after. 
-Meet you in 5
-I'll be there soon
-Held up, call you later
-Miss you too
-Wish you were here
-I'll be there too
+Meet you in 5.
+I'll be there soon.
+Held up, call you later.
+Miss you too.
+Wish you were here.
+I'll be there too.
 In a few.
-This is a common sentence
+This is a common sentence.
 Fleksy is a revolutionary keyboard technology that allows users to type text on the familiar keyboard layout by tapping on the screen. 
 Our patent pending technology does not need accuracy, just tap on the screen and Fleksy will automatically detect the word you meant to enter, even if you have missed every single key.
 Hey, wanna hang out?
 Where are you?
 Want to get some coffee? 
-That movie was legit
-Tailor responses to California swag
+That movie was legit.
+Tailor responses to California swag.
 How can I help you?
-Let me know what you need
-Let us know how it goes
+Let me know what you need.
+Let us know how it goes.
 Are you ok?
 How did it go with the thing?
-You still owe me from that other time
-We're even after that
-Forget about it
-Let's talk later
-Glad to catch up
+You still owe me from that other time.
+We're even after that.
+Forget about it.
+Let's talk later.
+Glad to catch up.
 Catch me up with your process later, ok?
 Thanks for getting back to me!
-Thank you for your feedback, much appreciated
+Thank you for your feedback, much appreciated.
 I'd like to share some feedback with you.
-We'd love to make the experience better for you
-Let us know what we should be working on next
-Check out our Beta community where we release new features and languages first
+We'd love to make the experience better for you.
+Let us know what we should be working on next.
+Check out our Beta community where we release new features and languages first.
 Join me for a drink?
 Hi! My name is this and I'm an alcoholic.
 Is this a thousand lines yet?
-I did a thousand lines the other day
+I did a thousand lines the other day.
 Coming or not?
 Let's go to lunch!
 I didn't realize that, was planning on leaving here in a few to work from the office.
@@ -142,7 +142,7 @@ Most members of the class were open to the teacher's ideas.
 Regardless of the weather we are going to go fishing tomorrow morning.
 So far no one has entered the speech contest at the television station.
 The teacher told us to take out our books.
-I took out some onions from the refridgerator.
+I took out some onions from the refrigerator.
 I plan to provide information about the new company policy to the extent that I am familiar with it.
 I do not know what the company will do with respect to the old computer system.
 I hope that everything will work out for my friend when she moves to London next week.
@@ -174,7 +174,7 @@ Why has no air quality test been done on this particular building since we were 
 It seems absolutely disgraceful that we pass legislation and do not adhere to it ourselves.
 I admit that, at present, the matter seems to be somewhat confused.
 As people have said, the situation there is extremely volatile.
-There has therefore been enough time for the Commission to prepare its programme and for us to become familiar with it and explain it to our citizens.
+There has therefore been enough time for the Commission to prepare its program and for us to become familiar with it and explain it to our citizens.
 You cannot prepare if you hear a statement in this House and have no idea of its content.
 I therefore think it is crucial for the environment that the ban on using poisonous heavy metals should be fully implemented and that we should not reduce manufacturers' liability.
 It is, as it stands, perfectly acceptable.
