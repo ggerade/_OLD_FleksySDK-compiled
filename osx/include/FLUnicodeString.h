@@ -16,7 +16,10 @@
 #include <unordered_map>
 #include "FLPoint.h"
 
+#ifndef FLUNICODECODEPOINT_DEFINED
+#define FLUNICODECODEPOINT_DEFINED
 typedef uint32_t FLUnicodeCodePoint;
+#endif
 
 #define FLUnicodeStringWithUTF8(s) FLUnicodeString((const unsigned char *)s)
 
@@ -91,8 +94,6 @@ public:
     return(onlyISO8859);
   }
 
-  bool containsOnlyFastPathCharacters() const;
-
   static bool containsOnlyTrivialCharacters(const uint16_t *buffer, size_t length) {
     bool onlyTrivial = true;
     
@@ -111,7 +112,7 @@ public:
   bool containsOnlyTrivialCharacters() const {
     return(containsOnlyTrivialCharacters(this->data(), this->length()));
   }
-
+  
   const char *c_str() const;
   std::string utf8String() const;
   std::string iso8859String() const;
@@ -204,6 +205,14 @@ struct FLUnicodeStringHash {
 struct FLUnicodeStringEqual {
   bool operator()(const FLUnicodeString& lhs, const FLUnicodeString& rhs) const { return((lhs.length() != rhs.length()) ? false : (memcmp(lhs.data(), rhs.data(), lhs.length() * sizeof(uint16_t)) == 0) ? true : false); }
 };
+
+template<class Value>
+class FLUnicodeMap {
+public:
+  typedef typename std::unordered_map<FLUnicodeString, Value, FLUnicodeStringHash, FLUnicodeStringEqual> Type;
+};
+
+extern FLUnicodeString subStr(const FLUnicodeString &str, int graphemeIndexStart, int stride);
 
 std::vector<FLUnicodeString> split(const FLUnicodeString &s, const FLUnicodeString& delims);
 

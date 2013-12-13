@@ -23,14 +23,6 @@ class FleksyListenerInterface{
   
 public:
   
-  virtual FLUnicodeCategory unicodeCategoryForCodePoint(FLUnicodeCodePoint codePoint) const = 0;
-  virtual int lengthOfNextGraphemeAt(const FLUnicodeString &string, int index) const = 0;
-  virtual int lengthOfPreviousGraphemeAt(const FLUnicodeString &string, int index) const = 0;
-  virtual FLUnicodeString normalizedStringFromString(const FLUnicodeString &string) const = 0;
-  virtual FLUnicodeString toLowerCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
-  virtual FLUnicodeString toUpperCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
-  virtual FLUnicodeString toTitleCase(const FLUnicodeString &string, const FLUnicodeString &locale) const = 0;
-
   /*********Required*******************/
   /*
    * Commit text to the text editor and set the new cursor position to be after the inserted text

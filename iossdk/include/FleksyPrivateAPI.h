@@ -20,6 +20,7 @@ class SystemsIntegrator;
 class FleksyAPIpImpl{
 private:
   FLResourceArchivePtr resourceArchive;
+  void initResources();
   std::string resourcePath;
   
   FLPoint internalKeyboardSize;
@@ -43,6 +44,7 @@ public:
   void postLoadSetup();
   void loadKeyboardData();
   void setResourceFLFile(FLFilePtr &file);
+  void initResourceArchive(FLResourceArchivePtr rsrcArchivePtr);
   void setResourcePath(const std::string &path);
   FLFilePtr FLFileForFileName(const char *filename);
   void initialize(FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);

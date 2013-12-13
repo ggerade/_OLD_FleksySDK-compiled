@@ -13,7 +13,7 @@
 #include <vector>
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
-#include "FLSpaceHelper.h"
+//#include "FLSpaceHelper.h"
 
 class FLTapsToWords;
 typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
