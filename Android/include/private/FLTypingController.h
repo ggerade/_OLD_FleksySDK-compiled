@@ -125,6 +125,7 @@ private:
   FLPunctuationSpaceMode punctuationSpaceMode;
   FLTextFieldType textFieldType;
   FLLongPressType longPressType;
+  FLMessageType spaceBarState;
   
   FLUnicodeString lastDeletedRawText;
   FLUnicodeString lastDeletedCorrectedWord;
@@ -240,6 +241,8 @@ private:
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLUnicodeString text, bool isDeleted);
   void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
+  FLMessageType getSpaceBarState();
+  void sendSpacebarState(bool forceSend = false);
 };
 
 #endif

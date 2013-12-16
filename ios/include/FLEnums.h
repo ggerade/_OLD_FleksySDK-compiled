@@ -48,6 +48,8 @@ enum FLMessageType{
   FLMessageType_ERROR,
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
+  FLMessageType_SPACEBAR_STATE_PUNCTUATION,
+  FLMessageType_SPACEBAR_STATE_CLEAR
 };
 
 //passed in as a parameter in onDictionaryModified

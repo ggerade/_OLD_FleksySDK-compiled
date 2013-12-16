@@ -6,14 +6,31 @@
 //  Copyright 2011 Syntellia Inc. All rights reserved.
 //
 
-//#include <Foundation/Foundation.h>
-//#include <UIKit/UITextChecker.h>
-
 #include <string>
 #include <vector>
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
-//#include "FLSpaceHelper.h"
+
+// The following two #ifndefs are needed for iFleksy.
+// These are nominally declared in `FLKeyTapsRecognizer.h`, but by including that header, it causes a huge dependency cascade when used from iFleksy.
+// This is ugly, but IMHO, better than the alternative.  :(
+
+#ifndef FLFOUNDWORDS_DEFINED
+#define FLFOUNDWORDS_DEFINED
+typedef struct {
+  FLUnicodeString word;
+  FLUnicodeString tapWord;
+  double shapeScore;
+  double contextScore;
+  double score;
+  bool isExtraWord;
+} FLFoundWords;
+#endif
+
+#ifndef FLFOUNDWORDSVECTOR_DEFINED
+#define FLFOUNDWORDSVECTOR_DEFINED
+typedef std::vector<FLFoundWords> FLFoundWordsVector;
+#endif
 
 class FLTapsToWords;
 typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
@@ -36,7 +53,7 @@ public:
 class SystemsIntegrator {
   
 private:
-  
+  FLFoundWordsVector _foundWordsVector;
   bool blindMode = false;
   
 public:
@@ -51,6 +68,13 @@ public:
   //FLSpaceHelper* spaceHelper = NULL;
   
   FLTapsToWordsPtr tapsToWords;
+  
+  /**
+   Gets the FLFoundWords associated with the last call to getCandidatesForRequest
+   @param index of the word to get. Same ordering as the suggested words
+   @returns a FLFoundWords object
+   */
+  FLFoundWords getFoundWord(int index);
   
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   

@@ -62,6 +62,7 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
+  kLanguage getLanguage() const;
   
   //Data Collection
   void setDataCollectionDirectory(const std::string &path); // folder/folder/dataFolder (no / at the end)

@@ -266,6 +266,8 @@ public:
   
   //private:
   FleksyAPIpImpl *pImpl;
+  
+  friend class FleksyAPIpImplAccessor;
 };
 
 #endif /* defined(__FleksySDK_FleksyAPI_h__) */
