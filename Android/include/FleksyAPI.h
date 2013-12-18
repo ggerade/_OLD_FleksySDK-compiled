@@ -57,7 +57,7 @@ public:
    * |setPlatformKeyboardSize|. This will result in a call to your FleksyListenerInterface onSetComposingText() with the character
    * that is closest to the x,y coordinates.
    *
-   * TODO:Add comments for character
+   * Character - character to use for with the x, y coordinates. (instead of the closest to the x,y)
    */
   void sendTap(float x, float y, long long time = 0, int offset = 0, FLUnicodeString character = "");
   
@@ -127,14 +127,14 @@ public:
    */
   void setCapitalizationMode(FLCapitalizationMode mode);
   
-  /* NEW
+  /*
    * Returns current capitalization mode
    */
   FLCapitalizationMode getCapitalizationMode();
   
   /*
    * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
-   * *NEW* buttonPress if switch was caused by hitting a button to switch the keyboard
+   * Optional: Set buttonPress to true if switch was caused by hitting a button to switch the keyboard
    */
   void setActiveKeyboard(FLKeyboardID keyboardID, bool buttonPress = false);
   
@@ -165,7 +165,7 @@ public:
    */
   void setCorrectionMode(FLCorrectionMode mode);
   
-  /* NEW
+  /*
    * Returns current correction mode
    */
   FLCorrectionMode getCorrectionMode();
@@ -188,21 +188,21 @@ public:
   bool isShifted();
   
   /*
-   * New
+   *
    * If 'space breaks' is enabled, then if the user misses the spacebar and types C,V,B, instead, then Fleksy might decide when appropriate
    * to split the word in two when correcting input. Example: [thisvis]->[this is]
    * Return value is new state. It it doesn't match the argument value, some error has occurred
    */
   bool setSpaceBreaksEnabled(bool value);
   /*
-   * New
+   *
    * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].
    * FLDeleteMode_VARIABLE on backspace(length > 0)(swipe left) will delete single characters when cursor is inside the word and whole words when cursor is a space after the word: [hello |there] -> swipe left -> [|there], [hel|lo there] -> swipe left -> [he|lo there].
    * Default: FLDeleteMode_VARIABLE
    */
   void setDeleteMode(FLDeleteMode mode);
   /*
-   * New
+   *
    * No correction will be perforemed on enter/new line in fields other than FLFieldAction_NEW_LINE
    * FLFieldAction_SEARCH     -Enter performs a "search" operation, taking the user to the results of searching for the text the have typed (in whatever context is appropriate)
    * FLFieldAction_GO         -Enter performs a "go" operation to take the user to the target of the text they typed. Typically used, for example, when entering a URL
@@ -219,7 +219,6 @@ public:
   FLFieldAction getFieldAction();
   
   /*
-   * New
    * Sets manual punctuation mode(punctuation added from non QWERTY keyboard)
    * FLPunctuationSpaceMode_DEFAULT                [hello]+ -> [hello]+[.]-[|] Default behaviour doesn't eat or add space
    * FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE   [hello]+ -> [hello]-[.]-[|] Eats space on previous word
@@ -231,10 +230,10 @@ public:
   void setPunctuationSpaceMode(FLPunctuationSpaceMode mode);
   
   /*
-   * New
    * FLTextFieldType_REGULAR_TEXT   -Nothing special, regular text field
    * FLTextFieldType_PASSWORD       -Password field, Swipe up or down is disabled, suggestions are not displayed
    * FLTextFieldType_URL            -URL or Email field
+   * FLTextFieldType_USER_AC_OFF    -User turned off AC. User still gets suggestions, and everything works as usual, except entered text is never automatically corrected
    *
    * Default: FLTextFieldType_REGULAR_TEXT
    */
@@ -246,9 +245,10 @@ public:
    * FLLongPressType_NONE         -No longpress, can be used to reset the engine state
    * FLLongPressType_LONG_PRESS   -Long press. Next sendTap() will be treated as accurate typing. If x,y is valid, then sendTap() will return an accented character
    *
-   * Optional: x,y - point where the long press was released
+   * Optional: x,y - point where the long press was released. (this is not used at this moment)
+   * 
    */
-  void longPress(FLLongPressType type, float x = -1, float y = -1); //TODO: -1,-1 someone can release in -x or -y ?
+  void longPress(FLLongPressType type, float x = -1, float y = -1);
   
   /*
    * The exact character input of the user is respected more when blind mode is off. Eg. "in" will not be corrected to "on"

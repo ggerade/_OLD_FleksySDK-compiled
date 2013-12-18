@@ -74,7 +74,9 @@ public:
    @param index of the word to get. Same ordering as the suggested words
    @returns a FLFoundWords object
    */
-  FLFoundWords getFoundWord(int index);
+  FLFoundWords getFoundWord(size_t index);
+  
+  size_t numWordsFound();
   
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   

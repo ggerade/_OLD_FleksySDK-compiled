@@ -69,9 +69,11 @@ public:
   virtual void onCapitalizationModeChanged(FLCapitalizationMode mode){};
   /*
    * Send message to the platform
-   * FLMessageType_USER                   - some message user should see
-   * FLMessageType_NO_NEXT_SUGGESTION     - reached end of the suggestion list
-   * FLMessageType_NO_PREVIOUS_SUGGESTION - reached beginning of the suggestion list
+   * FLMessageType_USER                       - some message user should see
+   * FLMessageType_NO_NEXT_SUGGESTION         - reached end of the suggestion list
+   * FLMessageType_NO_PREVIOUS_SUGGESTION     - reached beginning of the suggestion list
+   * FLMessageType_SPACEBAR_STATE_PUNCTUATION - next spacebar press or swipe right will add punctuation
+   * FLMessageType_SPACEBAR_STATE_CLEAR       - next spacebar press or swipe right will add space
    */
   virtual void onMessageReceived(FLMessageType type, FLUnicodeString message){};
   /*
