@@ -118,6 +118,7 @@ enum FLEventType{
   FLEventType_ET,
   FLEventType_FA,
   FLEventType_LP,
+  FLEventType_WT
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */
