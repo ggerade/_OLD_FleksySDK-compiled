@@ -27,6 +27,7 @@ public:
   void swipeUp();
   void swipeDown();
   void switchedKeyboard(FLKeyboardID id);
+  void wordTyped();
   
   //Single shot events
   void addedWordToDictionary();
@@ -54,6 +55,9 @@ private:
   FLUnicodeString intToString(int integer);
   void swipeRight();
   void spaceBarPress();
+  
+  
+  FLUnicodeString getLayoutName();
 };
 
 
