@@ -41,7 +41,7 @@ def readContext(filename):
         phraseList.append(words)
 
         if (len(words) > 1):
-            subphrase = " ".join(words[0:len(words)-2])
+            subphrase = " ".join(words[0:len(words)-1])
             targ = words[len(words)-1]
             if (subphrase in phraseFreqMap):
                 phraseFreqMap[subphrase][targ] = rank
@@ -114,33 +114,40 @@ jetLoc = "../Android/FleksySDKResources/encrypted/resourceArchive-" + lang + ".j
                       
 fnegOrig = 0
 fnegCur = 0
+fnegExtraBad = 0
 reversed = 0
 for line in failFile:
     failrate, index = parseFailFileLine(line)
     if (failrate >= threshold and index >= 0):
         maxFailed = ""
         fnegOrig += 1
-        phrase = phraseList[index]
-        output = launchProc(jetLoc, cycles, phrase)
-        maxFailed, failed = checkForFalseNegFailure(output, threshold)
+        try:
+            phrase = phraseList[index]
+            output = launchProc(jetLoc, cycles, phrase)
+            maxFailed, failed = checkForFalseNegFailure(output, threshold)
 
-        if (failed):
-            fnegCur += 1
-            targ = phrase.pop(len(phrase)-1)
-            phrase.append(maxFailed)          
-            outputRev = launchProc(jetLoc, cycles, phrase)
-            successRev = checkIfReversedSucceeded(outputRev, threshold)
-            if (successRev):
-                reversed += 1
+            if (failed):
+                fnegCur += 1
+                targ = phrase.pop(len(phrase)-1)
+                phrase.append(maxFailed)          
+                outputRev = launchProc(jetLoc, cycles, phrase)
+                successRev = checkIfReversedSucceeded(outputRev, threshold)
+                if (successRev):
+                    reversed += 1
+                    
+                    phrase[len(phrase)-1] = targ
+                    freqDict = phraseFreqMap[" ".join(phrase[0:len(phrase)-1])]
+                    suggRank = "NA"
+                    if (maxFailed in freqDict):
+                        suggRank = freqDict[maxFailed]
+                        if (suggRank > index):
+                            fnegExtraBad += 1
+                            
+                print(index, suggRank, "_".join(phrase), output[0], successRev)
+        except:
+            fnegOrig -= 1
 
-            phrase[len(phrase)-1] = targ
-            freqDict = phraseFreqMap[" ".join(phrase[0:len(phrase)-2])]
-            suggCnt = "NA"
-            if (maxFailed in freqDict):
-                suggCnt = freqDict[maxFailed]
-            print(index, suggCnt, "_".join(phrase), output[0], successRev);
-
-print("False negative:", fnegOrig, float(fnegOrig-fnegCur)/float(fnegOrig))
+print("False negative:", fnegOrig, float(fnegOrig-fnegCur)/float(fnegOrig), float(fnegExtraBad)/float(fnegOrig))
 
 revRate = 1.
 if (fnegCur > 0):
