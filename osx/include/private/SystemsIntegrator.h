@@ -6,6 +6,9 @@
 //  Copyright 2011 Syntellia Inc. All rights reserved.
 //
 
+#ifndef __FleksySDK__FLSystemIntegrator__
+#define __FleksySDK__FLSystemIntegrator__
+
 #include <string>
 #include <vector>
 #include "FleksyUtilities.h"
@@ -21,6 +24,7 @@ typedef struct {
   FLUnicodeString word;
   FLUnicodeString tapWord;
   double shapeScore;
+  double chiPvalue;
   double contextScore;
   double score;
   bool isExtraWord;
@@ -117,3 +121,5 @@ public:
   
   FLUnicodeString getVersion();
 };
+
+#endif
