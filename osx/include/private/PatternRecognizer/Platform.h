@@ -46,17 +46,6 @@
 #endif
 
 
-#define FLEKSY_LIBRARY_EXPIRES 1
-//http://www.ruddwire.com/handy-code/date-to-millisecond-calculators/
-// shell% date -r EXPIRATION_DATE_IN_SECONDS
-//Thu Nov 28 22:59:59 PST 2013
-#define EXPIRATION_DATE_IN_SECONDS 1385708399
-// set to 0 to disable. Value is approximate
-#define ALLOWED_REQUESTS_PER_WORD_LENGTH 0
-//(10 * 1000)
-
-
-
 class StaticVariables {
 public:
   static void* listener;
