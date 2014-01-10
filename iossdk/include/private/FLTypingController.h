@@ -15,6 +15,7 @@
 #include "FLTrackEvents.h"
 #include "FLDataCollector.h"
 #include "FLUnicodeString.h"
+#include "FLAutoLearn.h"
 
 class FLConsistencyChecker;
 
@@ -140,6 +141,7 @@ private:
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
+  //FLAutoLearn *autoLearner = NULL;
   
   //Debug stuff
   void printTextBlocks();
