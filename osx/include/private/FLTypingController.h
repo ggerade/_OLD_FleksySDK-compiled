@@ -82,6 +82,10 @@ public:
   FLDataCollector *getDataCollector();
   
   void biasPointForChar(FLPoint& p1, int offset);
+  
+  //Autolearning
+  std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
+  void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
 
 private:
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -246,6 +250,7 @@ private:
   void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   FLMessageType getSpaceBarState();
   void sendSpacebarState(bool forceSend = false);
+  
 };
 
 #endif

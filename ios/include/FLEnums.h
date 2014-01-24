@@ -51,13 +51,13 @@ enum FLMessageType{
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
   FLMessageType_SPACEBAR_STATE_CLEAR,
-  FLMessageType_WORD_AUTOLEARNED
 };
 
 //passed in as a parameter in onDictionaryModified
 enum FLDictionaryChangeEvent{
   FLDictionaryChangeEvent_ADD,
-  FLDictionaryChangeEvent_REMOVE
+  FLDictionaryChangeEvent_REMOVE,
+  FLDictionaryChangeEvent_WORD_AUTOLEARNED
 };
 
 //Result when called from JAVA
