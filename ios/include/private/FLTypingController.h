@@ -138,10 +138,11 @@ private:
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
   FLDataCollector *dataCollector = NULL;
+  FLAutoLearn *autoLearner = NULL;
+  
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
-  //FLAutoLearn *autoLearner = NULL;
   
   //Debug stuff
   void printTextBlocks();

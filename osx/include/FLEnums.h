@@ -50,7 +50,8 @@ enum FLMessageType{
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
-  FLMessageType_SPACEBAR_STATE_CLEAR
+  FLMessageType_SPACEBAR_STATE_CLEAR,
+  FLMessageType_WORD_AUTOLEARNED
 };
 
 //passed in as a parameter in onDictionaryModified
@@ -121,7 +122,7 @@ enum FLEventType{
   FLEventType_LP,
   FLEventType_WT,
   FLEventType_NEW_WORD,
-  FLEventType_SUGGESTION_0
+  FLEventType_SEL_SUGGESTION_0
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */
