@@ -27,7 +27,9 @@ public class FleksTest {
 	public static boolean tapper = false;
 	private static boolean client = false;
 	private static boolean unknown = false;
-	
+
+  private static boolean spaceBreak = false;
+
 	private final static String N = "n";
 	private final static String E = "e";
 	private final static String S = "s";
@@ -53,7 +55,9 @@ public class FleksTest {
 	private final static String X_IP = "-ip";
 	private final static String LRN2 = "-ll";
 	private final static String EZCP = "-ez";
-	
+
+  private final static String SPBK = "-sb";
+
 	private final static String STLW = "-tlw";
 	private final static String SSLW = "-slw";
 	private final static String SCLW = "-clw";
@@ -164,7 +168,9 @@ public class FleksTest {
 			}else if(a.equals(XOUT)){ 	print = false;
 			
 			}else if(a.equals(LRN2)){ 	learn = true;
-			
+
+      }else if(a.equals(SPBK)){ 	spaceBreak = true;
+
 			}else if(a.equals(GOAL)){ 	awaitGoal();
 			
 			}else if(a.equals(LERN)){ 	DataManager.enableLearning();
@@ -229,6 +235,7 @@ public class FleksTest {
 	private static void buildEngine(){
 		try{
 			FleksyEngine.createEngine(debug, languageCode);
+      FleksyEngine.api.setSpaceBreaksEnabled(spaceBreak);
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.err("Loading Engine Failed! Testing Failed! Exiting Environment! Good Day Sir!\n");

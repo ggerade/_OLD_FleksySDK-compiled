@@ -37,6 +37,8 @@
 -tt	: Run once, then again with real-time tapping enabled **
 -ez : Enables easy comparison, ignores ' and case sensitivity
 
+-sb : Enable the engines CVB space breaking feature
+
 -fol:XXXXX	: Enter a specific folder name ***
 -loc:xx-XX	: Determine language locale to use, xx-XX being the locale folder
 -fil:X.txt	: Enter a specific file name path
