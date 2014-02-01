@@ -95,7 +95,6 @@ private:
   std::vector<FLUnicodeString> specialCases;
   std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
-  std::vector<FLUnicodeString> last3events;
   
   FLUnicodeString versionNumber;
 	int expectedUserCursor;//loaction of the cursor
@@ -170,7 +169,6 @@ private:
   void correctTextBlockOnVerticalSwipe();
   void correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
-  bool checkForRepeatedTypingAndLearn(FLTextBlock *tb);
   void createEmoticonTextBlock();
   
   //Various helper functioins
@@ -197,7 +195,6 @@ private:
   void getReadyForInput();
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
-  void recordLastEvent(const FLUnicodeString &event);
   FLUnicodeString getGameCharacter(int index);
   std::vector<FLPoint> getSubVector(const std::vector<FLPoint> &original, int start, int end);
   void resetLongPressType();
