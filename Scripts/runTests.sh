@@ -42,17 +42,17 @@ FLEKSYSDK_COMPILED_BLACK_WHITE="\033[0m"
 FLEKSYSDK_COMPILED_BLACK_CYAN="\033[36m"
 FLEKSYSDK_COMPILED_BLACK_YELLOW="\033[33m"
 
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Building FleksySDK-compiled tests...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-if [ ! -x "${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/buildTests.sh" ]; then
-    echo "Scripts/buildTests.sh does not exist or is not valid."
-    exit 1;
-fi;
-
-"${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/buildTests.sh"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Building FleksySDK-compiled tests...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo ""
+#
+#if [ ! -x "${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/buildTests.sh" ]; then
+#    echo "Scripts/buildTests.sh does not exist or is not valid."
+#    exit 1;
+#fi;
+#
+#"${FLEKSYSDK_COMPILED_SCRIPTS_DIR}/buildTests.sh"
 
 echo ""
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
@@ -60,40 +60,42 @@ echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Running 'FleksyQualityPolice'...${FLEKSYSD
 echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
 echo ""
 
-FleksyQualityPolice/Scripts/runFleksyTester.sh
+#FleksyQualityPolice/Scripts/runFleksyTester.sh
+cd FleksyQualityPolice
+sh runQPtests.sh -fol:AssetsParliament s10 n20 w20000
 
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Debug)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-samples/FleksySample1/build/Debug/FleksySample_OSX
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Release)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-samples/FleksySample1/build/Release/FleksySample_OSX
-
-export MallocGuardEdges=YES
-export MallocScribble=YES
-export MallocStackLoggingNoCompact=YES
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Debug) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-samples/FleksySample1/build/Debug/FleksySample_OSX
-
-echo ""
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Release) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
-echo ""
-
-samples/FleksySample1/build/Release/FleksySample_OSX
+#echo ""
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Debug)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo ""
+#
+#samples/FleksySample1/build/Debug/FleksySample_OSX
+#
+#echo ""
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Release)...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo ""
+#
+#samples/FleksySample1/build/Release/FleksySample_OSX
+#
+#export MallocGuardEdges=YES
+#export MallocScribble=YES
+#export MallocStackLoggingNoCompact=YES
+#
+#echo ""
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Debug) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}--------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo ""
+#
+#samples/FleksySample1/build/Debug/FleksySample_OSX
+#
+#echo ""
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_CYAN}Executing 'FleksySample1/FleksySample_OSX' (Release) w/ MallocGuardEdges & MallocScribble...${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo "${FLEKSYSDK_COMPILED_BLACK_YELLOW}----------------------------------------------${FLEKSYSDK_COMPILED_BLACK_WHITE}"
+#echo ""
+#
+#samples/FleksySample1/build/Release/FleksySample_OSX
