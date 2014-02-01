@@ -62,6 +62,9 @@ echo ""
 
 #FleksyQualityPolice/Scripts/runFleksyTester.sh
 cd FleksyQualityPolice
+if [ ! -d "Output" ]; then
+    mkdir -p Output
+fi;
 sh runQPtests.sh -fol:AssetsParliament s10 n20 w20000
 
 #echo ""
