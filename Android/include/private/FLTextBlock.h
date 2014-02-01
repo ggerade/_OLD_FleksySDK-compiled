@@ -32,6 +32,7 @@ public:
   bool isEmojiTextBlock() const;
   void setIsEmojiTextBlock(bool isEmoji);
   bool isEndSentence() const;
+  bool isBeginSentence() const;
   bool isUserEditedText() const;
   void setIsAccuratelyTyped(bool isAccuratelyTyped);
   bool getIsAccuratelyTyped() const;
