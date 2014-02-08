@@ -70,6 +70,14 @@ public:
   void setDataFileHeader(const std::string &header);
   void processEventData(const FLUnicodeString &eventData);
   void writeDataToFile();
+  /*
+   * Compresses and encrypts data to file. Use this to create file for any kind of data.
+   * FLUicodeString data - data to write to file
+   * string directory - directory where files can be written
+   * Directory path is /path/to/directory (no / at the end)
+   * Returns a full path to the encrypted data file (<directory>/data.xxx) or empty string if fails to write data to file
+   */
+  FLUnicodeString writeDataToFile(const FLUnicodeString &data, const FLUnicodeString &directory);
   
   void spaceWithHint(const FLUnicodeString& hint, float length);
   

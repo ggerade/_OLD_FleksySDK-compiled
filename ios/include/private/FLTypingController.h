@@ -86,8 +86,12 @@ public:
   //Autolearning
   std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
   void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
+  
+  void enableGoatMode();
 
 private:
+  void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
+  
   std::string lastBatchEditBeginFunction; // Debugging?
 
 	FleksyListenerInterface &out;
@@ -95,6 +99,7 @@ private:
   std::vector<FLUnicodeString> specialCases;
   std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
+  std::map<FLUnicodeString, FLUnicodeString> wordToEmoji;
   
   FLUnicodeString versionNumber;
 	int expectedUserCursor;//loaction of the cursor
@@ -120,6 +125,7 @@ private:
   bool voiceFeedback;
   bool startedTypingSession;
   bool inBatchEdit;
+  bool goatMode;
 
   CursorChangeEvent cursorChangeEvent;
   
@@ -248,6 +254,7 @@ private:
   FLMessageType getSpaceBarState();
   void sendSpacebarState(bool forceSend = false);
   
+  void insertEmojiForWord(FLUnicodeString word, std::vector<FLUnicodeString> & suggestions);
 };
 
 #endif

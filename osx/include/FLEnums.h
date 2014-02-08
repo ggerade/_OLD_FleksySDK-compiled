@@ -121,6 +121,8 @@ enum FLEventType{
   FLEventType_FA,
   FLEventType_LP,
   FLEventType_WT,
+  FLEventType_ATW,
+  FLEventType_ALW,
   FLEventType_NEW_WORD,
   FLEventType_SEL_SUGGESTION_0
 };

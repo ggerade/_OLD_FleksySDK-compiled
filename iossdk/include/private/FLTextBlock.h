@@ -19,6 +19,7 @@ public:
   //Getters/Setters
   FLSuggestionsContainer *getResponse();
   void setCorrectedText(const FLUnicodeString &text);
+  FLUnicodeString getCorrectedText();
   void setTextEntered(const FLUnicodeString &text);
   FLUnicodeString getTextEntered() const;
   int getLength() const;
@@ -96,7 +97,9 @@ private:
   void printTextBlock() const;
   void deleteSuggestions();
   
+  
   int lengthBeforePreviousUpdate = 0;
+  void setLengthBeforePreviousUpdate(int length);
 };
 
 #endif
