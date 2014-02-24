@@ -13,7 +13,7 @@
 #define FLSOCKETSCOMMON_H_
 
 #include <vector>
-#include <PatternRecognizer/FLPoint.h>
+//#include <PatternRecognizer/FLPoint.h>
 //#include <PatternRecognizer/Structures.h>
 #include "FLUnicodeString.h"
 
