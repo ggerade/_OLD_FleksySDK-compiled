@@ -1,0 +1,6 @@
+*.jar -delta
+lib*.so -delta
+lib*.a -delta
+*.dylib -delta
+resourceArchive*.jet -delta
+
