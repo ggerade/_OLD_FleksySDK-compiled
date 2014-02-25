@@ -72,6 +72,9 @@ public:
   void writeDataToFile();
   
   void spaceWithHint(const FLUnicodeString& hint, float length);
+  
+  std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
+  void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
 };
 
 #endif

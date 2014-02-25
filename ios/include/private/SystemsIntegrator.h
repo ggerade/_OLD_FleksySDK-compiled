@@ -11,30 +11,9 @@
 
 #include <string>
 #include <vector>
+#include <array>
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
-
-// The following two #ifndefs are needed for iFleksy.
-// These are nominally declared in `FLKeyTapsRecognizer.h`, but by including that header, it causes a huge dependency cascade when used from iFleksy.
-// This is ugly, but IMHO, better than the alternative.  :(
-
-#ifndef FLFOUNDWORDS_DEFINED
-#define FLFOUNDWORDS_DEFINED
-typedef struct {
-  FLUnicodeString word;
-  FLUnicodeString tapWord;
-  double shapeScore;
-  double chiPvalue;
-  double contextScore;
-  double score;
-  bool isExtraWord;
-} FLFoundWords;
-#endif
-
-#ifndef FLFOUNDWORDSVECTOR_DEFINED
-#define FLFOUNDWORDSVECTOR_DEFINED
-typedef std::vector<FLFoundWords> FLFoundWordsVector;
-#endif
 
 class FLTapsToWords;
 typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
@@ -57,7 +36,6 @@ public:
 class SystemsIntegrator {
   
 private:
-  FLFoundWordsVector _foundWordsVector;
   bool blindMode = false;
   
 public:
@@ -65,22 +43,10 @@ public:
   ~SystemsIntegrator();
 
   FleksyUtilities* utils = NULL;
-  //FLTokenPredictor* ftp = NULL;
   
   std::vector<FLUnicodeString> noChangeWords;
   
-  //FLSpaceHelper* spaceHelper = NULL;
-  
   FLTapsToWordsPtr tapsToWords;
-  
-  /**
-   Gets the FLFoundWords associated with the last call to getCandidatesForRequest
-   @param index of the word to get. Same ordering as the suggested words
-   @returns a FLFoundWords object
-   */
-  FLFoundWords getFoundWord(size_t index);
-  
-  size_t numWordsFound();
   
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   
@@ -114,10 +80,6 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
-  
-  
-  //bool getSettingPlusMinus1();
-  //void setSettingPlusMinus1(bool b);
   
   FLUnicodeString getVersion();
 };

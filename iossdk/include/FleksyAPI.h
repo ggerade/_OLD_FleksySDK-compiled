@@ -151,6 +151,8 @@ public:
    */
   std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
   
+  FLPointToCharVectorMap getPointToCharVectorMapForKeyboard(FLKeyboardID keyboardID);
+
   /*
    * Returns the character nearest to the target point for the specified keyboard layout
    */

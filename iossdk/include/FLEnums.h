@@ -50,13 +50,14 @@ enum FLMessageType{
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
-  FLMessageType_SPACEBAR_STATE_CLEAR
+  FLMessageType_SPACEBAR_STATE_CLEAR,
 };
 
 //passed in as a parameter in onDictionaryModified
 enum FLDictionaryChangeEvent{
   FLDictionaryChangeEvent_ADD,
-  FLDictionaryChangeEvent_REMOVE
+  FLDictionaryChangeEvent_REMOVE,
+  FLDictionaryChangeEvent_WORD_AUTOLEARNED
 };
 
 //Result when called from JAVA
@@ -119,7 +120,9 @@ enum FLEventType{
   FLEventType_ET,
   FLEventType_FA,
   FLEventType_LP,
-  FLEventType_WT
+  FLEventType_WT,
+  FLEventType_NEW_WORD,
+  FLEventType_SEL_SUGGESTION_0
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

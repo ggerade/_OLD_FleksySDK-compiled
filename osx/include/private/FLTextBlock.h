@@ -29,7 +29,10 @@ public:
   bool isNewLineTextBlock() const;
   bool isSymbolsTextBlock() const;
   void setIsSymbolsTextBlock(bool symbol);
+  bool isEmojiTextBlock() const;
+  void setIsEmojiTextBlock(bool isEmoji);
   bool isEndSentence() const;
+  bool isBeginSentence() const;
   bool isUserEditedText() const;
   void setIsAccuratelyTyped(bool isAccuratelyTyped);
   bool getIsAccuratelyTyped() const;
@@ -68,6 +71,7 @@ public:
   
   int getLengthBeforePreviousUpdate() const;
   int getLengthDiff() const;
+  
 private:
   FleksyListenerInterface &out;
 	FLSuggestionsContainer *response;
@@ -83,6 +87,7 @@ private:
   bool userEditedText;
   bool changedToNextSuggestion;
   bool isAccuratelyTyped;
+  bool isEmoji;
   
   void changeSuggestion(int offset);
   FLUnicodeString matchCase(const FLUnicodeString &word);

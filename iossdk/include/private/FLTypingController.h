@@ -15,6 +15,7 @@
 #include "FLTrackEvents.h"
 #include "FLDataCollector.h"
 #include "FLUnicodeString.h"
+#include "FLAutoLearn.h"
 
 class FLConsistencyChecker;
 
@@ -81,6 +82,10 @@ public:
   FLDataCollector *getDataCollector();
   
   void biasPointForChar(FLPoint& p1, int offset);
+  
+  //Autolearning
+  std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
+  void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
 
 private:
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -90,7 +95,6 @@ private:
   std::vector<FLUnicodeString> specialCases;
   std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
-  std::vector<FLUnicodeString> last3events;
   
   FLUnicodeString versionNumber;
 	int expectedUserCursor;//loaction of the cursor
@@ -137,6 +141,8 @@ private:
   FLTextBlockCursor *tbCursor = NULL;
   FLConsistencyChecker *crazyCheck = NULL;
   FLDataCollector *dataCollector = NULL;
+  FLAutoLearn *autoLearner = NULL;
+  
   //Just pointers
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
@@ -163,7 +169,6 @@ private:
   void correctTextBlockOnVerticalSwipe();
   void correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
-  bool checkForRepeatedTypingAndLearn(FLTextBlock *tb);
   void createEmoticonTextBlock();
   
   //Various helper functioins
@@ -190,7 +195,6 @@ private:
   void getReadyForInput();
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
-  void recordLastEvent(const FLUnicodeString &event);
   FLUnicodeString getGameCharacter(int index);
   std::vector<FLPoint> getSubVector(const std::vector<FLPoint> &original, int start, int end);
   void resetLongPressType();
@@ -243,6 +247,7 @@ private:
   void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   FLMessageType getSpaceBarState();
   void sendSpacebarState(bool forceSend = false);
+  
 };
 
 #endif

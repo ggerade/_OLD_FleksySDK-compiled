@@ -20,10 +20,6 @@
 #include "FLUnicodeString.h"
 #include "FLPoint.h"
 
-struct FLPointComp {
-  bool operator() (const FLPoint& lhs, const FLPoint& rhs) const { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
-};
-typedef std::map<FLPoint, std::vector<FLUnicodeString>, FLPointComp> FLPointToCharVectorMap;
 
 class FLKeyboard {
 
@@ -91,6 +87,7 @@ public:
   void pointsFromLetters(const FLUnicodeStringPtr &letters, FLPoint points[]);
 
   std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
+  FLPointToCharVectorMap getPointToCharVectorMapForKeyboard(FLKeyboardID keyboardID);
 };
 
 typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;

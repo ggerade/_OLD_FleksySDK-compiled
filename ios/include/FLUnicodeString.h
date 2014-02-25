@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include "FLPoint.h"
 
 #ifndef FLUNICODECODEPOINT_DEFINED
@@ -232,5 +233,10 @@ struct FLUnicodeStringPtrHash {
 struct FLUnicodeStringPtrEqual {
   bool operator()(const FLUnicodeStringPtr& lhs, const FLUnicodeStringPtr& rhs) const { return((*(lhs.get())) == (*(rhs.get()))); }
 };
+
+struct FLPointComp {
+  bool operator() (const FLPoint& lhs, const FLPoint& rhs) const { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }
+};
+typedef std::map<FLPoint, std::vector<FLUnicodeString>, FLPointComp> FLPointToCharVectorMap;
 
 #endif /* defined(__FleksySDK__FLUnicodeString__) */
