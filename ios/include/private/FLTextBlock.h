@@ -10,6 +10,7 @@
 #include "FLUnicodeString.h"
 
 class SystemsIntegrator;
+class FLTypingController;
 
 class FLTextBlock{
 public:
@@ -50,7 +51,7 @@ public:
   void setRequestPoints(const std::vector<FLPoint> &points);
 	
 	void deleteText();
-  FLUnicodeString deleteCharacter(int indx);
+  FLUnicodeString deleteCharacter(int indx, FLTypingController *tc, int oldLength, int oldIndx,  int userCursorPos);
   void createNewLineCharacter();
   void cleanTextBlock();
   void resetSuggestionIndex();

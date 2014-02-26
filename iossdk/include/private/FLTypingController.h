@@ -68,6 +68,7 @@ public:
   int getCursorPosition();//only used by TC tester
   FLUnicodeString getTextFromTextBlocks();// in public for debugging
   bool getShiftState();//only used by TC tester
+  FLUnicodeString getTCDebugInfo();
   //EOF testing functions
 
   //Crazy Cheker uses these
