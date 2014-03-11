@@ -62,6 +62,7 @@ typedef enum {
   kLanguage_th_TH,
   kLanguage_uz_UZ,
   kLanguage_vi_VN,
+  kLanguage_ar_TN,
   kLanguageUnknown
 } kLanguage;
 
