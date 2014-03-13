@@ -125,7 +125,8 @@ enum FLEventType{
   FLEventType_ALW,
   FLEventType_NEW_WORD,
   FLEventType_SEL_SUGGESTION_0,
-  FLEventType_CC //Characters Corrected
+  FLEventType_CC, //Characters Corrected
+  FLEventType_WC  //Word Corrected
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

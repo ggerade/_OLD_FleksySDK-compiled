@@ -28,6 +28,7 @@ public:
   void swipeDown();
   void switchedKeyboard(FLKeyboardID id);
   void wordTyped();
+  void wordCorrected();
   void correctedCharacters(int numOfCorrections);
   
   //Single shot events
@@ -49,7 +50,10 @@ private:
   FLUnicodeString currentKeyboardLayout;
   
   
-  void sendEvent(const FLUnicodeString &data);
+  void sendEvent(FLUnicodeString &data);
+  static void* sendEventWrapper(void *arguments);
+  void sendEventAsync(FLUnicodeString &data);
+  
   FLUnicodeString createEventJSON(const FLUnicodeString &event, const FLUnicodeString &layout, const FLUnicodeString &message, const FLUnicodeString &value);
   std::map<FLUnicodeString, int>::iterator findEvent(const FLUnicodeString &event);
   bool hasReachedThreshold(int numOfEvents);
@@ -57,6 +61,7 @@ private:
   FLUnicodeString intToString(int integer);
   void swipeRight();
   void spaceBarPress();
+  
   
   
   FLUnicodeString getLayoutName();
