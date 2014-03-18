@@ -8,6 +8,15 @@
 #ifndef __FleksySDK_FLEnums_h__
 #define __FleksySDK_FLEnums_h__
 
+enum FLABTestType{
+  FLABTestType_Engine
+};
+
+enum FLABTestMode {
+  FLABTestMode_A,
+  FLABTestMode_B,
+};
+
 enum FLCapitalizationMode{
   FLCapitalizationMode_CAP_SENTENCES,
   FLCapitalizationMode_CAP_WORDS,
@@ -126,7 +135,8 @@ enum FLEventType{
   FLEventType_NEW_WORD,
   FLEventType_SEL_SUGGESTION_0,
   FLEventType_CC, //Characters Corrected
-  FLEventType_WC  //Word Corrected
+  FLEventType_WC,  //Word Corrected
+  FLEventType_MISSED_ALL_CHARS
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

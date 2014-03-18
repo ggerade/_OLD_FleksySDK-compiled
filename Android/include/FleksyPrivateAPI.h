@@ -83,6 +83,19 @@ public:
   
   std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
   void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
+  
+  /**
+   * Initializes Fleksy for A/B testing. Can be called multiple times
+   * to test multiple things at once
+   *
+   * @param type
+   * the type of the A/B test to use.
+   *
+   * @param mode
+   * Selecst the A or B mode to test
+   */
+  void setupABTesting(FLABTestType type, FLABTestMode mode);
+
 };
 
 #endif
