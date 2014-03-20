@@ -19,6 +19,14 @@
   #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
   #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
   #define  LOG_ALWAYS(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+#elif defined(__APPLE__)
+#include <CoreFoundation/CFString.h>
+extern "C" void NSLog(void *format, ...);
+#define  LOGI(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s:\t%@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGD(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s:\t%@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGW(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s:\t%@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGE(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s:\t%@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOG_ALWAYS(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s:\t%@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
 #else
   #define  LOGI(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGD(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
