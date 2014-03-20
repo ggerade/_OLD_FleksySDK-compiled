@@ -10,7 +10,7 @@
 #define __FleksyLib__FLResourceArchive__
 
 #include "FLResourceArchiveCommon.h"
-#include "FleksyDefines.h"
+#include <private/FleksyDefines.h>
 
 #include <stdint.h>
 #include "FLFile.h"

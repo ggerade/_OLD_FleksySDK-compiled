@@ -11,8 +11,8 @@
 
 #include "FLPoint.h"
 #include "FleksyListenerInterface.h"
-#include "FLFile.h"
-#include "FLResourceArchive.h"
+#include <private/PatternRecognizer/FLFile.h>
+#include <private/PatternRecognizer/FLResourceArchive.h>
 
 class FLTypingController;
 class SystemsIntegrator;
