@@ -136,6 +136,7 @@ enum FLEventType{
   FLEventType_SEL_SUGGESTION_0,
   FLEventType_CC, //Characters Corrected
   FLEventType_WC,  //Word Corrected
+  FLEventType_WC_INTERNAL,  //Word Corrected
   FLEventType_MISSED_ALL_CHARS
 };
 

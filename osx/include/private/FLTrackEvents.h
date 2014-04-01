@@ -28,7 +28,7 @@ public:
   void swipeDown();
   void switchedKeyboard(FLKeyboardID id);
   void wordTyped();
-  void wordCorrected();
+  void wordCorrected(FLUnicodeString &event);
   void correctedCharacters(int numOfCorrections);
   void missedAllCharacters();
   
