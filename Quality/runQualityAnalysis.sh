@@ -11,7 +11,7 @@ PYTHON3=/Library/Frameworks/Python.framework/Versions/3.3/bin/python3
 if [[ -z `type -t ${PYTHON3}` ]]; then
     echo "/Library/Frameworks/Python.framework/Versions/3.3/bin/python3 not found"
     PYTHON3=/usr/bin/python3
-    if [[ -z `type -t ${PTYHON3}` ]]; then
+    if [[ -z `type -t ${PYTHON3}` ]]; then
 	echo "/usr/bin/python3 not found. exiting..."
 	exit
     fi
