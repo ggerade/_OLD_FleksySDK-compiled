@@ -35,7 +35,7 @@ function waitProc()
 function waitAllProcs() {
     declare -a PROC_IDS=("${!1}")
     SLEEP=$2
-    for IDS in $PROC_IDS; do
+    for IDS in ${PROC_IDS[@]}; do
 	waitProc $IDS $SLEEP
     done 
 }

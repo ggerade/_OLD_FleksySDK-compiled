@@ -56,7 +56,7 @@ if [[ ${USE_PARLIMENT_SRC} -eq 1 ]]; then
 	fi
     done
 
-    if [[ $CNT -gt 0 ]]; then
+    if [[ $CNT -gt 1 ]]; then
 	echo "Waiting for procs..."
 	waitAllProcs PROC_IDS[@] 10
     fi
