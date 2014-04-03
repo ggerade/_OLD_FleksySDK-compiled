@@ -45,7 +45,7 @@ if [[ ${USE_PARLIMENT_SRC} -eq 1 ]]; then
     let CNT=1
     for NOISE in ${QP_NOISE_SEQUENCE}; do
 	echo "Launching QP for noise ${NOISE}"
-	${FL_QP} ${FL_JET_FILE} ${PARL_SAMPLE} 0 20 $NOISE >> ${QP_OUTPUT_FILE}_$NOISE &
+	${FL_QP} ${FL_JET_FILE} ${PARL_SAMPLE} 0 ${NOISE} ${QP_RUN_SIZE} >> ${QP_OUTPUT_FILE}_$NOISE &
 	PROC_IDS[$CNT]=$!
 	if [[ $CNT -eq $NUM_PROCS ]]; then
 	    echo "Waiting for procs..."
