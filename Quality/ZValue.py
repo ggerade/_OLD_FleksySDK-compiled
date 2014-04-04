@@ -12,12 +12,13 @@ values = []
 for line in file:
     words = FileIO.breakLine(line, 0)
     try:
-        cnt = float(words.pop())
-        rate = float(words.pop())
+        if (len(words) == 2):
+            cnt = float(words.pop())
+            rate = float(words.pop())
         
-        if (rate < 0.9):
-            totalSum += cnt
-            totalErr += rate*cnt
+            if (rate < 0.9):
+                totalSum += cnt
+                totalErr += rate*cnt
 
     except ValueError:
         pass

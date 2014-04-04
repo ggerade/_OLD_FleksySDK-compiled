@@ -147,6 +147,30 @@ if [[ ${USE_ENGINE_SRC} -eq 1 ]]; then
     fi
 fi
 
+if [[ ${USE_USER_SRC} -eq 1 ]]; then
+    if [[ ${RUN_QP} -eq 1 ]]; then 
+	# set up variables for runQPMeasure to work
+	QPM_SAMPLE=${FL_QUALITY_ANALYSIS_OUTPUT}/userSample.txt
+	QPM_FILE=${FL_QUALITY_ANALYSIS_DATA}/userText.txt
+	QPM_SRC_SIZE=${USER_QP_SRC_SIZE}
+	QPM_NOISE_SEQUENCE=${USER_QP_NOISE_SEQUENCE}
+	QPM_TRIALS=${USER_QP_TRIALS}
+	QPM_OUTPUT_FILE=${FL_QUALITY_ANALYSIS_OUTPUT}/QPUserOutput.txt
+	runQPMeasure user
+    fi
 
+    if [[ ${RUN_SG} -eq 1 ]]; then
+	SG_OFFSET=${USER_SG_OFFSET}
+	SG_STD=${USER_SG_STD}
+	SG_TRIALS=${USER_SG_TRIALS}
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGUserBigrams.txt    
+	echo ""
+	runSimNGrams user ${FL_QUALITY_ANALYSIS_DATA}/userBigrams.txt
+
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGUserTrigrams.txt    
+	echo ""
+	runSimNGrams user ${FL_QUALITY_ANALYSIS_DATA}/userTrigrams.txt
+    fi
+fi
 
 
