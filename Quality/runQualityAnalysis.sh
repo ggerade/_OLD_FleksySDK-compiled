@@ -104,28 +104,32 @@ mkdir -p ${FL_QUALITY_ANALYSIS_OUTPUT}
 rm -f ${FL_QUALITY_ANALYSIS_OUTPUT}/*
 
 if [[ ${USE_PARLIMENT_SRC} -eq 1 ]]; then
-    PARL_FILE=`ls -l ${FL_PARLIMENT_ASSET_DIR} | awk '{print $9}'`
-    PARL_FILE=`echo ${PARL_FILE}`
+    if [[ ${RUN_QP} -eq 1 ]]; then 
+	PARL_FILE=`ls -l ${FL_PARLIMENT_ASSET_DIR} | awk '{print $9}'`
+	PARL_FILE=`echo ${PARL_FILE}`
 
-    # set up variables for runQPMeasure to work
-    QPM_SAMPLE=${FL_QUALITY_ANALYSIS_OUTPUT}/parlSample.txt
-    QPM_FILE=${FL_PARLIMENT_ASSET_DIR}/${PARL_FILE}
-    QPM_SRC_SIZE=${PARL_QP_SRC_SIZE}
-    QPM_NOISE_SEQUENCE=${PARL_QP_NOISE_SEQUENCE}
-    QPM_TRIALS=${PARL_QP_TRIALS}
-    QPM_OUTPUT_FILE=${FL_QUALITY_ANALYSIS_OUTPUT}/QPParlOutput.txt
-    runQPMeasure parliment
+	# set up variables for runQPMeasure to work
+	QPM_SAMPLE=${FL_QUALITY_ANALYSIS_OUTPUT}/parlSample.txt
+	QPM_FILE=${FL_PARLIMENT_ASSET_DIR}/${PARL_FILE}
+	QPM_SRC_SIZE=${PARL_QP_SRC_SIZE}
+	QPM_NOISE_SEQUENCE=${PARL_QP_NOISE_SEQUENCE}
+	QPM_TRIALS=${PARL_QP_TRIALS}
+	QPM_OUTPUT_FILE=${FL_QUALITY_ANALYSIS_OUTPUT}/QPParlOutput.txt
+	runQPMeasure parliment
+    fi
 
-    SG_OFFSET=${PARL_SG_OFFSET}
-    SG_STD=${PARL_SG_STD}
-    SG_TRIALS=${PARL_SG_TRIALS}
-    SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGParlBigrams.txt    
-    echo ""
-    runSimNGrams parliment ${FL_QUALITY_ANALYSIS_DATA}/parlBigrams.txt
+    if [[ ${RUN_SG} -eq 1 ]]; then
+	SG_OFFSET=${PARL_SG_OFFSET}
+	SG_STD=${PARL_SG_STD}
+	SG_TRIALS=${PARL_SG_TRIALS}
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGParlBigrams.txt    
+	echo ""
+	runSimNGrams parliment ${FL_QUALITY_ANALYSIS_DATA}/parlBigrams.txt
 
-    SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGParlTrigrams.txt    
-    echo ""
-    runSimNGrams parliment ${FL_QUALITY_ANALYSIS_DATA}/parlTrigrams.txt
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGParlTrigrams.txt    
+	echo ""
+	runSimNGrams parliment ${FL_QUALITY_ANALYSIS_DATA}/parlTrigrams.txt
+    fi
 fi
 
 
