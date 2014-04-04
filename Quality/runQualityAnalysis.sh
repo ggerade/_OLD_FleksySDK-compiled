@@ -132,6 +132,21 @@ if [[ ${USE_PARLIMENT_SRC} -eq 1 ]]; then
     fi
 fi
 
+if [[ ${USE_ENGINE_SRC} -eq 1 ]]; then
+    if [[ ${RUN_SG} -eq 1 ]]; then
+	SG_OFFSET=${ENG_SG_OFFSET}
+	SG_STD=${ENG_SG_STD}
+	SG_TRIALS=${ENG_SG_TRIALS}
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGEngBigrams.txt    
+	echo ""
+	runSimNGrams engine ${FL_QUALITY_ANALYSIS_DATA}/engBigrams.txt
+
+	SG_OUTPUT=${FL_QUALITY_ANALYSIS_OUTPUT}/SGEngTrigrams.txt    
+	echo ""
+	runSimNGrams engine ${FL_QUALITY_ANALYSIS_DATA}/engTrigrams.txt
+    fi
+fi
+
 
 
 
