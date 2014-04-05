@@ -45,7 +45,7 @@ public:
   void setCorrectionMode(FLCorrectionMode mode);
   FLCorrectionMode getCorrectionMode();
   void cursorSelectionChanged(int selectionStart, int selectionEnd);
-  void startTypingSession(bool platformMovesCursor = false);
+  void startTypingSessionWithExtra(bool platformMovesCursor, int fieldAction, int keyboardSize, int spacebar, int invisible);
   void endTypingSession();
   void postLoadSetup();
   void setCapitalizationMode(FLCapitalizationMode mode);
@@ -160,6 +160,8 @@ private:
   
   //Game key charging
   FLUnicodeString getIntendedCharacter(int offset);
+  
+  void startTypingSession(bool platformMovesCursor = false);
   
   //Stuff that deletes
   void backspace(float length);

@@ -84,6 +84,7 @@ private:
   void deleteFile(const char * filePath);
   
   bool isTrackerEvent(FLEventType event);
+  bool isDataEvent(FLEventType event);
   
   std::string getDataWritePath();
 };

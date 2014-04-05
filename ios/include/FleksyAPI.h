@@ -111,6 +111,11 @@ public:
   void startTypingSession(bool platformMovesCursor = false);
   
   /*
+   * Start typing session with extra information about the text editor and keyboard state
+   */
+  void startTypingSessionWithExtra(bool platformMovesCursor = false, int fieldAction = -1, int keyboardSize = -1, int spacebar = -1, int invisible = -1);
+  
+  /*
    * Call this when the user is done with entering text(closed app/keyboard)
    * IMPORTANT: After calling endTypingSession(), startTypingSession() must be called before making any other calls to the API.
    */
