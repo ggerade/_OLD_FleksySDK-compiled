@@ -11,6 +11,14 @@
 
 #include <assert.h>
 
+//#define FLEKSYSUPERNOLOGGING
+
+#ifdef FLEKSYSUPERNOLOGGING
+#define FLEKSYNOLOGGING 1
+#warning FLEKSYNOLOGGING is defined
+#warning LOG_ALWAYS is disabled
+#endif
+
 #ifdef ANDROID
   #include <android/log.h>
   #define  LOG_TAG    "Fleksy Native C++"
@@ -24,7 +32,11 @@
   #define  LOGD(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGW(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGE(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
+#ifndef FLEKSYSUPERNOLOGGING
   #define  LOG_ALWAYS(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
+#else
+  #define LOG_ALWAYS(...)
+#endif
 #endif
 
 #if defined(FLEKSYNOLOGGING) || (!ANDROID && RELEASE)

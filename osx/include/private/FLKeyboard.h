@@ -38,7 +38,8 @@ private:
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
   
-  void loadKeyboardData(const FLFilePtr &keyboardFile, bool isEncrypted);
+  void loadKeyboardData(const FLFilePtr &keyboardFile, const FLFilePtr &commonData);
+  void loadLegacyKeyboardData(const FLFilePtr &keyboardFile);
   FLUnicodeString getNearestLetterForPoint(FLPoint target);
   std::vector<FLPointToCharVectorMap> pointKeyMap;
   
@@ -48,7 +49,7 @@ private:
   FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
 
 public:
-  FLKeyboard(const FLFilePtr &keyboardFile, bool isEncrypted);
+  FLKeyboard(const FLFilePtr &keyboardFile, const FLFilePtr &commonData);
   ~FLKeyboard();
   
   inline bool dawgGetPointForAlphaUTF16(uint16_t c, FLPoint &p) const {

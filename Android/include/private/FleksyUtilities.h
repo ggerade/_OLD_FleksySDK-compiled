@@ -59,7 +59,7 @@ public:
   ////////////////////
   
   FLKeyboardPtr keyboard;
-  FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
+  void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonData);
   
   size_t loadedWordCount();
   bool isWordInDictionary(FLUnicodeStringPtr &printLetters, bool allowLowerCase);

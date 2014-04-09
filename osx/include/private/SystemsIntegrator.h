@@ -50,7 +50,7 @@ public:
   
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   
-  FLPoint loadKeyboardData(FLFilePtr &keyboardFile, bool isEncrypted);
+  void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonFile);
   void loadDictionary(const std::string& tag, void* data, size_t dataLength, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   
   void loadDictionary(FLFilePtr &f, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);

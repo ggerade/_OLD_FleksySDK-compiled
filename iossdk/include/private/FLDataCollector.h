@@ -63,6 +63,7 @@ private:
   std::string dataWritePath;
   std::string fileHeader;
   bool isFileReadyForUpload;
+  bool recievedPointEvent;
   
   FLTrackEvents *tracker = NULL;
   

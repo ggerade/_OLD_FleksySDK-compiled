@@ -145,7 +145,13 @@ enum FLEventType{
   FLEventType_WC_INTERNAL,  //Word Corrected
   FLEventType_MISSED_ALL_CHARS,
   FLEventType_SEL_DEL,
-  FLEventType_REPARSE
+  FLEventType_REPARSE,
+  FLEventType_TD, //Text block deleted
+  FLEventType_TI,
+  FLEventType_SUW,
+  FLEventType_SUP,
+  FLEventType_SDW,
+  FLEventType_SDP
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

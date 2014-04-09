@@ -69,6 +69,12 @@ public:
   FLUnicodeString getTextFromTextBlocks();// in public for debugging
   bool getShiftState();//only used by TC tester
   FLUnicodeString getTCDebugInfo();
+  FLTextBlock* getLastUpdatedTB();
+  
+  // Two sets of tokens, first plain, second marking if the tokens were user typed words.
+  std::pair<std::vector<FLUnicodeString>, std::vector<FLUnicodeString>> getTwoPreviousTokens(int textBlockIndex);
+  
+  std::vector<FLTextBlock*> getTextBlocks() { return textBlocks; }
   //EOF testing functions
 
   //Crazy Cheker uses these
@@ -89,6 +95,11 @@ public:
   void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
   
   void enableGoatMode();
+  
+  // Debug
+  FLUnicodeString displayString(bool printDirectly = false);
+  void printTextBlocks();
+  void printfTextBlocks();
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -155,7 +166,7 @@ private:
   FLTextBlock *lastUpdatedTB = NULL;
   
   //Debug stuff
-  void printTextBlocks();
+  FLTextBlock *lastTBtoBeCorrected = nullptr;
   FLUnicodeString getSlashSeparatedSuggestions(const std::vector<FLUnicodeString> &suggestions);
   
   //Game key charging
@@ -171,7 +182,6 @@ private:
   int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
   //TextBlock correction operations
-  std::vector<FLUnicodeString> getTwoPreviousTokens(int textBlockIndex);
   void getSuggestionsForTextBlock(FLTextBlock *tb, int textBlockIndex = -1);
   void handleVerticalSwipe(bool isUp);
   void correctTextBlockOnSwipeRight(FLTextBlock *tb);
@@ -258,6 +268,7 @@ private:
   void sendSpacebarState(bool forceSend = false);
   
   void insertEmojiForWord(FLUnicodeString word, std::vector<FLUnicodeString> & suggestions);
+  FLUnicodeString getTextBlockInfos();
 };
 
 #endif

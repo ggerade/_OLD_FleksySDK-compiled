@@ -26,7 +26,7 @@ public:
    * Set the resource file that will be used by loadResources(). This also loads the keyboard maps so that the client can use
    * getKeymapForKeyboard() to draw the UI before calling loadResources().
    */
-  void setResourceFile(const char *file);
+  void setResourceFile(const char *file, FLUnicodeString keyboardName = "");
   
   /*
    * Loads the resources from the file set by setResourceFile().

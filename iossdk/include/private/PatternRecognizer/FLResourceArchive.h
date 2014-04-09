@@ -29,7 +29,7 @@ public:
   ~FLResourceArchive();
 
   FLFilePtr FLFileForFileName(const char *fileName);
-  std::string getTag();
+  FLUnicodeString getTag();
 
   kLanguage getLanguage();
   uint16_t getLanguageMajor();

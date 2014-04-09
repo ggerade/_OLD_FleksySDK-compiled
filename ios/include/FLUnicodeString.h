@@ -85,6 +85,7 @@ public:
   FLUnicodeString(const char utf8String[]);
   FLUnicodeString(const unsigned char *utf8String);
   FLUnicodeString(const unsigned char *utf8String, size_t utf8Length);
+  FLUnicodeString(const std::string utf8String);
 
   bool containsOnlyISO8859Characters() const {
     size_t length = this->length();
@@ -127,6 +128,7 @@ public:
   int lengthOfNextGraphemeAt(int index) const;
   int lengthOfPreviousGraphemeAt(int index) const;
   FLUnicodeString graphemeAtIndex(int index) const;
+  FLUnicodeString graphemeAtIndex(size_t index) const { return graphemeAtIndex((int) index); }
   
   // Similar to length, but returns number of graphemes, rather than number of code points.
   int gLength() const;
@@ -147,6 +149,36 @@ public:
   FLUnicodeString upperCaseString() const;
   FLUnicodeString titleCaseString() const;
   FLUnicodeString onlyLettersString() const;
+  
+  FLUnicodeString ltrim() const;
+  FLUnicodeString rtrim() const;
+  FLUnicodeString trim() const;
+  
+  FLUnicodeString filter(std::function<bool(const FLUnicodeString)> f) const;
+  FLUnicodeString filterNot(std::function<bool(const FLUnicodeString)> f) const;
+  
+  std::vector<FLUnicodeString> split(const FLUnicodeString &delim) const;
+  
+  // Return a substring of this string, including start, but not including end.
+  FLUnicodeString takeFromTo(size_t start, size_t end) const;
+  
+  // Apply op to each grapheme of this function.
+  void forEachGrapheme(std::function<void(const FLUnicodeString&)> op) const {
+    for (int i = 0; i < length(); ) {
+      FLUnicodeString grapheme = graphemeAtIndex(i);
+      op(grapheme);
+      i += grapheme.length();
+    }
+  }
+  
+  // If this strings initial characters all match other, return true, false otherwise.
+  bool startsWith(const FLUnicodeString other) const;
+  bool endsWith(const FLUnicodeString other) const;
+  
+  size_t find(const char target[], size_t from = 0) const;
+  size_t find(const FLUnicodeString target, size_t from = 0) const;
+  size_t rfind(const char target[], size_t from = std::string::npos) const;
+  size_t rfind(const FLUnicodeString target, size_t from = std::string::npos) const;
 
   FLUnicodeCodePoint codePointForGraphemeAtIndex(int index) const;
   FLUnicodeCategory unicodeCategoryForGraphemeAtIndex(int index) const;
@@ -182,6 +214,7 @@ public:
   FLUnicodeString &operator+=(const FLUnicodeString & __rhs) { this->append(__rhs.data(), __rhs.size()); return(*this); }
   FLUnicodeString &operator+=(int __rhs)                     { uint16_t c = (uint16_t)__rhs; this->append(&c, 1); return(*this); }
   FLUnicodeString &operator+=(const char __rhs[])            { FLUnicodeString __r; __r.setToUTF8String((const unsigned char *)__rhs); *this += __r; return(*this); }
+  FLUnicodeString &operator+=(const std::string __rhs)       { return (*this) += __rhs.c_str(); }
   
   FLUnicodeString  operator+ (const FLUnicodeString & __rhs) const { FLUnicodeString __r; __r.assign(this->data(), this->size()); __r.append(__rhs.data(), __rhs.size()); return(__r); }
   FLUnicodeString  operator+ (const char __rhs[])            const { FLUnicodeString __r; __r.assign(this->data(), this->size()); __r += __rhs; return(__r); }

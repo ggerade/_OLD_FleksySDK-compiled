@@ -20,11 +20,14 @@ class SystemsIntegrator;
 class FleksyAPIpImpl{
 private:
   FLResourceArchivePtr resourceArchive;
-  void initResources();
+  void initResources(const FLUnicodeString &keyboardName);
   std::string resourcePath;
   
   FLPoint internalKeyboardSize;
   FLPoint externalKeyboardSize;
+  
+  FLUnicodeString _defaultKeyboardName;
+  std::vector<FLUnicodeString> _keyboardNames;
   
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
@@ -35,6 +38,9 @@ public:
   
   bool areSwipesInverted;
   
+  std::vector<FLUnicodeString> getKeyboardNames() const;
+  std::vector<FLUnicodeString> getKeyboardNames(std::shared_ptr<FLFile> langFile) const;
+  
   // set this to have preprocessed files generated. Do not add "/" in the end.
   bool isEngineLoaded;
   void setExternalKeyboardSize(FLPoint xy);
@@ -42,9 +48,9 @@ public:
   FLUnicodeString getResourceDescription();
   void setMaxNumberOfSuggestions(int numberOfSuggestions);
   void postLoadSetup();
-  void loadKeyboardData();
-  void setResourceFLFile(FLFilePtr &file);
-  void initResourceArchive(FLResourceArchivePtr rsrcArchivePtr);
+  void loadKeyboardData(FLUnicodeString keyboardName);
+  void setResourceFLFile(FLFilePtr &file, FLUnicodeString keyboardName = "");
+//  void initResourceArchive(FLResourceArchivePtr rsrcArchivePtr);
   void setResourcePath(const std::string &path);
   FLFilePtr FLFileForFileName(const char *filename);
   void initialize(FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);

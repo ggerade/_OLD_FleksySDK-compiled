@@ -61,7 +61,10 @@ public:
 	void prevSuggestion();
   FLUnicodeString getTextToCorrect();
   
-  void printSelf(int tbNumber) const;
+  FLUnicodeString displayString(int tbNumber = -1);
+  void printSelf(int tbNumber = -1);
+  void printfSelf(int tbNumber = -1);
+  FLUnicodeString getTextBlockInfo(int tbNumber);
   FLUnicodeString toLowerCase(const FLUnicodeString &string);
   
   bool containsNonAlphaCharacters(SystemsIntegrator* fleksy) const;
@@ -73,6 +76,10 @@ public:
   
   int getLengthBeforePreviousUpdate() const;
   int getLengthDiff() const;
+  
+  // Functions for debug.
+  void rememberContext(const std::vector<FLUnicodeString> &tokens) { context = tokens; }
+  std::vector<FLUnicodeString> getContext() const { return context; }
   
 private:
   FleksyListenerInterface &out;
@@ -101,6 +108,9 @@ private:
   
   int lengthBeforePreviousUpdate = 0;
   void setLengthBeforePreviousUpdate(int length);
+  
+  // Data For debug.
+  std::vector<FLUnicodeString> context;
 };
 
 #endif
