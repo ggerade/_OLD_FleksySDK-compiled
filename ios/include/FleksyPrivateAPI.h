@@ -36,8 +36,6 @@ public:
   FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
   
-  bool areSwipesInverted;
-  
   std::vector<FLUnicodeString> getKeyboardNames() const;
   std::vector<FLUnicodeString> getKeyboardNames(std::shared_ptr<FLFile> langFile) const;
   

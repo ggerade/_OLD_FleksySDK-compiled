@@ -25,15 +25,15 @@ class FLKeyboard {
 
 private:
   typedef struct {
-    uint16_t u16Character;
+    uint32_t u32Character;
     FLPoint point;
-  } FLUTF16Point;
-  
+  } FLUTF32Point;
+
   enum {
-    FLUTF16ToPointsSize = 512
+    FLUTF32ToPointsSize = 512
   };
   
-  FLUTF16Point utf16ToPoints[FLUTF16ToPointsSize];
+  FLUTF32Point utf32ToPoints[FLUTF32ToPointsSize];
   
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
@@ -52,12 +52,12 @@ public:
   FLKeyboard(const FLFilePtr &keyboardFile, const FLFilePtr &commonData);
   ~FLKeyboard();
   
-  inline bool dawgGetPointForAlphaUTF16(uint16_t c, FLPoint &p) const {
+  inline bool dawgGetPointForAlphaUTF32(uint32_t c, FLPoint &p) const {
     size_t hash = (0x920b5217UL ^ (0x811C9DC5 * c));
-    for(size_t idx = 0; idx < FLUTF16ToPointsSize; idx++) {
-      const FLUTF16Point *u16p = &utf16ToPoints[(hash + idx) % FLUTF16ToPointsSize];
-      if(u16p->u16Character == c) { p = u16p->point; return(true); }
-      if(u16p->u16Character == 0) { return(false); }
+    for(size_t idx = 0; idx < FLUTF32ToPointsSize; idx++) {
+      const FLUTF32Point *u32p = &utf32ToPoints[(hash + idx) % FLUTF32ToPointsSize];
+      if(u32p->u32Character == c) { p = u32p->point; return(true); }
+      if(u32p->u32Character == 0) { return(false); }
     }
     return(false);
   }

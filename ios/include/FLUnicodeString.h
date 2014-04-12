@@ -86,6 +86,7 @@ public:
   FLUnicodeString(const unsigned char *utf8String);
   FLUnicodeString(const unsigned char *utf8String, size_t utf8Length);
   FLUnicodeString(const std::string utf8String);
+  FLUnicodeString(const uint16_t *utf16String, size_t utf16Length) { this->assign(utf16String, utf16Length); }
 
   bool containsOnlyISO8859Characters() const {
     size_t length = this->length();

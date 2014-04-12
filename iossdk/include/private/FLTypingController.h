@@ -58,6 +58,8 @@ public:
   void longPress(FLLongPressType type, float x, float y);
   bool isShifted();
   FLFieldAction getCurrentFieldAction();
+  void setInvertedVerticalSwipe(bool isInverted);
+  bool isVerticalSwipeInverted();
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   FLUnicodeString getVersionNumber(); //Version number of TC
@@ -132,12 +134,14 @@ private:
   //TODO:rename this 
   bool isFirstInputAfterParsing;
   //////
+  bool areSwipesInverted;
   bool isUserShifting;
   bool isEngineLoaded;
   bool voiceFeedback;
   bool startedTypingSession;
   bool inBatchEdit;
   bool goatMode;
+  
 
   CursorChangeEvent cursorChangeEvent;
   
@@ -167,7 +171,7 @@ private:
   
   //Debug stuff
   FLTextBlock *lastTBtoBeCorrected = nullptr;
-  FLUnicodeString getSlashSeparatedSuggestions(const std::vector<FLUnicodeString> &suggestions);
+  FLUnicodeString getDelimitedSuggestions(const std::vector<FLUnicodeString> &suggestions, FLUnicodeString originalWord, bool isWord);
   
   //Game key charging
   FLUnicodeString getIntendedCharacter(int offset);
@@ -189,6 +193,7 @@ private:
   void correctToNextSuggestion(FLTextBlock *tb, bool isUp);
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
   void createEmoticonTextBlock();
+  void setPunctuationSuggestions(FLTextBlock *tb);
   
   //Various helper functioins
   FLUnicodeString getNearestChar(FLPoint p);
