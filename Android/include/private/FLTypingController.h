@@ -258,7 +258,7 @@ private:
   void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
-  void mergeTextBlocksCheck();
+  bool mergeTextBlocksCheck();
   void checkTextBlockForSplittage(int indexOfTB);
   
   //UI&User Feedback
