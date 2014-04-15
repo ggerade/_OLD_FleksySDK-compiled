@@ -47,13 +47,27 @@ enum FLFieldAction{
   FLFieldAction_SEND,
   FLFieldAction_NEW_LINE,
   FLFieldAction_DONE,
-  FLFieldAction_EMOTICON
+  FLFieldAction_EMOTICON,
+  FLFieldAction_NONE
 };
 
 enum FLKeyboardSize{
   FLKeyboardSize_ORIGINAL,
   FLKeyboardSize_SMALL,
-  FLKeyboardSize_TINY
+  FLKeyboardSize_TINY,
+  FLKeyboardSize_NOT_SET
+};
+
+enum FLKeyboardLayout{
+  FLKeyboardLayout_NO_SPACEBAR,
+  FLKeyboardLayout_SPACEBAR,
+  FLKeyboardLayout_NOT_SET
+};
+
+enum FLKeyboardAlpha{
+  FLKeyboardAlpha_FULL,
+  FLKeyboardAlpha_TRANSPARENT,
+  FLKeyboardAlpha_NOT_SET
 };
 
 enum FLMessageType{

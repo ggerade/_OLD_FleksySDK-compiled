@@ -36,13 +36,12 @@ namespace Fleksy {
       backtraceString_ = fl_backtrace();
       if(file != NULL) { fileString_ = strdup(file); }
       lineNumber_ = lineNumber;
-      asprintf(&message_, "%s", message);
-      if(fileString_ != NULL) { asprintf(&whatCString_, "<%s:%d> %s\nVersion: %s-%s@%s\n%s", fileString_, lineNumber_, message == NULL ? "<NULL>" : message, fleksySDKBuildGitShortHash, fleksySDKBuildUser, fleksySDKBuildDate, backtraceString_ == NULL ? "<UNAVAILABLE>" : backtraceString_); }
-      else                    { asprintf(&whatCString_,         "%s\nVersion: %s-%s@%s\n%s",                           message == NULL ? "<NULL>" : message, fleksySDKBuildGitShortHash, fleksySDKBuildUser, fleksySDKBuildDate, backtraceString_ == NULL ? "<UNAVAILABLE>" : backtraceString_); }
+      if(message != NULL) { message_ = strdup(message); }
+      asprintf(&whatCString_, "<%s:%d> %s\n\nVersion: %s-%s@%s\n%s", (fileString_ == NULL) ? "<NULL>" : fileString_, lineNumber_, (message_ == NULL) ? "<NULL>" : message_, fleksySDKBuildGitShortHash, fleksySDKBuildUser, fleksySDKBuildDate, (backtraceString_ == NULL) ? "<UNAVAILABLE>" : backtraceString_);
     }
     void vinit(const char *file, int lineNumber, const char *message, va_list args) {
       char *vmessage = NULL;
-      vasprintf(&vmessage, message == NULL ? "<NULL>" : message, args);
+      vasprintf(&vmessage, (message == NULL) ? "<NULL>" : message, args);
       init(file, lineNumber, vmessage);
       if(vmessage != NULL) { free(vmessage); vmessage = NULL; }
     }
@@ -59,8 +58,18 @@ namespace Fleksy {
       if(fileString_      != NULL) { free((void *)fileString_);      fileString_      = NULL; }
       if(message_         != NULL) { free((void *)message_);         message_         = NULL; }
     }
-    virtual const char *what() const throw () { return(whatCString_); }
-    virtual const char *message() const throw () { return message_; }
+    virtual const char *what()    const throw () { return(whatCString_); }
+    virtual const char *message() const throw () { return(message_);     }
+    
+    exception &operator= (const exception &__rhs) {
+      if(__rhs.message_         != NULL) { message_         = strdup(__rhs.message_);         }
+      if(__rhs.whatCString_     != NULL) { whatCString_     = strdup(__rhs.whatCString_);     }
+      if(__rhs.backtraceString_ != NULL) { backtraceString_ = strdup(__rhs.backtraceString_); }
+      if(__rhs.fileString_      != NULL) { fileString_      = strdup(__rhs.fileString_);      }
+      lineNumber_ = __rhs.lineNumber_;
+      
+      return(*this);
+    }
   };
   
 }

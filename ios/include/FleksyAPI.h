@@ -113,7 +113,7 @@ public:
   /*
    * Start typing session with extra information about the text editor and keyboard state
    */
-  void startTypingSessionWithExtra(bool platformMovesCursor = false, int fieldAction = -1, int keyboardSize = -1, int spacebar = -1, int invisible = -1);
+  void startTypingSessionWithExtra(bool platformMovesCursor, FLFieldAction fieldAction, FLKeyboardSize keyboardSize, FLKeyboardLayout layout, FLKeyboardAlpha alphaState);
   
   /*
    * Call this when the user is done with entering text(closed app/keyboard)

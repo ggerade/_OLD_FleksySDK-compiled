@@ -45,7 +45,7 @@ public:
   void setCorrectionMode(FLCorrectionMode mode);
   FLCorrectionMode getCorrectionMode();
   void cursorSelectionChanged(int selectionStart, int selectionEnd);
-  void startTypingSessionWithExtra(bool platformMovesCursor, int fieldAction, int keyboardSize, int spacebar, int invisible);
+  void startTypingSessionWithExtra(bool platformMovesCursor, FLFieldAction fieldAction, FLKeyboardSize keyboardSize, FLKeyboardLayout layout, FLKeyboardAlpha alphaState);
   void endTypingSession();
   void postLoadSetup();
   void setCapitalizationMode(FLCapitalizationMode mode);
