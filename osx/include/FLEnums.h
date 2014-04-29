@@ -166,7 +166,8 @@ enum FLEventType{
   FLEventType_SUW,
   FLEventType_SUP,
   FLEventType_SDW,
-  FLEventType_SDP
+  FLEventType_SDP,
+  FLEventType_TBS
 };
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */

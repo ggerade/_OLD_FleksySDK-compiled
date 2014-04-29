@@ -25,9 +25,12 @@ public:
   void resetRequest();
   void clearPoints();
   void printPoints();
+  void setHasSimulatedPoints(bool isSimulated);
+  bool getHasSimulatedPoints();
   
 private:
   std::vector<FLPoint> points;
+  bool hasSimulatedPoints;
   FLUnicodeString textEntered;
 };
 

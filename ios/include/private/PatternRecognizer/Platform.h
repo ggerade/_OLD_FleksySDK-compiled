@@ -11,7 +11,7 @@
 
 #include <assert.h>
 
-//#define FLEKSYSUPERNOLOGGING
+#define FLEKSYSUPERNOLOGGING
 
 #ifdef FLEKSYSUPERNOLOGGING
 #define FLEKSYNOLOGGING 1
@@ -27,16 +27,32 @@
   #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
   #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
   #define  LOG_ALWAYS(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+#elif defined(__APPLE__)
+#include <CoreFoundation/CFString.h>
+extern "C" void NSLog(void *format, ...);
+#define  LOGI(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGD(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGW(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#define  LOGE(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+
+#ifndef FLEKSYSUPERNOLOGGING
+#define  LOG_ALWAYS(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }
+#else
+#define LOG_ALWAYS(...)
+#endif
+
 #else
   #define  LOGI(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGD(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGW(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
   #define  LOGE(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
+
 #ifndef FLEKSYSUPERNOLOGGING
   #define  LOG_ALWAYS(format, ...)  { printf("%s:\t",__func__); printf(format,##__VA_ARGS__); printf("\n"); fflush(stdout); }
 #else
   #define LOG_ALWAYS(...)
 #endif
+
 #endif
 
 #if defined(FLEKSYNOLOGGING) || (!ANDROID && RELEASE)

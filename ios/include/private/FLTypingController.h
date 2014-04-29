@@ -99,9 +99,9 @@ public:
   void enableGoatMode();
   
   // Debug
-  FLUnicodeString displayString(bool printDirectly = false);
-  void printTextBlocks();
-  void printfTextBlocks();
+  FLUnicodeString displayString(bool withPoints = false, bool printDirectly = false);
+  void printTextBlocks(bool withPoints = false);
+  void printfTextBlocks(bool withPoints = false);
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);

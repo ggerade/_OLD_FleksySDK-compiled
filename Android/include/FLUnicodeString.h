@@ -6,6 +6,14 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
+
+
+// It's UN̎ͪ̒͑͏̜͓̲̥̹͙͖̝̟̘̦͇̺̮́I̷̡̜̗̰͙̲̱͖̳̰̰̖͍̙̻̞̍̂̐͂͐̅͡C̛͔̳̦̫̬̩̣̭̝ͫ͆̈́̿̌ͥ̉͂̑̍ͧ̽͊͟O̠̩̤̞̭͎͖̯̘̳͉̪̫̰͙̰͖̼ͥ̊͐̒͐͗̏̉̀ĎE, bitches!
+
+
+
+
+
 #ifndef __FleksySDK__FLUnicodeString__
 #define __FleksySDK__FLUnicodeString__
 
@@ -116,7 +124,11 @@ public:
     return(containsOnlyTrivialCharacters(this->data(), this->length()));
   }
   
-  const char *c_str() const;
+  const char *c_str() const {
+    std::string tmpUTF8String = this->utf8String();
+    if(_utf8String != tmpUTF8String) { _utf8String = tmpUTF8String; }
+    return(_utf8String.c_str());
+  }
   std::string utf8String() const;
   std::string iso8859String() const;
   void setToUTF8String(const unsigned char *utf8String);
@@ -155,8 +167,8 @@ public:
   FLUnicodeString rtrim() const;
   FLUnicodeString trim() const;
   
-  FLUnicodeString filter(std::function<bool(const FLUnicodeString)> f) const;
-  FLUnicodeString filterNot(std::function<bool(const FLUnicodeString)> f) const;
+  FLUnicodeString filter(std::function<bool(const FLUnicodeString &)> f) const;
+  FLUnicodeString filterNot(std::function<bool(const FLUnicodeString &)> f) const;
   
   std::vector<FLUnicodeString> split(const FLUnicodeString &delim) const;
   

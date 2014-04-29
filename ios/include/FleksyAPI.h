@@ -14,6 +14,8 @@
 #include "FLEnums.h"
 #include "FLUnicodeString.h"
 
+extern const char* FL_API_VERSION;
+
 class FleksyAPIpImpl;
 
 class FleksyAPI{

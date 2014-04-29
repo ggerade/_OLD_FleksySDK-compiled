@@ -38,10 +38,13 @@ public:
   bool isUserEditedText() const;
   void setIsAccuratelyTyped(bool isAccuratelyTyped);
   bool getIsAccuratelyTyped() const;
+  bool isVirgin() const; // True if this text block contains no text or spaces.
   
 	FLRequestDataHolder *getRequest();
   FLUnicodeString getText() const;
   int getSuggestionIndex() const;
+  int getSuggestionIndex_dataexplorer() const;
+  
   void setSuggestionIndex(int suggIndex);
 	bool getIsExactEntry() const;
   bool isCorrected() const;
@@ -61,9 +64,9 @@ public:
 	void prevSuggestion();
   FLUnicodeString getTextToCorrect();
   
-  FLUnicodeString displayString(int tbNumber = -1);
-  void printSelf(int tbNumber = -1);
-  void printfSelf(int tbNumber = -1);
+  FLUnicodeString displayString(int tbNumber = -1, bool withPoints = false);
+  void printSelf(int tbNumber = -1, bool withPoints = false);
+  void printfSelf(int tbNumber = -1, bool withPoints = false);
   FLUnicodeString getTextBlockInfo(int tbNumber);
   FLUnicodeString toLowerCase(const FLUnicodeString &string);
   
