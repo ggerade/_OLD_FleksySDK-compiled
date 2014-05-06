@@ -29,6 +29,7 @@ public:
   void switchedKeyboard(FLKeyboardID id);
   void wordTyped();
   void wordCorrected(FLUnicodeString &event);
+  void wordCorrectedInternal(FLUnicodeString &event);
   void correctedCharacters(int numOfCorrections);
   void missedAllCharacters();
   

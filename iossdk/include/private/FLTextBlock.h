@@ -32,6 +32,7 @@ public:
   bool isSymbolsTextBlock() const;
   void setIsSymbolsTextBlock(bool symbol);
   bool isEmojiTextBlock() const;
+  bool isSmileyTextBlock() const;
   void setIsEmojiTextBlock(bool isEmoji);
   bool isEndSentence() const;
   bool isBeginSentence() const;
@@ -44,6 +45,8 @@ public:
   FLUnicodeString getText() const;
   int getSuggestionIndex() const;
   int getSuggestionIndex_dataexplorer() const;
+  
+  std::vector<FLUnicodeString> getSuggestions() const;
   
   void setSuggestionIndex(int suggIndex);
 	bool getIsExactEntry() const;
@@ -80,6 +83,8 @@ public:
   int getLengthBeforePreviousUpdate() const;
   int getLengthDiff() const;
   
+  FLUnicodeString matchCase(const FLUnicodeString &word);
+  
   // Functions for debug.
   void rememberContext(const std::vector<FLUnicodeString> &tokens) { context = tokens; }
   std::vector<FLUnicodeString> getContext() const { return context; }
@@ -102,7 +107,6 @@ private:
   bool isEmoji;
   
   void changeSuggestion(int offset);
-  FLUnicodeString matchCase(const FLUnicodeString &word);
   void prepareTextBlockToRecieveOrRemoveCharacters();
   
   void printTextBlock() const;

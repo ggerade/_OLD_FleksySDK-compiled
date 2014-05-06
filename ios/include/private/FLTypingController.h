@@ -36,8 +36,8 @@ public:
   void backAndForthSwipe(float length = 0);
 	void swipeRight(const FLUnicodeString& hint, float length = 0);
 	void swipeLeft(float length = 0);
-	void swipeUp(float length = 0);
-	void swipeDown(float length = 0);
+	int swipeUp(float length = 0);
+	int swipeDown(float length = 0);
   void enterSwipe(float length = 0);
   void shiftPressed(const std::string &who, bool userPress = false);
   void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
@@ -60,13 +60,13 @@ public:
   FLFieldAction getCurrentFieldAction();
   void setInvertedVerticalSwipe(bool isInverted);
   bool isVerticalSwipeInverted();
-  
+
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   FLUnicodeString getVersionNumber(); //Version number of TC
   
   
   //Here for testing
-  void sendCharacter(const FLUnicodeString &c);//Testing sends character and this function coverts it into points and calls sendPoint()
+  void sendCharacter(const FLUnicodeString &c, bool usePassedChar = false);//Testing sends character and this function coverts it into points and calls sendPoint()
   int getCursorPosition();//only used by TC tester
   FLUnicodeString getTextFromTextBlocks();// in public for debugging
   bool getShiftState();//only used by TC tester
@@ -75,8 +75,6 @@ public:
   
   // Two sets of tokens, first plain, second marking if the tokens were user typed words.
   std::pair<std::vector<FLUnicodeString>, std::vector<FLUnicodeString>> getTwoPreviousTokens(int textBlockIndex);
-  
-  std::vector<FLTextBlock*> getTextBlocks() { return textBlocks; }
   //EOF testing functions
 
   //Crazy Cheker uses these
@@ -102,6 +100,11 @@ public:
   FLUnicodeString displayString(bool withPoints = false, bool printDirectly = false);
   void printTextBlocks(bool withPoints = false);
   void printfTextBlocks(bool withPoints = false);
+  
+  // For data extractor.
+  std::vector<FLTextBlock*> getTextBlocks() { return textBlocks; }
+  bool updateTextBlockSuggestions(FLTextBlock *tb, std::vector<FLUnicodeString> suggs);
+  FLTextBlock* findTBMatchingSuggestions(const std::vector<FLUnicodeString> &suggs);
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -178,6 +181,10 @@ private:
   
   void startTypingSession(bool platformMovesCursor = false);
   
+  // Utility functions
+  std::pair<int, int> getSelectionRegion();
+  std::pair<int, int> regionForTB(FLTextBlock *tb, bool includeSpace);
+  
   //Stuff that deletes
   void backspace(float length);
   void deleteTextBlock();
@@ -187,7 +194,7 @@ private:
   
   //TextBlock correction operations
   void getSuggestionsForTextBlock(FLTextBlock *tb, int textBlockIndex = -1);
-  void handleVerticalSwipe(bool isUp);
+  int handleVerticalSwipe(bool isUp);
   void correctTextBlockOnSwipeRight(FLTextBlock *tb);
   void correctTextBlockOnVerticalSwipe();
   void correctToNextSuggestion(FLTextBlock *tb, bool isUp);
@@ -260,15 +267,16 @@ private:
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
   bool mergeTextBlocksCheck();
   void checkTextBlockForSplittage(int indexOfTB);
+  void convertToRegularTextBlock(FLTextBlock *tb);
   
   //UI&User Feedback
-  void setComposingRegionForTextBlock(FLTextBlock* tb, int userCursor, bool isSpaceIncluded);
+  void setComposingRegionForTextBlock(const FLTextBlock* tb, int userCursor, bool isSpaceIncluded);
   void updateShiftState(bool forcedUpdate = false);
   void updateCandidatesView(FLTextBlock *tbToUpdate = NULL);
   void clearCandidatesView();
   void forceCandidateViewUpdate(FLTextBlock *tbToUpdate = NULL);
   void speak(FLUnicodeString text, bool isDeleted);
-  void speak(FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
+  void speak(const FLTextBlock *tb, bool isDeleted, bool forceSpeak = false);
   FLMessageType getSpaceBarState();
   void sendSpacebarState(bool forceSend = false);
   

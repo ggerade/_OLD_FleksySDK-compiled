@@ -10,15 +10,16 @@
 class FLSuggestionsContainer{
   
 public:
-	FLSuggestionsContainer();
-	void setSuggestions(const std::vector<FLUnicodeString> &suggs);
-	std::vector<FLUnicodeString> getSuggestions();
+  FLSuggestionsContainer();
+  void setSuggestions(const std::vector<FLUnicodeString> &suggs);
   void clearSuggestions();
   void insertSuggestion(int index, const FLUnicodeString &suggestion);
-  int getSuggestionCount();
+  
+  std::vector<FLUnicodeString> getSuggestions() const;
+  int getSuggestionCount() const;
   
 private:
-	std::vector<FLUnicodeString> suggestions;
+  std::vector<FLUnicodeString> suggestions;
 };
 
 #endif

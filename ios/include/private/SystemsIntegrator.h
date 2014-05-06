@@ -14,6 +14,7 @@
 #include <array>
 #include "FleksyUtilities.h"
 #include "FLSocketsCommon.h"
+#include "FLKeyTapRecognizer.h"
 
 class FLTapsToWords;
 typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
@@ -37,6 +38,7 @@ class SystemsIntegrator {
   
 private:
   bool blindMode = false;
+  FLFoundWordsVector _foundWordsVector;
   
 public:
   SystemsIntegrator();
@@ -47,6 +49,10 @@ public:
   std::vector<FLUnicodeString> noChangeWords;
   
   FLTapsToWordsPtr tapsToWords;
+  
+  inline const FLFoundWordsVector &getFoundWords() const {
+    return _foundWordsVector;
+  }
   
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   
@@ -80,6 +86,9 @@ public:
   float getSettingTransformLayerWeight();
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
+  
+  void setPredictMissedLetter(bool shouldSim, double reductionFactor);
+  void setBayesianBlending(bool useBayesian);
   
   FLUnicodeString getVersion();
 };

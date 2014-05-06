@@ -89,13 +89,13 @@ public:
    * Replaces the current word with the previous word on the suggestion list.
    * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the previous suggestion replacement word (i.e., <wor|d1 > -> <word0 |>).
    */
-  void previousSuggestion(float length = 0);
+  int previousSuggestion(float length = 0);
   
   /*
    * Replaces current word with the next word on the suggestion list.
    * Note: If the cursor is in the middle of a word the cursor will be moved to the end of the next suggestion replacement word (i.e., <wor|d0 > -> <word1 |>).
    */
-  void nextSuggestion(float length = 0);
+  int nextSuggestion(float length = 0);
   
   /*
    * Will send '\n' as entered text.
@@ -270,6 +270,10 @@ public:
    * SU becomes SD and SD becomes SU.
    */
   void setInvertSwipeUpAndDown(bool isInverted);
+  
+  void setPredictMissedLetter(bool shouldSim, double reductionFactor); // weight is engine parameter, less is more weight
+  
+  void setBayesianBlending(bool useBayesian); // setting bayesian blending off uses Mike's linear weight blending logic
   
   FLUnicodeString getVersion();
   

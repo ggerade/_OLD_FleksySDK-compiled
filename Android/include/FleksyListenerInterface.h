@@ -8,6 +8,7 @@
 #ifndef __FleksySDK_FleksyListenerInterface_h__
 #define __FleksySDK_FleksyListenerInterface_h__
 
+#include <sstream>
 #include <string>
 #include <vector>
 #include "FLEnums.h"
@@ -17,6 +18,16 @@ struct FLExternalEditorState{
   FLUnicodeString text;
   int selectionStart = 0;
   int selectionEnd = 0;
+  int composingStart = -1;
+  int composingEnd = -1;
+  
+  FLUnicodeString displayString() const {
+    std::stringstream ss;
+    ss << "[" << selectionStart << "," << selectionEnd << "] ";
+    ss << "[" << composingStart << "," << composingEnd << "] ";
+    ss << "<" << text.c_str() << ">";
+    return ss.str();
+  }
 };
 
 class FleksyListenerInterface{
