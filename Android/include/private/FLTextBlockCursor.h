@@ -35,7 +35,7 @@ public:
   void setIndexInTextBlock(int indx);
   
   // Debug functions.
-  void testIntegrity(std::vector<FLTextBlock*> *ptrToTextBlocks);
+  void testIntegrity(const std::vector<FLTextBlock*> *ptrToTextBlocks);
   
 private:
   FLTextBlock *currentTextBlock;

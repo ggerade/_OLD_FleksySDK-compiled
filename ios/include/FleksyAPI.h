@@ -271,7 +271,7 @@ public:
    */
   void setInvertSwipeUpAndDown(bool isInverted);
   
-  void setPredictMissedLetter(bool shouldSim, double reductionFactor); // weight is engine parameter, less is more weight
+  void setPredictMissedLetter(bool shouldSim); // set to turn on or orr simulating new character
   
   void setBayesianBlending(bool useBayesian); // setting bayesian blending off uses Mike's linear weight blending logic
   

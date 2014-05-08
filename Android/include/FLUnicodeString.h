@@ -242,12 +242,9 @@ public:
 };
 
 struct FLUnicodeStringHash {
-  std::size_t operator()(const FLUnicodeString& k, std::size_t seed = 0) const {
-    //http://www.isthe.com/chongo/tech/comp/fnv/index.html
-    // "In the general case, almost any offset_basis will serve so long as it is non-zero."
-    // Here we use the "standard" 0x811C9DC5 value, plus an optional offset when needed (eg. for perfect hashing)
-    std::size_t hash = 0x811C9DC5UL + seed, len = k.length();
-    for(size_t idx = 0; idx < len; idx++) { hash ^= k[idx]; hash *= 0x1000193; }
+  std::size_t operator()(const FLUnicodeString& k) const {
+    std::size_t hash = 0x920b5217UL, len = k.length();
+    for(size_t idx = 0; idx < len; idx++) { hash *= 0x811C9DC5; hash ^= k[idx]; }
     return(hash);
   }
 };

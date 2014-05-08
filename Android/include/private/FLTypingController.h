@@ -60,7 +60,7 @@ public:
   FLFieldAction getCurrentFieldAction();
   void setInvertedVerticalSwipe(bool isInverted);
   bool isVerticalSwipeInverted();
-
+  
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   FLUnicodeString getVersionNumber(); //Version number of TC
   
@@ -101,10 +101,17 @@ public:
   void printTextBlocks(bool withPoints = false);
   void printfTextBlocks(bool withPoints = false);
   
+  // PUBLIC for data extractor
+  void setUpdateNoiseEstimation(bool value);
+  bool getUpdateNoiseEstimation(void);
+  
   // For data extractor.
   std::vector<FLTextBlock*> getTextBlocks() { return textBlocks; }
   bool updateTextBlockSuggestions(FLTextBlock *tb, std::vector<FLUnicodeString> suggs);
   FLTextBlock* findTBMatchingSuggestions(const std::vector<FLUnicodeString> &suggs);
+  void testTBIntegrity() const;
+  FLTextFieldType getTextFieldType() const { return textFieldType; }
+  FLCorrectionMode getCorrectionMode() const { return correctionMode; }
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -141,10 +148,10 @@ private:
   bool isUserShifting;
   bool isEngineLoaded;
   bool voiceFeedback;
-  bool startedTypingSession;
+  bool startedTypingSession = false;
   bool inBatchEdit;
   bool goatMode;
-  
+  bool _updateNoiseEstimation = true;
 
   CursorChangeEvent cursorChangeEvent;
   
@@ -244,7 +251,6 @@ private:
 
   int calculateEndOfTextBlock(FLTextBlock *tb);
   void setLastDeletedWord(FLTextBlock *tb);
-
   
   //User cursor operations
   void moveCursorToPosition(int position);

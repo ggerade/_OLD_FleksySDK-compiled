@@ -87,7 +87,7 @@ public:
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
   
-  void setPredictMissedLetter(bool shouldSim, double reductionFactor);
+  void setPredictMissedLetter(bool shouldSim);
   void setBayesianBlending(bool useBayesian);
   
   FLUnicodeString getVersion();
