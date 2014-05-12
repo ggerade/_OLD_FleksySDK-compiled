@@ -82,6 +82,7 @@ public:
   
   int getLengthBeforePreviousUpdate() const;
   int getLengthDiff() const;
+  int getVisibleLength() const;
   
   FLUnicodeString matchCase(const FLUnicodeString &word);
   
