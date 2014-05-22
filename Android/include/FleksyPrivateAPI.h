@@ -29,6 +29,8 @@ private:
   FLUnicodeString _defaultKeyboardName;
   std::vector<FLUnicodeString> _keyboardNames;
   
+  std::string writableDataDirecotry;
+  
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
   ~FleksyAPIpImpl();
@@ -67,6 +69,8 @@ public:
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
   kLanguage getLanguage() const;
+  
+  void setWritableDataDirectory(const std::string &directory);
   
   //Data Collection
   void setDataCollectionDirectory(const std::string &path); // folder/folder/dataFolder (no / at the end)

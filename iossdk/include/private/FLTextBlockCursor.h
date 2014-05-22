@@ -36,6 +36,7 @@ public:
   
   // Debug functions.
   void testIntegrity(const std::vector<FLTextBlock*> *ptrToTextBlocks);
+  bool lostIntegrity(const std::vector<FLTextBlock*> *ptrToTextBlocks);
   
 private:
   FLTextBlock *currentTextBlock;

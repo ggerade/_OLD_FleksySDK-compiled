@@ -31,6 +31,11 @@ public:
   void setResourceFile(const char *file, FLUnicodeString keyboardName = "");
   
   /*
+   * Set a directory where files can be written and used by the engine
+   */
+  void setWritableDataDirectory(const std::string &directory);
+  
+  /*
    * Loads the resources from the file set by setResourceFile().
    * After this Fleksy is ready for input.
    */
@@ -265,6 +270,12 @@ public:
    * Default: false
    */
   void setBlindMode(bool enabled);
+  
+  /*
+   * Enable/Disable auto-learning.
+   * Default: true
+   */
+  void setAutoLearning(bool isEabled);
   
   /*
    * SU becomes SD and SD becomes SU.

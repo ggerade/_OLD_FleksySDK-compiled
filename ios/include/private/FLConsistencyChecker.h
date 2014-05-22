@@ -26,7 +26,7 @@ public:
   bool areSelectionPositionsValid(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd);
   bool isTextBlockTextEqualsToScreenText(const FLUnicodeString &screenText, const std::string &caller);
   /**checks if old text is still valid. if not reparses everything*/
-  bool isTextStillValid(const FLUnicodeString &text, int cursorPosition);
+  bool isTextStillValid(const FLUnicodeString &text, const std::vector<FLTextBlock*> *textBlocks, FLTextBlockCursor *tbCursor);
   void checkCursorPositionVSnumOfTextBlocks(int userCursorPosition, const std::vector<FLTextBlock*> &textBlocks);
   void sendErrorReport(const FLUnicodeString &message);
   

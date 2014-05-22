@@ -60,6 +60,7 @@ public:
   FLFieldAction getCurrentFieldAction();
   void setInvertedVerticalSwipe(bool isInverted);
   bool isVerticalSwipeInverted();
+  void setAutoLeaning(bool isEnabled);
   
   void setMaxNumberOfSuggestions(int numOfSuggestions); //Private API uses this
   FLUnicodeString getVersionNumber(); //Version number of TC
@@ -72,6 +73,7 @@ public:
   bool getShiftState();//only used by TC tester
   FLUnicodeString getTCDebugInfo();
   FLTextBlock* getLastUpdatedTB();
+  FLTextBlock* getTextBlockAt(int index);
   
   // Two sets of tokens, first plain, second marking if the tokens were user typed words.
   std::pair<std::vector<FLUnicodeString>, std::vector<FLUnicodeString>> getTwoPreviousTokens(int textBlockIndex);

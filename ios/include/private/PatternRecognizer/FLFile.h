@@ -40,7 +40,9 @@ private:
   
   void* contents = NULL;
   
-  bool memoryMapped = false;
+  bool    memoryMapped        = false;
+  void   *memoryMappedAddress = NULL;
+  size_t  memoryMappedLength  = 0;
   
   void init(off_t _startOffset, size_t *_length, FLFilePtr *parent);
   void cleanup();
