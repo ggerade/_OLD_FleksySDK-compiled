@@ -75,6 +75,8 @@ public:
   // Settings
   bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred
   bool getSpaceBreaksEnabled();
+  bool setSpellingCorrectionEnabled(bool value); // returns new value. If return value does not match argument some error occurred
+  bool getSpellingCorrectionEnabled();
   void setBlindMode(bool value);
   
   void setSettingTransformLayerWeight(float weight);
@@ -87,9 +89,8 @@ public:
   float getSettingContextLayerWeight();
   float getSettingPlatformLayerWeight();
   
-  void setPredictMissedLetter(bool shouldSim);
   void setBayesianBlending(bool useBayesian);
-  
+
   FLUnicodeString getVersion();
 };
 

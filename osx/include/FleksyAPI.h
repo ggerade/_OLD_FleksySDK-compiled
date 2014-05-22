@@ -210,6 +210,13 @@ public:
   bool setSpaceBreaksEnabled(bool value);
   /*
    *
+   * If 'spelling correction' is enabled, then if the user makes a spelling error, such as missing a tap for a key, then Fleksy might decide when appropriate
+   * to correct the spelling mistake. Example: [caliornia]->[california]
+   * Return value is new state. It it doesn't match the argument value, some error has occurred
+   */
+  bool setSpellingCorrectionEnabled(bool value);
+  /*
+   *
    * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].
    * FLDeleteMode_VARIABLE on backspace(length > 0)(swipe left) will delete single characters when cursor is inside the word and whole words when cursor is a space after the word: [hello |there] -> swipe left -> [|there], [hel|lo there] -> swipe left -> [he|lo there].
    * Default: FLDeleteMode_VARIABLE

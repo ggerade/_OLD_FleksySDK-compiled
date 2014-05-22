@@ -11,7 +11,7 @@
 
 #include <assert.h>
 
-#define FLEKSYSUPERNOLOGGING
+//#define FLEKSYSUPERNOLOGGING
 
 #ifdef FLEKSYSUPERNOLOGGING
 #define FLEKSYNOLOGGING 1
@@ -27,7 +27,7 @@
   #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
   #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
   #define  LOG_ALWAYS(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-#elif defined(__APPLE__)
+#elif 0&&defined(__APPLE__)
 #include <CoreFoundation/CFString.h>
 extern "C" void NSLog(void *format, ...);
 #define  LOGI(format, ...)  { CFStringRef formattedString = CFStringCreateWithFormat(NULL, NULL, CFSTR(format), ##__VA_ARGS__); CFStringRef logString = CFStringCreateWithFormat(NULL, NULL, CFSTR("%s: %@\n"), __func__, formattedString); NSLog((void *)logString); CFRelease(formattedString); CFRelease(logString); }

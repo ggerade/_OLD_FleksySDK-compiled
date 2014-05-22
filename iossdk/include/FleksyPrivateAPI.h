@@ -71,6 +71,7 @@ public:
   kLanguage getLanguage() const;
   
   void setWritableDataDirectory(const std::string &directory);
+  std::string getWritableDataDirectory();
   
   //Data Collection
   void setDataCollectionDirectory(const std::string &path); // folder/folder/dataFolder (no / at the end)

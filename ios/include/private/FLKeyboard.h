@@ -53,11 +53,12 @@ public:
   ~FLKeyboard();
   
   inline bool dawgGetPointForAlphaUTF32(uint32_t c, FLPoint &p) const {
-    size_t hash = (0x920b5217UL ^ (0x811C9DC5 * c));
+    size_t hash = (c == 0) ? 1 : c; // Required for proper operation of the LFSR.
     for(size_t idx = 0; idx < FLUTF32ToPointsSize; idx++) {
-      const FLUTF32Point *u32p = &utf32ToPoints[(hash + idx) % FLUTF32ToPointsSize];
+      const FLUTF32Point *u32p = &utf32ToPoints[(hash) % FLUTF32ToPointsSize];
       if(u32p->u32Character == c) { p = u32p->point; return(true); }
       if(u32p->u32Character == 0) { return(false); }
+      hash = ((hash >> 1) ^ ((0UL - (hash & 1UL)) & 0x80200003UL)); // 32-bit LFSR w/ 2^32 period.
     }
     return(false);
   }
