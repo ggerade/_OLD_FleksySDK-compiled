@@ -46,8 +46,8 @@ static inline bool FLPointEqualToPoint(FLPoint p1, FLPoint p2) {
 #define FLPointFromCGPoint(__p__) FLPointMake(__p__.x, __p__.y)
 
 static inline float FLDistanceBetweenPoints(FLPoint p1, FLPoint p2) {
-  float dx = p1.x - p2.x;
-  float dy = p1.y - p2.y;
+  float dx = (float)(p1.x - p2.x);
+  float dy = (float)(p1.y - p2.y);
   float result = hypotf(dx, dy);
   return((fabsf(result) < FLEKSY_SMALL_VALUE) ? 0.0f : result);
 }

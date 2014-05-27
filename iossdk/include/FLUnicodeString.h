@@ -131,6 +131,8 @@ public:
   }
   std::string utf8String() const;
   std::string iso8859String() const;
+  std::string hexString() const;
+  
   void setToUTF8String(const unsigned char *utf8String);
   void setToUTF8String(const unsigned char *utf8String, size_t length);
   void setToISO8859String(const unsigned char *iso8859String);
