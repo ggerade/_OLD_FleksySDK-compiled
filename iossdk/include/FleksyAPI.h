@@ -81,6 +81,7 @@ public:
    * <word |> -> space -> <word. |>
    */
   void space(float length = 0);
+  void testOnlyFakeSpace(float length = 0);
   
   /*
    * If length = 0, then backspace() will delete just a single character.

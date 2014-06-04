@@ -13,10 +13,19 @@
 #include <iosfwd>
 #include <memory>
 #include "FLUnicodeString.h"
+#include "FLException.h"
+#include "EncryptionUtilities.h"
 
 #define USE_MEMORY_MAP 1
 
-//using namespace std;
+namespace Fleksy {
+  class FileException : public Fleksy::Exception {
+  public:
+    explicit FileException(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
+    }
+  };
+}
 
 class FLFile;
 typedef std::shared_ptr<FLFile> FLFilePtr;
@@ -68,7 +77,7 @@ public:
 
   
   void read(void* outBuffer, size_t length);
-  std::vector<FLUnicodeString> getLines(bool decrypt = true);
+  std::vector<FLUnicodeString> getLines(bool decrypt = true, bool decompress = false, char * key = DEFAULT_M_VALUE);
   
   // offset is relative from begining of file
   void seek(off_t offset);

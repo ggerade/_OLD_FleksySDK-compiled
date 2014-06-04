@@ -114,6 +114,7 @@ public:
   void testTBIntegrity() const;
   FLTextFieldType getTextFieldType() const { return textFieldType; }
   FLCorrectionMode getCorrectionMode() const { return correctionMode; }
+  void testOnlyDoFakeCorrections(bool doThem) { _doFakeCorrections = doThem; }
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -182,7 +183,8 @@ private:
   FLTextBlock *lastUpdatedTB = NULL;
   
   //Debug stuff
-  FLTextBlock *lastTBtoBeCorrected = nullptr;
+  bool _doFakeCorrections = false;
+  FLTextBlock *_lastTBtoBeCorrected = nullptr;
   FLUnicodeString getDelimitedSuggestions(const std::vector<FLUnicodeString> &suggestions, FLUnicodeString originalWord, bool isWord);
   
   //Game key charging

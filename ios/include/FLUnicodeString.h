@@ -24,6 +24,7 @@
 #include <unordered_map>
 #include <map>
 #include "FLPoint.h"
+#include "FLException.h"
 
 #ifndef FLUNICODECODEPOINT_DEFINED
 #define FLUNICODECODEPOINT_DEFINED
@@ -82,6 +83,15 @@ typedef enum FLUnicodeCategory {
   FL_FINAL_PUNCTUATION       = 29,
   FL_CHAR_CATEGORY_COUNT
 } FLUnicodeCategory;
+
+namespace Fleksy {
+  class UnicodeConversionError : public Fleksy::Exception {
+  public:
+    explicit UnicodeConversionError(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
+    }
+  };
+}
 
 class FLUnicodeString : public std::basic_string<uint16_t> {
 private:
@@ -172,7 +182,7 @@ public:
   FLUnicodeString filter(std::function<bool(const FLUnicodeString &)> f) const;
   FLUnicodeString filterNot(std::function<bool(const FLUnicodeString &)> f) const;
   
-  std::vector<FLUnicodeString> split(const FLUnicodeString &delim) const;
+  std::vector<FLUnicodeString> split(const FLUnicodeString &delim, int maxsplit = -1) const;
   
   // Return a substring of this string, including start, but not including end.
   FLUnicodeString takeFromTo(size_t start, size_t end) const;

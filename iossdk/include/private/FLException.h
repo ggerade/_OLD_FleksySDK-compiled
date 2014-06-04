@@ -21,59 +21,100 @@ extern "C" {
   extern char *(*fl_backtrace)(void);
 }
 
+
+
+
 namespace Fleksy {
   
-  class exception : public std::exception {
-    
+  class Exception : public std::exception {
   protected:
-    char *message_         = NULL;
-    char *whatCString_     = NULL;
-    char *backtraceString_ = NULL;
-    char *fileString_      = NULL;
-    int   lineNumber_      = 0;
+    std::string _message;
+    std::string _backtrace;
+    std::string _filename;
+    std::string _what;
+    int _lineNumber;
     
-    void init(const char *file, int lineNumber, const char *message) {
-      backtraceString_ = fl_backtrace();
-      if(file != NULL) { fileString_ = strdup(file); }
-      lineNumber_ = lineNumber;
-      if(message != NULL) { message_ = strdup(message); }
-      asprintf(&whatCString_, "<%s:%d> %s\n\nVersion: %s-%s@%s\n%s", (fileString_ == NULL) ? "<NULL>" : fileString_, lineNumber_, (message_ == NULL) ? "<NULL>" : message_, fleksySDKBuildGitShortHash, fleksySDKBuildUser, fleksySDKBuildDate, (backtraceString_ == NULL) ? "<UNAVAILABLE>" : backtraceString_);
-    }
-    void vinit(const char *file, int lineNumber, const char *message, va_list args) {
-      char *vmessage = NULL;
-      vasprintf(&vmessage, (message == NULL) ? "<NULL>" : message, args);
-      init(file, lineNumber, vmessage);
-      if(vmessage != NULL) { free(vmessage); vmessage = NULL; }
+    void init(const std::string message, std::string filename, int lineNumber) {
+      const auto backtraceString = fl_backtrace();
+      char *whatCString = nullptr;
+      asprintf(&whatCString,
+               "<%s:%d> %s\n\nVersion: %s-%s@%s\n%s",
+               filename.c_str(),
+               lineNumber,
+               message.c_str(),
+               fleksySDKBuildGitShortHash,
+               fleksySDKBuildUser,
+               fleksySDKBuildDate,
+               (backtraceString == nullptr) ? "<UNAVAILABLE>" : backtraceString);
+      
+      _what = std::string(whatCString);
+      
+      if (whatCString != nullptr) {
+        free(whatCString);
+        whatCString = nullptr;
+      }
     }
     
   public:
     
-    explicit exception(const std::string &message)                                   { init(NULL,         -1, message.c_str()); }
-    explicit exception(const char *file, int lineNumber, const std::string &message) { init(file, lineNumber, message.c_str()); }
-    explicit exception(const char *message, ...)                                     { va_list args; va_start(args, message); vinit(NULL,         -1, message, args); va_end(args); }
-    explicit exception(const char *file, int lineNumber, const char *message, ...)   { va_list args; va_start(args, message); vinit(file, lineNumber, message, args); va_end(args); }
-    virtual ~exception() throw () {
-      if(whatCString_     != NULL) { free((void *)whatCString_);     whatCString_     = NULL; }
-      if(backtraceString_ != NULL) { free((void *)backtraceString_); backtraceString_ = NULL; }
-      if(fileString_      != NULL) { free((void *)fileString_);      fileString_      = NULL; }
-      if(message_         != NULL) { free((void *)message_);         message_         = NULL; }
-    }
-    virtual const char *what()    const throw () { return(whatCString_); }
-    virtual const char *message() const throw () { return(message_);     }
-    
-    exception &operator= (const exception &__rhs) {
-      if(__rhs.message_         != NULL) { message_         = strdup(__rhs.message_);         }
-      if(__rhs.whatCString_     != NULL) { whatCString_     = strdup(__rhs.whatCString_);     }
-      if(__rhs.backtraceString_ != NULL) { backtraceString_ = strdup(__rhs.backtraceString_); }
-      if(__rhs.fileString_      != NULL) { fileString_      = strdup(__rhs.fileString_);      }
-      lineNumber_ = __rhs.lineNumber_;
-      
-      return(*this);
+    std::string message()    const { return _message; }
+    std::string backtrace()  const { return _backtrace; }
+    std::string filename()   const { return _filename; }
+    int         lineNumber() const { return _lineNumber; }
+    const char* what() const throw() override { return _what.c_str(); }
+  };
+  
+  
+  
+  
+  class PlainException : public Exception {
+  public:
+    explicit PlainException(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
     }
   };
   
+  class InvalidArguments : public Exception {
+  public:
+    explicit InvalidArguments(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
+    }
+  };
+  
+  class IOError : public Exception {
+  public:
+    explicit IOError(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
+    }
+  };
+  
+  template <typename E>
+  E vaGenerateException(const char *file, int lineNumber, const char *message, ...) {
+    try {
+      char _vaBuffer[50000];
+      
+      va_list(args);
+      va_start(args, message);
+      int result = vsnprintf(_vaBuffer, sizeof(_vaBuffer), (message == nullptr) ? "<NULL>" : message, args);
+      va_end(args);
+      
+      if (result == -1) {
+        strcpy(_vaBuffer, message);
+      }
+      
+      E e(std::string(_vaBuffer), file, lineNumber);
+      _vaBuffer[0] = 0;
+      return e;
+    }
+    catch (const std::exception &e) {
+      return E("Problem creating exception.", file, lineNumber);
+    }
+  }
 }
 
-#define FLException(msg, ...) Fleksy::exception(__FILE__, __LINE__, msg, ##__VA_ARGS__)
+#define FLMagicException(type, msg, ...) Fleksy::vaGenerateException<type>(__FILE__, __LINE__, msg, ##__VA_ARGS__)
+#define FLException(msg, ...) FLMagicException(Fleksy::PlainException, msg, ##__VA_ARGS__)
+#define InvalidArguments(msg, ...) FLMagicException(Fleksy::InvalidArguments, msg, ##__VA_ARGS__)
+#define IOError(msg, ...) FLMagicException(Fleksy::IOError, msg, ##__VA_ARGS__)
 
 #endif /* defined(__FleksySDK__FLException__) */

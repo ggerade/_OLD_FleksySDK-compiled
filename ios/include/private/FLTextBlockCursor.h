@@ -5,6 +5,15 @@
 #include <vector>
 #include "FLTextBlock.h"
 
+namespace Fleksy {
+  class TBCursorIntegrityError : public Exception {
+  public:
+    explicit TBCursorIntegrityError(std::string message, std::string filename = "", int lineNumber = 0) {
+      init(message, filename, lineNumber);
+    }
+  };
+}
+
 class FLTextBlockCursor{
   
 public:

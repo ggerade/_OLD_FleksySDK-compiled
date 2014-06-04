@@ -15,7 +15,8 @@
 namespace ZipUtilities {
   
   int zipFile(std::string src, std::string destination);
-  
+  bool unzipBytes(const char *compressedBytes, size_t compressedLength, std::string &decompressedString);
+
 };
 
 #endif /* defined(__FleksySDK__ZipUtilities__) */

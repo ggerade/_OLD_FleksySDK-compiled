@@ -9,7 +9,8 @@
 #define __FleksySDK_FLEnums_h__
 
 enum FLABTestType{
-  FLABTestType_Engine
+  FLABTestType_Engine,
+  FLABTestType_Disabled
 };
 
 enum FLABTestMode {
