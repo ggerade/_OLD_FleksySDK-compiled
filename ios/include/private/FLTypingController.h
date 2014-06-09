@@ -72,7 +72,6 @@ public:
   FLUnicodeString getTextFromTextBlocks();// in public for debugging
   bool getShiftState();//only used by TC tester
   FLUnicodeString getTCDebugInfo();
-  FLTextBlock* getLastUpdatedTB();
   FLTextBlock* getTextBlockAt(int index);
   
   // Two sets of tokens, first plain, second marking if the tokens were user typed words.
@@ -85,6 +84,7 @@ public:
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock();
   void parseExistingText(const FLUnicodeString &existingText = FLUnicodeString((const unsigned char *)""), int cursorPosition = -1, bool deletedSelectedText = false);
+  int getUserCursorPos();
   //EOF crazyChecker functions
   
   void setCurrentKeyboardLayout(const std::string &keyboardLayout);
@@ -184,7 +184,6 @@ private:
   
   //Debug stuff
   bool _doFakeCorrections = false;
-  FLTextBlock *_lastTBtoBeCorrected = nullptr;
   FLUnicodeString getDelimitedSuggestions(const std::vector<FLUnicodeString> &suggestions, FLUnicodeString originalWord, bool isWord);
   
   //Game key charging
@@ -263,7 +262,6 @@ private:
   void changeUserCursor(int byNumber, const std::string &caller);
   void incrementUserCursorBy(int number, const std::string &caller);
   void decrementUserCursorBy(int number, const std::string &caller);
-  int getUserCursorPos();
   void setUserSelection(int selectionStart, int selectionEnd);
   void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd);
   

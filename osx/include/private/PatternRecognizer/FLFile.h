@@ -77,7 +77,7 @@ public:
 
   
   void read(void* outBuffer, size_t length);
-  std::vector<FLUnicodeString> getLines(bool decrypt = true, bool decompress = false, char * key = DEFAULT_M_VALUE);
+  std::vector<FLUnicodeString> getLines(bool decrypt = true, bool decompress = false, const char * key = DEFAULT_M_VALUE);
   
   // offset is relative from begining of file
   void seek(off_t offset);

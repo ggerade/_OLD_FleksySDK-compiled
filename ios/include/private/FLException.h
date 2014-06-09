@@ -34,18 +34,25 @@ namespace Fleksy {
     std::string _what;
     int _lineNumber;
     
-    void init(const std::string message, std::string filename, int lineNumber) {
+    void init(const std::string message, const std::string filename, int lineNumber) {
       const auto backtraceString = fl_backtrace();
+      if (backtraceString == nullptr) _backtrace = "<UNAVAILABLE>";
+      else _backtrace = backtraceString;
+      
+      _message = message;
+      _filename = filename;
+      _lineNumber = lineNumber;
+      
       char *whatCString = nullptr;
       asprintf(&whatCString,
                "<%s:%d> %s\n\nVersion: %s-%s@%s\n%s",
-               filename.c_str(),
-               lineNumber,
-               message.c_str(),
+               _filename.c_str(),
+               _lineNumber,
+               _message.c_str(),
                fleksySDKBuildGitShortHash,
                fleksySDKBuildUser,
                fleksySDKBuildDate,
-               (backtraceString == nullptr) ? "<UNAVAILABLE>" : backtraceString);
+               _backtrace.c_str());
       
       _what = std::string(whatCString);
       
@@ -99,15 +106,14 @@ namespace Fleksy {
       va_end(args);
       
       if (result == -1) {
-        strcpy(_vaBuffer, message);
+        return E("Problem creating exception (A).", file, lineNumber);
       }
-      
-      E e(std::string(_vaBuffer), file, lineNumber);
-      _vaBuffer[0] = 0;
-      return e;
+      else {
+        return E(std::string(_vaBuffer), file, lineNumber);
+      }
     }
     catch (const std::exception &e) {
-      return E("Problem creating exception.", file, lineNumber);
+      return E("Problem creating exception (B).", file, lineNumber);
     }
   }
 }
