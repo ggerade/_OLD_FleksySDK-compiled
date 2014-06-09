@@ -90,8 +90,6 @@ public:
   void setCurrentKeyboardLayout(const std::string &keyboardLayout);
   FLDataCollector *getDataCollector();
   
-  void biasPointForChar(FLPoint& p1, int offset);
-  
   //Autolearning
   std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
   void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
