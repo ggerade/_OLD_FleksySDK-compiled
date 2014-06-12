@@ -296,6 +296,52 @@ public:
   
   FLUnicodeString getVersion();
   
+  /*
+   Sets the noise estimation state of the system keyboard for key distance average and
+   std
+   
+   @param avg
+   avg key distance 
+   
+   @param std
+   spread of the key taps
+   */
+  void setKeyDistanceNE(float avg, float std);
+  
+  /*
+   Sets the noise estimation state of the system keyboard for rotation estimation
+   
+   @param avg
+   avg rotational changes
+   
+   @param std
+   spread of the rotational changes
+   */
+  void setRotationNE(float avg, float std);
+
+  /*
+   Sets the noise estimation state of the system keyboard for scaling estimation
+   
+   @param avg
+   avg scale change
+   
+   @param std
+   spread of the scaling change
+   */
+  void setScalingNE(float avg, float std);
+  
+  /*
+   Sets the noise estimation state of the system keyboard for key distance centered 
+   about the tap center of mass
+   
+   @param avg
+   NOT USED, so set to zero
+   
+   @param std
+   spread of the rotational changes
+   */
+  void setKeyDistance2NE(float avg, float std);
+  
   //private:
   FleksyAPIpImpl *pImpl;
   

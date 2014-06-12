@@ -33,8 +33,6 @@ public:
 private:
   FleksyListenerInterface &out;
   FLTypingController *tc;
-  
-  void updateTextBlockCursor(int userCursorPosition = -1);
 };
 
 #endif

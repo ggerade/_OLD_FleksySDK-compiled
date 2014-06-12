@@ -11,6 +11,33 @@
 
 class SystemsIntegrator;
 class FLTypingController;
+class FLTextBlock;
+
+/*
+ * class SplittageMemo
+ * When the engine gives a space broken suggestion which the user accepts, as a general rule
+ * we just leave that text block unchaged, with both words combined. However, if the user does
+ * something that would modify the text in that text block, we split the two words apart into
+ * their own text blocks. This presents a problem for data analysis, because neither new text
+ * block knows what its origins were, so we lose information in the most important case for
+ * space breaking: when we didn't do what the user wanted.
+ *
+ * To solve this problem, we use Splittage Memo, which carries a link to the original, unsplit
+ * text block. This gives us information about the original text, points, and suggestions.
+ *
+ * The splittage memo becomes responsible for the life of the orig text block, and when either
+ * of a or b is deleted, it is responsible for setting the pointer to itself on its splittage
+ * memo to null.
+ */
+class SplittageMemo {
+public:
+  SplittageMemo(FLTextBlock *orig_, FLTextBlock *a_, FLTextBlock *b_);
+  ~SplittageMemo();
+  
+  FLTextBlock *orig;
+  FLTextBlock *a;
+  FLTextBlock *b;
+};
 
 class FLTextBlock{
 public:
@@ -24,6 +51,7 @@ public:
   void setTextEntered(const FLUnicodeString &text);
   FLUnicodeString getTextEntered() const;
   int getLength() const;
+  int getLengthWithSpace() const;
   bool isPunctuationInside() const;
 	void setIsPunctuationInside(bool isPunctuation);
   bool isSpaceEnabled() const;
@@ -86,6 +114,9 @@ public:
   
   FLUnicodeString matchCase(const FLUnicodeString &word);
   
+  void setMemo(std::shared_ptr<SplittageMemo> memo);
+  std::shared_ptr<SplittageMemo> getMemo() const;
+  
   // Functions for debug.
   void rememberContext(const std::vector<FLUnicodeString> &tokens) { context = tokens; }
   std::vector<FLUnicodeString> getContext() const { return context; }
@@ -113,9 +144,12 @@ private:
   void printTextBlock() const;
   void deleteSuggestions();
   
-  
   int lengthBeforePreviousUpdate = 0;
   void setLengthBeforePreviousUpdate(int length);
+  
+  // Text blocks that were space broken and subsequently modified will carry information about
+  // their life before being split apart to help with data collection.
+  std::shared_ptr<SplittageMemo> _memo;
   
   // Data For debug.
   std::vector<FLUnicodeString> context;

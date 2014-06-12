@@ -20,7 +20,11 @@ public:
   FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FleksyListenerInterface &listener, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock);
   ~FLTextBlockCursor();
   
-  FLTextBlock *getCurrentTextBlock();
+  FLTextBlock *getCurrentTextBlock() const;
+  FLTextBlock* getPreviousTextBlock() const;
+  FLTextBlock* getNextTextBlock() const;
+  int getIndexOfCurrentTextBlockInVector() const;
+  int getIndexInTextBlock() const;
   
   void decrementIndexInTextBlock(int amount);
   void incrementIndexInTextBlock(int amount, const std::string &who);
@@ -30,15 +34,9 @@ public:
   void dectementVectorIndex();
   void incrementVectorIndex();
   
-  int getIndexOfCurrentTextBlockInVector();
-  int getIndexInTextBlock();
-  
-  FLTextBlock* getPreviousTextBlock();
-  FLTextBlock* getNextTextBlock();
-  
-  void updateTextBlockCursor(FLTextBlock *tb, int vectorIndex, int indexInTextBlock);
-  void updateTextBlockCursor(int userCursorPosition, FleksyListenerInterface &out);
-  void updateTextBlockCursorToBlock(FLTextBlock *tb, int vectorIndex, int indexInTextBlock);
+  void set(FLTextBlock *tb, int indexInTextBlock);
+  void updateToPosition(int userCursorPosition, FleksyListenerInterface &out);
+  void updateTextBlockCursor(FLTextBlock *tb, int tbIndex);
   void closeBlockAndAssignNew();
   void setCurrentTextBlock(FLTextBlock *tb);
   void setIndexInTextBlock(int indx);
@@ -54,14 +52,20 @@ private:
   std::vector<FLTextBlock*> &textBlocks;
   FleksyListenerInterface &out;
   
-  void setIndexOfCurrentTextBlockInVector(int indx);
   void assignNewTextBlock();
-  
-  void deleteFromVectorLocation(int index);
-  bool checkIfSafeAndDeleteFromCurrentLocation();
   void insertAtLocation(int index);
-  bool createNewTextBlockIfNextToPunctuation(FLTextBlock *tb, int i);
-  void updateTextBlockCursor(int vectorIndex, int indexInTextBlock);
+  
+  /*
+   * Any text blocks which contain no text (or spaces) are removed in preparation for moving
+   * the textblock cursor.
+   */
+  void removeEmptyTextBlocks();
+  
+  /*
+   * Some text blocks (eg. punctuation, newline, etc) don't join together with additional
+   * characters. This function tells you if a text block is like that.
+   */
+  bool dontAppendToTextBlock(const FLTextBlock * const tb) const;
 };
 
 #endif
