@@ -34,7 +34,6 @@ public:
   void setIsTrackingEvents(bool isTracking);
   
   void setDataCollectionFilePath(std::string path);
-  void setFileHeader(std::string fileHeader);
   
   void processEvent(FLEventType event, ...);
   void processEvent(const FLUnicodeString &eventData);
@@ -42,6 +41,8 @@ public:
   void writeEventsToFile(bool writeAsync = false);
   std::string writeGameEventsToFile();
   
+  void setFileHeader(std::string fileHeader);
+  void appendToFileHeader(std::string info);
   
   /*
    * Compresses and encrypts data to file. Use this to create file for any kind of data.
@@ -56,10 +57,8 @@ public:
 private:
   FleksyListenerInterface &listener;
   std::vector<FLUnicodeString>events;
-  std::vector<FLUnicodeString>gameEvents;
   FLUnicodeString tempEvents;
   bool isCollectingData;
-  bool isGaming;
   std::string dataWritePath;
   std::string fileHeader;
   bool isFileReadyForUpload;

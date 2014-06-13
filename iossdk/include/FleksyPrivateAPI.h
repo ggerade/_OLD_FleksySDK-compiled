@@ -56,6 +56,7 @@ public:
   void initialize(FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);
   
   FLUnicodeString getLanguagePackVersion(const char *resourceFilePath);
+  FLUnicodeString getLanguagePackVersion(FLResourceArchivePtr languagePack);
   bool isValidLanguagePack(const char *resourceFilePath);
   
   // Settings

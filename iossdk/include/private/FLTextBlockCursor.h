@@ -59,7 +59,7 @@ private:
    * Any text blocks which contain no text (or spaces) are removed in preparation for moving
    * the textblock cursor.
    */
-  void removeEmptyTextBlocks();
+  void cleanUpTextBlocks();
   
   /*
    * Some text blocks (eg. punctuation, newline, etc) don't join together with additional
