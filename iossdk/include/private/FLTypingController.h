@@ -113,6 +113,11 @@ public:
   FLTextFieldType getTextFieldType() const { return textFieldType; }
   FLCorrectionMode getCorrectionMode() const { return correctionMode; }
   void testOnlyDoFakeCorrections(bool doThem) { _doFakeCorrections = doThem; }
+  void testOnlySetOldSchoolSplittage(bool old) { _oldSchoolSplittage = old; }
+  bool testOnlyJustDeletedTB() { return _justDeletedTB; }
+  void testOnlyResetJustDeletedTB() { _justDeletedTB = false; }
+  bool testOnlyJustSplitWithSpace() { return _justSplitWithSpace; }
+  void testOnlyResetJustSplitWithSpace() { _justSplitWithSpace = false; }
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -153,6 +158,11 @@ private:
   bool inBatchEdit;
   bool goatMode;
   bool _updateNoiseEstimation = true;
+  
+  // Values used by Data Explorer
+  bool _oldSchoolSplittage = false;
+  bool _justDeletedTB = false;
+  bool _justSplitWithSpace = false;
 
   CursorChangeEvent cursorChangeEvent;
   

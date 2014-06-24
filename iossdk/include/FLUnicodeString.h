@@ -85,7 +85,7 @@ typedef enum FLUnicodeCategory {
 } FLUnicodeCategory;
 
 namespace Fleksy {
-  class UnicodeConversionError : public Fleksy::Exception {
+  class EXPORT UnicodeConversionError : public Fleksy::Exception {
   public:
     explicit UnicodeConversionError(std::string message, std::string filename = "", int lineNumber = 0) {
       init(message, filename, lineNumber);
