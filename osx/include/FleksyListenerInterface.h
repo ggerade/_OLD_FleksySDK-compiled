@@ -23,9 +23,9 @@ struct FLExternalEditorState{
   
   FLUnicodeString displayString() const {
     std::stringstream ss;
-    ss << "[" << selectionStart << "," << selectionEnd << "] ";
+    ss << "SCREEN: <" << text.c_str() << ">";
     ss << "[" << composingStart << "," << composingEnd << "] ";
-    ss << "<" << text.c_str() << ">";
+    ss << "[" << selectionStart << "," << selectionEnd << "] ";
     return ss.str();
   }
 };

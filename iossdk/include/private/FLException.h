@@ -21,12 +21,12 @@ extern "C" {
   extern char *(*fl_backtrace)(void);
 }
 
-
+#define EXPORT __attribute__((visibility("default")))
 
 
 namespace Fleksy {
   
-  class Exception : public std::exception {
+  class EXPORT Exception : public std::exception {
   protected:
     std::string _message;
     std::string _backtrace;
@@ -74,21 +74,21 @@ namespace Fleksy {
   
   
   
-  class PlainException : public Exception {
+  class EXPORT PlainException : public Exception {
   public:
     explicit PlainException(std::string message, std::string filename = "", int lineNumber = 0) {
       init(message, filename, lineNumber);
     }
   };
   
-  class InvalidArguments : public Exception {
+  class EXPORT InvalidArguments : public Exception {
   public:
     explicit InvalidArguments(std::string message, std::string filename = "", int lineNumber = 0) {
       init(message, filename, lineNumber);
     }
   };
   
-  class IOError : public Exception {
+  class EXPORT IOError : public Exception {
   public:
     explicit IOError(std::string message, std::string filename = "", int lineNumber = 0) {
       init(message, filename, lineNumber);

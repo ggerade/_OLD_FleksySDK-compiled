@@ -19,7 +19,7 @@
 #define USE_MEMORY_MAP 1
 
 namespace Fleksy {
-  class FileException : public Fleksy::Exception {
+  class EXPORT FileException : public Fleksy::Exception {
   public:
     explicit FileException(std::string message, std::string filename = "", int lineNumber = 0) {
       init(message, filename, lineNumber);
