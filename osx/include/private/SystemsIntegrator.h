@@ -13,7 +13,6 @@
 #include <vector>
 #include <array>
 #include "FleksyUtilities.h"
-#include "FLSocketsCommon.h"
 #include "FLKeyTapRecognizer.h"
 
 class FLTapsToWords;
@@ -70,7 +69,7 @@ public:
   void pointsFromLetters(const FLUnicodeString& letters, FLPoint points[]);
   FLPoint getPointForChar(FLUnicodeString c, FLKeyboardID keyboard);
     
-  FLKeyboardPtr& getKeyboard();
+  std::shared_ptr<FLKeyboard> getKeyboard();
 
   // Settings
   bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred

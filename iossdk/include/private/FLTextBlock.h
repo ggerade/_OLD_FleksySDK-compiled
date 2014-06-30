@@ -80,7 +80,7 @@ public:
 	bool getIsExactEntry() const;
   bool isCorrected() const;
   
-  void addCharacter(FLPoint p, const FLUnicodeString &c, int index, FLKeyboardPtr &keyboard);
+  void addCharacter(FLPoint p, const FLUnicodeString &c, int index, std::shared_ptr<FLKeyboard> keyboard);
   void setSuggestions(const std::vector<FLUnicodeString>& suggestions);
   void setRequestPoints(const std::vector<FLPoint> &points);
 	

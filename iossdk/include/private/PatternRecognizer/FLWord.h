@@ -28,7 +28,7 @@ private:
 
   bool pointsFromLetters = false;
   FLPoint* rawPoints = NULL;
-  FLKeyboardPtr keyboard;
+  std::shared_ptr<FLKeyboard> keyboard;
 
 public:
 
@@ -45,7 +45,7 @@ public:
   ////////////////////
 
   FLWord(short nPoints, FLPoint* points);
-  FLWord(FLUnicodeStringPtr &_letters, FLUnicodeStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, bool canBeRemoved, FLKeyboardPtr &keyboardPtr);
+  FLWord(FLUnicodeStringPtr &_letters, FLUnicodeStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, bool canBeRemoved, std::shared_ptr<FLKeyboard> &keyboardPtr);
   ~FLWord();
 
   FLUnicodeStringPtr getLetters();

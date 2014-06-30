@@ -29,8 +29,7 @@ typedef enum {
 typedef enum {
   kWordlistStandard,
   kWordlistPreloaded, // will calculate blackbox values on the fly
-  kWordlistUser, // will calculate blackbox values on the fly
-  kWordlistBlacklist
+  kWordlistUser       // will calculate blackbox values on the fly
 } kWordlistType;
 
 class FleksyUtilities {
@@ -58,7 +57,7 @@ public:
   bool removeWord(FLUnicodeStringPtr &wordLetters);
   ////////////////////
   
-  FLKeyboardPtr keyboard;
+  std::shared_ptr<FLKeyboard> keyboard;
   void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonData);
   
   size_t loadedWordCount();

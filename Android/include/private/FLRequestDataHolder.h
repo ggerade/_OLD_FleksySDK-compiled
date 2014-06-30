@@ -5,7 +5,6 @@
 #include <vector>
 #include "FLTouchPoint.h"
 #include "PatternRecognizer/Platform.h"
-#include "FLSocketsCommon.h"
 #include "FLUnicodeString.h"
 
 class FLRequestDataHolder{

@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include "PatternRecognizer/Platform.h"
-#include "FLSocketsCommon.h"
 #include "FLUnicodeString.h"
 
 class FLSuggestionsContainer{

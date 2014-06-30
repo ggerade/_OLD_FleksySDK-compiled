@@ -33,6 +33,8 @@ private:
     FLUTF32ToPointsSize = 512
   };
   
+  static const std::vector<FLUnicodeString> allAccentData;
+  
   FLUTF32Point utf32ToPoints[FLUTF32ToPointsSize];
   
   FLKeyboardID activeKeyboardID;
@@ -91,7 +93,5 @@ public:
   std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
   FLPointToCharVectorMap getPointToCharVectorMapForKeyboard(FLKeyboardID keyboardID);
 };
-
-typedef std::shared_ptr<FLKeyboard> FLKeyboardPtr;
 
 #endif /* defined(__FleksySDK__FLKeyboard__) */

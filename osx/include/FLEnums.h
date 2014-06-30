@@ -124,6 +124,11 @@ enum FLLongPressType{
   FLLongPressType_LONG_PRESS
 };
 
+enum FLSuggestionsType{
+  FLSuggestionsType_REGULAR,
+  FLSuggestionsType_PUNCTUATION
+};
+
 enum FLEventType{
   FLEventType_SL,
   FLEventType_SR,

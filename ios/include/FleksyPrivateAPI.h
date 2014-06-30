@@ -53,7 +53,7 @@ public:
 //  void initResourceArchive(FLResourceArchivePtr rsrcArchivePtr);
   void setResourcePath(const std::string &path);
   FLFilePtr FLFileForFileName(const char *filename);
-  void initialize(FLFilePtr &blackListCapital, FLFilePtr &blackList, bool isEncrypted = true);
+  void initialize(bool isEncrypted = true);
   
   FLUnicodeString getLanguagePackVersion(const char *resourceFilePath);
   FLUnicodeString getLanguagePackVersion(FLResourceArchivePtr languagePack);
