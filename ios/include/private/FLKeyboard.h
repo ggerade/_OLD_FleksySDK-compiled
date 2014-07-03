@@ -40,8 +40,6 @@ private:
   FLKeyboardID activeKeyboardID;
   FLPoint keyboardSize;
   
-  void loadKeyboardData(const FLFilePtr &keyboardFile, const FLFilePtr &commonData);
-  void loadLegacyKeyboardData(const FLFilePtr &keyboardFile);
   FLUnicodeString getNearestLetterForPoint(FLPoint target);
   std::vector<FLPointToCharVectorMap> pointKeyMap;
   
@@ -49,10 +47,41 @@ private:
   std::vector<FLUnicodeStringToPointMap> keysToPointMap;
 
   FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
+  
+  
+  void reset();
+  void initializeFromLegacyData();
+  void initializeFromModernData();
+  void initializeModernKeyboard(size_t id);
+  void initializeModernAccents();
+  
+  std::vector<std::vector<FLUnicodeString>> _keyboardLineData;
+  std::vector<FLUnicodeString> _accentLineData;
+  std::vector<FLUnicodeString> _legacyLineData;
+  
+  bool _useAllAccents = false;
+  bool _useLegacyKeyboard = false;
 
 public:
-  FLKeyboard(const FLFilePtr &keyboardFile, const FLFilePtr &commonData);
-  ~FLKeyboard();
+  FLKeyboard();
+  
+  /*
+   * Initialization methods
+   *
+   * Use these methods to set up the keyboard, and then call initialize, which will use the
+   * prepared data and settings to set up the keyboard. This is done in place, so any existing
+   * pointers to this keyboard will not be damaged.
+   */
+  void setDataFromFile(const FLFilePtr &keyboardFile);
+  void setDataFromString(const FLUnicodeString &data);
+  void setDataFromVector(const std::vector<FLUnicodeString> &lines);
+  void setLegacyDataFromFile(const FLFilePtr &keyboardFile);
+  void setUseAllAccents(bool useAll) { _useAllAccents = useAll; }
+  void setUseLegacyKeyboard(bool legacy) { _useLegacyKeyboard = legacy; }
+  void initialize();
+  
+  bool getUseAllAccents() const { return _useAllAccents; }
+  
   
   inline bool dawgGetPointForAlphaUTF32(uint32_t c, FLPoint &p) const {
     size_t hash = (c == 0) ? 1 : c; // Required for proper operation of the LFSR.

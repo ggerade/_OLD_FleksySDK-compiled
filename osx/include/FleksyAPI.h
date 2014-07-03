@@ -296,6 +296,8 @@ public:
   
   FLUnicodeString getVersion();
   
+  void setUseAllAccents(bool use);
+  
   /*
    Sets the noise estimation state of the system keyboard for key distance average and
    std

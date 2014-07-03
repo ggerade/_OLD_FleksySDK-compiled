@@ -99,8 +99,11 @@ public:
   /*
    * Send suggestion list to the platform to display(aka Candidates)
    * Suggestions could be empty. When suggestions list is empty, that means that there are no available suggestions and UI should update to indicate that there are no suggestions
+   *
+   * Deprecated method: If both versions are overwritten, only the newer method (with FLSuggestionsType as third input) will be used.
    */
-  virtual void onReceiveSuggestions(std::vector<FLUnicodeString> suggestions, int selectedIndex){};
+  virtual void onReceiveSuggestions(std::vector<FLUnicodeString> suggestions, int selectedIndex){}
+  
   /*
    @param suggestions
    suggestions Returned by the engine
@@ -109,10 +112,13 @@ public:
    @param selectedIndex
    index of the suggestion to display
    
-   @param isPunctuation
-   Indicates if suggestions are of type punctuation, so UI can choose to display them in a different way
+   @param type
+   Indicates type of suggestion, so UI can choose to display them in a different way
    */
-  virtual void onReceiveSuggestions(std::vector<FLUnicodeString> suggestions, int selectedIndex, FLSuggestionsType type){};
+  virtual void onReceiveSuggestions(std::vector<FLUnicodeString> suggestions, int selectedIndex, FLSuggestionsType type){
+    // The default mode is for backwards compatibility.
+    this->onReceiveSuggestions(suggestions, selectedIndex);
+  };
   /*
    * Send an index of suggestion platform should display as current suggestion
    */

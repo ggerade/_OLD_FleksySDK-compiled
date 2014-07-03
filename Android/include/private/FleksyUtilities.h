@@ -55,6 +55,7 @@ public:
   void postload();
   FLAddWordResult addWord(FLUnicodeStringPtr &word, bool canBeRemoved);
   bool removeWord(FLUnicodeStringPtr &wordLetters);
+  void setUseAllAccents(bool use);
   ////////////////////
   
   std::shared_ptr<FLKeyboard> keyboard;

@@ -126,7 +126,8 @@ enum FLLongPressType{
 
 enum FLSuggestionsType{
   FLSuggestionsType_REGULAR,
-  FLSuggestionsType_PUNCTUATION
+  FLSuggestionsType_PUNCTUATION,
+  FLSuggestionsType_CLEAR_SUGGESTIONS //UI should clear the suggestions
 };
 
 enum FLEventType{

@@ -169,6 +169,10 @@ public:
   //        gCharAt(3) = FLUnicodeString("E")
   FLUnicodeString gCharAt(int graphemeIndex) const;
   
+  // Search this string for unmatched surrogates and replace them with the unicode replacement
+  // character, returning a new string with the fixed result.
+  FLUnicodeString fixedString() const;
+  
   FLUnicodeString normalizedString() const;
   FLUnicodeString lowerCaseString() const;
   FLUnicodeString upperCaseString() const;
@@ -181,6 +185,8 @@ public:
   
   FLUnicodeString filter(std::function<bool(const FLUnicodeString &)> f) const;
   FLUnicodeString filterNot(std::function<bool(const FLUnicodeString &)> f) const;
+  
+  FLUnicodeString drop(size_t count) const;
   
   std::vector<FLUnicodeString> split(const FLUnicodeString &delim, int maxsplit = -1) const;
   
