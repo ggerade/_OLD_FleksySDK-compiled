@@ -32,6 +32,8 @@ enum FLKeyboardID{
   FLKeyboardID_SYMBOLS,
   FLKeyboardID_QWERTY_AC_OFF,
   FLKeyboardID_EMOJIS,
+  FLKeyboardID_NUMBER_PAD,
+  FLKeyboardID_NUMBER_PAD_SYMBOLS,
   FLKeyboardID_NUMBER_OF_KEYBOARDS
 };
 
