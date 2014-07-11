@@ -34,6 +34,8 @@ public:
   kLanguage getLanguage();
   uint16_t getLanguageMajor();
   uint16_t getLanguageMinor();
+  uint16_t getJetMajor();
+  uint16_t getJetMinor();
 
 private:
   FLFilePtr archiveFile;// = NULL;
@@ -50,6 +52,8 @@ private:
 
   const char *gitCommit = NULL;
   
+  // The major and minor versions for language are not used.
+  // The "language version" of a resource archive is the version.minor, below.
   struct {
     const char *ID = NULL;
     uint16_t major = 0;
