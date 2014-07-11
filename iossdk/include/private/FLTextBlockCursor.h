@@ -17,8 +17,8 @@ namespace Fleksy {
 class FLTextBlockCursor{
   
 public:
-  FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FleksyListenerInterface &listener, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock);
-  ~FLTextBlockCursor();
+  FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock);
+  ~FLTextBlockCursor() {};
   
   FLTextBlock *getCurrentTextBlock() const;
   FLTextBlock* getPreviousTextBlock() const;
@@ -50,7 +50,6 @@ private:
   int indexOfCurrentTextBlockInVector;
   int indexInTextBlock;
   std::vector<FLTextBlock*> &textBlocks;
-  FleksyListenerInterface &out;
   
   void assignNewTextBlock();
   void insertAtLocation(int index);

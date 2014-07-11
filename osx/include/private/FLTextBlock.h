@@ -1,7 +1,6 @@
 #ifndef FLTEXTBLOCK_H
 #define FLTEXTBLOCK_H
 
-#include "FLSuggestionsContainer.h"
 #include "FLRequestDataHolder.h"
 #include "FLTextBlock.h"
 #include "PatternRecognizer/Platform.h"
@@ -41,11 +40,10 @@ public:
 
 class FLTextBlock{
 public:
-	FLTextBlock(FleksyListenerInterface &listener);
+	FLTextBlock();
   ~FLTextBlock();
   
   //Getters/Setters
-  FLSuggestionsContainer *getResponse();
   void setCorrectedText(const FLUnicodeString &text);
   FLUnicodeString getCorrectedText();
   void setTextEntered(const FLUnicodeString &text);
@@ -64,35 +62,37 @@ public:
   void setIsEmojiTextBlock(bool isEmoji);
   bool isEndSentence() const;
   bool isBeginSentence() const;
+  void setUserEditedText(bool edited) { userEditedText = edited; }
   bool isUserEditedText() const;
   void setIsAccuratelyTyped(bool isAccuratelyTyped);
   bool getIsAccuratelyTyped() const;
   bool isVirgin() const; // True if this text block contains no text or spaces.
   
-	FLRequestDataHolder *getRequest();
-  FLUnicodeString getText() const;
-  int getSuggestionIndex() const;
-  int getSuggestionIndex_dataexplorer() const;
+  ////////// Functions for managing suggestions. //////////
   
+  int getSuggestionIndex() const;
   std::vector<FLUnicodeString> getSuggestions() const;
   
+  void resetSuggestionIndex();
   void setSuggestionIndex(int suggIndex);
+  
+  void setSuggestions(const std::vector<FLUnicodeString>& suggestions);
+  void clearSuggestion() { _suggestions.clear(); }
+  
+  ////////// Unclassified functions. ///////////
+  
+	FLRequestDataHolder *getRequest();
+  FLUnicodeString getText() const;
+  
+  
 	bool getIsExactEntry() const;
   bool isCorrected() const;
   
   void addCharacter(FLPoint p, const FLUnicodeString &c, int index, std::shared_ptr<FLKeyboard> keyboard);
-  void setSuggestions(const std::vector<FLUnicodeString>& suggestions);
   void setRequestPoints(const std::vector<FLPoint> &points);
 	
-	void deleteText();
-  FLUnicodeString deleteCharacter(int indx, FLTypingController *tc, int oldLength, int oldIndx,  int userCursorPos);
-  void createNewLineCharacter();
+  FLUnicodeString deleteCharacter(int indx);
   void cleanTextBlock();
-  void resetSuggestionIndex();
-  void correctEnteredText(bool isSpaceAfter);
-  void correctTextOnVSwipe();
-  void nextSuggestion();
-	void prevSuggestion();
   FLUnicodeString getTextToCorrect();
   
   FLUnicodeString displayString(int tbNumber = -1, bool withPoints = false);
@@ -106,7 +106,9 @@ public:
   bool isSplitWithSpace() const;
   void setUserCapitalization(bool isUserSet);
   bool userSetCapitalization() const;
-  bool replacedSuggestion() const;
+  
+  void setReplacedSuggestion(bool replaced) { _replacedSuggestion = replaced; }
+  bool replacedSuggestion() const { return _replacedSuggestion; }
   
   int getLengthBeforePreviousUpdate() const;
   int getLengthDiff() const;
@@ -122,10 +124,10 @@ public:
   std::vector<FLUnicodeString> getContext() const { return context; }
   
 private:
-  FleksyListenerInterface &out;
-	FLSuggestionsContainer *response;
-	FLRequestDataHolder *request;
+  std::vector<FLUnicodeString> _suggestions;
 	int suggestionIndx;
+  
+	FLRequestDataHolder *request;
 	FLUnicodeString correctedText;
 	bool isPunctuation;
   bool isSpaceAfterTextBlock;
@@ -134,15 +136,11 @@ private:
   bool addedWordToDictionary;
   bool isUserSetCapitalization;
   bool userEditedText;
-  bool changedToNextSuggestion;
   bool isAccuratelyTyped;
   bool isEmoji;
-  
-  void changeSuggestion(int offset);
-  void prepareTextBlockToRecieveOrRemoveCharacters();
+  bool _replacedSuggestion;
   
   void printTextBlock() const;
-  void deleteSuggestions();
   
   int lengthBeforePreviousUpdate = 0;
   void setLengthBeforePreviousUpdate(int length);
@@ -152,6 +150,7 @@ private:
   std::shared_ptr<SplittageMemo> _memo;
   
   // Data For debug.
+  // The context that was used when the suggestions for this text block were generated.
   std::vector<FLUnicodeString> context;
 };
 

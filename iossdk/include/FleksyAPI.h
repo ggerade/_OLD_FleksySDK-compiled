@@ -344,6 +344,13 @@ public:
    */
   void setKeyDistance2NE(float avg, float std);
   
+  /*
+   * Returns word "type". Type indicating if this word is in Dawg or was later added by the user
+   * @param word
+   * Word to search
+   */
+  FLDictionaryWordType getDictionaryWordType(FLUnicodeString word);
+  
   //private:
   FleksyAPIpImpl *pImpl;
 };

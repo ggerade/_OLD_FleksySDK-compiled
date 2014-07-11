@@ -63,6 +63,7 @@ public:
   
   size_t loadedWordCount();
   bool isWordInDictionary(FLUnicodeStringPtr &printLetters, bool allowLowerCase);
+  FLDictionaryWordType getDictionaryWordType(FLUnicodeStringPtr &key, bool allowLowerCase);
   FLWordPtr getWordByString(FLUnicodeStringPtr &s, bool allowLowerCase = false);
   FLWordPtr getWordPtrByID(int wordID);
   

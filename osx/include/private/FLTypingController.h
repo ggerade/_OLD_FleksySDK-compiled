@@ -219,8 +219,12 @@ private:
   void changeTextBlockSuggestionWithCursorInTheMiddle(FLTextBlock *currTextBlock, int indxInTextBlock, bool isUp);
   void createEmoticonTextBlock();
   void setPunctuationSuggestions(FLTextBlock *tb);
+  void changeSuggestion(FLTextBlock *tb, int offset);
+  void correctEnteredText(FLTextBlock *tb, bool isSpaceAfter);
+  void prepareTextBlockToRecieveOrRemoveCharacters(FLTextBlock *tb);
   
   //Various helper functioins
+  int measureTBLengthDiff(FLTextBlock *tb, std::function<void(void)> f);
   FLUnicodeString getNearestChar(FLPoint p);
   std::vector<FLPoint> getPointsForText(const FLUnicodeString &word);
   void reset();
@@ -271,7 +275,6 @@ private:
   void incrementUserCursorBy(int number, const std::string &caller);
   void decrementUserCursorBy(int number, const std::string &caller);
   void setUserSelection(int selectionStart, int selectionEnd);
-  void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd);
   
   //TextBlock operations
 	int addTextBlock(FLTextBlock *block);

@@ -18,6 +18,12 @@ enum FLABTestMode {
   FLABTestMode_B,
 };
 
+enum FLDictionaryWordType {
+  FLDictionaryWordType_DAWG,
+  FLDictionaryWordType_USER,
+  FLDictionaryWordType_NOT_FOUND
+};
+
 enum FLCapitalizationMode{
   FLCapitalizationMode_CAP_SENTENCES,
   FLCapitalizationMode_CAP_WORDS,
