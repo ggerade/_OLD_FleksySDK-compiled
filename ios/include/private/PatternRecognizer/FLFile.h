@@ -87,8 +87,8 @@ public:
   bool is_open();
   bool good();
   
-  
-  
+  int mlockContents();
+  int munlockContents();
   void* getContents(bool memoryMapped = USE_MEMORY_MAP);
   size_t getLength();
   FLUnicodeString getTag();

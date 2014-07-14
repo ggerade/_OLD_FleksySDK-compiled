@@ -351,6 +351,12 @@ public:
    */
   FLDictionaryWordType getDictionaryWordType(FLUnicodeString word);
   
+  /*
+   * Experimental.
+   * Locks and unlocks mmaped memory so that all of the jet file is loaded by the time user starts typing
+   */
+  bool warmUpJet();
+  
   //private:
   FleksyAPIpImpl *pImpl;
 };

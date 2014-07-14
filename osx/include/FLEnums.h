@@ -31,7 +31,7 @@ enum FLCapitalizationMode{
   FLCapitalizationMode_CAP_OFF
 };
 
-enum FLKeyboardID{
+typedef enum{
   FLKeyboardID_QWERTY_LOWER,
   FLKeyboardID_QWERTY_UPPER,
   FLKeyboardID_NUMBERS,
@@ -41,7 +41,7 @@ enum FLKeyboardID{
   FLKeyboardID_NUMBER_PAD,
   FLKeyboardID_NUMBER_PAD_SYMBOLS,
   FLKeyboardID_NUMBER_OF_KEYBOARDS
-};
+}FLKeyboardID;
 
 enum FLCorrectionMode{
   FLCorrectionMode_URL, //In this mode, when . is entered previous TB is not corrected
@@ -60,12 +60,12 @@ enum FLFieldAction{
   FLFieldAction_NONE
 };
 
-enum FLKeyboardSize{
+typedef enum{
   FLKeyboardSize_ORIGINAL,
   FLKeyboardSize_SMALL,
   FLKeyboardSize_TINY,
   FLKeyboardSize_NOT_SET
-};
+}FLKeyboardSize;
 
 enum FLKeyboardLayout{
   FLKeyboardLayout_NO_SPACEBAR,

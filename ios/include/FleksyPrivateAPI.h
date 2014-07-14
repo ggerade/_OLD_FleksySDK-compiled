@@ -105,6 +105,8 @@ public:
    * Selecst the A or B mode to test
    */
   void setupABTesting(FLABTestType type, FLABTestMode mode);
+  
+  bool warmUpJet();
 
 };
 

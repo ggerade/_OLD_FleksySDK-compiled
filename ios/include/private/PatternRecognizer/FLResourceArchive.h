@@ -36,6 +36,9 @@ public:
   uint16_t getLanguageMinor();
   uint16_t getJetMajor();
   uint16_t getJetMinor();
+  
+  int mlockContents();
+  int munlockContents();
 
 private:
   FLFilePtr archiveFile;// = NULL;
