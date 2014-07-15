@@ -82,7 +82,7 @@ public:
   FLTextBlockCursor * getTextBlockCursor();
   void setUserCursor(int userCursor, const std::string &caller);
   void resetIgnoreNextCursorUpdateCount();
-  void underlineCurrentTextBlock();
+  void underlineCurrentTextBlock(bool justBackspaced = false);
   void parseExistingText(const FLUnicodeString &existingText = FLUnicodeString((const unsigned char *)""), int cursorPosition = -1, bool deletedSelectedText = false);
   int getUserCursorPos();
   //EOF crazyChecker functions
