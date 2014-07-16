@@ -190,6 +190,13 @@ private:
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
   
+  // Tell what the current composing region is.
+  struct {
+    size_t start = 0;
+    size_t end = 0;
+  } composingRegion;
+  void setComposingRegion(size_t start, size_t end);
+  
   //Debug stuff
   bool _doFakeCorrections = false;
   FLUnicodeString getDelimitedSuggestions(const std::vector<FLUnicodeString> &suggestions, FLUnicodeString originalWord, bool isWord);

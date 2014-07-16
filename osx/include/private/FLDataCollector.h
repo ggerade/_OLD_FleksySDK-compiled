@@ -53,6 +53,7 @@ public:
    */
 
   FLUnicodeString writeDataToFile(const FLUnicodeString &data, const FLUnicodeString directory);
+  FLUnicodeString getLastEvents(int numOfEvents);
 
 private:
   FleksyListenerInterface &listener;
