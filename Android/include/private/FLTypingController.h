@@ -266,6 +266,7 @@ private:
   bool canAddSpace(const FLUnicodeString &c, FLTextBlock *prevTB);
   bool canAddSpaceAfterEating(const FLUnicodeString &c);
   bool canAddSymbolToTextBlock(const FLUnicodeString &character, const FLUnicodeString &blockText);
+  bool canSwipeRight();
 
   bool isSymbolAllowedToCorrect(const FLUnicodeString &character);
 

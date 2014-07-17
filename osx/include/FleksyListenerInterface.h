@@ -124,6 +124,13 @@ public:
    */
   virtual void onSelectedSuggestionChanged(int selectedIndex){};
   
+  /*
+   * UI needs to switch keyboard layout. After switching, platform needs to let
+   * engine know that it switched the layout via api call to setActiveKeyboard()
+   * @param keyboardID id of the keyboard platform needs to switch to
+   */
+  virtual void onChangeKeyboardLayout(FLKeyboardID keyboardID){};
+  
   virtual ~FleksyListenerInterface(){};
 };
 
