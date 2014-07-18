@@ -83,7 +83,7 @@ public:
   void setUserCursor(int userCursor, const std::string &caller);
   void resetIgnoreNextCursorUpdateCount();
   void underlineCurrentTextBlock(bool justBackspaced = false);
-  void parseExistingText(const FLUnicodeString &existingText = FLUnicodeString((const unsigned char *)""), int cursorPosition = -1, bool deletedSelectedText = false);
+  void parseExistingText(const FLUnicodeString &existingText = "", int cursorPosition = -1, bool deletedSelectedText = false);
   int getUserCursorPos();
   //EOF crazyChecker functions
   
@@ -190,12 +190,20 @@ private:
   SystemsIntegrator *fleksy = NULL;
   FLTextBlock *lastUpdatedTB = NULL;
   
-  // Tell what the current composing region is.
+  // Track the current composing region.
   struct {
     size_t start = 0;
     size_t end = 0;
   } composingRegion;
   void setComposingRegion(size_t start, size_t end);
+  void setComposingText(FLUnicodeString text);
+  
+  // Track information about the max field length.
+  struct {
+    size_t min = 0;            // The field is known to accept at least this many characters.
+    size_t max = (size_t)-1;   // The field could potentially hold this many characters.
+  } fieldSize;
+  void testFieldSize();
   
   //Debug stuff
   bool _doFakeCorrections = false;
@@ -259,6 +267,7 @@ private:
   std::vector<FLPoint> getSubVector(const std::vector<FLPoint> &original, int start, int end);
   void resetLongPressType();
   int getNumberOfQuotes();
+  void requestQwertyLayout();
   
   void apostropheSmergeCheck();
 

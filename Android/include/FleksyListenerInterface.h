@@ -53,6 +53,11 @@ public:
    * This is used to determine initial editor state
    */
   virtual FLExternalEditorState onRequestEditorState() = 0;
+  /*
+   * Request characters in front of the cursor.
+   * NOTE: This is an API in progress. It is currently not used by anything in the engine.
+   */
+  virtual FLUnicodeString onRequestTextBeforeCursor(size_t count) { return ""; }
   
   /**************Optional************************/
   /*
