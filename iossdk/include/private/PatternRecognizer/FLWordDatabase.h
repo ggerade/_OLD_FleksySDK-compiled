@@ -26,8 +26,8 @@ private:
   std::unordered_map<size_t, FLWordPtrList> systemWordsByLength;
   std::unordered_map<size_t, FLWordPtrList> userWordsByLength;
   
-  std::unordered_map<FLUnicodeStringPtr, FLWordPtr,          FLUnicodeStringPtrHash, FLUnicodeStringPtrEqual> wordsByLetters;
-  std::unordered_map<FLUnicodeStringPtr, FLUnicodeStringPtr, FLUnicodeStringPtrHash, FLUnicodeStringPtrEqual> wordsBlacklistByLetters;
+  std::unordered_map<FLUnicodeString, FLWordPtr, FLUnicodeStringHash, FLUnicodeStringEqual> wordsByLetters;
+  std::unordered_map<FLUnicodeString, FLUnicodeString, FLUnicodeStringHash, FLUnicodeStringEqual> wordsBlacklistByLetters;
   
   pthread_mutex_t _recursiveMutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -49,11 +49,11 @@ public:
   FLWordPtrList getUserWordsForLength(size_t length);
 
   //
-  FLWordPtr getWordFromDictionary(FLUnicodeStringPtr &key);
-  void setWordInDictionary(FLUnicodeStringPtr &key, FLWordPtr &word);
+  FLWordPtr getWordFromDictionary(const FLUnicodeString &key);
+  void setWordInDictionary(const FLUnicodeString &key, FLWordPtr &word);
   //
-  bool isWordInBlacklist(FLUnicodeStringPtr &printLetters);
-  void addWordToBlacklist(FLUnicodeStringPtr &word);
+  bool isWordInBlacklist(const FLUnicodeString &printLetters);
+  void addWordToBlacklist(const FLUnicodeString &word);
 
   // these should be between 0.0 and 1.0
   // Platform is platform suggestions

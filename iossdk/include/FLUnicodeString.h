@@ -259,6 +259,8 @@ public:
   bool operator!=(const char rhs[]) const { const char *utf8String = this->c_str(); return(strcmp(rhs, (utf8String == NULL) ? "" : utf8String) == 0 ? false : true); }
 };
 
+std::ostream& operator<<(std::ostream &os, const FLUnicodeString &s);
+
 struct FLUnicodeStringHash {
   std::size_t operator()(const FLUnicodeString& k) const {
     std::size_t hash = 0x920b5217UL, len = k.length();
@@ -282,21 +284,6 @@ extern FLUnicodeString subStr(const FLUnicodeString &str, int graphemeIndexStart
 std::vector<FLUnicodeString> split(const FLUnicodeString &s, const FLUnicodeString& delims);
 
 typedef std::unordered_map<FLUnicodeString, FLPoint, FLUnicodeStringHash, FLUnicodeStringEqual> FLUnicodeStringToPointMap;
-
-typedef std::shared_ptr<FLUnicodeString> FLUnicodeStringPtr;
-
-struct FLUnicodeStringPtrHash {
-  std::size_t operator()(const FLUnicodeStringPtr& k) const {
-    std::size_t hash = 0x920b5217UL;
-    FLUnicodeString *kp = k.get();
-    if(kp != NULL) { for(size_t idx = 0; idx < kp->length(); idx++) { hash *= 0x811C9DC5; hash ^= (*kp)[idx]; } }
-    return(hash);
-  }
-};
-  
-struct FLUnicodeStringPtrEqual {
-  bool operator()(const FLUnicodeStringPtr& lhs, const FLUnicodeStringPtr& rhs) const { return((*(lhs.get())) == (*(rhs.get()))); }
-};
 
 struct FLPointComp {
   bool operator() (const FLPoint& lhs, const FLPoint& rhs) const { return((lhs.x < rhs.x) ? true : (lhs.x > rhs.x) ? false : (lhs.y < rhs.y) ? true : false); }

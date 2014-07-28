@@ -149,7 +149,7 @@ public:
    * Set the keyboard the user is on: QWERTY, SYMBOLS, NUMBERS.
    * Optional: Set buttonPress to true if switch was caused by hitting a button to switch the keyboard
    */
-  void setActiveKeyboard(FLKeyboardID keyboardID, bool buttonPress = false);
+  bool setActiveKeyboard(FLKeyboardID keyboardID, bool buttonPress = false);
   
   /*
    * Returns active keyboard.
@@ -356,6 +356,21 @@ public:
    * Locks and unlocks mmaped memory so that all of the jet file is loaded by the time user starts typing
    */
   bool warmUpJet();
+  
+  /*
+   As named.
+   */
+  bool doesLangUseCaps() const;
+  
+  /*
+   As named.
+   */
+  int getNumShiftKeyboards() const;
+  
+  /*
+   as named
+   */
+  bool getRightToLeft() const;
   
   //private:
   FleksyAPIpImpl *pImpl;

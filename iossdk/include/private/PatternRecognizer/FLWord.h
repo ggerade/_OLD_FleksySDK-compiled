@@ -35,8 +35,8 @@ public:
   short nPoints; // Although this is "public", it should be treated as "private", use getNPoints() instead.
                  // This was moved here because SystemsIntegrator::processContextResults() needed to call getNPoints() sufficiently often that profiling justified a direct access exception.
 
-  FLUnicodeStringPtr lettersPtr;
-  FLUnicodeStringPtr printLettersPtr;
+  FLUnicodeString letters;
+  FLUnicodeString printLetters;
 
   FLPoint getPoint(size_t pointIdx) const;
   
@@ -44,12 +44,11 @@ public:
   
   ////////////////////
 
-  FLWord(short nPoints, FLPoint* points);
-  FLWord(FLUnicodeStringPtr &_letters, FLUnicodeStringPtr &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, bool canBeRemoved, std::shared_ptr<FLKeyboard> &keyboardPtr);
+  FLWord(const FLUnicodeString &_letters, const FLUnicodeString &_printLetters, short _nPoints, FLPoint pointsToUse[], bool usePointsFromLetters, bool canBeRemoved, std::shared_ptr<FLKeyboard> &keyboardPtr);
   ~FLWord();
 
-  FLUnicodeStringPtr getLetters();
-  FLUnicodeStringPtr getPrintLetters();
+  FLUnicodeString getLetters() const;
+  FLUnicodeString getPrintLetters() const;
   
   short getNPoints() const;
 };

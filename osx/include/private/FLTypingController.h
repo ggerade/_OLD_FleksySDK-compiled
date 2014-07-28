@@ -16,6 +16,7 @@
 #include "FLDataCollector.h"
 #include "FLUnicodeString.h"
 #include "FLAutoLearn.h"
+#include "FLLanguageData.h"
 
 class FLConsistencyChecker;
 
@@ -28,7 +29,7 @@ struct CursorChangeEvent{
 class FLTypingController{
   
 public:
-	FLTypingController(FleksyListenerInterface &listener, SystemsIntegrator* fleksy);
+	FLTypingController(FleksyListenerInterface &listener, SystemsIntegrator* fleksy, FLLanguageData &l);
   ~FLTypingController();
   
   //FleksyAPI calls
@@ -40,7 +41,7 @@ public:
 	int swipeDown(float length = 0);
   void enterSwipe(float length = 0);
   void shiftPressed(const std::string &who, bool userPress = false);
-  void setActiveKeyboard(FLKeyboardID id, bool buttonPress);
+  bool setActiveKeyboard(FLKeyboardID id, bool buttonPress);
   FLKeyboardID getActiveKeyboardID();
   void setCorrectionMode(FLCorrectionMode mode);
   FLCorrectionMode getCorrectionMode();
@@ -125,7 +126,9 @@ private:
   std::string lastBatchEditBeginFunction; // Debugging?
 
 	FleksyListenerInterface &out;
-	std::vector<FLUnicodeString> punctuation;
+  FLLanguageData &_lang;
+  
+//	std::vector<FLUnicodeString> punctuation;
   std::vector<FLUnicodeString> specialCases;
   std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;

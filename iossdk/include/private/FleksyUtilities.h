@@ -38,7 +38,7 @@ private:
   
   bool postLoaded;
   
-  FLAddWordResult _addWord(FLUnicodeStringPtr &wordLetters, FLUnicodeStringPtr &printLetters, bool ignoreBlacklist, bool canBeRemoved);
+  FLAddWordResult _addWord(const FLUnicodeString &wordLetters, const FLUnicodeString &printLetters, bool ignoreBlacklist, bool canBeRemoved);
   void _processWordlistLine1(FLUnicodeString* wordString, kWordlistType type, const FLUnicodeString& delimiter);
   void processWordBlacklistLine(FLUnicodeString* line, const FLUnicodeString& delimiter2);
   void processWordlistLine(FLUnicodeString* wordString, const FLUnicodeString& delimiter, kWordlistType type);
@@ -53,8 +53,8 @@ public:
   void loadDictionary(const std::string& tag, void* data, size_t dataLength, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   void loadDictionary(FLFilePtr &f, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   void postload();
-  FLAddWordResult addWord(FLUnicodeStringPtr &word, bool canBeRemoved);
-  bool removeWord(FLUnicodeStringPtr &wordLetters);
+  FLAddWordResult addWord(const FLUnicodeString &word, bool canBeRemoved);
+  bool removeWord(const FLUnicodeString &wordLetters);
   void setUseAllAccents(bool use);
   ////////////////////
   
@@ -62,15 +62,15 @@ public:
   void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonData);
   
   size_t loadedWordCount();
-  bool isWordInDictionary(FLUnicodeStringPtr &printLetters, bool allowLowerCase);
-  FLDictionaryWordType getDictionaryWordType(FLUnicodeStringPtr &key, bool allowLowerCase);
-  FLWordPtr getWordByString(FLUnicodeStringPtr &s, bool allowLowerCase = false);
+  bool isWordInDictionary(const FLUnicodeString &printLetters, bool allowLowerCase);
+  FLDictionaryWordType getDictionaryWordType(const FLUnicodeString &key, bool allowLowerCase);
+  FLWordPtr getWordByString(const FLUnicodeString &s, bool allowLowerCase = false);
   FLWordPtr getWordPtrByID(int wordID);
   
   FLWordDatabase* getWordDatabase();
   bool getPostloaded();
   
-  kLanguage language = kLanguageUnknown;
+//  kLanguage language = kLanguageUnknown;
 };
 
 #endif

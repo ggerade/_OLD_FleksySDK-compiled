@@ -49,7 +49,6 @@ private:
   FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
   
   
-  void reset();
   void initializeFromLegacyData();
   void initializeFromModernData();
   void initializeModernKeyboard(size_t id);
@@ -61,6 +60,7 @@ private:
   
   bool _useAllAccents = false;
   bool _useLegacyKeyboard = false;
+  size_t _numShiftKeyboards = 0;
 
 public:
   FLKeyboard();
@@ -78,10 +78,23 @@ public:
   void setLegacyDataFromFile(const FLFilePtr &keyboardFile);
   void setUseAllAccents(bool useAll) { _useAllAccents = useAll; }
   void setUseLegacyKeyboard(bool legacy) { _useLegacyKeyboard = legacy; }
+  
+  /*
+   * Call this before calling the setData functions.
+   * If called afterwards, the data from those functions will be reset for keyboard ids
+   * with default values.
+   */
+  void reset();
+  
+  /*
+   * Call after setting the data using the setData family of functions to initialize
+   * the internal representations based on the data.
+   */
   void initialize();
   
   bool getUseAllAccents() const { return _useAllAccents; }
   
+  size_t numShiftKeyboards() const { return _numShiftKeyboards; }
   
   inline bool dawgGetPointForAlphaUTF32(uint32_t c, FLPoint &p) const {
     size_t hash = (c == 0) ? 1 : c; // Required for proper operation of the LFSR.
@@ -102,14 +115,15 @@ public:
   std::vector<FLUnicodeString> getNearestKeysForPoint(FLPoint point, FLKeyboardID keyboardID);
   FLUnicodeString getNearestPrimaryKeyForPoint(FLPoint point, FLKeyboardID keyboardID);
 
-  FLPoint getKeyboardSize();
+  FLPoint getKeyboardSize() const;
 
   void setPointForChar(FLPoint point, const FLUnicodeString &c, FLKeyboardID keyboardID);
   
   FLPoint getPointForChar(const FLUnicodeString &c, FLKeyboardID keyboardID);
 
-  FLKeyboardID getCurrentKeyboardID();
+  FLKeyboardID getCurrentKeyboardID() const;
   void setCurrentKeyboardID(FLKeyboardID keyboardID);
+  bool isValidKeyboardID(FLKeyboardID kb) const;
   
   FLUnicodeString getNearestChar(FLPoint target);
   FLPoint getPointForChar(const FLUnicodeString &c);
@@ -117,7 +131,7 @@ public:
   float getDistanceBetweenLetters(const FLUnicodeString &c1, const FLUnicodeString &c2);
 
   FLUnicodeString lettersFromPoints(const FLPoint points[], size_t nPoints);
-  void pointsFromLetters(const FLUnicodeStringPtr &letters, FLPoint points[]);
+  void pointsFromLetters(const FLUnicodeString &letters, FLPoint points[]);
 
   std::map<FLUnicodeString, FLPoint> getKeymapForKeyboard(FLKeyboardID keyboardID, bool includeAccents = false);
   FLPointToCharVectorMap getPointToCharVectorMapForKeyboard(FLKeyboardID keyboardID);

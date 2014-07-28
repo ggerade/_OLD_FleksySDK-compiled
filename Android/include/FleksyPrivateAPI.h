@@ -13,12 +13,15 @@
 #include "FleksyListenerInterface.h"
 #include "FLFile.h"
 #include "FLResourceArchive.h"
+#include "FLLanguageData.h"
 
 class FLTypingController;
 class SystemsIntegrator;
 
 class FleksyAPIpImpl{
 private:
+  FLLanguageData _lang;
+  
   FLResourceArchivePtr resourceArchive;
   void initResources(const FLUnicodeString &keyboardName);
   std::string resourcePath;
@@ -31,12 +34,16 @@ private:
   
   std::string writableDataDirecotry;
   
+  void loadLanguageData();
+  
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
   ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
   FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
+  
+  FLLanguageData& getLanguageData() { return _lang; }
   
   std::vector<FLUnicodeString> getKeyboardNames() const;
   std::vector<FLUnicodeString> getKeyboardNames(std::shared_ptr<FLFile> langFile) const;

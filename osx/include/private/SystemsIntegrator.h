@@ -14,6 +14,7 @@
 #include <array>
 #include "FleksyUtilities.h"
 #include "FLKeyTapRecognizer.h"
+#include "FLLanguageData.h"
 
 class FLTapsToWords;
 typedef std::shared_ptr<FLTapsToWords> FLTapsToWordsPtr;
@@ -24,6 +25,7 @@ public:
   FLUnicodeString previousToken1;
   FLUnicodeString previousToken2;
   std::vector<FLUnicodeString> platformSuggestions;
+  std::vector<FLUnicodeString> pointlessChars; // Punctuation, numbers, etc.
   bool debug;
   double requestTime;
   std::vector<FLPoint> points;
@@ -36,11 +38,12 @@ public:
 class SystemsIntegrator {
   
 private:
+  FLLanguageData &_lang;
   bool blindMode = false;
   FLFoundWordsVector _foundWordsVector;
   
 public:
-  SystemsIntegrator();
+  SystemsIntegrator(FLLanguageData &l);
   ~SystemsIntegrator();
 
   FleksyUtilities* utils = NULL;
@@ -62,7 +65,7 @@ public:
   
   void postload();
   
-  FLAddWordResult addUserWord(FLUnicodeStringPtr &word);
+  FLAddWordResult addUserWord(FLUnicodeString &word);
   bool removeUserWord(const FLUnicodeString& word);
   bool wordExists(const FLUnicodeString& word, bool allowLowerCase);
   
