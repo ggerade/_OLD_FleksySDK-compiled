@@ -88,6 +88,8 @@ enum FLMessageType{
   FLMessageType_NO_PREVIOUS_SUGGESTION,
   FLMessageType_EVENT,
   FLMessageType_ERROR,
+  FLMessageType_ERROR1,
+  FLMessageType_ERROR2,
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
