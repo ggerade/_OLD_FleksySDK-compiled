@@ -44,10 +44,8 @@ private:
   
 public:
   SystemsIntegrator(FLLanguageData &l);
-  ~SystemsIntegrator();
 
-  FleksyUtilities* utils = NULL;
-  
+  std::unique_ptr<FleksyUtilities> utils;
   std::vector<FLUnicodeString> noChangeWords;
   
   FLTapsToWordsPtr tapsToWords;

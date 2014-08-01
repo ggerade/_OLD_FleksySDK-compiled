@@ -107,10 +107,9 @@ public:
     return(false);
   }
 
-  bool dawgGetPointForAlphaChar(const FLUnicodeString &c, FLPoint &p) const {
-    const FLUnicodeStringToPointMap::const_iterator &it = dawgAlphaKeyToPointMap.find(c);
-    if(it == dawgAlphaKeyToPointMap.end()) { return(false); } else { p = it->second; return(true); }
-  }
+  bool dawgGetPointForAlphaChar(const FLUnicodeString &c, FLPoint &p) const;
+  
+  bool areAllCharactersOnQWERTYKeyboard(const FLUnicodeString &word) const;
 
   std::vector<FLUnicodeString> getNearestKeysForPoint(FLPoint point, FLKeyboardID keyboardID);
   FLUnicodeString getNearestPrimaryKeyForPoint(FLPoint point, FLKeyboardID keyboardID);

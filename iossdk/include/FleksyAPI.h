@@ -372,6 +372,11 @@ public:
    */
   bool getRightToLeft() const;
   
+  /*
+   as named
+   */
+  bool getTallCandies() const;
+  
   //private:
   FleksyAPIpImpl *pImpl;
 };
