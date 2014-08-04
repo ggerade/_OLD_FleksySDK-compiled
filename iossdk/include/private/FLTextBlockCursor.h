@@ -14,15 +14,17 @@ namespace Fleksy {
   };
 }
 
+class FLTypingController;
+
 class FLTextBlockCursor{
   
 public:
-  FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock);
+  FLTextBlockCursor(std::vector<FLTextBlock*> &tbs, FLTextBlock *tb, int textBlockIndex, int indexInTextBlock, FLTypingController *tc);
   ~FLTextBlockCursor() {};
   
-  FLTextBlock *getCurrentTextBlock() const;
-  FLTextBlock* getPreviousTextBlock() const;
-  FLTextBlock* getNextTextBlock() const;
+  FLTextBlock* getCurrentTextBlock();// const;
+  FLTextBlock* getPreviousTextBlock();// const;
+  FLTextBlock* getNextTextBlock();// const;
   int getIndexOfCurrentTextBlockInVector() const;
   int getIndexInTextBlock() const;
   
@@ -31,11 +33,11 @@ public:
   void decrementIndexInTextBlock() { decrementIndexInTextBlock(1); }
   void incrementIndexInTextBlock(const std::string &who) { incrementIndexInTextBlock(1, who); }
 
-  void dectementVectorIndex();
+  void decrementVectorIndex();
   void incrementVectorIndex();
   
   void set(FLTextBlock *tb, int indexInTextBlock);
-  void updateToPosition(int userCursorPosition, FleksyListenerInterface &out);
+  void updateToPosition(int userCursorPosition, FleksyListenerInterface &out, const char *caller);
   void updateTextBlockCursor(FLTextBlock *tb, int tbIndex);
   void closeBlockAndAssignNew();
   void setCurrentTextBlock(FLTextBlock *tb);
@@ -46,13 +48,17 @@ public:
   bool lostIntegrity(const std::vector<FLTextBlock*> *ptrToTextBlocks);
   
 private:
+  // The following three lines are for debugging a problem with invalid FLTextBlock pointers.
+  FLTypingController *_tc;
+  std::string _lastCaller = "";
+  void testIfEverythingIsAlright();
+  
   FLTextBlock *currentTextBlock;
   int indexOfCurrentTextBlockInVector;
   int indexInTextBlock;
   std::vector<FLTextBlock*> &textBlocks;
   
   void assignNewTextBlock();
-  void insertAtLocation(int index);
   
   /*
    * Any text blocks which contain no text (or spaces) are removed in preparation for moving

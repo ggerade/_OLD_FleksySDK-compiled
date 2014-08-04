@@ -119,6 +119,9 @@ public:
   void testOnlyResetJustDeletedTB() { _justDeletedTB = false; }
   bool testOnlyJustSplitWithSpace() { return _justSplitWithSpace; }
   void testOnlyResetJustSplitWithSpace() { _justSplitWithSpace = false; }
+  
+  void sendErrorMessage(FLMessageType type, const FLUnicodeString &message);
+  FleksyListenerInterface& DEBUGgetListener() { return out; }
 
 private:
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
@@ -262,7 +265,6 @@ private:
 
   bool selectedTextAndConsistencyCheck(bool isVerticalSwipe = false, bool isDeleting = false);
   void addRemoveFromDictionary(FLTextBlock *tb);
-  void updateTBCursorAfterParsing(FLUnicodeString &blockText, FLExternalEditorState state);
   void getReadyForInput();
   void closeComposingRegionAt(int position);
   double getUpdateTimeDiff();
@@ -298,10 +300,8 @@ private:
   
   //TextBlock operations
 	int addTextBlock(FLTextBlock *block);
-  FLTextBlock* createTextBlockFromExistingText(FLUnicodeString &blockText);
 	void addSymbolsTextBlock(bool keepSpaceOnCurrTB);
-  void createTextBlockFromExistingTextAndUpdateTBCursor(FLUnicodeString &blockText);
-  void updateTextBlockCursorBasedOnCursorPosition(int cursorPosition = -1);
+  void updateTextBlockCursorBasedOnCursorPosition(const char* caller, int cursorPosition = -1);
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
   bool mergeTextBlocksCheck();

@@ -90,6 +90,7 @@ enum FLMessageType{
   FLMessageType_ERROR,
   FLMessageType_ERROR1,
   FLMessageType_ERROR2,
+  FLMessageType_ERROR3, // used by FLTextBlockCursor for integrity tests on call to getCurrentTextBlock
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
