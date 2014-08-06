@@ -87,6 +87,7 @@ public:
   void setDataFileHeader(const std::string &header);
   void processEventData(const FLUnicodeString &eventData);
   void writeDataToFile();
+  void setIsTracking(bool isTracking);
   /*
    * Compresses and encrypts data to file. Use this to create file for any kind of data.
    * FLUicodeString data - data to write to file

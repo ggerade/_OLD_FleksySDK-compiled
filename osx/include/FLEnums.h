@@ -8,30 +8,30 @@
 #ifndef __FleksySDK_FLEnums_h__
 #define __FleksySDK_FLEnums_h__
 
-enum FLABTestType{
+typedef enum {
   FLABTestType_Engine,
   FLABTestType_Disabled
-};
+}FLABTestType;
 
-enum FLABTestMode {
+typedef enum  {
   FLABTestMode_A,
   FLABTestMode_B,
-};
+}FLABTestMode;
 
-enum FLDictionaryWordType {
+typedef enum {
   FLDictionaryWordType_DAWG,
   FLDictionaryWordType_USER,
   FLDictionaryWordType_NOT_FOUND
-};
+}FLDictionaryWordType;
 
-enum FLCapitalizationMode{
+typedef enum {
   FLCapitalizationMode_CAP_SENTENCES,
   FLCapitalizationMode_CAP_WORDS,
   FLCapitalizationMode_CAP_ALL,
   FLCapitalizationMode_CAP_OFF
-};
+}FLCapitalizationMode;
 
-enum FLKeyboardID {
+typedef enum {
   FLKeyboardID_QWERTY_LOWER,        // 0
   FLKeyboardID_QWERTY_UPPER,        // 1
   FLKeyboardID_NUMBERS,             // 2
@@ -44,15 +44,15 @@ enum FLKeyboardID {
   FLKeyboardID_SHIFT_2,             // 9
   FLKeyboardID_SHIFT_3,             // 10
   FLKeyboardID_NUMBER_OF_KEYBOARDS
-};
+}FLKeyboardID;
 
-enum FLCorrectionMode{
+typedef enum {
   FLCorrectionMode_URL, //In this mode, when . is entered previous TB is not corrected
   FLCorrectionMode_ALWAYS,
   FLCorrectionMode_OFF
-};
+}FLCorrectionMode;
 
-enum FLFieldAction{
+typedef enum {
   FLFieldAction_SEARCH,
   FLFieldAction_GO,
   FLFieldAction_NEXT,
@@ -61,28 +61,28 @@ enum FLFieldAction{
   FLFieldAction_DONE,
   FLFieldAction_EMOTICON,
   FLFieldAction_NONE
-};
+}FLFieldAction;
 
-enum FLKeyboardSize{
+typedef enum {
   FLKeyboardSize_ORIGINAL,
   FLKeyboardSize_SMALL,
   FLKeyboardSize_TINY,
   FLKeyboardSize_NOT_SET
-};
+}FLKeyboardSize;
 
-enum FLKeyboardLayout{
+typedef enum {
   FLKeyboardLayout_NO_SPACEBAR,
   FLKeyboardLayout_SPACEBAR,
   FLKeyboardLayout_NOT_SET
-};
+}FLKeyboardLayout;
 
-enum FLKeyboardAlpha{
+typedef enum {
   FLKeyboardAlpha_FULL,
   FLKeyboardAlpha_TRANSPARENT,
   FLKeyboardAlpha_NOT_SET
-};
+}FLKeyboardAlpha;
 
-enum FLMessageType{
+typedef enum {
   FLMessageType_DEBUG,
   FLMessageType_NO_NEXT_SUGGESTION,
   FLMessageType_NO_PREVIOUS_SUGGESTION,
@@ -90,60 +90,60 @@ enum FLMessageType{
   FLMessageType_ERROR,
   FLMessageType_ERROR1,
   FLMessageType_ERROR2,
-  FLMessageType_ERROR3, // used by FLTextBlockCursor for integrity tests on call to getCurrentTextBlock
+  FLMessageType_ERROR3,
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
   FLMessageType_SPACEBAR_STATE_CLEAR,
-};
+}FLMessageType;
 
 //passed in as a parameter in onDictionaryModified
-enum FLDictionaryChangeEvent{
+typedef enum {
   FLDictionaryChangeEvent_ADD,
   FLDictionaryChangeEvent_REMOVE,
   FLDictionaryChangeEvent_WORD_AUTOLEARNED
-};
+}FLDictionaryChangeEvent;
 
 //Result when called from JAVA
-enum FLDictionaryChangeResult{
+typedef enum {
   FLDictionaryChangeResult_SUCCESS,
   FLDictionaryChangeResult_EXISTS,
   FLDictionaryChangeResult_NOT_FOUND,
   FLDictionaryChangeResult_ERROR
-};
+}FLDictionaryChangeResult;
 
-enum FLDeleteMode{
+typedef enum {
   FLDeleteMode_VARIABLE,
   FLDeleteMode_WHOLE_WORD
-};
+}FLDeleteMode;
 
-enum FLPunctuationSpaceMode{
+typedef enum {
   //On manual punctuation
   FLPunctuationSpaceMode_DEFAULT, //[hello]+ -> [hello]+[.]-[|]
   FLPunctuationSpaceMode_DEL_PRECEEDING_SPACE, //[hello]+ -> [hello]-[.]-[|]
   FLPunctuationSpaceMode_DEL_AND_ADD_SPACE //[hello]+ -> [hello]-[.]+[|]
-};
+}FLPunctuationSpaceMode;
 
-enum FLTextFieldType{
+typedef enum {
   FLTextFieldType_REGULAR_TEXT,
   FLTextFieldType_PASSWORD,
   FLTextFieldType_URL,
   FLTextFieldType_NO_SUGGESTIONS,
   FLTextFieldType_USER_AC_OFF
-};
+}FLTextFieldType;
 
-enum FLLongPressType{
+typedef enum {
   FLLongPressType_NONE,
   FLLongPressType_LONG_PRESS
-};
+} FLLongPressType;
 
-enum FLSuggestionsType{
+typedef enum {
   FLSuggestionsType_REGULAR,
   FLSuggestionsType_PUNCTUATION,
   FLSuggestionsType_CLEAR_SUGGESTIONS //UI should clear the suggestions
-};
+}FLSuggestionsType;
 
-enum FLEventType{
+typedef enum {
   FLEventType_SL,
   FLEventType_SR,
   FLEventType_SU,
@@ -188,6 +188,6 @@ enum FLEventType{
   FLEventType_SDW,
   FLEventType_SDP,
   FLEventType_TBS
-};
+}FLEventType;
 
 #endif /* defined(__FleksySDK_FLEnums_h__) */
