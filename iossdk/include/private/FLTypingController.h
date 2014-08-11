@@ -224,7 +224,7 @@ private:
   //Stuff that deletes
   void backspace(float length);
   void deleteTextBlock();
-  void deleteCharacterAt(int indx);
+  void deleteCharacterAtCursor();
   void deleteCurrentTextBlock();
   int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
@@ -302,7 +302,7 @@ private:
   void splitTextBlockWithSpace(FLTextBlock *TBtoSplit, int indxInTBtoSplitAt, int indxOfTBinVector);
   void mergeTextBlocks(FLTextBlock *tb1, FLTextBlock *tb2, int tb1Indx, int indxInTB);
   bool mergeTextBlocksCheck();
-  void checkTextBlockForSplittage(int indexOfTB);
+  bool checkTextBlockForSplittage(int indexOfTB);
   void convertToRegularTextBlock(FLTextBlock *tb);
   
   //UI&User Feedback

@@ -88,9 +88,10 @@ typedef enum {
   FLMessageType_NO_PREVIOUS_SUGGESTION,
   FLMessageType_EVENT,
   FLMessageType_ERROR,
-  FLMessageType_ERROR1,
+  FLMessageType_ERROR1,  // FleksyAPI::addWordToDictionary
   FLMessageType_ERROR2,
-  FLMessageType_ERROR3,
+  FLMessageType_ERROR3,  // FLTextBlockCursor::updateToPosition
+  FLMessageType_ERROR4,  // FLTypingController::deleteCharacterAt
   FLMessageType_BACKSPACE,
   FLMessageType_UPLOAD_DATA_FILE,
   FLMessageType_SPACEBAR_STATE_PUNCTUATION,
