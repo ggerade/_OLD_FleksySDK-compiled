@@ -225,6 +225,7 @@ private:
   void backspace(float length);
   void deleteTextBlock();
   void deleteCharacterAtCursor();
+  bool deleteSpaceAtCursor();
   void deleteCurrentTextBlock();
   int deleteAnySelectedText(FLExternalEditorState &state, bool isDeleting = false);
   
