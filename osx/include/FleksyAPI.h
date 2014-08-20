@@ -31,25 +31,11 @@ public:
   void setResourceFile(const char *file, FLUnicodeString keyboardName = "");
   
   /*
-   * Set a directory where files can be written and used by the engine
-   */
-  void setWritableDataDirectory(const std::string &directory);
-  
-  /*
    * Loads the resources from the file set by setResourceFile().
    * After this Fleksy is ready for input.
    */
   void loadResources();
   
-  /*
-   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_EXISTS if the word was already in the dictionary.
-   */
-  FLDictionaryChangeResult addWordToDictionary(FLUnicodeString word);
-  
-  /*
-   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_NOT_FOUND if the word was not in the dictionary.
-   */
-  FLDictionaryChangeResult removeWordFromDictionary(FLUnicodeString word);
   
   /*
    * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
@@ -210,12 +196,18 @@ public:
    */
   bool setSpaceBreaksEnabled(bool value);
   /*
-   *
-   * If 'spelling correction' is enabled, then if the user makes a spelling error, such as missing a tap for a key, then Fleksy might decide when appropriate
-   * to correct the spelling mistake. Example: [caliornia]->[california]
+   * If the user misses a tap, Fleksy might add it in.
+   *   eg. user types "helo", Fleksy could correct to "hello".
    * Return value is new state. It it doesn't match the argument value, some error has occurred
    */
-  bool setSpellingCorrectionEnabled(bool value);
+  bool setMissingTapsEnabled(bool value);
+  
+  /*
+   * If user types two consecutive letters out of order, Fleksy can fix that problem.
+   *   eg. lsitening -> listening
+   */
+  bool setTranspositionsEnabled(bool value);
+  
   /*
    *
    * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].

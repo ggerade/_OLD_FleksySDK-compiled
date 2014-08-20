@@ -1,0 +1,264 @@
+/* Class = "IBUIButton"; normalTitle = "Minimal"; ObjectID = "05n-X6-H9X"; */
+"05n-X6-H9X.normalTitle" = "Minimal";
+
+/* Class = "IBUIButton"; normalTitle = "Large"; ObjectID = "0qe-qG-XpX"; */
+"0qe-qG-XpX.normalTitle" = "Large";
+
+/* Class = "IBUIButton"; normalTitle = "Get it now!"; ObjectID = "1NJ-cy-Li5"; */
+"1NJ-cy-Li5.normalTitle" = "Get it now!";
+
+/* Class = "IBUIBarButtonItem"; title = "Done"; ObjectID = "2bN-kZ-a9f"; */
+"2bN-kZ-a9f.title" = "Done";
+
+/* Class = "IBUIButton"; normalTitle = "Go to Settings"; ObjectID = "2s3-nZ-o9a"; */
+"2s3-nZ-o9a.normalTitle" = "Go to Settings";
+
+/* Class = "IBUINavigationItem"; title = "Dictionary"; ObjectID = "3o8-vL-ob1"; */
+"3o8-vL-ob1.title" = "Dictionary";
+
+/* Class = "IBUILabel"; text = "About Fleksy"; ObjectID = "3v4-mB-D3z"; */
+"3v4-mB-D3z.text" = "About Fleksy";
+
+/* Class = "IBUILabel"; text = "Delete Faster"; ObjectID = "3zw-9w-DLL"; */
+"3zw-9w-DLL.text" = "Delete Faster";
+
+/* Class = "IBUILabel"; text = "Updated on: 06/30/2014 11:30"; ObjectID = "4Ck-SU-QKz"; */
+"4Ck-SU-QKz.text" = "Updated on: 06/30/2014 11:30";
+
+/* Class = "IBUILabel"; text = "Unlock \"Gold\""; ObjectID = "4ca-Np-a4q"; */
+"4ca-Np-a4q.text" = "Unlock \"Gold\"";
+
+/* Class = "IBUILabel"; text = "Tutorial"; ObjectID = "4e8-0f-1iE"; */
+"4e8-0f-1iE.text" = "Tutorial";
+
+/* Class = "IBUILabel"; text = "Dictionary"; ObjectID = "5Sn-tr-6Qg"; */
+"5Sn-tr-6Qg.text" = "Dictionary";
+
+/* Class = "IBUILabel"; text = "Download failed. Tap to retry."; ObjectID = "5hZ-6z-vkV"; */
+"5hZ-6z-vkV.text" = "Download failed. Tap to retry.";
+
+/* Class = "IBUILabel"; text = "Touch to enable Fleksy on your device"; ObjectID = "7f2-wz-bov"; */
+"7f2-wz-bov.text" = "Touch to enable Fleksy on your device";
+
+/* Class = "IBUITableViewSection"; headerTitle = "My Stats"; ObjectID = "8E6-IV-P8T"; */
+"8E6-IV-P8T.headerTitle" = "My Stats";
+
+/* Class = "IBUILabel"; text = "Wrong letter? Sloppy typing? No Problem! Fleksy understands what word you mean to type even if you mis-type every letter."; ObjectID = "8Ke-fh-qED"; */
+"8Ke-fh-qED.text" = "Wrong letter? Sloppy typing? No Problem! Fleksy understands what word you mean to type even if you mis-type every letter.";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Version 4.0 (API v0.8.4) - Copyright Fleksy 2014. Patents Pending."; ObjectID = "9gt-aR-g3n"; */
+"9gt-aR-g3n.footerTitle" = "Version 4.0 (API v0.8.4) - Copyright Fleksy 2014. Patents Pending.";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Settings"; ObjectID = "9gt-aR-g3n"; */
+"9gt-aR-g3n.headerTitle" = "Settings";
+
+/* Class = "IBUIButton"; normalTitle = "Personalize from Gmail"; ObjectID = "APk-oz-lnd"; */
+"APk-oz-lnd.normalTitle" = "Personalize from Gmail";
+
+/* Class = "IBUILabel"; text = "Voice Feedback"; ObjectID = "APt-3x-OFH"; */
+"APt-3x-OFH.text" = "Voice Feedback";
+
+/* Class = "IBUILabel"; text = "Text Description"; ObjectID = "AwN-b1-dfB"; */
+"AwN-b1-dfB.text" = "Text Description";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "BEp-Gt-bGU"; */
+"BEp-Gt-bGU.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Gmail"; ObjectID = "Bds-bL-qbG"; */
+"Bds-bL-qbG.text" = "Gmail";
+
+/* Class = "IBUIButton"; normalTitle = "Get Started"; ObjectID = "ByT-Qa-Sab"; */
+"ByT-Qa-Sab.normalTitle" = "Get Started";
+
+/* Class = "IBUILabel"; text = "level x"; ObjectID = "DjB-ff-K6d"; */
+"DjB-ff-K6d.text" = "level x";
+
+/* Class = "IBUILabel"; text = "Swipe "; ObjectID = "Ewf-PZ-tai"; */
+"Ewf-PZ-tai.text" = "Swipe ";
+
+/* Class = "IBUIButton"; normalTitle = "Spacebar"; ObjectID = "FPh-Ti-x2q"; */
+"FPh-Ti-x2q.normalTitle" = "Spacebar";
+
+/* Class = "IBUIButton"; normalTitle = "Enable Fleksy"; ObjectID = "Fjj-ko-p8p"; */
+"Fjj-ko-p8p.normalTitle" = "Enable Fleksy";
+
+/* Class = "IBUILabel"; text = "Auto-Correction"; ObjectID = "Ggb-6q-WGm"; */
+"Ggb-6q-WGm.text" = "Auto-Correction";
+
+/* Class = "IBUILabel"; text = "Permanently unlock this premium theme"; ObjectID = "H5w-lr-6IW"; */
+"H5w-lr-6IW.text" = "Permanently unlock this premium theme";
+
+/* Class = "IBUILabel"; text = "Personalization"; ObjectID = "HIW-LZ-VuY"; */
+"HIW-LZ-VuY.text" = "Personalization";
+
+/* Class = "IBUIButton"; normalTitle = "Original"; ObjectID = "I7m-AW-acB"; */
+"I7m-AW-acB.normalTitle" = "Original";
+
+/* Class = "IBUIButton"; normalTitle = "Personalize from Twitter"; ObjectID = "IBl-XE-hKg"; */
+"IBl-XE-hKg.normalTitle" = "Personalize from Twitter";
+
+/* Class = "IBUILabel"; text = "Typing Efficiency"; ObjectID = "ImX-qG-lSQ"; */
+"ImX-qG-lSQ.text" = "Typing Efficiency";
+
+/* Class = "IBUILabel"; text = "Scroll Down"; ObjectID = "Iwk-w7-Wzv"; */
+"Iwk-w7-Wzv.text" = "Scroll Down";
+
+/* Class = "IBUILabel"; text = "Keyboard Clicks"; ObjectID = "KFm-7C-p5F"; */
+"KFm-7C-p5F.text" = "Keyboard Clicks";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "KxD-4X-YLM"; */
+"KxD-4X-YLM.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "LRi-yv-ecr"; */
+"LRi-yv-ecr.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Keystrokes\nSaved"; ObjectID = "MIr-1h-8TF"; */
+"MIr-1h-8TF.text" = "Keystrokes\nSaved";
+
+/* Class = "IBUIBarButtonItem"; title = "Close"; ObjectID = "MgF-Jg-ji0"; */
+"MgF-Jg-ji0.title" = "Close";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Mhe-5q-sKm"; */
+"Mhe-5q-sKm.text" = "Label";
+
+/* Class = "IBUILabel"; text = "t"; ObjectID = "Mj0-Jw-5U4"; */
+"Mj0-Jw-5U4.text" = "t";
+
+/* Class = "IBUITableViewSection"; headerTitle = "My Badges"; ObjectID = "NCp-7X-IMp"; */
+"NCp-7X-IMp.headerTitle" = "My Badges";
+
+/* Class = "IBUILabel"; text = "Tell A Friend"; ObjectID = "Nqj-xt-FIV"; */
+"Nqj-xt-FIV.text" = "Tell A Friend";
+
+/* Class = "IBUIButton"; normalTitle = "skip"; ObjectID = "OHY-kM-25X"; */
+"OHY-kM-25X.normalTitle" = "skip";
+
+/* Class = "IBUILabel"; text = "Fast Delete"; ObjectID = "ORd-Ra-NHe"; */
+"ORd-Ra-NHe.text" = "Fast Delete";
+
+/* Class = "IBUITextField"; placeholder = "Enter a new word"; ObjectID = "OlB-nQ-LNu"; */
+"OlB-nQ-LNu.placeholder" = "Enter a new word";
+
+/* Class = "IBUILabel"; text = "Updated on: 06/30/2014 11:30"; ObjectID = "QdH-rG-ZkD"; */
+"QdH-rG-ZkD.text" = "Updated on: 06/30/2014 11:30";
+
+/* Class = "IBUIBarButtonItem"; title = "Edit"; ObjectID = "RVS-Rr-CeN"; */
+"RVS-Rr-CeN.title" = "Edit";
+
+/* Class = "IBUIBarButtonItem"; title = "Close"; ObjectID = "SQU-fi-Mak"; */
+"SQU-fi-Mak.title" = "Close";
+
+/* Class = "IBUILabel"; text = "Swipe Sounds"; ObjectID = "T46-zg-xfh"; */
+"T46-zg-xfh.text" = "Swipe Sounds";
+
+/* Class = "IBUILabel"; text = "Facebook"; ObjectID = "Uq2-F5-v29"; */
+"Uq2-F5-v29.text" = "Facebook";
+
+/* Class = "IBUILabel"; text = "e"; ObjectID = "WNy-h8-kYg"; */
+"WNy-h8-kYg.text" = "e";
+
+/* Class = "IBUILabel"; text = "English"; ObjectID = "WST-Sk-1He"; */
+"WST-Sk-1He.text" = "English";
+
+/* Class = "IBUILabel"; text = "Reset User Data"; ObjectID = "YUt-jX-bue"; */
+"YUt-jX-bue.text" = "Reset User Data";
+
+/* Class = "IBUINavigationItem"; title = "About Fleksy"; ObjectID = "aA3-GK-fsM"; */
+"aA3-GK-fsM.title" = "About Fleksy";
+
+/* Class = "IBUILabel"; text = "Updated on: 06/30/2014 11:30"; ObjectID = "ahk-J0-ExQ"; */
+"ahk-J0-ExQ.text" = "Updated on: 06/30/2014 11:30";
+
+/* Class = "IBUILabel"; text = "Language"; ObjectID = "b7O-SY-yoH"; */
+"b7O-SY-yoH.text" = "Language";
+
+/* Class = "IBUIButton"; normalTitle = "Do it later"; ObjectID = "cd4-09-fh7"; */
+"cd4-09-fh7.normalTitle" = "Do it later";
+
+/* Class = "IBUILabel"; text = "Typos Corrected"; ObjectID = "dF8-34-dag"; */
+"dF8-34-dag.text" = "Typos Corrected";
+
+/* Class = "IBUIButton"; normalTitle = "Do it later"; ObjectID = "e9f-AW-wVs"; */
+"e9f-AW-wVs.normalTitle" = "Do it later";
+
+/* Class = "IBUIButton"; normalTitle = "Small"; ObjectID = "hbl-z2-2ZY"; */
+"hbl-z2-2ZY.normalTitle" = "Small";
+
+/* Class = "IBUILabel"; text = "Fleksy is enabled"; ObjectID = "hwV-WZ-Uk2"; */
+"hwV-WZ-Uk2.text" = "Fleksy is enabled";
+
+/* Class = "IBUILabel"; text = "How to enable Fleksy"; ObjectID = "i8M-ZJ-hHo"; */
+"i8M-ZJ-hHo.text" = "How to enable Fleksy";
+
+/* Class = "IBUILabel"; text = "Personalize Fleksy to your writing style"; ObjectID = "ivk-Ot-x10"; */
+"ivk-Ot-x10.text" = "Personalize Fleksy to your writing style";
+
+/* Class = "IBUINavigationItem"; title = "Language"; ObjectID = "j4X-Hb-eGj"; */
+"j4X-Hb-eGj.title" = "Language";
+
+/* Class = "IBUILabel"; text = "You're good to go!"; ObjectID = "jFB-ob-DoF"; */
+"jFB-ob-DoF.text" = "You're good to go!";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "kWA-hA-vfy"; */
+"kWA-hA-vfy.text" = "Title";
+
+/* Class = "IBUILabel"; text = "level x"; ObjectID = "las-7Z-tcE"; */
+"las-7Z-tcE.text" = "level x";
+
+/* Class = "IBUILabel"; text = "Twitter"; ObjectID = "lbL-mD-grf"; */
+"lbL-mD-grf.text" = "Twitter";
+
+/* Class = "IBUILabel"; text = "Feedback and Support"; ObjectID = "m5Q-u8-A6b"; */
+"m5Q-u8-A6b.text" = "Feedback and Support";
+
+/* Class = "IBUILabel"; text = "Cheat Sheet"; ObjectID = "mcX-KW-v2E"; */
+"mcX-KW-v2E.text" = "Cheat Sheet";
+
+/* Class = "IBUILabel"; text = "Text Description"; ObjectID = "n2d-EE-uoB"; */
+"n2d-EE-uoB.text" = "Text Description";
+
+/* Class = "IBUILabel"; text = "level x"; ObjectID = "n4X-3P-x5l"; */
+"n4X-3P-x5l.text" = "level x";
+
+/* Class = "IBUILabel"; text = "Show us some love"; ObjectID = "nz9-sM-oVq"; */
+"nz9-sM-oVq.text" = "Show us some love";
+
+/* Class = "IBUINavigationItem"; title = "Personalization"; ObjectID = "odR-AW-Rzs"; */
+"odR-AW-Rzs.title" = "Personalization";
+
+/* Class = "IBUIButton"; normalTitle = "Personalize from Facebook"; ObjectID = "qAK-Sl-QVP"; */
+"qAK-Sl-QVP.normalTitle" = "Personalize from Facebook";
+
+/* Class = "IBUILabel"; text = "f"; ObjectID = "rI8-yG-Et0"; */
+"rI8-yG-Et0.text" = "f";
+
+/* Class = "IBUILabel"; text = "Auto-Capitalization"; ObjectID = "t84-c8-RTk"; */
+"t84-c8-RTk.text" = "Auto-Capitalization";
+
+/* Class = "IBUIBarButtonItem"; title = "Close"; ObjectID = "tMf-PD-7Eu"; */
+"tMf-PD-7Eu.title" = "Close";
+
+/* Class = "IBUILabel"; text = "Type reliably, type beyond prediction."; ObjectID = "uZ9-2R-Yru"; */
+"uZ9-2R-Yru.text" = "Type reliably, type beyond prediction.";
+
+/* Class = "IBUIButton"; normalTitle = "Add"; ObjectID = "vTC-FU-cwB"; */
+"vTC-FU-cwB.normalTitle" = "Add";
+
+/* Class = "IBUIButton"; normalTitle = "Get Started"; ObjectID = "wNU-ec-216"; */
+"wNU-ec-216.normalTitle" = "Get Started";
+
+/* Class = "IBUILabel"; text = "L"; ObjectID = "xga-t6-Wcg"; */
+"xga-t6-Wcg.text" = "L";
+
+/* Class = "IBUILabel"; text = "Restore Purchases"; ObjectID = "xjq-hg-dsb"; */
+"xjq-hg-dsb.text" = "Restore Purchases";
+
+/* Class = "IBUINavigationItem"; title = "Cheat Sheet"; ObjectID = "xkq-vH-bA7"; */
+"xkq-vH-bA7.title" = "Cheat Sheet";
+
+/* Class = "IBUILabel"; text = "Enable Fleksy in Settings to use it as your \ndevice keyboard"; ObjectID = "xyL-am-eGy"; */
+"xyL-am-eGy.text" = "Enable Fleksy in Settings to use it as your \ndevice keyboard";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Select and download additional languages."; ObjectID = "zz0-hR-TBr"; */
+"zz0-hR-TBr.footerTitle" = "Select and download additional languages.";
+

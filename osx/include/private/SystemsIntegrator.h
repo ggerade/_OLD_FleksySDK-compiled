@@ -36,11 +36,13 @@ public:
 };
 
 class SystemsIntegrator {
-  
 private:
   FLLanguageData &_lang;
   bool blindMode = false;
   FLFoundWordsVector _foundWordsVector;
+  FLUnicodeMap<bool>::Type _secondaryUserWords;
+  
+  std::shared_ptr<const FLDawg> _userDawg;
   
 public:
   SystemsIntegrator(FLLanguageData &l);
@@ -54,17 +56,15 @@ public:
     return _foundWordsVector;
   }
   
+  void initSecondaryUserWords(FLFilePtr userFile);
+  
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   
+  void loadUserDawg();
   void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonFile);
-  void loadDictionary(const std::string& tag, void* data, size_t dataLength, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
-  
-  void loadDictionary(FLFilePtr &f, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   
   void postload();
   
-  FLAddWordResult addUserWord(FLUnicodeString &word);
-  bool removeUserWord(const FLUnicodeString& word);
   bool wordExists(const FLUnicodeString& word, bool allowLowerCase);
   
   void pointsFromLetters(const FLUnicodeString& letters, FLPoint points[]);
@@ -74,24 +74,24 @@ public:
 
   // Settings
   bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred
-  bool getSpaceBreaksEnabled();
-  bool setSpellingCorrectionEnabled(bool value); // returns new value. If return value does not match argument some error occurred
-  bool getSpellingCorrectionEnabled();
+  bool getSpaceBreaksEnabled() const;
+  bool setMissingTapsEnabled(bool value); // returns new value. If return value does not match argument some error occurred
+  bool getMissingTapsEnabled() const;
+  bool setTranspositionsEnabled(bool value);
+  bool getTranspositionsEnabled() const;
+  
   void setBlindMode(bool value);
-  
-  void setSettingTransformLayerWeight(float weight);
-  void setSettingShapeLayerWeight(float weight);
-  void setSettingContextLayerWeight(float weight);
-  void setSettingPlatformLayerWeight(float weight);
-  
-  float getSettingShapeLayerWeight();
-  float getSettingTransformLayerWeight();
-  float getSettingContextLayerWeight();
-  float getSettingPlatformLayerWeight();
   
   void setBayesianBlending(bool useBayesian);
 
   FLUnicodeString getVersion();
+  
+  /*
+   Use this function whenever reading or writing the user dawg file in order to avoid access
+   collisions in the case that the file system doesn't handle this correctly.
+   */
+  static void withUserDawgReadWriteMutex(std::function<void()> f);
+  
 };
 
 #endif

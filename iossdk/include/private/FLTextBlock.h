@@ -119,6 +119,13 @@ public:
   void setMemo(std::shared_ptr<SplittageMemo> memo);
   std::shared_ptr<SplittageMemo> getMemo() const;
   
+  /*
+   Change the current corrected word to the new word. If the word is not in the suggestion 
+   list, nothing happens and "false" is returned. This method will modify the suggestion index and
+   the corrected text
+   */
+  bool changeSuggestedWordTo(const FLUnicodeString &word);
+  
   // Functions for debug.
   void rememberContext(const std::vector<FLUnicodeString> &tokens) { context = tokens; }
   std::vector<FLUnicodeString> getContext() const { return context; }

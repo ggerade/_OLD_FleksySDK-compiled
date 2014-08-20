@@ -14,11 +14,18 @@
 #include "FLFile.h"
 #include "FLResourceArchive.h"
 #include "FLLanguageData.h"
+#include "FLLocale.h"
+#include "FLDawgBuilder.h"
+#include "FLDawg.h"
 
 class FLTypingController;
 class SystemsIntegrator;
 
-class FleksyAPIpImpl{
+namespace Json {
+  class Value;
+}
+
+class FleksyAPIpImpl : private FLLocaleAccessor {
 private:
   FLLanguageData _lang;
   
@@ -32,9 +39,7 @@ private:
   FLUnicodeString _defaultKeyboardName;
   std::vector<FLUnicodeString> _keyboardNames;
   
-  std::string writableDataDirecotry;
-  
-  void loadLanguageData();
+  void loadLanguageData(const Json::Value &root);
   
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
@@ -66,20 +71,7 @@ public:
   FLUnicodeString getLanguagePackVersion(FLResourceArchivePtr languagePack);
   bool isValidLanguagePack(const char *resourceFilePath);
   
-  // Settings
-  void setSettingTransformLayerWeight(float weight);
-  void setSettingShapeLayerWeight(float weight);
-  void setSettingContextLayerWeight(float weight);
-  void setSettingPlatformLayerWeight(float weight);
-  
-  float getSettingShapeLayerWeight();
-  float getSettingTransformLayerWeight();
-  float getSettingContextLayerWeight();
-  float getSettingPlatformLayerWeight();
   kLanguage getLanguage() const;
-  
-  void setWritableDataDirectory(const std::string &directory);
-  std::string getWritableDataDirectory();
   
   //Data Collection
   void setDataCollectionDirectory(const std::string &path); // folder/folder/dataFolder (no / at the end)
@@ -115,7 +107,42 @@ public:
   void setupABTesting(FLABTestType type, FLABTestMode mode);
   
   bool warmUpJet();
+  
+  /*
+   The writeable data directory is the place where the engine can read and write to the disk.
+   */
+private:
+  static std::string _writableDataDirectory;
+public:
+  static void setWritableDataDirectory(const std::string &directory);
+  static std::string getWritableDataDirectory();
+  static std::string getUserDawgPath();
+  
+  /*
+   The dawg builder is used for creating the user words dawg. It is all handled as statics
+   because it is mostly operated by a background process from Android, and so it is important
+   that it be available even when the user is switching languages or the engine is not
+   available for some other reason.
+   
+   For testing purposes, it is possible to write the user dawg to memory.
+   */
+private:
+  static FLDAWGBuilder _dawgBuilder;
+  static bool _dontWriteDawgToDisk;
+  static std::shared_ptr<const FLDawg> _memoryDawg;
+public:
+  static void dawgBuilderReset();
+  static void dawgBuilderBuild();
+  static void dawgBuilderLoadFromDisk();
+  static void dawgBuilderAddWord(const FLUnicodeString &word);
+  static void dawgBuilderRemoveWord(const FLUnicodeString &word);
+  static void dontWriteDawgToDisk();
+  static std::shared_ptr<const FLDawg> getUserDawgFromMemory();
 
+  /*
+   Tell the engine to reload the user dawg data from disk, if any is available.
+   */
+  void loadUserDawg();
 };
 
 #endif
