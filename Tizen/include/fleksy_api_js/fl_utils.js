@@ -1,4 +1,4 @@
-function t0HexString(character){
+function toHexString(character){
 	var hex, j;
 	var str = character;
 	var hexRep = "";
