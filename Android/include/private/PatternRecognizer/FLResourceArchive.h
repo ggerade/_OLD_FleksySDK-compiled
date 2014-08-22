@@ -29,13 +29,14 @@ public:
   ~FLResourceArchive();
 
   FLFilePtr FLFileForFileName(const char *fileName);
-  FLUnicodeString getTag();
+  FLUnicodeString getTag() const;
 
-  kLanguage getLanguage();
-  uint16_t getLanguageMajor();
-  uint16_t getLanguageMinor();
-  uint16_t getJetMajor();
-  uint16_t getJetMinor();
+  std::string getLanguageCode() const;
+  kLanguage getLanguage() const;
+  uint16_t getLanguageMajor() const;
+  uint16_t getLanguageMinor() const;
+  uint16_t getJetMajor() const;
+  uint16_t getJetMinor() const;
   
   int mlockContents();
   int munlockContents();

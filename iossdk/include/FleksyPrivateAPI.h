@@ -9,16 +9,23 @@
 #ifndef FleksyLib_FleksyPrivateAPI_h
 #define FleksyLib_FleksyPrivateAPI_h
 
+#include <memory>
 #include "FLPoint.h"
 #include "FleksyListenerInterface.h"
 #include "FLFile.h"
 #include "FLResourceArchive.h"
 #include "FLLanguageData.h"
+#include "FLLocale.h"
+#include "FLAsyncDawgManager.h"
 
 class FLTypingController;
 class SystemsIntegrator;
 
-class FleksyAPIpImpl{
+namespace Json {
+  class Value;
+}
+
+class FleksyAPIpImpl : private FLLocaleAccessor {
 private:
   FLLanguageData _lang;
   
@@ -32,9 +39,7 @@ private:
   FLUnicodeString _defaultKeyboardName;
   std::vector<FLUnicodeString> _keyboardNames;
   
-  std::string writableDataDirecotry;
-  
-  void loadLanguageData();
+  void loadLanguageData(const Json::Value &root);
   
 public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
@@ -57,7 +62,6 @@ public:
   void postLoadSetup();
   void loadKeyboardData(FLUnicodeString keyboardName);
   void setResourceFLFile(FLFilePtr &file, FLUnicodeString keyboardName = "");
-//  void initResourceArchive(FLResourceArchivePtr rsrcArchivePtr);
   void setResourcePath(const std::string &path);
   FLFilePtr FLFileForFileName(const char *filename);
   void initialize(bool isEncrypted = true);
@@ -66,20 +70,7 @@ public:
   FLUnicodeString getLanguagePackVersion(FLResourceArchivePtr languagePack);
   bool isValidLanguagePack(const char *resourceFilePath);
   
-  // Settings
-  void setSettingTransformLayerWeight(float weight);
-  void setSettingShapeLayerWeight(float weight);
-  void setSettingContextLayerWeight(float weight);
-  void setSettingPlatformLayerWeight(float weight);
-  
-  float getSettingShapeLayerWeight();
-  float getSettingTransformLayerWeight();
-  float getSettingContextLayerWeight();
-  float getSettingPlatformLayerWeight();
   kLanguage getLanguage() const;
-  
-  void setWritableDataDirectory(const std::string &directory);
-  std::string getWritableDataDirectory();
   
   //Data Collection
   void setDataCollectionDirectory(const std::string &path); // folder/folder/dataFolder (no / at the end)
@@ -115,7 +106,18 @@ public:
   void setupABTesting(FLABTestType type, FLABTestMode mode);
   
   bool warmUpJet();
-
+  
+  /*
+   The writeable data directory is the place where the engine can read and write to the disk.
+   */
+private:
+  static std::string _writableDataDirectory;
+public:
+  static void setWritableDataDirectory(const std::string &directory);
+  static std::string getWritableDataDirectory();
+  
+public:
+  static std::unique_ptr<FLAsyncDawgManager> dawgManager;
 };
 
 #endif

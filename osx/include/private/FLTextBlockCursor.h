@@ -26,6 +26,10 @@ public:
   int getIndexOfCurrentTextBlockInVector() const;
   int getIndexInTextBlock() const;
   
+  inline const std::vector<FLTextBlock*> &getTextBlocks() const {
+    return textBlocks;
+  }
+  
   void decrementIndexInTextBlock(int amount);
   void incrementIndexInTextBlock(int amount, const std::string &who);
   void decrementIndexInTextBlock() { decrementIndexInTextBlock(1); }
