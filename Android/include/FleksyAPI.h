@@ -31,22 +31,31 @@ public:
   void setResourceFile(const char *file, FLUnicodeString keyboardName = "");
   
   /*
+   * Set a directory where files can be written and used by the engine
+   */
+  void setWritableDataDirectory(const std::string &directory);
+  
+  /*
    * Loads the resources from the file set by setResourceFile().
    * After this Fleksy is ready for input.
    */
   void loadResources();
   
   /*
-   * @param wordString newline separated list of words to add.
+   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_EXISTS if the word was already in the dictionary.
    */
-  void addWordsToDictionary(const FLUnicodeString &wordString);
-  void addWordsToDictionary(const std::vector<FLUnicodeString> &words);
+  FLDictionaryChangeResult addWordToDictionary(FLUnicodeString word);
   
   /*
-   * @param wordString newline separated list of words to add.
+   * Returns FLDictionaryChangeResult_SUCCESS if the word was added, FLDictionaryChangeResult_NOT_FOUND if the word was not in the dictionary.
    */
-  void removeWordsFromDictionary(const FLUnicodeString &wordString);
-  void removeWordsFromDictionary(const std::vector<FLUnicodeString> &words);
+  FLDictionaryChangeResult removeWordFromDictionary(FLUnicodeString word);
+  
+  /*
+   Format
+   <abbr>::::<expansion>||||<abbr>::::<expansion> ...
+   */
+  void addWordExpansions(const FLUnicodeString &wordData);
   
   /*
    * Sets the desired keyboard frame of reference. The x and y arguments of the |sendTap| method are expected to be within this frame.
@@ -207,18 +216,12 @@ public:
    */
   bool setSpaceBreaksEnabled(bool value);
   /*
-   * If the user misses a tap, Fleksy might add it in.
-   *   eg. user types "helo", Fleksy could correct to "hello".
+   *
+   * If 'spelling correction' is enabled, then if the user makes a spelling error, such as missing a tap for a key, then Fleksy might decide when appropriate
+   * to correct the spelling mistake. Example: [caliornia]->[california]
    * Return value is new state. It it doesn't match the argument value, some error has occurred
    */
-  bool setMissingTapsEnabled(bool value);
-  
-  /*
-   * If user types two consecutive letters out of order, Fleksy can fix that problem.
-   *   eg. lsitening -> listening
-   */
-  bool setTranspositionsEnabled(bool value);
-  
+  bool setSpellingCorrectionEnabled(bool value);
   /*
    *
    * FLDeleteMode_WHOLE_WORD on backspace(length > 0)(swipe left) will delete whole word regardless of cursor position: [hello |there] -> swipe left -> [there], [hel|lo there] -> swipe left -> [|there].

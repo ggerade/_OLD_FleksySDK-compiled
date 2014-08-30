@@ -16,19 +16,9 @@
 #include "FLDataCollector.h"
 #include "FLUnicodeString.h"
 #include "FLAutoLearn.h"
-#include "TokenGrammar.h"
 #include "FLLanguageData.h"
-#include "FLTCUpdater.h"
 
 class FLConsistencyChecker;
-
-namespace Json {
-  class Value;
-}
-
-namespace TextProc{
-  class TokenCommunicator;
-}
 
 struct CursorChangeEvent{
   bool useThisEvent = false;
@@ -41,8 +31,6 @@ class FLTypingController{
 public:
 	FLTypingController(FleksyListenerInterface &listener, SystemsIntegrator* fleksy, FLLanguageData &l);
   ~FLTypingController();
-  
-  void initializeGrammarRules(const Json::Value &root);
   
   //FleksyAPI calls
   void sendPoint(float x, float y, long long time, int offset, FLUnicodeString character);
@@ -133,22 +121,6 @@ public:
   void testOnlyResetJustSplitWithSpace() { _justSplitWithSpace = false; }
 
 private:
-  struct PuncBlocks {
-    FLTextBlock *beforePuncTB = nullptr;
-    FLTextBlock *puncTB = nullptr;
-    FLTextBlock *afterPuncTB = nullptr;
-  };
-  
-  struct ScreenUpdate {
-    FLUnicodeString display;
-    int moveCursorForward;
-    int changeRegion;
-  };
-  
-  FLTCUpdater _tcUpdater;
-  ScreenUpdate fixPuncBlocks(TextProc::TokenGrammar::WordBlocks &, PuncBlocks &);
-  PuncBlocks getPuncBlocksFromCursor();
-  std::pair<FLUnicodeString, FLUnicodeString> puncTextSegments(PuncBlocks &pb);
   void batchEditWithBlock(const char* funcName, std::function<void(void)> func);
   
   std::string lastBatchEditBeginFunction; // Debugging?
@@ -161,8 +133,6 @@ private:
   std::vector<FLUnicodeString> emoticons;
 	std::vector<FLTextBlock*> textBlocks;
   std::map<FLUnicodeString, FLUnicodeString> wordToEmoji;
-  std::map<FLPunctuationSpaceMode, std::map<FLUnicodeString, TextProc::TokenGrammar>> _puncRules;
-  std::shared_ptr<TextProc::TokenCommunicator> _tokenComm;
   
   FLUnicodeString versionNumber;
 	int expectedUserCursor;//loaction of the cursor
@@ -338,7 +308,6 @@ private:
   
   //UI&User Feedback
   void setComposingRegionForTextBlock(const FLTextBlock* tb, int userCursor, bool isSpaceIncluded);
-  void setComposingRegionForTextBlock(FLTextBlock* tb, bool isSpaceIncluded);
   void updateShiftState(bool forcedUpdate = false);
   void updateCandidatesView(FLTextBlock *tbToUpdate = NULL);
   void clearCandidatesView();

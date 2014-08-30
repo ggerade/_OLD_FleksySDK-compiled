@@ -20,19 +20,14 @@
 #include "FLUnicodeString.h"
 #include "FLPoint.h"
 
-enum {
-  FLUTF32PointMaxPoints = 3
-};
-
-typedef struct {
-  uint32_t u32Character;
-  uint8_t numPoints;
-  FLPoint points[FLUTF32PointMaxPoints];
-} FLUTF32Point;
 
 class FLKeyboard {
 
 private:
+  typedef struct {
+    uint32_t u32Character;
+    FLPoint point;
+  } FLUTF32Point;
 
   enum {
     FLUTF32ToPointsSize = 512
@@ -51,8 +46,7 @@ private:
   FLUnicodeStringToPointMap allKeysToPointMap;
   std::vector<FLUnicodeStringToPointMap> keysToPointMap;
 
-  std::unordered_map<FLUnicodeString, FLUTF32Point, FLUnicodeStringHash, FLUnicodeStringEqual> dawgAlphaKeyToPointMap;
-//  FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
+  FLUnicodeStringToPointMap dawgAlphaKeyToPointMap;
   
   
   void initializeFromLegacyData();
@@ -102,30 +96,18 @@ public:
   
   size_t numShiftKeyboards() const { return _numShiftKeyboards; }
   
-  inline const FLUTF32Point * dawgGetPointForAlphaUTF32(uint32_t c) const {
+  inline bool dawgGetPointForAlphaUTF32(uint32_t c, FLPoint &p) const {
     size_t hash = (c == 0) ? 1 : c; // Required for proper operation of the LFSR.
     for(size_t idx = 0; idx < FLUTF32ToPointsSize; idx++) {
       const FLUTF32Point *u32p = &utf32ToPoints[(hash) % FLUTF32ToPointsSize];
-      if(u32p->u32Character == c) { return u32p; }
-      if(u32p->u32Character == 0) { return nullptr; }
+      if(u32p->u32Character == c) { p = u32p->point; return(true); }
+      if(u32p->u32Character == 0) { return(false); }
       hash = ((hash >> 1) ^ ((0UL - (hash & 1UL)) & 0x80200003UL)); // 32-bit LFSR w/ 2^32 period.
     }
-    return nullptr;
+    return(false);
   }
 
-  /*
-   Get the points on the keyboard that match the passed character.
-   
-   @param c
-   The character too look up points for. This should be a single grapheme, although it
-   may have multiple code points.
-   
-   @returns
-   nullptr if c does not appear on ont of the QWERTY layouts for this keyboard.
-   The FLUTF32Point details otherwise. The FLUTF32Point.u32Character will be set to zero,
-   since this function is doing the lookup via FLUnicodeString rather than UTF-32 code points.
-   */
-  const FLUTF32Point * dawgGetPointForAlphaChar(const FLUnicodeString &c) const;
+  bool dawgGetPointForAlphaChar(const FLUnicodeString &c, FLPoint &p) const;
   
   bool areAllCharactersOnQWERTYKeyboard(const FLUnicodeString &word) const;
 

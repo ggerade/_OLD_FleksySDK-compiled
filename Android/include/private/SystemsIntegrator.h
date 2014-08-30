@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <unordered_map>
 #include "FleksyUtilities.h"
 #include "FLKeyTapRecognizer.h"
 #include "FLLanguageData.h"
@@ -36,13 +37,12 @@ public:
 };
 
 class SystemsIntegrator {
+  
 private:
   FLLanguageData &_lang;
   bool blindMode = false;
   FLFoundWordsVector _foundWordsVector;
-  FLUnicodeMap<bool>::Type _secondaryUserWords;
-  
-  std::shared_ptr<const FLDawg> _userDawg;
+  std::unordered_map<FLUnicodeString, FLUnicodeString, FLUnicodeStringHash, FLUnicodeStringEqual> _expansionMap;
   
 public:
   SystemsIntegrator(FLLanguageData &l);
@@ -56,14 +56,18 @@ public:
     return _foundWordsVector;
   }
   
-  void initSecondaryUserWords(FLFilePtr userFile);
-  
   std::vector<FLUnicodeString> getCandidatesForRequest(FLRequest &request);
   
   void loadKeyboardData(FLFilePtr &keyboardFile, FLFilePtr &commonFile);
+  void loadDictionary(const std::string& tag, void* data, size_t dataLength, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
+  
+  void loadDictionary(FLFilePtr &f, const FLUnicodeString& delimiter, kWordlistType type, bool isEncrypted);
   
   void postload();
   
+  void addWordExpansion(const FLUnicodeString &abbr, const FLUnicodeString &exp);
+  FLAddWordResult addUserWord(const FLUnicodeString &word);
+  bool removeUserWord(const FLUnicodeString& word);
   bool wordExists(const FLUnicodeString& word, bool allowLowerCase);
   
   void pointsFromLetters(const FLUnicodeString& letters, FLPoint points[]);
@@ -73,24 +77,24 @@ public:
 
   // Settings
   bool setSpaceBreaksEnabled(bool value); // returns new value. If return value does not match argument some error occurred
-  bool getSpaceBreaksEnabled() const;
-  bool setMissingTapsEnabled(bool value); // returns new value. If return value does not match argument some error occurred
-  bool getMissingTapsEnabled() const;
-  bool setTranspositionsEnabled(bool value);
-  bool getTranspositionsEnabled() const;
-  
+  bool getSpaceBreaksEnabled();
+  bool setSpellingCorrectionEnabled(bool value); // returns new value. If return value does not match argument some error occurred
+  bool getSpellingCorrectionEnabled();
   void setBlindMode(bool value);
+  
+  void setSettingTransformLayerWeight(float weight);
+  void setSettingShapeLayerWeight(float weight);
+  void setSettingContextLayerWeight(float weight);
+  void setSettingPlatformLayerWeight(float weight);
+  
+  float getSettingShapeLayerWeight();
+  float getSettingTransformLayerWeight();
+  float getSettingContextLayerWeight();
+  float getSettingPlatformLayerWeight();
   
   void setBayesianBlending(bool useBayesian);
 
   FLUnicodeString getVersion();
-  
-  /*
-   Use this function whenever reading or writing the user dawg file in order to avoid access
-   collisions in the case that the file system doesn't handle this correctly.
-   */
-  static void withUserDawgReadWriteMutex(std::function<void(const std::string&)> f);
-  
 };
 
 #endif

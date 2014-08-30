@@ -179,13 +179,9 @@ public:
   FLUnicodeString titleCaseString() const;
   FLUnicodeString onlyLettersString() const;
   
-  /*
-   If c is empty, this will trim on default white space chars
-   {' ', '\t', '\n', '\r'}
-   */
-  FLUnicodeString ltrim(FLUnicodeString c = "") const;
-  FLUnicodeString rtrim(FLUnicodeString c = "") const;
-  FLUnicodeString trim(FLUnicodeString c = "") const;
+  FLUnicodeString ltrim() const;
+  FLUnicodeString rtrim() const;
+  FLUnicodeString trim() const;
   
   FLUnicodeString filter(std::function<bool(const FLUnicodeString &)> f) const;
   FLUnicodeString filterNot(std::function<bool(const FLUnicodeString &)> f) const;
