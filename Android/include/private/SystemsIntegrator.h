@@ -80,8 +80,6 @@ public:
   bool getTranspositionsEnabled() const;
   
   void setBlindMode(bool value);
-  
-  void setBayesianBlending(bool useBayesian);
 
   FLUnicodeString getVersion();
   

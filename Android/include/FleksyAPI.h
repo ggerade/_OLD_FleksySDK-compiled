@@ -292,11 +292,7 @@ public:
    * SU becomes SD and SD becomes SU.
    */
   void setInvertSwipeUpAndDown(bool isInverted);
-  
-  void setPredictMissedLetter(bool shouldSim); // set to turn on or orr simulating new character
-  
-  void setBayesianBlending(bool useBayesian); // setting bayesian blending off uses Mike's linear weight blending logic
-  
+    
   FLUnicodeString getVersion();
   
   void setUseAllAccents(bool use);
