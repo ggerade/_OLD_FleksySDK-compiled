@@ -86,7 +86,12 @@ public:
   
   
 	bool getIsExactEntry() const;
+  /*
+   Sometimes a block can be corrected but without suggestion. This can happen for space broken
+   words 
+   */
   bool isCorrected() const;
+  bool isCorrectedWithSuggestions() const;
   
   void addCharacter(FLPoint p, const FLUnicodeString &c, int index, std::shared_ptr<FLKeyboard> keyboard);
   void setRequestPoints(const std::vector<FLPoint> &points);

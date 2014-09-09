@@ -41,9 +41,7 @@ private:
   bool blindMode = false;
   FLFoundWordsVector _foundWordsVector;
   FLUnicodeMap<bool>::Type _secondaryUserWords;
-  
-  std::shared_ptr<const FLDawg> _userDawg;
-  
+    
 public:
   SystemsIntegrator(FLLanguageData &l);
 
