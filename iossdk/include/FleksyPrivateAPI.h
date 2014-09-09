@@ -115,7 +115,8 @@ public:
   void setupABTesting(FLABTestType type, FLABTestMode mode);
   
   bool warmUpJet();
-
+  bool lockJetContents();
+  bool unlockJetContents();
 };
 
 #endif

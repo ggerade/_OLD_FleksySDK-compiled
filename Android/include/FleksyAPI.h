@@ -356,6 +356,8 @@ public:
    * Locks and unlocks mmaped memory so that all of the jet file is loaded by the time user starts typing
    */
   bool warmUpJet();
+  bool lockJetContents();
+  bool unlockJetContents();
   
   /*
    As named.

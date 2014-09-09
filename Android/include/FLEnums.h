@@ -64,6 +64,7 @@ typedef enum {
 }FLFieldAction;
 
 typedef enum {
+  FLKeyboardSize_LARGE,
   FLKeyboardSize_ORIGINAL,
   FLKeyboardSize_SMALL,
   FLKeyboardSize_TINY,
