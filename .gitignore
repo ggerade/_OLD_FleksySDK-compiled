@@ -32,3 +32,5 @@ FleksyQualityPolice/Output/*.txt
 
 
 *.log
+
+samples/FleksySample1/FleksySample_iOS/en.lproj/Main.strings
