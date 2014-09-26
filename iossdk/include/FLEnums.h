@@ -32,7 +32,7 @@ typedef enum {
 }FLCapitalizationMode;
 
 typedef enum {
-  FLKeyboardID_QWERTY_LOWER,        // 0
+  FLKeyboardID_QWERTY_LOWER = 0,    // 0
   FLKeyboardID_QWERTY_UPPER,        // 1
   FLKeyboardID_NUMBERS,             // 2
   FLKeyboardID_SYMBOLS,             // 3
@@ -43,6 +43,8 @@ typedef enum {
   FLKeyboardID_SHIFT_1,             // 8
   FLKeyboardID_SHIFT_2,             // 9
   FLKeyboardID_SHIFT_3,             // 10
+  FLKeyboardID_NUMBERS_IOS,         // 11
+  FLKeyboardID_SYMBOLS_IOS,         // 12
   FLKeyboardID_NUMBER_OF_KEYBOARDS
 }FLKeyboardID;
 

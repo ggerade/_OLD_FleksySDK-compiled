@@ -59,6 +59,7 @@ private:
   std::vector<FLUnicodeString> _legacyLineData;
   
   bool _useAllAccents = false;
+  bool _useAppleSymbols = false;
   bool _useLegacyKeyboard = false;
   size_t _numShiftKeyboards = 0;
 
@@ -72,12 +73,11 @@ public:
    * prepared data and settings to set up the keyboard. This is done in place, so any existing
    * pointers to this keyboard will not be damaged.
    */
-  void setDataFromFile(const FLFilePtr &keyboardFile);
-  void setDataFromString(const FLUnicodeString &data);
-  void setDataFromVector(const std::vector<FLUnicodeString> &lines);
-  void setLegacyDataFromFile(const FLFilePtr &keyboardFile);
-  void setUseAllAccents(bool useAll) { _useAllAccents = useAll; }
-  void setUseLegacyKeyboard(bool legacy) { _useLegacyKeyboard = legacy; }
+  void setData(const std::vector<FLUnicodeString> &lines);
+  void setLegacyData(const std::vector<FLUnicodeString> &lines);
+  void setUseAllAccents(bool use);
+  void setUseAppleSymbols(bool use);
+  void setUseLegacyKeyboard(bool use);
   
   /*
    * Call this before calling the setData functions.

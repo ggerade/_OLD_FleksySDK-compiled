@@ -42,6 +42,14 @@ private:
   void _processWordlistLine1(FLUnicodeString* wordString, kWordlistType type, const FLUnicodeString& delimiter);
   void processWordBlacklistLine(FLUnicodeString* line, const FLUnicodeString& delimiter2);
   void processWordlistLine(FLUnicodeString* wordString, const FLUnicodeString& delimiter, kWordlistType type);
+  
+  bool _useAllAccents = false;
+  bool _useAppleSymbols = false;
+  bool _useLegacyKeyboard = false;
+  std::vector<FLUnicodeString> _keyboardFileLines;
+  std::vector<FLUnicodeString> _commonDataLines;
+  
+  void rebuildKeyboard();
 
 public:
   FleksyUtilities();
@@ -56,6 +64,7 @@ public:
   FLAddWordResult addWord(const FLUnicodeString &word, bool canBeRemoved);
   bool removeWord(const FLUnicodeString &wordLetters);
   void setUseAllAccents(bool use);
+  void setUseAppleSymbols(bool use);
   ////////////////////
   
   std::shared_ptr<FLKeyboard> keyboard;

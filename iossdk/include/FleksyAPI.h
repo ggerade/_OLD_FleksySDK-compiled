@@ -298,6 +298,8 @@ public:
   
   void setUseAllAccents(bool use);
   
+  void setUseAppleSymbols(bool use);
+  
   /*
    Sets the noise estimation state of the system keyboard for key distance average and
    std
