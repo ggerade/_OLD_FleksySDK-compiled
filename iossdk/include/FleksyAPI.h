@@ -36,6 +36,9 @@ public:
    */
   void loadResources();
   
+  static void dontWriteToDisk();
+  static void setWritableDataDirectory(const std::string &directory);
+  
   /*
    * @param wordString newline separated list of words to add.
    */
