@@ -17,6 +17,8 @@
 #include "FLLanguageData.h"
 #include "FLLocale.h"
 #include "FLAsyncDawgManager.h"
+#include "FLTypingControllerIfc.h"
+#include "FLDataCollector.h"
 
 class FLTypingController;
 class SystemsIntegrator;
@@ -45,8 +47,10 @@ public:
   FleksyAPIpImpl(FleksyListenerInterface &listener);
   ~FleksyAPIpImpl();
   FleksyListenerInterface &out;
-  FLTypingController *tc = NULL;
   SystemsIntegrator *fleksy = NULL;
+  
+  std::shared_ptr<FLTypingControllerIfc> tc;
+  std::shared_ptr<FLDataCollector> dataCollector;
   
   FLLanguageData& getLanguageData() { return _lang; }
   
@@ -106,6 +110,9 @@ public:
   void setupABTesting(FLABTestType type, FLABTestMode mode);
   
   bool warmUpJet();
+  
+  bool lockJetContents();
+  bool unlockJetContents();
   
   /*
    The writeable data directory is the place where the engine can read and write to the disk.

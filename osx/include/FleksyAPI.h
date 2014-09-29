@@ -297,6 +297,8 @@ public:
   
   void setUseAllAccents(bool use);
   
+  void setUseAppleSymbols(bool use);
+  
   /*
    Sets the noise estimation state of the system keyboard for key distance average and
    std
@@ -355,6 +357,8 @@ public:
    * Locks and unlocks mmaped memory so that all of the jet file is loaded by the time user starts typing
    */
   bool warmUpJet();
+  bool lockJetContents();
+  bool unlockJetContents();
   
   /*
    As named.
@@ -375,6 +379,11 @@ public:
    as named
    */
   bool getTallCandies() const;
+  
+  /*
+   ???
+   */
+  void setIsTracking(bool isTracking);
   
   //private:
   FleksyAPIpImpl *pImpl;
