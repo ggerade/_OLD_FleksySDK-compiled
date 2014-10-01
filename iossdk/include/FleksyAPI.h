@@ -384,9 +384,37 @@ public:
   bool getTallCandies() const;
   
   /*
-   ???
+   * Sets if keyboard interaction events should be tracked. Events such as number of SR, SL, SU etc.
+   * OFF by default
    */
   void setIsTracking(bool isTracking);
+  
+  /*
+   * Sets if we're tracking all the user interactions, including taps, swipes, typing sessions etc.
+   * OFF by default
+   */
+  void setIsCollectingData(bool isCollectingData);
+  
+  /*
+   * Sets data file header in data collector
+   */
+  void setDataFileHeader(FLUnicodeString header);
+  
+  /*
+   * Checks if language pack in resourceFilePath is valid
+   */
+  bool isValidLanguagePack(const char *resourceFilePath);
+  
+  /*
+   * Gets array of words in temporary dictionary from auto-learning
+   */
+  std::vector<FLUnicodeString> getWordsInTemporaryDictionary();
+  
+  /*
+   * Sets array of words in temporary dictionary for auto-learning
+   */
+  void setWordsInTemporaryDictionary(std::vector<FLUnicodeString> temp_words);
+  
   
   //private:
   FleksyAPIpImpl *pImpl;
